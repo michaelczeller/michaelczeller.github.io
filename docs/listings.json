@@ -1,0 +1,30 @@
+[
+  {
+    "listing": "/research/index_research.html",
+    "items": [
+      "/research/articles/metodieva-zeller2023_sct_ff/index.html",
+      "/research/articles/hrckova-zelller2021_inters_pol/index.html",
+      "/research/articles/vidra-zeller2021_inters_illib/index.html",
+      "/research/articles/zeller2022_sms_hess/index.html",
+      "/research/articles/zeller2021_moby_qca/index.html",
+      "/research/articles/zeller2020_interf_demob/index.html",
+      "/research/articles/zeller2020_interf_karlsruhe/index.html",
+      "/research/articles/zeller2016_era_hu/index.html",
+      "/research/articles/zeller2016_era_manas/index.html",
+      "/research/articles/zeller2012_vestnik_memorial/index.html",
+      "/research/chapters/zeller2023_austria/index.html",
+      "/research/chapters/vidra-zeller2023_hungary/index.html",
+      "/research/chapters/zeller-hrckova2023_poland/index.html",
+      "/research/chapters/zeller2021_laugh/index.html",
+      "/research/chapters/zeller2020_pause/index.html"
+    ]
+  },
+  {
+    "listing": "/teaching/index.html",
+    "items": []
+  },
+  {
+    "listing": "/teaching/index_teaching.html",
+    "items": []
+  }
+]
