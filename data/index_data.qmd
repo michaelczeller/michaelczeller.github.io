@@ -251,7 +251,7 @@ m <- dr_states %>% mutate(count = lengths(st_contains(., dat.sf)),
   mapview(zcol = "homicides_density") + 
   mapview(BRD_unrecognised, color = 'red', col.regions = "yellow") +
   mapview(BRD_recognised, color = 'red', col.regions = "black")
-# m
+m
 
 ```
 
