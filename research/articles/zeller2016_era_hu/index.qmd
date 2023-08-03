@@ -1,0 +1,41 @@
+---
+title: "Shifting Political Dynamics and Democratic Disillusionment in Hungary’s Political Youth"
+date: 2016-07-01
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Eurasian Research and Analysis (ERA) Institute
+categories:
+  - Hungary
+  - constitution
+  - youth politics
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “Shifting Political Dynamics and Democratic Disillusionment in Hungary’s Political Youth,” <em>The Eurasian Era,</em> 1, no. 1 (2016): 3-11.
+  links:
+  - name: Paper
+    url: zeller2016_era_hu.pdf
+    local: true
+    # icon: bi filetype-pdf
+haiku:
+  - <em>"In young democratic regimes like Hungary and elsewhere in the post-Soviet space, twenty-five years has proven insufficient to establish resilient democracies. Political youth has not been socialized into a healthy democratic system, and without having experienced much or any of the preceding socialist system, thus lacking that comparative frame, it significantly expresses dissatisfaction with the current regime."</em>
+---
+
+## Important links
+
+- [Paper](zeller2016_era_hu.pdf)
+
+## Citation
+
+```bibtex
+@article{zeller2016shifting,
+  title={Shifting Political Dynamics and Democratic Disillusionment in Hungary’s Political Youth},
+  author={Zeller, Michael C},
+  journal={The Eurasian Era},
+  volume={1},
+  number={1},
+  pages={3--11},
+  year={2016}
+}
+```

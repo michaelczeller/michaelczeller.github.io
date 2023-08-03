@@ -1,0 +1,289 @@
+---
+title: "Data"
+title-block-banner: "#00bc8c"
+---
+
+On this page you can find data from past and present projects, replication code, data visualisations, and other resources that might be useful.
+
+# Homicides in Germany with a right-wing extremist motive
+
+```{r echo = F, collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE}
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(rnaturalearthhires) # to get subnational regions?
+library(tidyverse)
+library(dplyr)
+
+library(mapview)
+mapviewOptions(fgb = FALSE)
+
+library(sf)
+library(spatstat)
+library(stars)
+
+de = ne_countries(scale = 50, returnclass = "sf") |>
+  filter(admin == "Germany") 
+
+mapData <- ne_countries(scale = 10, continent = c("Europe"), returnclass = "sf")
+de_states <- ne_states(country = "germany", returnclass = "sf")
+de_states <- dplyr::select(de_states, name, geometry)
+
+
+name <- de_states$name
+pop <- c(4086152,13369393,4159150,992666,2953270,8140242,18139116,11280257,2573135,1628378,684864,1892122,6391360,2126846,2186643,3755251)
+
+pops <- data.frame(name, pop)
+
+dr_states <- de_states %>% left_join(pops, by="name")
+
+# scraping homicide data ------------------------------------------------------
+
+# to scrape webtext
+# if(!require("learnr")) {install.packages("learnr"); library("learnr")} 
+if(!require("rvest")) {install.packages("rvest"); library("rvest")} 
+if(!require("stringr")) {install.packages("stringr"); library("stringr")} 
+if(!require("dplyr")) {install.packages("dplyr"); library("dplyr")} 
+if(!require("magrittr")) {install.packages("magrittr"); library("magrittr")}
+if(!require("httr")) {install.packages("httr"); library("httr")} 
+if(!require("lubridate")) {install.packages("lubridate"); library("lubridate")} 
+library(tidyverse)
+
+# links to news stories
+LINK <- read_html("https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/") %>% 
+  html_nodes("#main .text-grey-light a") %>% 
+  html_attr("href")
+
+DATE <- read_html("https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/") %>% 
+  html_nodes(".bigdate") %>% 
+  html_text()
+
+DATE <- dmy(DATE)
+
+YEAR <- format(DATE, format="%Y")
+
+VICTIM <- read_html("https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/") %>% 
+  html_nodes("#main .no-underline") %>% 
+  html_text()
+VICTIM <- VICTIM[1:237]
+
+AGE <- read_html("https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/") %>% 
+  html_nodes(".md\\:block:nth-child(3)") %>% 
+  html_text()
+# 27.07.2000 - no age; 04.04.1992 - no age
+AGE <- append(AGE, "46", after = 24)
+AGE <- append(AGE, "0", after = 130)
+AGE <- AGE[1:237]
+AGE <- gsub(" Jahre","",as.character(AGE))
+AGE <- gsub("13 Monate","1",as.character(AGE))
+
+LOCATION <- read_html("https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/") %>% 
+  html_nodes(".mt-2.md\\:block") %>% 
+  html_text()
+
+LAND <- regmatches(LOCATION, gregexpr( "(?<=\\().+?(?=\\))", LOCATION, perl = T))
+LAND <- str_remove_all(LAND, "Saale")
+
+# OFFICIAL <- read_html("https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/") %>% 
+#   html_nodes(".text-grey-light.md\\:block") %>% 
+#   html_text()
+# OFFICIAL
+
+OFFICIAL <- c(F,T,F,T,F,F,F,T,F,T,T,T,F,T,T,F,F,F,F,F,F,T,T,T,F,T,T,T,T,F,F,F,T,
+              T,T,T,F,T,T,T,T,F,F,T,F,T,T,F,F,T,F,T,T,T,T,T,T,F,F,F,T,F,F,F,F,T,
+              F,F,F,F,F,F,T,F,F,F,F,F,F,F,F,F,F,F,F,T,T,T,F,F,F,T,T,F,T,T,T,F,F,
+              T,F,T,F,F,F,T,T,T,F,T,T,T,T,T,F,F,F,F,T,F,F,T,T,T,F,F,F,F,F,T,F,T,
+              T,T,T,F,F,F,F,T,T,T,F,F,T,F,T,F,F,F,T,F,F,F,F,F,F,F,T,T,T,T,F,F,F,
+              F,F,F,F,T,F,F,T,T,F,F,T,T,F,F,T,F,F,F,T,F,T,F,F,T,F,T,F,F,F,F,T,F,
+              F,F,T,F,F,T,T,T,T,T,T,T,T,T,F,T,T,F,T,F,T,T,T,F,T,T,T,T,T,T,T,T,T,
+              F,F,T,T,T,T)
+
+COUNTRYCODE <- rep("DE",237)
+
+COUNTRY <- rep("Germany",237)
+
+df <- data.frame(YEAR, DATE, LOCATION, LAND, VICTIM, AGE, OFFICIAL, COUNTRY, COUNTRYCODE, LINK)
+df$AGE <- as.numeric(df$AGE)
+
+df[119, 4] = "Sachsen-Anhalt"
+df[220, 4] = "Sachsen-Anhalt"
+df[221, 4] = "Sachsen-Anhalt"
+
+df$LOCATION <- gsub("\\s*\\([^\\)]+\\)","",as.character(df$LOCATION))
+
+HOMS_LAT <- c(52.520008,51.868191,47.728569,52.833839,50.662731,51.5051949,
+              54.7833021,51.0493286,52.5272424,47.6500279,49.3164661,53.0586366,
+              52.520008,53.1972047,51.5482909,52.9654649,49.5944958,49.5944958,
+              49.5944958,50.1106444,52.5780612,54.3098719,54.7833021,53.4767351,
+              52.2973664,52.520008,52.1315889,52.9243859,48.7181954,50.5098164,
+              51.0560722,50.3533278,52.520008,51.494125,52.3173613,51.264018,
+              51.2818569,52.520008,53.62892,53.62892,53.62892,50.8749804,
+              51.2652237,50.8349097,51.2468031,51.4333103,51.4272925,
+              52.9840679,53.9422672,51.3916284,52.42503738,51.1721629,
+              51.1721629,51.1721629,51.1721629,51.1721629,52.3587532,52.520008,
+              52.520008,52.5814009,51.6485843,52.2261017,49.8851869,51.7855428,
+              51.3406321,52.520008,52.520008,52.6882194,51.7189596,51.018118,
+              50.8959142,51.3406713,50.8021139,51.2990263,49.4454211,53.866444,
+              53.866444,53.866444,53.866444,53.866444,53.866444,53.866444,
+              53.866444,53.866444,53.866444,50.9929303,52.8455492,51.7506552,
+              51.3406321,54.0536473,49.1373277,51.3406321,52.1315889,52.3464533,
+              53.5314978,52.520008,52.520008,54.516728,52.5262465,52.2994511,
+              51.5051574,51.7567447,51.7567447,51.4818111,50.6481277,53.017276,
+              51.3406321,51.9503235,51.434999,52.7340315,47.8556623,50.8021139,
+              52.520008,51.6367961,47.7222676,47.7222676,47.7222676,47.7222676,
+              51.4825041,50.6119221,51.8953514,52.520008,52.8350807,51.8309956,
+              51.5142273,51.6237456,51.6237456,54.095791,53.8909832,53.6704395,
+              51.2254018,49.453872,54.51851,52.1405622,54.095791,54.1127844,
+              51.3757611,53.9221033,50.6829946,49.453872,53.550341,52.3215901,
+              52.9983723,50.5542328,48.1371079,47.9299867,52.520008,53.5574458,
+              53.3726226,52.4804344,53.2172582,49.2751627,50.9777974,51.1525648,
+              50.0820384,52.3412273,51.3038241,53.248706,51.3406321,50.9320015,
+              50.9320015,50.9320015,49.0809754,49.0809754,48.6767637,48.6767637,
+              48.6767637,50.8772301,52.2705632,54.0924445,51.8309956,51.5142273,
+              49.453872,48.1371079,51.4582235,48.0641747,51.5142273,51.3154546,
+              48.7772562,53.8909832,49.142291,54.1681463,52.3744779,47.9867696,
+              53.1193496,51.8309956,52.1315889,51.7930788,51.3406321,51.0493286,
+              51.3854116,51.3406321,51.1981778,51.297984,52.520008,50.6086518,
+              53.8374497,52.3744779,47.8803788,52.3744779,50.3876305,52.520008,
+              52.520008,48.1371079,48.1371079,48.1371079,48.1371079,48.1371079,
+              48.1371079,48.1371079,48.1371079,48.1371079,52.520008,49.1904112,
+              51.1167001,51.6594629,50.586993,49.3722236,51.3044488,51.4825041,
+              51.4825041,50.9852411,50.132881,50.132881,50.132881,50.132881,
+              50.132881,50.132881,50.132881,50.132881,50.132881,50.132881,
+              49.7107134,52.2994511,52.2994511,52.2994511,52.2994511)
+HOMS_LON <- c(13.404954,13.96944,10.315784,13.81176,7.81972,9.8984285,9.4333264,
+              13.7381437,10.5291453,9.4800858,6.749846,14.2840858,13.404954,
+              14.2766409,13.9286822,13.2750522,8.4674561,8.4674561,8.4674561,
+              8.6820917,10.6613448,12.4992041,9.4333264,9.7003941,7.5862462,
+              13.404954,11.6399609,12.8092919,9.2316035,7.2983807,11.0427557,
+              7.5943951,13.404954,14.1239462,12.7437812,7.1780374,7.0328063,
+              13.404954,10.6880174,10.6880174,10.6880174,8.0227233,6.6760958,
+              10.9461479,10.6567507,14.250083,6.8829192,10.5385882,10.3137943,
+              11.6508014,13.8311758,7.0845893,7.0845893,7.0845893,7.0845893,
+              7.0845893,14.06391525,13.404954,13.404954,13.8833952,7.0829054,
+              9.1237569,8.6736295,11.1519933,12.3747329,13.404954,13.404954,
+              13.1775867,8.7648698,9.7487639,14.8064417,7.0439912,12.7072907,
+              7.6734841,11.858728,10.684738,10.684738,10.684738,10.684738,
+              10.684738,10.684738,10.684738,10.684738,10.684738,10.684738,
+              7.1277379,13.2461296,6.9293313,12.3747329,13.7757809,8.9084374,
+              12.3747329,11.6399609,12.9890287,10.6265906,13.404954,13.404954,
+              13.644119,13.7604458,13.6244389,10.7925317,14.3357307,14.3357307,
+              7.2196635,11.3616652,13.9981503,12.3747329,14.7153567,6.759562,
+              10.234838,12.0595795,12.7072907,13.404954,11.9011036,12.8760923,
+              12.8760923,12.8760923,12.8760923,11.9705452,13.1171014,11.0520563,
+              13.404954,13.7996542,12.2430723,7.4652789,7.400959,7.400959,
+              13.3815238,11.4647932,14.1862434,6.7763137,11.077298,9.5653284,
+              12.5865873,13.3815238,13.0429152,11.8989296,13.3374416,11.2726327,
+              11.077298,10.000654,13.4366479,11.7507204,9.6770448,11.5753822,
+              8.4482647,13.404954,13.2602781,13.694259,14.3872922,13.840039,
+              7.0287408,11.0287364,11.8099186,8.2416556,14.549452,13.308828,
+              10.407855,12.3747329,7.2839042,7.2839042,7.2839042,8.1970699,
+              8.1970699,10.152923,10.152923,10.152923,12.0796208,11.8588198,
+              12.1286127,12.2430723,7.4652789,11.077298,11.5753822,7.0158171,
+              9.6106661,7.4652789,9.4924096,12.8750665,11.4647932,9.218655,
+              9.6322782,9.7385532,10.181319,13.5005559,12.2430723,11.6399609,
+              11.7391606,12.3747329,13.7381437,7.7661798,12.3747329,6.6916476,
+              13.1082637,13.404954,10.6926437,13.6451173,9.7385532,10.622246,
+              9.7385532,8.0636197,13.404954,13.404954,11.5753822,11.5753822,
+              11.5753822,11.5753822,11.5753822,11.5753822,11.5753822,11.5753822,
+              11.5753822,13.404954,11.0159272,13.1166999,10.1000547,12.6992687,
+              7.1870921,9.2296168,11.9705452,11.9705452,12.4340988,8.9169797,
+              8.9169797,8.9169797,8.9169797,8.9169797,8.9169797,8.9169797,
+              8.9169797,8.9169797,8.9169797,7.3136563,13.6244389,13.6244389,
+              13.6244389,13.6244389)
+
+df$LAT <- HOMS_LAT
+df$LON <- HOMS_LON
+
+df$LATj <- jitter(df$LAT, factor = 100)
+df$LONj <- jitter(df$LON, factor = 100)
+
+row.names(df) <- df$VICTIM
+
+df <- df[1:237,]
+
+# df <- read.csv("FR_homicides2023-01-20.csv", row.names=1, header = TRUE)
+dfUNOFFIC <- subset(df, OFFICIAL == F)
+
+dfOFFIC <- subset(df, OFFICIAL == T)
+
+# ALL (official and unofficial) HOMICIDES
+
+dat.sf <- st_as_sf(x=df,
+                   coords = c("LONj", "LATj"))
+
+st_crs(dat.sf) <- st_crs(de_states)
+
+pp = st_geometry(dat.sf)
+window = st_geometry(de)
+
+crs = st_crs("EPSG:32632") # CRS for Germany
+pp = st_transform(pp, crs)[!st_is_empty(pp)]
+window = st_transform(window, crs)
+wt = as.ppp(c(window, pp))
+
+# Smooth points
+density_spatstat <- density(wt, dimyx = 500)
+# Convert density_spatstat into a stars object.
+density_stars <- stars::st_as_stars(density_spatstat)
+# Convert density_stars into an sf object
+density_sf <- st_as_sf(density_stars) %>% st_set_crs(32632)
+
+map_density <- ggplot() +
+  geom_sf(data = density_sf, aes(fill = v), col = NA) + 
+  scale_fill_viridis_c(option = 'magma', direction = -1) +
+  # scale_fill_gradientn(colours = c("white", "grey20")) +
+  geom_sf(data = st_boundary(de_states)) +
+  geom_sf(data = dat.sf, shape = 6, size = 1.5, colour = "blue", fill = NA)+
+  theme_void() + 
+  theme(legend.position="none")
+# map_density
+
+# mapview
+
+BRD_recognised <- st_as_sf(x=dfOFFIC, coords = c("LONj", "LATj"))
+BRD_unrecognised <- st_as_sf(x=dfUNOFFIC, coords = c("LONj", "LATj"))
+st_crs(BRD_recognised) <- st_crs(de_states)
+st_crs(BRD_unrecognised) <- st_crs(de_states)
+
+
+m <- dr_states %>% mutate(count = lengths(st_contains(., dat.sf)),
+                     homicides_density = (count / pop)*100000) %>% 
+  mapview(zcol = "homicides_density") + 
+  mapview(BRD_unrecognised, color = 'red', col.regions = "yellow") +
+  mapview(BRD_recognised, color = 'red', col.regions = "black")
+# m
+
+```
+
+The German government recognises `r nrow(dfOFFIC)` homicides with a right-wing extremist motive between `r head(df$YEAR, 1)` and `r as.numeric(tail(df$YEAR, 1))+1`. The [Amadeo Antonio Foundation](https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/) claims as many as `r nrow(dfUNOFFIC)` further such homicides. Visualising the dispersion of this deadly violence can be of some help in addressing the threat of right-wing extremist violence in Germany. 
+
+## Density map
+
+```{r echo = F, collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE}
+map_density
+```
+
+## Interactive map
+
+Dots indicate the municipality where homicides with a right-wing extremist motive occurred. Black dots refer to those cases recognised as instances of right-wing extremist violence by the German government. Yellow dots refer to additional cases identified by or reported to the [Amadeo Antonio Foundation](https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/). The states of Germany are shaded according to the density (by population, per 100,000 inhabitants) of homicides that have occurred therein. You can examine further evidence about a case by clicking on a dot.
+
+```{r echo = F, collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE}
+m
+```
+
+You can download the data by clicking the button below.
+
+```{r echo = F, collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE}
+library(downloadthis)
+
+df %>% download_this(
+    output_name = "de_rwe_homicides_data",
+    output_extension = ".xlsx",
+    button_label = "Download datasets as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+```
+
+

@@ -1,0 +1,81 @@
+---
+title: "Research"
+listing:
+  - id: articles
+    contents: "articles/*/index.qmd"
+    sort: "date desc"
+    template: ../html/research/listing.ejs
+    categories: true
+  # - id: working-papers
+  #   contents: "working-papers/*/index.qmd"
+  #   sort: "date desc"
+  #   template: ../html/research/listing.ejs
+  - id: book-chapters
+    contents: "chapters/*/index.qmd"
+    sort: "date desc"
+    template: ../html/research/listing.ejs
+  # - id: reviews
+  #   contents: "reviews/*/index.qmd"
+  #   sort: "date desc"
+  #   template: ../html/research/listing.ejs
+  # - id: dormant-working-papers
+  #   contents: "dormant-working-papers/*/index.qmd"
+  #   sort: "date desc"
+  #   template: ../html/research/listing.ejs
+  # - id: seminar-papers
+  #   contents: "seminar-papers/*/index.qmd"
+  #   sort: "date desc"
+  #   template: ../html/research/listing.ejs
+  # - id: translations
+  #   contents: "translations/*/index.qmd"
+  #   sort: "date desc"
+  #   template: ../html/research/listing.ejs
+page-layout: full
+include-back-link: false
+toc-location: right
+---
+
+My research is centred in comparative politics. I study political violence and far-right socio-politics, as well as collaborating with colleagues on an array of other topics. My research applies a diverse array of methodological techniques, especially qualitative methods such as qualitative comparative analysis (QCA) and case study designs.
+
+
+
+## Journal articles
+
+:::{#articles}
+:::
+
+
+<!-- ## Working papers -->
+
+<!-- :::{#working-papers} -->
+<!-- ::: -->
+
+
+## Book chapters
+
+:::{#book-chapters}
+:::
+
+
+<!-- ## Reviews -->
+
+<!-- :::{#reviews} -->
+<!-- ::: -->
+
+
+<!-- ## Dormant working papers -->
+
+<!-- :::{#dormant-working-papers} -->
+<!-- ::: -->
+
+
+<!-- ## Selected seminar papers -->
+
+<!-- :::{#seminar-papers} -->
+<!-- ::: -->
+
+
+<!-- ## Translations -->
+
+<!-- :::{#translations} -->
+<!-- ::: -->

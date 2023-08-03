@@ -1,0 +1,76 @@
+---
+title: "Patterns of Negative Demobilisation: A qualitative comparative analysis (QCA) of large, far-right, demonstration campaigns"
+date: 2021-09-27
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories:
+  - demobilisation
+  - far right
+  - protest
+  - qualitative comparative analysis (QCA)
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “Patterns of Negative Demobilisation: A qualitative comparative analysis (QCA) of large, far-right, demonstration campaigns,” <em>Mobilization: An International Quarterly</em> 26, no. 3 (2021): 267-284, doi: <a href="https://doi.org/10.17813/1086-671X-26-3-267"><code>10.17813/1086-671X-26-3-267</code></a>
+  links:
+  - name: Preprint
+    url: zeller2021_moby_qca.pdf
+    local: true
+    # icon: bi filetype-pdf
+  - name: Final version
+    url: https://doi.org/10.17813/1086-671X-26-3-267
+    # icon: fa-solid fa-scroll
+  # - name: Code and data
+  #   url: https://github.com/andrewheiss/cautioning-canary
+  #   icon: fa-brands fa-github
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=doi&q=10.17813/1086-671X-26-3-267
+    # icon: ai ai-zotero
+  extra: >-
+    Presented to the research seminar of the Hochschule Düsseldorf’s Forschungsschwerpunkt Rechtsextremismus/Neonazismus (FORENA) and to the Central European University’s Center for Policy Studies.
+doi: 10.17813/1086-671X-26-3-267
+haiku:
+  - <em>"Whether due to inattention, indifference, or (particularly in cases where local state authorities oppose the far-right campaign) insufficient capacity, it appears that sometimes private forms of social control must first materialize to jolt the requisite state actor(s) out of lethargy or spur on the requisite state action."</em>
+---
+
+## Important links
+
+- [Paper (preprint)](zeller2021_moby_qca.pdf)
+<!-- - [Statistical analysis notebook](https://stats.andrewheiss.com/cautioning-canary/) -->
+<!-- - [GitHub repository](https://github.com/andrewheiss/cautioning-canary) -->
+
+
+## Abstract
+
+Scholarship on social movement lifecycles has focused on mobilization processes, with relatively less attention on the ends, demobilization. The intuitive connection between origins and ends has sometimes led to a conceptualization of demobilization as simply the failure to continue mobilizing, obscuring the distinct causal processes underlying demobilization. This article adds to recent studies foregrounding demobilization by studying the negative demobilization of large, far-right, demonstration campaigns. Using a subset from this population of cases—campaigns in Germany, England, and Austria between 1990 and 2015---the article applies qualitative comparative analysis (QCA) to this causally complex phenomenon. I find that demobilizing is conjunctural, with evidence of four patterns: closing opportunity, coercive state repression, civil countermobilization, and militant anti-far-right action. This article addresses an important—and conspicuously ubiquitous—population of cases, far-right demonstration campaigns and presents findings that reflect on critical issues in the study of far-right sociopolitics.
+
+
+## Important figures
+
+![Figure 1. Timeline of Demonstration Campaign Cases in Descending Order of Size](plot_timelines.png)
+
+![Figure 2. Necessity Plot of SCO + PCH](plot_nec.png)
+
+![Figure 3. Graphic Illustration of the Solution for Negative Demobilization](plot_paths.png)
+
+![Figure 4. Sufficiency Solution](plot_suf.png)
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.17813/1086-671X-26-3-267">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@article{zeller2021patterns,
+  title={Patterns of Demobilization: A Qualitative Comparative Analysis (QCA) of Far-Right Demonstration Campaigns},
+  author={Zeller, Michael C},
+  journal={Mobilization: An International Quarterly},
+  volume={26},
+  number={3},
+  pages={267--284},
+  year={2021}
+}
+```

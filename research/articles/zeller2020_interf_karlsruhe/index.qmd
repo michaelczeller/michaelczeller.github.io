@@ -1,0 +1,50 @@
+---
+title: "Karlsruhe’s ‘giving fences’: mobilisation for the needy in times of COVID-19"
+date: 2020-04-20
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories:
+  - COVID-19
+  - homelessness
+  - collective action
+  - expectancy-value theory
+  - digital mobilisation
+  - solidarity
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “Karlsruhe’s ‘giving fences’: mobilisation for the needy in times of COVID-19,” <em>Interface: a journal for and about social movements,</em> 12, no. 1 (2020): 292-303.
+  links:
+  - name: Paper
+    url: zeller2020_interf_karlsruhe.pdf
+    local: true
+    # icon: bi filetype-pdf
+  - name: Online version
+    url: https://www.interfacejournal.net/wp-content/uploads/2020/07/Interface-12-1-Zeller.pdf
+haiku:
+  - <em>"... homeless and needy individuals take succour from the giving fences; and participants clearly derive distinct psycho-social benefits from engagement, which can alleviate strains arising from the public health response to COVID-19."</em>
+---
+
+## Important links
+
+- [Paper](zeller2020_interf_karlsruhe.pdf)
+
+## Abstract
+
+Protective measures against the spread of COVID-19 have placed strains on many segments of society, but perhaps homeless and impoverished people most of all. In Karlruhe (Germany), a form of collective action has emerged to help provide for needy individuals while their normal support structures are unavailable: ‘giving fences.’ This article reviews this practice and considers its qualities and defects. The giving fences are a promising example of solidary collective action, providing considerable advantages to participants and beneficiaries. Its shortcomings, however, emphasise the importance of resuming institutionalised social service provision as soon as emergency conditions are relaxed.
+
+## Citation
+
+```bibtex
+@article{zeller2020karlsruhe,
+  title={Karlsruhe’s ‘giving fences’: mobilisation for the needy in times of COVID-19},
+  author={Zeller, Michael C},
+  journal={Interface: a journal for and about social movements},
+  volume={21},
+  number={1},
+  pages={292--303},
+  year={2020}
+}
+```

@@ -1,0 +1,77 @@
+---
+title: "Influences of Islamist Radicalization: A Configurational Analysis of Balkan Foreign Fighters in Syria"
+date: 2023-05-24
+author:
+  - name: Asya Metodieva
+    url: https://www.iir.cz/en/asya-metodieva
+    orcid: 0000-0002-8775-6227
+    affiliation: Central European University
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories:
+  - foreign fighters
+  - radicalization
+  - recruitment
+  - qualitative comparative analysis (QCA)
+  - terrorism
+  - violent extremism
+pub-info:
+  reference: >-
+    <a href="https://www.iir.cz/en/asya-metodieva">Asya Metodieva</a> and <strong>Michael C. Zeller</strong>, “Influences of Islamist Radicalization: A Configurational Analysis of Balkan Foreign Fighters in Syria,” <em>Studies in Conflict & Terrorism</em> (in press): 1-27, doi: <a href="https://doi.org/10.1080/1057610X.2023.2213967"><code>10.1080/1057610X.2023.2213967</code></a>
+  links:
+  - name: Preprint
+    url: metodieva-zeller2023_sct_ff_preprint.pdf
+    local: true
+    # icon: fa-solid fa-file-pdf
+  - name: Final version
+    url: https://doi.org/10.1080/1057610X.2023.2213967
+    # icon: fa-solid fa-scroll
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=doi&q=10.1080/1057610X.2023.2213967
+    # icon: ai ai-zotero
+  extra: >-
+    Presented to the Comparative Politics section of the Swiss Political Science Association Annual Congress in 2022.
+doi: 10.1080/1057610X.2023.2213967
+haiku:
+  - <em>"While recruitment of IS foreign fighters was highly decentralized, local radical milieus secured both resilient social structures and authority, concentrated in influencers’ networks."</em>
+---
+
+## Important links
+
+- [Paper (preprint)](metodieva-zeller2023_sct_ff_preprint.pdf)
+
+## Abstract
+
+Recent research on Islamist radicalization has directed greater attention to the conjunctions of causes and staged processes that draw individuals into violent extremism. Yet research is still grappling with the varying extents of individual action and external factors, including social networks, peer pressure, propaganda, cultural and socio-economic conditions, on radicalization processes. At bottom, this investigation revolves around the context in which individuals live and the influences acting upon them. Identifying patterns of these conditions is essential to understanding how individuals come to engage in violent extremism. This article presents a configurational analysis of foreign fighters that travelled to fight in the Syrian War. The paper presents data gathered from interviews, security and judicial records, and secondary sources on individuals from the Western Balkans (predominantly Bosnia and Herzegovina) that joined Islamist groups in the Syrian War. Individuals’ relationship with longstanding Balkan radical milieus and with key Islamist preachers were coded. Using qualitative comparative analysis (QCA) techniques, we present a systematic description of characteristics of foreign fighters.
+
+## Important figures
+
+![Figure 1. Summary of research process](FIG_1.png)
+
+![Figure 3. A Heatmap showing the clustering of cases based on their connection (if any) to radical influencers and their relationship with the radical milieu. Bars within the cells show the proportions of fighters, women, children, and recruiters.](FIG_3.png)
+
+![Figure 4. Set relations of foreign fighters, individuals with a positive active relationship to the radical milieu, individuals connected to Imamovíc, and individuals connected to Bilal B.](FIG_4.png)
+
+![Figure 5. Set relations of foreign fighters, individuals connected to Bilal B., individuals affiliated with Al-Nusra front, and individuals affiliated with Islamic State.](FIG_5.png)
+
+![Figure 6. Set relations of foreign fighters, individuals connected to Nusret I., individuals affiliated with JN, and individuals affiliated with IS](FIG_6.png)
+
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1080/1057610X.2023.2213967">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@article{metodieva2023influences,
+  title={Influences of Islamist Radicalization: A Configurational Analysis of Balkan Foreign Fighters in Syria},
+  author={Metodieva, Asya and Zeller, Michael C},
+  journal={Studies in Conflict \& Terrorism},
+  pages={1--26},
+  year={2023},
+  publisher={Taylor \& Francis}
+}
+```

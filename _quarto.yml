@@ -2,19 +2,86 @@ project:
   type: website
   output-dir: docs
 
+bibliography: files/bib/library.bib
+csl: files/bib/chicago-author-date.csl
+
+# Metadata stuff
+pagetitle: "{{< meta title >}} | Dr. Michael C. Zeller"
+description-meta: "Michael C. Zeller is an assistant professor at XXX, researching political violence and far-right socio-politics."
+author-meta: "Michael C. Zeller"
+
 website:
-  title: "michaelczeller.github.io"
+  title: "Dr. Michael C. Zeller"
+  description: "{{< meta description-meta >}}"
+  favicon: "/files/favicon4.png"
+  site-url: "michaelczeller.github.io"
+  repo-url: "https://github.com/michaelczeller/michaelczeller.github.io"
+  
+  twitter-card: 
+    image: "/files/favicon4.png"
+    description: "{{< meta description-meta >}}"
+    card-style: summary_large_image
+    creator: "@michaelczeller"
+    site: "@michaelczeller"
+  
+  open-graph: 
+    image: "/files/favicon4.png"
+    description: "{{< meta description-meta >}}"
+    locale: en_UK
+  
   navbar:
+    pinned: true
+    
     left:
       - href: index.qmd
-        text: Home
-      - about.qmd
+        text: "About"
+      - href: cv/index_cv.qmd
+        text: "CV"
+      - href: research/index_research.qmd
+        text: "Research"
+      - href: teaching/index_teaching.qmd
+        text: "Teaching"
+      - href: data/index_data.qmd
+        text: "Data"
+    
+    right:
+      - icon: envelope
+        aria-label: email
+        href: "mailto:michael.zeller@uni-bielefeld.de"
+      - icon: twitter
+        aria-label: twitter
+        href: https://twitter.com/michaelczeller
+        rel: me
+      - text: CV
+        aria-label: CV
+        href: cv/mz_cv.pdf
+      # - icon: github
+      #   aria-label: github
+      #   href: https://github.com/michaelczeller
+      #   rel: me
+
+page-footer:
+    left: |
+      <span class="faux-block">{{< var years >}} Michael C. Zeller</span>
+      # <span class="faux-block">All content licensed under<br>[{{< fa brands creative-commons >}} {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-sa >}} Creative Commons CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)</span>      
+    center: |
+      <span class="faux-block"><strong>ORCID</strong> [{{< var orcid >}}](https://orcid.org/{{< var orcid >}})</span>
+    right: |
+      <span class="faux-block">Made with 'R' and [Quarto](https://quarto.org/)</span>
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      dark: [darkly, mcz.scss] # or 'flatly'
+      light: [flatly, mcz.scss]
+      # mcz.scss [cosmo, theme-dark.scss]
+    # mainfont: arial
+    # fontsize: 1.5rem
+    # fontcolor: "#0013d5"
+    # linkcolor: "#ff33f0"
+    # monofont: courier new
     css: styles.css
     toc: true
 
-
+    
 

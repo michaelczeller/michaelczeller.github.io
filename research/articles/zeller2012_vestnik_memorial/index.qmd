@@ -1,0 +1,42 @@
+---
+title: "Cooperative Ventures of Russian Civil Society: Three Case Studies from the Memorial Human Rights Group"
+date: 2012-01-01
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    affiliation: University of Louisville
+categories:
+  - civil society
+  - Memorial Human Rights Group
+  - cooperation
+  - case study
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “Cooperative Ventures of Russian Civil Society: Three Case Studies from the Memorial Human Rights Group,” <em>Vestnik, The Journal of Russian and Asian Studies</em> 12, no. 1 (2012): 3-12.
+  links:
+  - name: Paper
+    url: zeller2012_vestnik_memorial.pdf
+    local: true
+    # icon: bi filetype-pdf
+haiku:
+  - <em>"... the key element of a genuinely flourishing civil society is the ability for un‐coerced popular influence to freely act within a pluralistic scene of governmental and non‐governmental structures."</em>
+---
+
+## Important links
+
+- [Paper](zeller2012_vestnik_memorial.pdf)
+
+
+## Citation
+
+```bibtex
+@article{zeller2012cooperative,
+  title={Cooperative Ventures of Russian Civil Society: Three Case Studies from the Memorial Human Rights Group},
+  author={Zeller, Michael C},
+  journal={Vestnik, The Journal of Russian and Asian Studies},
+  volume={12},
+  number={1},
+  pages={3--12},
+  year={2012}
+}
+```

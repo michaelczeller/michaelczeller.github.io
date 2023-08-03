@@ -1,0 +1,47 @@
+---
+title: "COVID-19 and the Pause of Far-Right Demonstrations in Germany"
+date: 2020-03-01
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories: 
+  - Germany
+  - far right
+  - social movements
+  - demonstrations
+  - COVID-19
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “COVID-19 and the Pause of Far-Right Demonstrations in Germany,” in <em>Responses to the COVID-19 Pandemic by the Radical Right</em>, eds. Tamir Bar-On and Bàrbara Molas (Stuttgart: ibidem-Verlag, 2020).
+  links:
+  - name: Preprint
+    url: zeller2020_pause_preprint.pdf
+    local: true
+    # icon: fa-solid fa-file-pdf 
+haiku:
+  - <em>"The restoration of normal circumstances of pub- lic life and activity in public space will surely include renewed far-right demonstration activity. Though it may effect a pause, COVID-19 is not likely to deter the far right from their Demonstrationspolitik."</em>
+---
+
+## Important links
+
+- [Paper (preprint)](zeller2020_pause_preprint.pdf)
+
+
+## Abstract
+
+In most European countries, protective measures against COVID-19 have dramatically reduced activities in public space. While these measures have a wide-ranging and diverse impact, a particular effect on far-right social movements is noteworthy. Large public gatherings are widely prohibited because of the pandemic. This deprives the far right of one of its core ac- tivities: demonstrations. Far-right movements in Germany are particularly wedded to this tactic—to the extent that Fabian Virchow refers to the cen- tral importance of Demonstrationspolitik (demonstration politics) for the German far right. Considering the many uses and advantages of demon- strations, this emphasis is unsurprising.
+
+## Citation
+
+```bibtex
+@incollection{Zeller2020covid,
+    Address = {Stuttgart},
+    Author = {Michael C. Zeller},
+    Booktitle = {Responses to the COVID-19 Pandemic by the Radical Right},
+    Editor = {Tamir Bar-On and Bàrbara Molas},
+    Publisher = {ibidem-Verlag},
+    Title = {COVID-19 and the Pause of Far-Right Demonstrations in Germany},
+    Year = {2020}}
+```

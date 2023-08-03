@@ -1,0 +1,61 @@
+---
+title: "Illiberalism, polarisation, resilience, and resistance: Concepts in dynamic tension"
+date: 2022-01-03
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+  - name: Zsuzsanna Vidra
+    url: https://www.ppk.elte.hu/munkatarsak/vidra-zsuzsanna
+    orcid: 0000-0001-8125-3154
+    affiliation: Central European University
+categories:
+  - illiberalism
+  - polarisation
+  - resilience
+  - resistance
+pub-info:
+  reference: >-
+    <a href="https://www.ppk.elte.hu/munkatarsak/vidra-zsuzsanna">Zsuzsanna Vidra</a> and <strong>Michael C. Zeller</strong>, “Illiberalism, polarisation, resilience, and resistance: Concepts in dynamic tension,” <em>Intersections. East European Journal of Society and Politics</em> 7, no. 4 (2021): 1-12, doi: <a href="https://doi.org/10.17356/ieejsp.v7i4.945"><code>10.17356/ieejsp.v7i4.945</code></a>
+  links:
+  - name: PDF
+    url: vidra-zeller2021_inters_illib.pdf
+    local: true
+    # icon: bi filetype-pdf
+  - name: Online version
+    url: https://doi.org/10.17356/ieejsp.v7i4.945
+    # icon: fa-solid fa-scroll
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=doi&q=10.17356/ieejsp.v7i4.945
+    # icon: ai ai-zotero
+doi: 10.17356/ieejsp.v7i4.945
+haiku:
+  - <em>'... articles in this thematic issue are concerned with countries where illiberalism al- ready sits in the seat of power, namely in Central and Eastern Europe, where the establish- ment and operation of illiberal regimes is conspicuous, where ‘pernicious polarisation’ that strains resilience is often striking, and where resistance is crucial to halt or reverse illiberalisation.'</em>
+---
+
+## Important links
+
+- [Paper](vidra-zeller2021_inters_illib.pdf)
+
+## Abstract
+
+Illiberal regimes undermine human rights norms that entail equal legal protections of citizens and social groups. Illiberal actors often intentionally drive social polarisation in hopes of bolstering their support and securing their political position. This strains liberal democratic-oriented social resilience and provokes resistance to the illiberal regime. The articles in this special issue, looking at the regimes and societies of Central and Eastern Europe—where the establishment and operation of illiberal regimes is conspicuous, where ‘pernicious polarisation’ (Somer, McCoy, & Luke, 2021) that strains social resilience is often striking, and where resistance is crucial to halt or reverse illiberalisation—address this nexus of concepts. In this introduction, we review the four key concepts that undergird the special issue’s articles. 
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.17356/ieejsp.v7i4.945">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@article{zeller2021illiberalism,
+  title={Illiberalism, polarisation, resilience, and resistance: Concepts in dynamic tension},
+  author={Zeller, Michael C and Vidra, Zsuzsanna},
+  journal={Intersections. East European Journal of Society and Politics},
+  volume={7},
+  number={4},
+  pages={1--12},
+  year={2021}
+}
+```

@@ -1,0 +1,65 @@
+---
+title: "Hungary"
+date: 2023-06-05
+author:
+  - name: Zsuzsanna Vidra
+    url: https://www.ppk.elte.hu/munkatarsak/vidra-zsuzsanna
+    orcid: 0000-0001-8125-3154
+    affiliation: Central European University
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories: 
+  - Hungary
+  - right-wing extremism
+  - radical right
+  - far right
+  - illiberal government
+  - counter-extremism
+  - civil society
+pub-info:
+  reference: >-
+    <a href="https://www.ppk.elte.hu/munkatarsak/vidra-zsuzsanna">Zsuzsanna Vidra</a> and <strong>Michael C. Zeller</strong>, “Hungary,” chap. 12 in <em>Routledge Handbook of Violent Extremism and Resilience</em>, eds. Richard McNeil-Willson and Anna Triandafyllidou (London: Routledge, 2023), doi: <a href="https://doi.org/10.4324/9781003267102-14"><code>10.4324/9781003267102-14</code></a>
+  links:
+  - name: Preprint
+    url: vidra-zeller2023_hungary_preprint.pdf
+    local: true
+    # icon: fa-solid fa-file-pdf 
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=isbn&q=10.4324/9781003267102-14
+    # icon: ai ai-zotero
+  # extra: >-
+  #   Presented to the research seminar of the Hochschule Düsseldorf’s Forschungsschwerpunkt Rechtsextremismus/Neonazismus (FORENA) and to the Central European University’s Center for Policy Studies.
+doi: 10.4324/9781003267102-14
+haiku:
+  - <em>"Hungarian state actors have no impactful counter-extremism strategy. Laws and policies meant to curtail extremism, though enacted, are judicially interpreted with a tolerant regard for the far-right and seldom applied by law enforcement agencies. What is more, since 2010 the illiberal regime has both fostered the far-right in the public sphere and hindered the efforts of civil society actors to implement counter-extremism projects and programmes."</em>
+---
+
+## Important links
+
+- [Paper (preprint)](vidra-zeller2023_hungary_preprint.pdf)
+
+
+## Abstract
+
+This chapter gives a comprehensive overview of extremism and counter-extremism in Hungary. First, it looks at the progression of far-right social forces and the trends of resentment and xenophobic attitudes. Then, three phases of the post-socialist era are discussed, each exploring radical and extreme right political actors and movements, their political participation and influence on mainstream politics and the public. In the early years, while far-right political actors and movements proliferated, they remained marginal. With the rise of a new far-right party, Jobbik, in the 2000s, masses of voters were mobilised, and the party became the second strongest political force. Since 2010, Hungary has been marked above all by the political hegemony of Viktor Orbán’s Fidesz. The party’s turn to illiberalism and populism, and indeed its adoption of extreme positions on issues like immigration and so-called gender ideology, has closed opportunities for other far-right actors. In the final section, we examine counter-extremism policies and politics, revealing that extant measures are reactive rather than proactive and most of the time can be characterized as legally permissive and weakly implemented. What is more, since 2010 there have been no significant governmental attempts to address radicalisation, far-right activism and associated criminality.
+
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=isbn&q=10.4324/9781003267102-14">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@incollection{VidraZeller2023,
+    Address = {London},
+    Author = {Zsuzsanna Vidra and Michael C. Zeller},
+    Booktitle = {Routledge Handbook of Violent Extremism and Resilience},
+    Editor = {Richard McNeil-Willson and Anna Triandafyllidou},
+    Publisher = {Routledge},
+    Title = {Hungary},
+    Chapter = {12},
+    Year = {2023}}
+```

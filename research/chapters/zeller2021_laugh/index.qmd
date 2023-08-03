@@ -1,0 +1,48 @@
+---
+title: "How to Laugh Away the Far-Right: Lessons from Germany"
+date: 2021-09-21
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories: 
+  - Germany
+  - far right
+  - social movements
+  - humour
+  - counter-mobilisation
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “How to Laugh Away the Far-Right: Lessons from Germany,” in <em>The Radical Right During Crisis</em>, ed. Eviane Leidig (Stuttgart: ibidem-Verlag, 2021).
+  links:
+  - name: Preprint
+    url: zeller2021_laugh_preprint.pdf
+    local: true
+    # icon: fa-solid fa-file-pdf 
+haiku:
+  - <em>"The tactics employed by the Apfelfront activists, like the fun-fighters before them, attempt to undermine their targets with ridicule."</em>
+---
+
+## Important links
+
+- [Paper (preprint)](zeller2021_laugh_preprint.pdf)
+
+
+## Abstract
+
+Counter-mobilisation against far-right activism takes many forms, adopts many practices— but humour is one of the most persistent tactics. Time and again far-right movement organisations carry out actions laden with pretensions of gravity and solemnity: Nazis mourning Rudolf Hess on the anniversary of his suicide; Ku Klux Klan members protesting against the removal of Confederate flags from U.S. state houses; Hindu extremists ‘protecting people from immorality’ by assaulting men and women gathered together in a pub; black-clad ‘soldiers of Odin’ patrolling streets in Finland, are just a few examples. To undermine these activities, anti-fascist activists have repeatedly turned to ‘tactical frivolity’ or calculated silliness to disrupt the attempts of far-right groups to perform dignified actions. Humour can serve several purposes. In order to illustrate these, this article examines the emergence of humour as a tactic in activism in Germany and the example of the Front Deutscher Äpfel, a case which demonstrates the utility of satire among counter-mobilising activists and, specifically, against far-right groups.
+
+
+## Citation
+
+```bibtex
+@incollection{Zeller2021how,
+    Address = {Stuttgart},
+    Author = {Michael C. Zeller},
+    Booktitle = {The Radical Right During Crisis},
+    Editor = {Eviane Leidig},
+    Publisher = {ibidem-Verlag},
+    Title = {How to Laugh Away the Far-Right: Lessons from Germany},
+    Year = {2021}}
+```

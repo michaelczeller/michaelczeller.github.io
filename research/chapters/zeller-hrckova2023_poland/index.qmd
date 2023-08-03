@@ -1,0 +1,64 @@
+---
+title: "Poland"
+date: 2023-06-05
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+  - name: Jana Hrckova
+    orcid: 
+    affiliation: Central European University
+categories: 
+  - Poland
+  - National Radical Camp (ONR)
+  - Autonomia Foundation
+  - Law and Justice (PiS)
+  - far right
+  - social resilience
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong> and Jana Hrckova, “Poland,” chap. 13 in <em>Routledge Handbook of Violent Extremism and Resilience</em>, eds. Richard McNeil-Willson and Anna Triandafyllidou (London: Routledge, 2023), doi: <a href="https://doi.org/10.4324/9781003267102-15"><code>10.4324/9781003267102-15</code></a>
+  links:
+  - name: Preprint
+    url: zeller-hrckova2023_poland_preprint.pdf
+    local: true
+    # icon: fa-solid fa-file-pdf 
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=isbn&q=10.4324/9781003267102-15
+    # icon: ai ai-zotero
+  # extra: >-
+  #   Presented to the research seminar of the Hochschule Düsseldorf’s Forschungsschwerpunkt Rechtsextremismus/Neonazismus (FORENA) and to the Central European University’s Center for Policy Studies.
+doi: 10.4324/9781003267102-15
+haiku:
+  - <em>"Poland ... a country gripped by illiberalisation, both spurred by and providing further encouragement of radical and extremist actors, but also possessed of sources of social resilience."</em>
+---
+
+## Important links
+
+- [Paper (preprint)](zeller-hrckova2023_poland_preprint.pdf)
+
+
+## Abstract
+
+Poland’s transformation to democracy was not blighted by violence or intense contestation and was capped by smooth accession to the EU; the national economy developed well (though unequally) over the past three decades, including during the 2008–2009 economic crisis from which Poland emerged largely unscathed; and the ethnic and religious homogeneity of the population portended no danger of inter-group conflict. Yet Poland today is marked by strong polarisation and rising extremism. This chapter unpacks this empirical puzzle, first delineating the arc of macro-political developments that brought the populist radical right Law and Justice (PiS) party to power. Then, it identifies and classifies the variants of (violent) extremism in contemporary Poland, many of which have been nurtured or emboldened by PiS. This typological overview is accompanied by a detailed examination of one violent extremist actor, the National Radical Camp (ONR). The perils of polarisation and extremism have not gone unchallenged, so the next section identifies and classifies the types of resilience-building practices existent in Poland. This is complemented by examining the activity of the Polish ‘Autonomy Foundation’. The final section summarises the diagnosis of polarisation and extremism in Poland, as well as the prognosis suggested by political trends and resilience-building practices.
+
+
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=isbn&q=10.4324/9781003267102-15">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@incollection{ZellerHrckova2023,
+    Address = {London},
+    Author = {Michael C. Zeller and Jana Hrckova},
+    Booktitle = {Routledge Handbook of Violent Extremism and Resilience},
+    Editor = {Richard McNeil-Willson and Anna Triandafyllidou},
+    Publisher = {Routledge},
+    Title = {Poland},
+    Chapter = {13},
+    Year = {2023}}
+```

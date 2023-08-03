@@ -1,0 +1,75 @@
+---
+title: "The everyday abnormal and the quest for normalcy: How Polish equality marches build protester resilience"
+date: 2022-01-03
+author:
+  - name: Jana Hrckova
+    affiliation: Central European University
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories:
+  - illiberalism
+  - social movements
+  - emotions
+  - resistance
+  - resilience
+  - normalcy
+pub-info:
+  reference: >-
+    Jana Hrckova and <strong>Michael C. Zeller</strong>, “The everyday abnormal and the quest for normalcy: How Polish equality marches build protester resilience,” <em>Intersections. East European Journal of Society and Politics</em> 7, no. 4 (2021):  104-123, doi: <a href="https://doi.org/10.17356/ieejsp.v7i4.817"><code>10.17356/ieejsp.v7i4.817</code></a>
+  links:
+  - name: PDF
+    url: hrckova-zelller2021_inters_pol.pdf
+    local: true
+    # icon: fa-solid fa-file-pdf
+  - name: Online version
+    url: https://doi.org/10.17356/ieejsp.v7i4.817
+    # icon: fa-solid fa-scroll
+  # - name: Code and data
+  #   url: https://github.com/andrewheiss/cautioning-canary
+  #   icon: fa-brands fa-github
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=doi&q=10.17356/ieejsp.v7i4.817
+    # icon: ai ai-zotero
+  # extra: >-
+  #   Presented to the research seminar of the Hochschule Düsseldorf’s Forschungsschwerpunkt Rechtsextremismus/Neonazismus (FORENA) and to the Central European University’s Center for Policy Studies.
+doi: 10.17356/ieejsp.v7i4.817
+haiku:
+  - <em>"... people like our interviewees must contend with a wobbly balance between the en- couraging normalcy provided by protest activity and the difficult abnormality they face in their everyday lives."</em>
+---
+
+## Important links
+
+- [Paper](hrckova-zelller2021_inters_pol.pdf)
+
+
+## Abstract
+
+Illiberal regimes and societies test resilience and provoke resistance, especially from targeted minority groups. But this abstraction can obscure the complexity of specific events and participants’ emotional motivation. What are the emotional and cognitive responses of protest participants within illiberal contexts? This article investigates this question by focusing on LGBT-rights protest participants in contemporary Poland. Using testimony from in-depth semi-structured interviews with participants from 2019 equality marches, we identify emotional and cognitive responses that centre around a quest for normalcy. Illiberal politics in Poland, especially when contrasted with perceptions about LGBT acceptance in neighbouring countries, have made everyday life ‘abnormal’, whereby LGBT individuals fear increasing violence and feel unable to act normally. Protest participation opens a space where LGBT individuals and allies can feel normal. This experience of normalcy effectively claims recognition of one’s ‘normal’ humanity. In turn, this builds resilience within participants to endure the deterring effects of everyday life and to continue their advocacy for LGBT rights.
+
+## Important figures
+
+![Figure 1. Google trend analysis for ‘LGBT’ in Poland. Y-axis numbers represent search interest relative to the highest point on the chart for the given region and time. A value of 100 is the peak popularity for the term. A value of 50 means that the term is half as popular. A score of 0 means there was not enough data for this term.](plot_google.png)
+
+![Figure 2. Longitudinal European Social Survey responses from Poland on acceptance of LGBT individuals (European Social Survey Cumulative File, 2020)](plot_ess.png)
+
+![Table 1. Summary of study findings categorised by those elements that are *deterring* or *resilience-building* in everyday and protest settings](plot_tab.png)
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.17356/ieejsp.v7i4.817">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@article{hrckova2021everyday,
+  title={The everyday abnormal and the quest for normalcy: How Polish equality marches build protester resilience},
+  author={Hrckova, Jana and Zeller, Michael C},
+  journal={Intersections. East European Journal of Society and Politics},
+  volume={7},
+  number={4},
+  pages={104--123},
+  year={2021}
+}
+```

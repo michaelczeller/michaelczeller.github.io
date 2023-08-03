@@ -1,0 +1,70 @@
+---
+title: "The Austrian far right: historical continuities and the case of the Ulrichsberg commemorations"
+date: 2023-09-12
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories: 
+  - Austria
+  - far right
+  - social movements
+  - FPÖ
+  - Ulrichsberg
+  - demobilisation
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “The Austrian far right: historical continuities and the case of the Ulrichsberg commemorations,” chap. 5 in <em>Routledge Handbook of Far-Right Extremism in Europe</em>, eds. Katherine Kondor and Mark Littler (London: Routledge, 2023), doi: <a href="https://doi.org/10.4324/9781003256892-8"><code>10.4324/9781003256892-8</code></a>
+  links:
+  - name: Preprint
+    url: zeller2023_austria_preprint.pdf
+    local: true
+    # icon: fa-solid fa-file-pdf 
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=isbn&q=10.4324/9781003256892-8
+    # icon: ai ai-zotero
+  # extra: >-
+  #   Presented to the research seminar of the Hochschule Düsseldorf’s Forschungsschwerpunkt Rechtsextremismus/Neonazismus (FORENA) and to the Central European University’s Center for Policy Studies.
+doi: 10.4324/9781003256892-8
+haiku:
+  - <em>"The branches of Austria’s far right are many and varied, stretching from attitudes and criminal activity to movement actors and to one of Europe’s largest radical right parties – but many of these branches share common roots."</em>
+---
+
+## Important links
+
+- [Paper (preprint)](zeller2023_austria_preprint.pdf)
+
+
+## Abstract
+
+Throughout Europe contemporary far-right activism is at least partially rooted in historical grievances and activities. Austria is no exception. Here, a far-reaching base of far-right support manifests in antisemitic and xenophobic attitudes, criminal activity, movement organisation and campaigning, and party politics. Prominent parts of the dynamics that characterise these far-right manifestations are rooted in Austria's past. This chapter focuses on that rootedness by specifying the elements of the contemporary far-right ecosystem. It looks at case of the Ulrichsberg commemorations of Third Reich military veterans and examines how that demonstration campaign is an archetype of far-right party-movement dynamics in Austria. Specifically, the commemorations long enjoyed approval, support, and even participation by prominent politicians and state officials. As the dominant perception of Austria's historical legacy shifted towards acknowledging complicity in Nazi atrocities, the Ulrichsberg commemorations became politicised and the Austrian Freedom Party (Freiheitliche Partei Österreichs, FPÖ) transformed into the political representative of Austria's far right.
+
+## Important figures
+
+![Figure 5.1 Xenophobia in Austria, 1990–2017. (Data from the 2nd, 3rd, 4th, and 5th waves of the European Values Survey.) A respondent is counted as xenophobic when expressing a desire not to have neighbours that are “Muslims,” “immigrants/foreigners,” or people of a different race.](FIG1.1_austria_xenophobia.png)
+
+![Figure 5.2 Criminal offences in Austria with a far-right background. Source: Statistics from reports of the Austrian Federal Constitutional Protection Office.](FIG1.2_austria_far-right_crimes.png)
+
+![Figure 5.3 Comparison of per capita far-right criminal offences in Austria and Germany. Source: Statistics from reports of the Austrian and German Constitutional Protection Offices.](FIG1.3_at_de_far-right_crimes_per-capita.png)
+
+![Figure 5.4 FPÖ vote share in Austrian regional (Länder) elections since 1985.](FIG1.4_austria_fpoe-laender.png)
+
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=isbn&q=10.4324/9781003256892-8">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@incollection{Zeller2023austria,
+    Address = {London},
+    Author = {Michael C. Zeller},
+    Booktitle = {Routledge Handbook of Far-Right Extremism in Europe},
+    Editor = {Katherine Kondor and Mark Littler},
+    Publisher = {Routledge},
+    Title = {Poland},
+    Chapter = {5},
+    Year = {2023}}
+```

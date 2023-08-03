@@ -1,0 +1,57 @@
+---
+title: "Rethinking Demobilisation: Concepts, causal logic, and the case of Russia’s For Fair Elections movement"
+date: 2020-07-01
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Central European University
+categories:
+  - demobilisation
+  - social movements
+  - SMOs
+  - Russia
+  - For Fair Elections movement
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “Rethinking Demobilisation: Concepts, causal logic, and the case of Russia’s For Fair Elections movement,” <em>Interface: a journal for and about social movements,</em> 12, no. 1 (2020): 527-558.
+  links:
+  - name: Paper
+    url: zeller2020_interf_demob.pdf
+    local: true
+    # icon: bi filetype-pdf
+  - name: Online version
+    url: https://www.interfacejournal.net/wp-content/uploads/2020/07/Interface-12-1-MC-Zeller.pdf
+haiku:
+  - <em>"The study of social movements has long concentrated on mobilising and campaigning, that is, how movements get moving and then move. Yet this concentration on the initial upward slope and plateau of the life of movements deprived the latter, downward trajectory of much scholarly focus. How do movements falter and fail? What takes them from the apex of their strength and brings them low?"</em>
+---
+
+## Important links
+
+- [Paper](zeller2020_interf_demob.pdf)
+
+## Abstract
+
+The study of social movement organisations (SMOs) has tended to converge on the initial, upward trajectory and most intense activity of SMOs, that is, mobilisation and campaigning. Comparatively little attention has focused on the downward slope: how do movements falter and fail; how do SMOs demobilise? Recent work has sought to fill this lacuna. Davenport’s (2015) theorisation is the latest, most useful addition to the topic. Yet existing theories still omit facets of demobilisation and bear the mark of over-reliance on case inference. This article addresses these persistent conceptual problems. First, it argues for a reformulation of Davenport’s theorisation of SMO demobilisation, re-aggregating demobilising factors internal to SMOs and broadening the scope of external factors to include the repressive activities of non-state agents. Next, the article asserts that the causal logic of demobilising factors is complex: the concurrence of factors is what produces demobilisation (this is ‘conjunctural causation’) and multiple combinations of factors can cause demobilisation (this is ‘equifinality’). Finally, the article demonstrates the analytical utility of the proposed conceptual framework and concomitant causal logic by briefly analysing the case of the For Fair Elections (FFE) movement organisation in Russia in 2011-2012. This case exhibits the multiplicity of internal strains and external pressures that converge to produce demobilisation. Taken together, the article’s conceptual framework and empirical example provide a guide for identifying, analysing, and characterising SMO demobilisation.
+
+## Important figures
+
+![Table 1. A typology of demobilising factors of social movement organisations](tab_demob.png)
+
+![Figure 1 - Timeline of the For Fair Elections movement](fig1_ffe.png)
+
+![Figure 2 - the demobilisation of For Fair Elections](fig2_ffe.png)
+
+## Citation
+
+```bibtex
+@article{zeller2020rethinking,
+  title={Rethinking demobilisation: concepts, causal logic, and the case of Russia’s For Fair Elections movement},
+  author={Zeller, Michael C},
+  journal={Interface: A Journal on Social Movements},
+  volume={12},
+  number={1},
+  pages={527--558},
+  year={2020}
+}
+```
