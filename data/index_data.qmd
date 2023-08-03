@@ -15,6 +15,7 @@ library(tidyverse)
 library(dplyr)
 
 library(mapview)
+library(leaflet)
 mapviewOptions(fgb = FALSE)
 
 library(sf)
@@ -246,11 +247,24 @@ st_crs(BRD_recognised) <- st_crs(de_states)
 st_crs(BRD_unrecognised) <- st_crs(de_states)
 
 
-dr_states %>% mutate(count = lengths(st_contains(., dat.sf)),
+m <- dr_states %>% mutate(count = lengths(st_contains(., dat.sf)),
                      homicides_density = (count / pop)*100000) %>% 
   mapview(zcol = "homicides_density") + 
   mapview(BRD_unrecognised, color = 'red', col.regions = "yellow") +
   mapview(BRD_recognised, color = 'red', col.regions = "black")
+
+# m <- leaflet() %>% 
+#   addTiles() %>% 
+#   addCircleMarkers(data = BRD_unrecognised,
+#                    radius = 5,
+#                    fillOpacity = 1,
+#                    stroke = FALSE,
+#                    fillColor = "#e2eb34") %>% 
+#   addCircleMarkers(data = BRD_recognised,
+#                    radius = 5,
+#                    fillOpacity = 1,
+#                    stroke = FALSE,
+#                    fillColor = "#eb4034")
 
 # m
 
@@ -264,13 +278,16 @@ The German government recognises `r nrow(dfOFFIC)` homicides with a right-wing e
 map_density
 ```
 
-## Interactive map
 
-Dots indicate the municipality where homicides with a right-wing extremist motive occurred. Black dots refer to those cases recognised as instances of right-wing extremist violence by the German government. Yellow dots refer to additional cases identified by or reported to the [Amadeo Antonio Foundation](https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/). The states of Germany are shaded according to the density (by population, per 100,000 inhabitants) of homicides that have occurred therein. You can examine further evidence about a case by clicking on a dot.
+
+<!-- Dots indicate the municipality where homicides with a right-wing extremist motive occurred. Black dots refer to those cases recognised as instances of right-wing extremist violence by the German government. Yellow dots refer to additional cases identified by or reported to the [Amadeo Antonio Foundation](https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/). The states of Germany are shaded according to the density (by population, per 100,000 inhabitants) of homicides that have occurred therein. You can examine further evidence about a case by clicking on a dot. -->
+
+
 
 ```{r echo = F, collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE}
 m
 ```
+
 
 You can download the data by clicking the button below.
 
