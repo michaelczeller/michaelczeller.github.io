@@ -280,7 +280,7 @@ map_density
 
 
 
-<!-- Dots indicate the municipality where homicides with a right-wing extremist motive occurred. Black dots refer to those cases recognised as instances of right-wing extremist violence by the German government. Yellow dots refer to additional cases identified by or reported to the [Amadeo Antonio Foundation](https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/). The states of Germany are shaded according to the density (by population, per 100,000 inhabitants) of homicides that have occurred therein. You can examine further evidence about a case by clicking on a dot. -->
+Dots indicate the municipality where homicides with a right-wing extremist motive occurred. Black dots refer to those cases recognised as instances of right-wing extremist violence by the German government. Yellow dots refer to additional cases identified by or reported to the [Amadeo Antonio Foundation](https://www.amadeu-antonio-stiftung.de/todesopfer-rechter-gewalt/). The states of Germany are shaded according to the density (by population, per 100,000 inhabitants) of homicides that have occurred therein. You can examine further evidence about a case by clicking on a dot.
 
 
 
