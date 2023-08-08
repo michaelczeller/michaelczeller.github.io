@@ -298,11 +298,1066 @@ library(downloadthis)
 df %>% download_this(
     output_name = "de_rwe_homicides_data",
     output_extension = ".xlsx",
-    button_label = "Download datasets as xlsx",
+    button_label = "Download dataset as xlsx",
     button_type = "warning",
     has_icon = TRUE,
     icon = "fa fa-save"
   )
 ```
 
+
+# Proscribed Right-Wing Extremist Organisations (PREOs)
+
+This section contains data on Proscribed Right-wing Extremist Organizations (PREOs) in Europe. An article presenting this data and presenting initial analyses has been published in [Terrorism and Political Violence](https://www.tandfonline.com/doi/full/10.1080/09546553.2023.2240446):
+
+- Michael C. Zeller & Michael Vaughan (2023) Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects, *Terrorism and Political Violence*, DOI: [10.1080/09546553.2023.2240446](https://www.tandfonline.com/doi/full/10.1080/09546553.2023.2240446).
+
+In the map below, the markers of proscribed organisations shows where that organisation was active and/or where it was proscribed. The location markers are coloured differently depending on the country of the proscribed organisation. By clicking on a location marker, you can see when the organisation was proscribed as well as further information.
+
+```{r echo=F, collapse=T, comment="#>", message=F, warning=F}
+library(tidyverse)
+library(ggplot2)
+library(sf)
+library(stars)
+library(rnaturalearth)
+library(spatstat)
+library(mapview)
+library(leaflet)
+library(leafpop)
+library(dplyr)
+library(readxl)
+
+preo <- read_excel("PREO_dataframe2023.xlsx", sheet = "current_version", range = "A1:K194")
+# View(preo)
+
+preo$LONj <- jitter(preo$LON, factor = 300)
+preo$LATj <- jitter(preo$LAT, factor = 300)
+
+preo_sf <- preo %>% 
+  st_as_sf(
+    coords = c("LONj", "LATj"),
+    crs = st_crs("EPSG:3035") # CRS for Europe
+  )
+
+eu = ne_countries(continent = "europe", returnclass = "sf")
+
+eu_crop <- eu[eu$name!="Russia",]
+eu_trim <- st_crop(eu_crop, xmin = -13, ymin = 31, xmax = 50, ymax = 70)
+
+eu_states <- dplyr::select(eu_trim, name, geometry)
+
+eu_states <- eu_states[eu_states$name!="Albania",]
+eu_states <- eu_states[eu_states$name!="Belarus",]
+eu_states <- eu_states[eu_states$name!="Bosnia and Herz.",]
+eu_states <- eu_states[eu_states$name!="Kosovo",]
+eu_states <- eu_states[eu_states$name!="Moldova",]
+eu_states <- eu_states[eu_states$name!="Montenegro",]
+eu_states <- eu_states[eu_states$name!="North Macedonia",]
+eu_states <- eu_states[eu_states$name!="Serbia",]
+eu_states <- eu_states[eu_states$name!="Switzerland",]
+eu_states <- eu_states[eu_states$name!="Ukraine",]
+
+st_crs(preo_sf) <- st_crs(eu_trim)
+
+library(leafpop)
+
+
+mapview(preo_sf, color = 'black', zcol = "COUNTRY", col.regions = preo_sf$C_COL, 
+        label = "NAME", legend = F, popup = popupTable(preo_sf, 
+                                                       zcol = c("NAME","COUNTRY","P_YEAR","P_METHOD","TYPE",
+                                                                "EXTENT")))
+
+```
+
+
+The collapsible list below contains basic information on most of the PREOs identified in the map above. Some information is still being added/updated.
+
+::: {.callout-caution collapse="true"}
+## Austria
+
+::: {.callout-caution collapse="true"}
+### Nazionalsozialistische Deutsche Arbeiterpartei (NSDAP) and auxiliary organisations (6.6.1945)
+Proscribed under the ‘Prohibition Act’ (Verbotsgesetz). See State Law Gazette (Staatsgesetzblatt) StGBl. Nr. 13/1945
+:::
+::: {.callout-caution collapse="true"}
+### Bund Heimattreuer Jugend (BHJ) Graz (20.11.1953)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Nationales Jugendkorps (21.4.1956)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Sudetendeutsche Jugend (22.7.1957)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Deutsch-Österreichiche Jungsozialisten (21.5.1958)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Arbeitsgemeinschaft Nationaler Jugendverbände Österreichs (ANJÖ) (31.7.1958)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Bund Heimattreuer Jugend Ungarns (24.11.1958)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Volkstreuer Kampfbund (9.3.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Bund Heimattreuer Jugend (BHJ) - Landesgruppe Niederösterreich (26.3.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Adler Jugend (AJ) (26.3.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Schützenkompanie Andreas von Liebenberg (25.6.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Schützenkompanie Major Walter Novotny (25.6.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Bund Heimattreuer Jugend (BHJ) - Landesgruppe Wien (10.7.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Wiener Jungvolk (18.8.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Patrouillenstaffel Graz (2.9.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Wiener Sturmjugend (18.12.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Bund Heimattreuer Jugend (BHJ) Kärnten (22.12.1959)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Steirischer Jugendbund (26.2.1960)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Verband der Donauschwaben-Jugend (1.3.1960)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Grenzlandjugend (4.10.1960)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Kulturverband der Heimattreuen Jugend Österreichs (17.10.1960)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV). Decision: 3957. Erk. v. 18.. Juni 1961, B 265/60.
+:::
+::: {.callout-caution collapse="true"}
+### Verband Freiheitlicher Mittelschüler (20.9.1961)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Olympia Akademische Burschenschaft (1.12.1961)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Verband Südetendeutsche Hochschüler (22.1.1962)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Verband Heimattreuer Jugend (28.1.1963)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Legion Europa (15.7.1964)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Allgemeine DIskussions- und Bildungsklub (14.2.1967)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Bund Nationaler Studenten (BNS) (22.1.1968)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Arbeitsvereinigung für Mittelschüler (AFM) (13.10.1974)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Arbeitsgemeinschaft für Politik (AFP) (3.1.1975)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Deutsches Kulturwerk Europäischen Geistes (5.5.1976)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV). Decision was later reversed by the constitutional court.
+:::
+::: {.callout-caution collapse="true"}
+### Kameradschaft Babenberg (1980)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV). Founded in 1969 by Wehrmacht veteran Arthur Maichanitsch. The group published a regular magazine, ‘Der Babenberger,’ in which it promoted the notion of Greater Germany. The group also carried out paramilitary exercises in the wooded areas outside of Vienna.
+:::
+::: {.callout-caution collapse="true"}
+### Aktion Neue Rechte (1981)
+Proscribed under the Association Act (Vereinsgesetz) 1951. StF: BGBl. Nr. 233/1951 (WV)
+:::
+::: {.callout-caution collapse="true"}
+### Nationaldemokratische Partei (NDP) (25.6.1988)
+Proscribed under the Party Law (Parteigesetz) https://www.ris.bka.gv.at/Dokumente/BgblPdf/1975_404_0/1975_404_0.pdf BGBl. 404/1975 and Prohibition Act (Verbotsgesetz). Decision of the constitutional court: B999/87.
+:::
+::: {.callout-caution collapse="true"}
+### Verein für lebendige Kultur und Brauchtumspflege (7.5.2019)
+Proscribed by the Upper Austrian Police Department for noncompliance of the society’s by-laws, in particular, due to irregularities with its financial statement
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Belgium
+
+::: {.callout-caution collapse="true"}
+### Order of Flemish Militants (Vlaamse Militanten Orde, VMO) (25.5.1983)
+Proscribed as a private militia under the Act of 1934 by the Ghent Court of Appeal. About forty militants were given suspended sentences or fines. Their leader Bert Eriksson was given effective one year. Further information is available in Lee, M. (1997). The Beast Reawakens. London: Little, Brown and Company. & in Art, D. (2008). The Organizational Origins of the Contemporary Radical Right: The Case of Belgium. Comparative Politics 40(4), pp. 421-440.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Flemish Block (Vlaams Blok, VB) (9.11.2004)
+Proscribed under the Belgian Anti-Racism Law (i.e., ’Law of 30 July 1981 on the punishment of certain acts inspired by racism or xenophobia’) by the Ghent Court of Appeal. Non-profit organisations connected to the VB produced and distributed racially discriminatory publications. The suit against them substantiated the VB as promoting discrimination. The ruling deprived the organisation of state funding and the ability to appear on television. The ruling, given the deprivations it imposed, effectively proscribed the organisation. A few days after the ruling, the VB officially dissolved itself and reformed as the Flemish Interest (Vlaams Belang) party.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### BBET (Bloed bodem eer en trouw) (14.11.2014)
+Proscribed due to violations of the penal code (including acts of terrorism); of the law of 23 March 1995 penalising the denial, minimisation, justification, or approval of the genocide committed by German National Socialist regime in WWII; and of the law of 30 July 1981 penalising certain acts inspired by racism or xenophobia. The members of the organisation were convicted of all kinds of offences, including being members of this terrorist organisation, the group was not banned as such. The group no longer seems to exist in its original form at the moment. The former members are now part of other organisations. However, references to the group may still occur.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Bulgaria
+
+::: {.callout-caution collapse="true"}
+### Lukov march (23.7.2018)
+Proscribed under Criminal Procedure Code, Law on Gatherings, Meetings and Manifestations, Local Self-Government and Administration Act. The event, a torchlight procession in memory of a former WWII Bulgarian general, Hristo Lukov, is banned, but the group that organises it, Bulgarian National Union – Edelweiss, is not proscribed.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Croatia
+No right-wing extremist organisations have been proscribed.
+:::
+
+::: {.callout-caution collapse="true"}
+## Cyprus
+No right-wing extremist organisations have been proscribed.
+:::
+
+::: {.callout-caution collapse="true"}
+## Czechia
+
+::: {.callout-caution collapse="true"}
+### The Workers’ Party (Dělnická strana, DS) (17.2.2010)
+Proscribed under the Act of Law 424/1991 Coll., on association in political parties and political movements. The programme of the DS, public speeches of representatives and members of the DS, and speeches that take place during assemblies are published in the party press and are aimed at inciting racial, ethnic, and social intolerance and consequently to restricting the fundamental rights and freedoms of some citizens. DS aimed at suppressing the equality of citizens, especially on the basis of nationality or sexual orientation. Furthermore, according to the National Court, the DS uses symbolism inspired by German National Socialism, i.e., a totalitarian ideology incompatible with democracy and fundamental rights and freedoms.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Denmark
+No right-wing extremist organisations have been proscribed.
+:::
+
+::: {.callout-caution collapse="true"}
+## Estonia
+
+::: {.callout-caution collapse="true"}
+### Vaps Movement - Union of Participants in the Estonian War of Independence (17.12.1934 / 2009)
+Proscribed under the Act on the Use of the Name of the War of Independence. The organisation was banned during the First Republic of Estonia, in 1934, following Päts’ coup to prevent the Vaps’ raise to power, following their electoral victory. In 2009, Jüri Liim submitted a formal application to restore the organisation named “Vaps Movement”. The application was rejected in the light of the ban of 1934 (in the light of Estonia’s state continuity).
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Finland
+
+::: {.callout-caution collapse="true"}
+### Patriotic People’s Front (Isänmaallinen Kansanrintama, IKR) (16.5.1978)
+Proscribed under the Associations Act 1/1919 and Article 8 of the 1947 Paris Peace Treaty; a temporary ban was ordered by the Ministry of Interior (4.11.1977), confirmed by the Naantali district court (17.11.1977), and finally by the Turku Court of Appeal (2.2.1978). Final verdict in Naantali district court 16.5.1978. IKR was a neo-Nazi group founded by Pekka Siitoin in 1976. They organised armed drills, which was against the Associations Act. They were also connected to violent activities, including the arson attack against communist printing house in 1977 in Helsinki by the party secretary, and the letter bomb the vice-chairman of the party send to an office of communist youth in Vaasa in 1977. The proscription of the organisation covered also three other unregistered associations founded by Siitoin and supporting IKR: Turun Hengentieteen Seura, Isänmaa ja Vapaus, and Pegasos seura.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nordic Resistance Movement (NRM) (Pohjoismainen vastarintaliike, PVL) (22.9.2020)
+Proscribed under the Associations Act 503/1989. In an action brought before the district court, the National Police Board requested that an unregistered association be disbanded, as its activities were essentially unlawful or at least improper, as its goal was a national socialist state whose ideals were contrary to the Finnish constitution, and as its objectives were inter alia racist, anti-immigrant, antisemitic and restrictive of the rights of sexual minorities. The court decision also banned registered association Pohjoinen Perinne (Northern Heritage), which was an auxiliary association founded by the NRM for business purposes. NRM has continued in Finland as Kohti Vapautta! (Towards Freedom!), against which the prosecutor decided 30.6.2021 to press charges for illegally continuing the activities of the banned NRM.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## France
+
+::: {.callout-caution collapse="true"}
+### Jeunesses Nationalistes Revolutionnaires (Revolutionary Nationalist Youth) (12.7.2013)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). Dissolution was decided after the murder of a young antifascist militant, Clément Méric, on June 5, 2013, for which two members of the JNR were finally convicted in 2021. Security service of the Third Way organisation. At the end of a ceremony of “awarding of colors”, the members of the Revolutionary nationalist Youth become ispo facto militants of the Third Way. Hierarchical organisation with the motto: “Believe, fight, obey” (in reference to the fascist slogan “Credere, Obbedire, Combattere”). Marchs on public streets in uniforms emblazoned with the “JNR” crest, in close order, under their flag and the leadership of the “general” whose uniform displays an eagle as a distinctive sign. A secret ceremony during which the candidates take an oath of absolute obedience and are given a “dagger of honor”. Use of the Nazi salute between members according to the decree of dissolution. However, neither in its propaganda nor in its internal communication does the group refer to Nazism. The trial of the murderers of Clément Méric showed that several of the had neo-Nazi tattoos such as the Black sun.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Troisieme Voie (12.7.2013)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). Close association with the Nationalist Revolutionary Youth. Dissolution was decided after the murder of a young antifascist militant, Clément Méric, on June 5, 2013, for which two members of the JNR were finally convicted in 2021. In addition, on June 22, 2013, 5 members of the group Third Way assaulted 2 men who were leaving a libertarian rock festival, including a Maghrebi, who was targeted for his origin. Founded in 2010, the movement had grown rapidly. Not to be confused with the movement of the same name active between 1985 and 1992.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Envie de Rêver (12.7.2013)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). The dissolution decree states that Envie de Rêver, as association operating the JNR and Third Way localities, should be dissolved because the three entities were “intertwined”. The formulation referred to the legal recognition of the notion of imbrication in matters of dissolution. However, in its ruling No. 370306 of July 30, 2014, the Council of State argued that it was not demonstrated that Envie de Rêver had participated in the paramilitary or hate speech activities mentioned by the decree, which led to an annulation of its dissolution and the order for the State of 2,000€ payment to the organisation. Envie de Rêver’s main activities included operation of a bar in Paris called “Le Local” that served as a meeting point of JNR and Third Way (as well as others within the ultra-right), hosting a weekly conference on a political theme close to the extreme right, and organisation of festive evenings, particularly the “awarding of colours” of JNR members.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Œuvre Francaise (25.7.2013)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). Worship of well­-known figures who collaborated with Nazi Germany, in particular Marshal Pétain and Marcel Bucard, leader of the Francist Movement (chef of Francisme). organisation of summer camps under the patronage of collaborators of the Nazi regime. organisation of paramilitary training camps to train “political soldiers”. Use of the francisque emblem in reference to the National Revolution of Vichy. On December 20, 2014 (n° 372322), the Council of State confirmed that both grounds (exaltation of collaboration and provocation to racial hatred) were accepted. Organisation was founded in 1969 and followed, among others, the Nationalist Party (dissolved in 1959) and the Young Nation (dissolved in 1958). Its dissolution had already been considered in 1980 and 2005. After their dissolution, Œuvre française and Jeunesses nationalistes were initially reorganised as local associations. A year later, they were integrated in the French Nationalist Party, a formation founded in 1982 that had become an empty shell. The PNF was renamed the Nationalists. Nevertheless, they only represent about 50 militants compared to 150 before. The Jeune Nation website was not affected by the bans and continues to disseminate the group’s propaganda with a focus on the denial of the genocide on the Jews and the glorification of the collaboration. It has between 50.000 and 150.000 monthly connections.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Jeunesses Nationalistes (Nationalist Youth) (25.7.2013)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). Youth movement of the Œuvre Francaise. Media coverage of “punch” actions with the use of the slogan “Get them out of here”, which summarises their doctrine. Commemoration of the death of militias (annual ceremony in Grand Bornand in Haute Savoie, around August 20) and members of the Waffen-SS. Annual tribute to Benito Mussolini in the town of Predappio. Hitler salute used by some members in front of a Nazi flag while wearing a uniform inspired by the SS uniform. The movement was particularly active during the 2013 demonstrations against the law allowing same-sex marriage. Most of the unrest caused was in the Lyon area. On December 20, 2014 (No. 372322), the Council of State confirmed that both grounds (exaltation of collaboration and provocation to racial hatred) were accepted. In the Marseille region, the ex-Jeunesse Nationalistes founded the Movement Populaire Nouvelle Aurore (inspired by the Greek Aube Dorée) and then an organisation with the name of Organisation Armée Secrète (dismantled in 2017) with terrorist aims (among other objectives: shooting at kebab restaurant customers). The terrorist formation grouped together the ultras of French Algeria (dissolved on December 7, 1961).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bastion Social / Les Petits Reblochons / Association Lugdunum / Cercle Frederic Mistral / Cercle Honore D’estienne D’orves / Solidarite Argentoratum / Association Arvernis (24.4.2019)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). Inspired by the Italian movement CasaPound. Public objective to only help the disadvantaged of French nationality: expropriation and occupation of public buildings, distribution of food (including pork) to the homeless, implicitly excluding Muslims and Jews. The Bastion Social was founded in 2017 by the Lyon section of Groupe Union Défense. The GUD was founded in 1969 resulting out of the dissolution of the Occident Movement on October 31, 1968 (which itself stemmed from the Nationalist Party dissolved on February 13, 1959, because of a rebuilding of Jeune Nation, which was dissolved on May 15, 1958). The GUD gave birth to Ordre Nouveau, founded in 1970 and dissolved on June 28, 1973. It was one of the parts of Unité Radicale, dissolved on August 6, 2002.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Blood And Honor Hexagone – Combat 18 (24.7.2019)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). Organisation structured in three rings: members (12 dues-paying members); “prospects” (4 aspiring members in the observation phase who must prove themselves in combat); “hexagoners” (7 supporters). Organised MMA (mixed martial arts) tournaments and fights; military structures, methods and values; members involved in arms trafficking. Organised neo-Nazi music concerts of White Power and RAC (Rock against Communism) type to benefit the group. The one on December 12, 2015, gathered between 300 and 350 people, some of whom came from Germany, Belgium, Switzerland, and Spain.
+:::
+
+::: {.callout-caution collapse="true"}
+### Loups Gris (Grey Wolves) (4.11.2020)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). Movement founded in 1968 in Turkey and represented in several European countries. Common symbols: flag with three crescents and hand gesture symbolising the wolf, a rallying sign for supporters of the Turkish nationalist extreme right. Several clusters on the territory. organisation of training camps (e.g., youth weapons camps). Provocation to violence and violent actions against people of Armenian or Kurdish origin, particularly in the context of the Armenian-Azerbaijan war of 2020-2021. Use of weapons and violence on the sidelines of manifestations, constituting criminal offences, particularly in the Lyon area. Participates in the supervision of fractions of the Turks of France living in autarky on the territory.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Generation Identitaire (3.3.2021)
+Proscribed by decree of the Council of Ministers under Article L. 212.1 of the internal security code (Code de la sécurité intérieure, CSI). Born out of the dissolution of Unité Radicale on August 6, 2002, the Identitaires have abandoned antisemitism, antizionism, references to fascism and the promotion of violence for an ethicist, 'pro-remigration', Islamophobic agitprop. Some of its members or sympathisers are known to have been criminally convicted for acts of violence against people because of their real or supposed ethnicity, provocation to an act of terrorism and public provocation to hatred or violence, without the Identitaires dissociating themselves from it. Links with ultra-right groupings or individuals from whom it receives logistical and financial support. Relations in France with the Social Bastion, local neo-fascist groups, the Braves (an organisation claiming to be “white communitarian”) and the Hammerskins. Transnational practice: by 2012 they had already created franchises in Italy, Germany, Austria, Czech Republic, Hungary, Denmark, United Kingdom, and Russia. Willingness to act as a private militia. Regular training of its members in boxing or self-defense. Visual identity: uniform, emblem (inspired by that of the Spartan warriors who repelled the Persian invaders), martial symbolism and rhetoric.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Germany
+
+::: {.callout-caution collapse="true"}
+### Bund junger Deutscher (6.8.1951)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Deutsche Sozialistische Partei (DSP) (9.8.1951)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bund für Wahrheit und Recht (21.3.1952)
+Proscribed in Hamburg under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Deutsche Arbeiterpartei (DAP) (17.9.1952)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Unpolitische Interessengemeinschaft (UIG) (17.9.1952)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Vereinigung ehemaliger Internierter in Moosburg (17.9.1952)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Sozialistische Reichspartei (SRP) (23.10.1952)
+Proscribed by the federal government under Article 21 Paragraph 2 of the Basic Law (Grundgesetz). The SRP is the only right-wing party ever to be proscribed, i.e., through the procedure against unconstitutional political parties.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bund der Schaffenden (11.11.1952)
+Proscribed in Hesse under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Deutscher Arbeiter-Verband (DAV) (11.11.1952)
+Proscribed in Hesse under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Technischer Dienst im Bund Deutscher Jugend (13.1.1953)
+Proscribed in Lower Saxony under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Deutscher Heimatschutz (DHS) (13.1.1953)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Diskussionskreis der ehemaligen SS (24.1.1953)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationale Sammlungsbewegung (27.1.1953)
+Proscribed in Baden-Württemberg under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Arbeitsgemeinschaft Nation Europa (29.1.1953)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Freikorps Deutschland (11.2.1953)
+Proscribed in Hamburg under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bund Deutscher Jugend (18.2.1953)
+Proscribed in Hesse (7.1.1953), Bremen (13.1.1953), Hamburg (14.1.1953), and Baden-Württemberg (18.2.1953) under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Technischer Dienst (18.2.1953)
+Proscribed in Bayern (24.1.1953) and Baden-Württemberg (18.2.1953) under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Sozialistische Jugend Europas (11.3.1953)
+Proscribed in Hesse under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Vereinigung freier unabhängiger Deutscher (11.3.1953)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Deutsche Gemeinschaft (DG) (19.3.1953)
+Proscribed in Lower Saxony under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Europäische Verbindungsstelle (EVS) Nationale Sektion (15.6.1954)
+Proscribed in Schleswig-Holstein under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Vereinigung ehemaliger Angehöriger des SS­Kavallerie­ Korps in Bad Wildungen (12.4.1956)
+Proscribed in Hesse under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bund für Deutschlands Erneuerung (25.9.1956)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Arbeitsgemeinschaft nie vergessene Heimat (25.9.1956)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Gründungsausschuss der Deutschen Gemeinschaft (10.11.1956)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationaljugend Deutschlands (NJD) (20.1.1960)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bund Nationaler Studenten (BNS) (6.3.1961)
+Proscribed in Berlin (14.1.1960), Rhineland-Palatinate (1.4.1960), Hamburg (12.4.1960), Schleswig-Holstein (24.2.1961), Bavaria (24.2.1961), and Baden-Württemberg (18.2.1953) under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bund Vaterländischer Jugend (BVJ) (in Hamburg, Freundeskreis Vaterländischer Jugend) (16.7.1962)
+Proscribed in Baden-Württemberg (13.7.1962), Rhineland-Palatinate (13.7.1962), Schleswig-Holstein (13.7.1962), Bavaria (14.7.1962), and Hamburg (16.7.1962) under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Stahlheim e. V. – Bund der Frontsoldaten, Ortsgruppe Bad Bergzabern (3.3.1966)
+Proscribed in Rhineland-Palatinate under provisions of the Association Act (Vereinsgesetz). A Nazi Veteran organisation.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Vereinigung zur Veranstaltung eines Treffens der Angehörigen der ehemaligen SS-Division Nordland (3.5.1966)
+Proscribed in Lower Saxony under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bund Deutscher Nationalsozialisten (29.4.1969)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Banned shortly before its official founding. Set up as a successor to the NSDAP by Wolf Dieter Eckart. Associated with ‘Nationalsozialistischer Deutscher Nachrichtendienst’ and with ‘Wille und Weg’ publications.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Wehrsportgruppe Hoffmann (30.1.1980)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). WSG’s political aims correspond to Hoffmann’s political aims […] towards a totalitarian state, the opposite of the free democratic basic order, and violates the principles of the separation of powers, governmental accountabiity, sovereignty of the people as well as the multiparty principle and the system of federalism […]. Assumption of power is not achieved through democratic means […]. It is also characteristic that WSG does not draw upon the example of a changeover of power brought about by democratic means but that it refers to Mao’s - and indirectly also to Hitler’s - military struggle.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Volkssozialistische Bewegung Deutschlands / Partei der Arbeit, einschl. Junge Front (27.1.1982)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Wehrsportgruppe Wolfspack / Sturm 12 (14.4.1983)
+Proscribed in Rhineland-Palatinate under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Aktionsfront Nationaler Sozialisten / Nationale Aktivisten (ANS/NA) (7.12.1983)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Views and appearance similar to NSDAP and SA. ANS/NA insignia includes slightly modified sig rune as formerly used by the NSDAP organisation. The kind of greeting used by ANS/NA can be considered so similar as to be mistaken for the ”Hitler salute” (greeting with the outstretched right arm) and hence it is liable to prosecution according to section 86a (1,2), second sentence, of the Criminal Code in conjunction with section 86 (1) no.4 of the Criminal Code.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Unabhängiger Wählerkreis Würzburg – Arbeitskreis für Wiedervereinigung und Volksgesundheit (UWK) (27.2.1984)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationale Sammlung (N.S.) (9.2.1989)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz). Also prohibited as surrogate organisation of the ANS/NA.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationalistische Front (NF) (27.11.1992)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). It strove to set up a German state in form of socialist people’s community. It called for fighting against capitalism and communism.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Deutsche Alternative (DA) (10.12.1992)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). It regarded itself as leading power of alternative German opposition, loyal to the Reich, and aimed at re-establishing NSDAP. It also called itself the ‘national protest party.’
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Deutscher Kameradschaftsbund Wilhelmshaven (DKB) (21.12.1992)
+Proscribed in Lower Saxony under provisions of the Association Act (Vereinsgesetz). It aimed to preserve German cultural property, borders, against ”foreign infiltration/ asylum” and planned to teach ethnic German nationality in school.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationale Offensive (NO) (22.12.1992)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Its members conducted antisemitic hate campaigns, opposed democratic basic order, agitated against state institutions, all through aggressive militant means.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationale Block (NB) (7.6.1993)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz). It strove to unite radical national forces in DE Landers. Used racist slogans and statements, distributing stickers saying: ”No further asylum seekers in our quarter - Germans defend yourselves”, ”No foreigners = less crime” ”Attention dear migrants and refugees! 31 December will be your day of deportation”.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Heimattreue Vereinigung Deutschlands (HVD) (14.7.1993)
+Proscribed in Baden-Württemberg under provisions of the Association Act (Vereinsgesetz). Extremist literature, ammunitions and uniform-like clothing were seized during police searches. Internal working paper to set up ”security service” was also found.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Freundeskreis Freiheit für Deutschland (FFD) (2.9.1993)
+Proscribed in North Rhine-Westphalia under provisions of the Association Act (Vereinsgesetz). Affiliated with the news bulletin ‘Unabhängige Freundeskreise.’
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Wiking-Jugend (WJ) (10.11.1994)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Its members showed affinity with former NSDAP and ”Hitlerjugend”
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Freiheitliche Deutsche Arbeiterpartei (FAP) (24.2.1995)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Despite the name, the FAP did not constitute a party (according to Article 21 Basic Law, sec. 2(1) of Law of Political Parties). The FAP used National Socialist language, including: ”assume power,” ”we will push through exactly what Hitler failed to do in 1933: first of all, part of the bourgeoisie will be put against the wall”
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationale Liste (NL) (24.2.1995)
+Proscribed in Hamburg under provisions of the Association Act (Vereinsgesetz). The NL strove to eliminate the Basic Law and called for a constitutional revision under Art. 146 of Basic Law.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Direkte Aktion/Mitteldeutschland (JF) (5.5.1995)
+Proscribed in Brandenburg under provisions of the Association Act (Vereinsgesetz). Emerged from the Förderwerk Mitteldeutsche Jugend (FMJ). The JF avowed loyalty to Hitler, Goebbels, Hess etc. and agitated aggressively against foreigners, asylum seekers and minorities.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Skindheads Allgäu (30.7.1996)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz). Organisational purpose of fostering skinhead culture, including music, clothing, appearance, and cultivating comradeship. Main targets: ”Leftists”, Jews, foreign nationals, refugees, asylum seekers etc. They sympathised with racist organisations like the Ku Klux Klan.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Kameradschaft Oberhavel (15.8.1997)
+Proscribed in Brandenburg under provisions of the Association Act (Vereinsgesetz). Ideational traits expressed in the organisation’s short-term publication, ‘Modernes Denken. Gestalt und Ausdruck volkstreuer Jugend.’ Co-founded by a NPD member. Targeted foreigners, asylum seekers, German nationals of foreign origin, disregarding their fundamental rights.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Heide-Heim e.V., together with Heideheim e.V. (11.2.1998)
+Proscribed in Lower Saxony under provisions of the Association Act (Vereinsgesetz). The organisation provided opportunities for events of extremist or neo-Nazi groups, e.g. Hetendorf congress week. The events were intended to indoctrinate participants with racist views, denial of holocaust, and messages about overcoming constitutional order.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Hamburger Sturm (11.8.2000)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Led by Torben Klebe, who was also connected to the ‘Blood & Honour’ network. It regarded itself as part of neo-Nazi ”Freie Nationalisten” network. It addresses neo-Nazi, hooligans, skinheads. It also appears under Hamburger Sturm 18.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Blood & Honour Division Deutschland and its youth organisation ’White Youth’ (14.9.2000)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). The slogan of Blood and Honour is reminiscent of the Hitlerjugend, written in old German lettering. In some cases it contains a triskele (sun wheel similar to swastika). One of the racist slogans: “First the race, then the union”. Transnational links with other neo-Nazi and white supremacist groups. Overwhelmingly male.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Skinheads Sächsische Schweiz (SSS) (3.4.2001)
+Proscribed in Saxony under provisions of the Association Act (Vereinsgesetz). According to the group, the environment needs to be “cleansed” from “ticks,” “potheads,” and foreigners even by using violence.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Bündnis nationaler Sozialisten für Lübeck (7.3.2003)
+Proscribed in Schleswig-Holstein under provisions of the Association Act (Vereinsgesetz). Organisation’s language showed affinity with National Socialism: use of ”Volksgemeinschaft, Volksstaat, Volksherrschft, Arbeitsdienst, Systemparteien, Volksheer, Volksmiliz, and NAZI” in the their propaganda materials.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Fränkische Aktionsfront (F.A.F.) (22.1.2004)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz). Commemorative actions for ”Nazi heroes” like Hess, midsummer celebrations, Nazi traditions, etc. FAF chanted National Socialist slogans like ”Sieg Heil.” The group had an active women’s sub-group ‘Frauen in der Fränkischen Aktionsfront’. Group was found to break with the ’reactionary structures’ in the Aktionsfront that would not accept women as full (i.e., equally valued) political persons within the group. This shows both the sexism in the FAF and the potential within this autonomous nationalist style group to break with it. The ideology with regards is likely anti-feminist and anti-traditionalist.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Kameradschaft Tor Berlin (KTB) together with Mädelsgruppe Kameradschaft Tor Berlin (9.3.2005)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz). One of the most influential Kameradschaften in Berlin and beyond. It cultivated the style of Autonomous Nationalists and Anti-Antifa activism. It was anti-feminist, however it had its own women’s group (’Mädelgruppe’), which rejected both feminism and traditionalist gender roles and engaged in militant activities alongside male members. Ideological ecclecticism. See Röpke/Speit ’Mädelsache!’ about women in the neo-Nazi movement.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Berliner Alternative Süd-Ost (BASO) (9.3.2005)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz). Notable for several ‘squatter’ actions. Used symbols and terms from National Socialism.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Kameradschaft Hauptvolk (and its youth organisation Sturm 27) (6.4.2005)
+Proscribed in Brandenburg under provisions of the Association Act (Vereinsgesetz). They staged a number of typical neo-Nazi events and activities. 'Sturm 27' refers to an SA division from the same area.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Alternative Nationale Strausberger Dart Piercing und Tattoo Offensive (ANSDAPO) (14.7.2005)
+Proscribed in Brandenburg under provisions of the Association Act (Vereinsgesetz). Language orients towards NSDAP, especially their acronym ANSDAPO. Organised events in Berlin, like skinhead concerts.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Schutzbund Deutschland (4.7.2006)
+Proscribed in Brandenburg under provisions of the Association Act (Vereinsgesetz). Notable for its direct mail campaigns, particularly through its publication ‘Bewegung Neues Deutschland’. They stated claims, terms, and slogans corresponding to National Socialism. Their propaganda inspired racist incidents like shouting against foreigners, saying ”shit nigger” and chanting Hitler’s greeting.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Sturm 34 (26.4.2007)
+Proscribed in Saxony under provisions of the Association Act (Vereinsgesetz). Name refers to an SA division from the same area. Organisation members linked to and in some cases convicted of assault of foreigners, left-wing activists. Higher than average female membership for a ‘Kameradschaft,’ female members also involved in violent attacks. See Esen, Ellen (2009), Rechtsextremistinnen heute – Aktuelle Entwicklungen und Fallbeispiele, in: Stephan Braun, Alexander Geisler, Martin Gerster (Hrsg.) Strategien der extremen Rechten p.210
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Collegium Humanum (CH) together with Bauernhilfe e.V (7.5.2008)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Noted for espousing ecofascism.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Verein zur Rehabilitierung der wegen Bestreitens des Holocaust Verfolgten (VRBHV) (7.5.2008)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Closely associated with the (also banned) Collegium Humanum, once led by Holocaust-denier Ursula Haverbeck-Wetzel.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Heimattreue Deutsche Jugend - Bund zum Schutz für Umwelt, Mitwelt und Heimat e.V. (HDJ) (31.3.2008)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Publication ”Funkenflug” (flying sparks).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Mecklenburgische Aktionsfront (M.A.F.) (28.5.2009)
+Proscribed in Mecklenburg-Western Pomerania under provisions of the Association Act (Vereinsgesetz). Led by an NPD member.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Frontbann 24 (5.11.2009)
+Proscribed in Berlin under provisions of the Association Act (Vereinsgesetz). Symbols: shape and colours similar to imperial eagle and German Reich flag. Activists made uniformed public appearances, showed attitudes of glorification of National Socialism. Led by a former member of NPD.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Freie Kräfte Teltow-Fläming (FKTF) (11.4.2011)
+Proscribed in Brandenburg under provisions of the Association Act (Vereinsgesetz). Use of National Socialist symbols, jargon, songs, and identification with its representatives.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Hilfsorganisation für nationale politische Gefangene und deren Angehörige e.V. (HNG) (21.9.2011)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Slogan: Inside and outside - a united front. Prisoners’ supporter organisation. Members came from several extreme-right organisations.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Kameradschaft Walter Spangenberg (10.5.2012)
+Proscribed in North Rhine-Westphalia under provisions of the Association Act (Vereinsgesetz). Also known as Freies Netz Köln. The name of this group goes back to a SA man killed by communists. The group was popular for the well-known activist also named “Hitler of Cologne”.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Widerstandsbewegung in Südbrandenburg (19.6.2012)
+Proscribed in Brandburg under provisions of the Association Act (Vereinsgesetz). Co-operates with neo-Nazi band Hassgesang (song of hatred).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationaler Widerstand Dortmund (23.8.2012)
+Proscribed in North Rhine-Westphalia under provisions of the Association Act (Vereinsgesetz). Used National Socialist jargon and identified with National Socialist personalities.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Kameradschaft Hamm (23.8.2012)
+Proscribed in North Rhine-Westphalia under provisions of the Association Act (Vereinsgesetz). Campaigned for a national youth centre. Most members joined the party Die Rechte after being proscribed.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Kameradschaft Aachener Land (K-A-L) (23.8.2012)
+Proscribed in North Rhine-Westphalia under provisions of the Association Act (Vereinsgesetz). Strong affiliations to the local hooligan scene.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Besseres Hannover (25.9.2012)
+Proscribed in Lower Saxony under provisions of the Association Act (Vereinsgesetz). Abschiebaer videos (from ‘Abschieben’ (deportation) and ‘Baer’ (bear)): videos with messages marked by contempt for humanity delivered by a bear (trivialised). Magazine: “bock” used to incite hatred. Internet posting with references to NSDAP functionaries. Involvement in neo-Nazi networks.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationale Sozialisten Döbeln (18.2.2013)
+Proscribed in Saxony under provisions of the Association Act (Vereinsgesetz). In public did not use National Socialist symbols, but rather terminology: politisches Soldatentum, Volksgemeinschaft, Volksgenosse.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Schwarze Schar (20.12.2014)
+Proscribed in Mecklenburg-Western Pomerania under provisions of the Association Act (Vereinsgesetz). While the motorcycle club was conspicuously neo-Nazi, the basis of its proscription was drug offences and other violent crimes. Founded and led by present-day ‘exit’ advocate, Philip Schlaffer. Schwarze Schar was connected with Schlaffer’s shop of right-wing extremist paraphernalia in Wismar. The group’s main gathering place was Clubhaus Gägelow.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationale Sozialisten Chemnitz (28.3.2014)
+Proscribed in Saxony under provisions of the Association Act (Vereinsgesetz). Also acted under the name ”Interessengemeinschaft Chemnitzer Stadtgeschichte” and as action group ”Raus in die Zukunft”. Slogan: ”Deutschland befreien”. They expressed resentment against asylum centres.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Freies Netz Süd (FNS) (23.7.2014)
+Proscribed in Bavaria under provisions of the Association Act (Vereinsgesetz). Starting in 2008 it developed into largest neo-Nazi network. Substitute of the association Fränkische Aktionsfront (FAF). FNS has been a network organisation bringing various local groups together. Participated in international neo-Nazi rallies (Budapest, Athens). The core members built the party Der Dritte Weg.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Autonome Nationalisten Göppingen (10.12.2014)
+Proscribed in Baden-Württemberg under provisions of the Association Act (Vereinsgesetz). Action-oriented group with few members.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Sturm 18 e. V. (6.11.2015)
+Proscribed in Hesse under provisions of the Association Act (Vereinsgesetz). Militant group with close ties to Combat 18 built around a neo-Nazi mail order.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Altermedia Deutschland (27.1.2016)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Internet platform and organisation. ”free national discussion platform” intended to strengthen National Resistance and push ahead enlightenment of the "German Fatherland".
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Weisse Wölfe Terrorcrew (WWT) (16.3.2016)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Hamburger Nationalkollectiv division of WWT initially presented as website to inform other groups. WWT membership is compared to Family ties. Often referred to as “Brotherhood” (expressions that can be found in logos and imprints). Several female members.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Phalanx 18 (6.11.2019)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). The association also campaigned extensively for right­wing extremist music and forbidden events.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Combat 18 Deutschland (23.1.2020)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). The conspiratorial association disseminated anti-constitutional ideas, in particular through the distribution of right-wing extremist music and the organisation of concerts.
+
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Geeinte deutsche Völker und Stämme (and Osnabrücker Landmark) (19.3.2020)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). GdVuSt is the first so-called ‘Reichsbürger’ group banned at the national level.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nordadler (23.6.2020)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). Very small group, largely isolated from the right-wing extremist scene.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Völkische Gemeinschaft (Ethnic Community) (23.6.2020)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Völkische Renaissance (Ethnic Renaissance) (23.6.2020)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Völkische Jugend (Ethnic Youth) (23.6.2020)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Völkische Revolution (Ethnic Revolution) (23.6.2020)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Sturmbrigade 44 or Wolfsbrigade 44 (1.12.2020)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). The name (‘44’) is a reference to a particularly notorious SS-unit, Division Dirlewanger.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Nationale Sozialisten Rostock und Baltik Korps (17.5.2021)
+Proscribed by the federal government under provisions of the Association Act (Vereinsgesetz). The association focused on martial arts training and preparation for ‘Day X,’ when right-wing forces will rise up and topple the German state. Also proscribed: Their online portal Aktionsblog which has been a central news source for extreme right activists in the region.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Greece
+Officially, no right-wing extremist organisations have been proscribed. However, Golden Dawn was ruled a criminal organisation in October 2020.
+
+::: {.callout-caution collapse="true"}
+### Golden Dawn (7.10.2020)
+Proscribed as a criminal organisation, rather than as a right-wing extremist organisation.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Hungary
+
+::: {.callout-caution collapse="true"}
+### Hungarian Hungarist Movement (Magyar Hungarista Mozgalom, MHM) (1994)
+Proscribed under the Associations Act. A coalition organisation that succeeded in mobilising a few hundred young skinheads for rallies espousing elements of Nazism and Szálasi’s Hungarism. Under the Supreme Court’s decision, the constituent organisations were also proscribed: the World-National People’s Power Party (Világnemzeti Népuralmista Pártot, VNP) led by Albert Szabó, the Hungarian National Front (Magyar Nemzeti Arcvonal, MNA) led by István Györkös, and the Association of Those Persecuted by Communism (Kommunizmus Üldözötteinek Szövetsége, KÜSZ). Many of the activists re-formed as the Hungarian Welfare Association (Magyar Népjóléti Szövetség, MNSZ). See: Szôcs, L. (1998). A tale of the unexpected: the extreme right vis-à-vis democracy in post-communist Hungary. Ethnic and Racial Studies, 21(6), 1096-1115.
+:::
+
+::: {.callout-caution collapse="true"}
+### Blood and Honour Cultural Association (Vér és Becsület Kulturális Egyesület) (27.10.2005)
+Proscribed under Act C. of 2012 on the Criminal Code and the Act CLXXV of 2011 (Act of the right of association). According to the prosecution, the reason for the dissolution, and proscription, of the organisation was that they had openly advertised neo-fascist views at Blood and Honour events in violation of the Association Act, the constitution, and international treaties. The organisation quickly re-formed as Blood and Honour Hungaria.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Hungarian Guards Association (Magyar Gárda Egyesület) (15.12.2009)
+Proscribed under Act C. of 2012 on the Criminal Code and the Act CLXXV of 2011 (Act of the right of association). According to the prosecution, the Hungarian Guard activities violated the law of associations, threatened Roma, and violated the human dignity of Roma and other minorities, such as Jews. After a year-long procedure, the Metropolitan Court dissolved the organisation. Activists immediately re-formed as ‘The New Hungarian Guard’ – though it led to fragmentation, leading to the formation of the split-off Association for a Better Future (Szebb Jövőért Egyesület).
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Association for a Better Future (Szebb Jövőért Egyesület) (8.10.2014)
+Proscribed under Act C. of 2012 on the Criminal Code and the Act CLXXV of 2011 (Act of the right of association). The Szeged judicial executive board passed the final judgment; the board, headed by Katalin Szeghő, decided to dissolve the Association for a Better Future, which became notorious because of its activities in Gyöngyöspata. The Szeged judicial executive board found that the Association for a Better Future abused its rights of association and assembly in several cases, especially at the events held in Kunhegyes, Devecser, and Cegléd. According to the verdict, in Kunhegyes and Devecser, the President of Association for a Better Future made a clearly racist and exclusionary speech because he did not differentiate between Roma who commit crimes and those who abide by the law. Expressions such as ’worms/vermin, demons, rats’ were judged to have exceeded not only the limits of good taste but also the limits of free expression, and the speeches made clear that the president believed such a group of people had no place in the Carpathian basin. The judiciary board concluded that the speeches were capable of creating heightened mood that could encourage people receptive to such ideas to commit violence against Roma. As the Association did not distance itself from the speeches of one of its representatives, the court held that the speeches should be considered as reflecting the opinion of the association. Several activists immediately re-formed under different Logo name, Hungarian Defence Movement (Magyar Önvédelmi Mozgalom).
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Ireland
+No right-wing extremist organisations have been proscribed.
+:::
+
+::: {.callout-caution collapse="true"}
+## Italy
+
+::: {.callout-caution collapse="true"}
+### Ordine Nuovo (23.11.1972)
+Proscribed under Scelba’s Law: Art. 3 comma 1 L. 20 giugno 1952 n. 645, XXII Constitutional Disposizione Transitoria. Political movement founded in 1969. Use of terrorism to achieve its aims.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Avanguardia Nazionale (8.6.1976)
+Proscribed under Scelba’s Law: Art. 3 comma 1 L. 20 giugno 1952 n. 645 XXII Constitutional Disposizione Transitoria. Political movement founded in 1960. Use of terrorism to achieve its aims.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Fronte Nazionale (9.11.2000)
+Proscribed under Mancino’s Law: art. 1 comma 3 L. 25 giugno 1993 n. 205. Organisation founded in 1991 with the aim to build a racially homogenous nation that would preserve the racial integrity of the nation.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Latvia
+
+::: {.callout-caution collapse="true"}
+### Gustav Celminsh Center (12.10.2014)
+Proscribed under Law on Public organisations and Their Associations; Judgment of the Chamber of Civil Cases of the Riga Regional Court, case No. C04467413. The court claims that the Gustav Celminsh Center organisation is a cover for an unregistered neo-Nazi organisation, Perkonkrust (the Nazi organisation of the same name existed in pre-war Latvia), whose ideology is based on the superiority of the white race over the rest, which contradicts the principles of a democratic state. Gustav Celminsh was in 1933-34 the leader of the Latvian nationalist organisation Ugunskrusts (Fire Cross) and the fascist antisemitic organisation Perkonkrusts (Thunder Cross). More details available online.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Lithuania
+No right-wing extremist organisations have been proscribed.
+:::
+
+::: {.callout-caution collapse="true"}
+## Netherlands
+
+
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Poland
+
+::: {.callout-caution collapse="true"}
+### National Radical Camp in Brzeg (Obóz Narodowo-Radykalny, ONR) (12.10.2009)
+Proscribed under the Association Act. OP VIII Ns Rej. KRS 11579/07/460. Importantly, the decision concerned local branch of the ONR (from Brzeg city) as it was registered only regionally. Only in 2012 ONR registered as one association. Decision followed a series of criminal proceedings against members of the ONR for spreading anti­Semitic and nationalist slogans and making Nazi salute. The court in Opole stated that the organisation members’ criminal convictions of for the crime of incitement to hatred on grounds of national and ethnic differences and public propagation of a totalitarian system of the country confirm an illegal character of the ONR activity. The court referred both to the Constitution (art. 13) wording of art. 13 of the Constitution, as well as to acts of international law guaranteeing freedom of association, arguing that it is justified to proscribe the association whose objectives are incompatible with national law is justified.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Pride and Modernity (Duma i Nowoczesność, DiN) (7.8.2019)
+Proscribed under the Association Act. The proscription of Duma i Logos Nowoczesność is complex. The association was accused of public promotion of the Nazi ideology (they organized celebration of Hitler’s birthday in 2017) and based on the evidences, the court decided to proscribe the organisation in 2019. However, in the course of the appeal it turned out that the establishment of the association could have been illegal (false signatures). The case has not been finalised yet.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Portugal
+No right-wing extremist organisations have been proscribed.
+:::
+
+::: {.callout-caution collapse="true"}
+## Romania
+
+::: {.callout-caution collapse="true"}
+### Everything for the Country Party (Partidul Totul pentru Tară) (21.5.2014)
+Proscribed under Legea nr. 14, 9/01/ 2003, Republicată în temeiul art. II din Legea nr. 114/2015. The party was dissolved on procedure, because it failed to propose candidates for two consecutive parliamentary elections (2008 and 2012) and it failed to gather the minimum number of votes required nationally in the previous two elections. Consequently, it was erased from the Register of Political Parties.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Slovakia
+
+::: {.callout-caution collapse="true"}
+### Slovak Togetherness – National Party (Slovenská pospolitosť – Národná strana, SPNS) (1.3.2006)
+Proscribed under Law Nr. 85/2005 of February 4th 2005 on political parties and movements. Ruling by the Supreme court of the Slovak Republic – 3 Sž 79/2005.54. The party was an offshot of the civic association Slovak Togethreness, at that time marginal. Their members continued In their activity. Later the created the Peoples Party Our Slovakia (ĽSNS). It won parliamentary representation in 2016.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Slovenia
+No right-wing extremist organisations have been proscribed.
+:::
+
+::: {.callout-caution collapse="true"}
+## Spain
+
+::: {.callout-caution collapse="true"}
+### Blood and Honour España (10.5.2011)
+Proscribed under Article 515.5o of the Penal Code, and related with the articles 517.1 y 2. & Supreme Court ruling no 3380/2011. Transnational organisation created in England. Its armed wing is known as “Combat 18”, in Spain called “Combat España”.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Hammerskin España (28.11.2011)
+Proscribed under Article 515.5o of the Penal Code, and related with the articles 517.1 y 2. Sentence number 79/09 issued by the Provincial Court of Madrid and ratified by the Ruling 1396/2011 of the Supreme Court. The Association ‘Hammerskin Spain’ was considered a criminal association for promoting discrimination, the hate and the violence against persons, groups or partnerships for reasons such as their political views, faiths, the belonging of the members to a ethnicity, race or nation, sex, sexual orientation, familiar situation, sickness or handicap.
+:::
+
+:::
+
+::: {.callout-caution collapse="true"}
+## Sweden
+No right-wing extremist organisations have been proscribed.
+:::
+
+::: {.callout-caution collapse="true"}
+## United Kingdom
+
+::: {.callout-caution collapse="true"}
+### National Action (16.12.2016)
+Proscribed by the Home Office under the Terrorism Act of 2000. Founded in 2013, National Action was an avowed National Socialist activist movement. It had a web presence with a blog, used to host ideological postings, and operated openly, posting pictures of videos of neo-Nazi publicity stunts. National Action brought together young activists from a range of other movements, most notably figures from the Young British National Party such as Alex Davies and Jack Renshaw.  National Action was focused on the creation of a White Homeland, and the cleansing of British society of what they termed ‘subhuman’ or other elements they identified as undesirable. They emphasised self-defense and self-protection, with all members expected to train in combat skills. Numbering in the tens of activists – from 50 to 100 at their peak – the group engaged in publicity stunts to gain coverage, with provocative statements in overt worship of Hitler and the Third Reich. Following the murder of Jo Cox MP, the group supported the attack and gained notoriety. This support of terrorism was cited by the Home Office as one of the reasons for their proscription in December 2016, the first far-right organisation to be proscribed under UK terror legislation. Arrests began in late 2017 when 4 serving Army members and one civilian were arrested over membership of the group, and claims the group were actively trying to infiltrate the British Army. One of National Actions’ leaders, Christopher Lythgoe, was convicted of membership of the group and jailed in July 2018, though found not guilty of a plot to kill another MP with a sword. Since its proscription, Lythgoe had kept the group going and modelled their strategy on the provisional Irish Republican Army, Arrests and trials continued, including the conviction of 4 people in the West Midlands in June 2020 for their role in keeping the group moving. In April 2021, Benjamin Hannam, a Metropolitan Police Service officer, was jailed for membership of the organisation and had been discharged from the police for lying on his application forms about his membership of a banned organisation.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Scottish Dawn (29.9.2017)
+Proscribed by the Home Office under the Terrorism Act of 2000. The neo-Nazi group National Action was banned in 2016 following an assessment that it was ‘concerned in terrorism.’ The order against Scottish Dawn means that National Action cannot operate as Scottish Dawn or NS131, which have been identified as alternate names the group has used. Home Secretary, Amber Rudd, said: “National Action is a vile racist, homophobic and anti-semitic group which glorifies violence and stirs up hatred while promoting their poisonous ideology and I will not allow them to masquerade under different names. By extending the proscription of National Action, we are halting the spread of a poisonous ideology and stopping its membership from growing – protecting those who could be at risk of radicalisation. Our priority as government will always be to maintain the safety and security of families and communities across the United Kingdom and we will continue to identify and ban any terrorist group which threatens this, whatever their ideology.”
+:::
+ 
+::: {.callout-caution collapse="true"}
+### National Socialist Anti-Capitalist Action (NS131) (29.9.2017)
+Proscribed by the Home Office under the Terrorism Act of 2000. The neo-Nazi group National Action was banned in 2016 following an assessment that it was ‘concerned in terrorism.’ The order against National Socialist Anti-Capitalist Action (NS131) means that National Action cannot operate as Scottish Dawn or NS131, which have been identified as alternate names the group has used. Home Secretary, Amber Rudd, said: “National Action is a vile racist, homophobic and anti-semitic group which glorifies violence and stirs up hatred while promoting their poisonous ideology and I will not allow them to masquerade under different names. By extending the proscription of National Action, we are halting the spread of a poisonous ideology and stopping its membership from growing – protecting those who could be at risk of radicalisation. Our priority as government will always be to maintain the safety and security of families and communities across the United Kingdom and we will continue to identify and ban any terrorist group which threatens this, whatever their ideology.”
+:::
+ 
+::: {.callout-caution collapse="true"}
+### System Resistance Network (SRN) (28.2.2020)
+Proscribed by the Home Office under the Terrorism Act of 2000. SRN “is to be treated as another name for National Action”, a right-wing extremist group that is proscribed in the UK. SRN was formerly known as Vanguard Britania (VB), a UK based chapter of Vanguard America (VA). However, the group distanced themselves from the VA following the Charlottesville attack and rebranded themselves as the SRN. In 2019, two young British men were arrested on charges of encouraging acts of terrorism following propaganda that they distributed calling Prince Harry a “race traitor”. The SRN appeared in 2018 as an alias for National Action, and were active predominately in Wales and Scotland; although, SRN propaganda has also appeared in Bristol, Cambridge and Hampshire. The SRN’s “physical activity has been limited”; however, they are responsible for plastering neo-Nazi propaganda around the UK.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Sonnenkrieg Division (SKD) (28.2.2020)
+Proscribed by the Home Office under the Terrorism Act of 2000. Concerns after recent attacks in Germany and in the UK highlighted the threat of violent extremism. Proscribed to “mak[e] it much harder for them to spread their hateful rhetoric.” The Sonnenkrieg (German: Sun War) Division (SKD) was a UK sub-group of the US-based Atomwaffen Division. Emerged in late 2018, with members arrested in December 2018 over terrorism offences, including threats against the Royal family. Both were jailed in June 2019. Group was proscribed in February 2020, the second far-right group to be proscribed in the UK in its own right (rather than as a variant of another group). Despite proscription and the claims of parent organisation Atomwaffen to have dissolved in early 2020, SKD-linked individuals were being arrested and charged in late 2020. In March 2021 the Australian Government proscribed SKD as a terrorist organisation, though stated there was no Australian involvement in SKD. It also identifies the SKD as a splinter of System Resistance Network based on several members being former SRN activists, as well as the influence of left-handed Satanism such as the Order of the Nine Angles. SKD was thought to have only 10-15 members at its peak.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Feuerkrieg Division (FKD) (17.7.2020)
+Proscribed by the Home Office under the Terrorism Act of 2000. UK branch of a transnational group whose founder is believed to live in Estonia. FKD was established in October 2018 and has expanded into a transnational movement whose membership is becoming increasingly more American. FKD supports Atomwaffen Division (AWD), Sonnenkrieg Division (SKD), and The Base, right-wing extremist groups that are also proscribed in the UK. Home Secretary, Priti Patel stated that that FKD should be subject to proscription because “[t]his vile white supremacist group advocates violence and seeks to sow division, targeting young and vulnerable people online. I am determined to do everything I can to stop the spread of extreme ideologies that encourage and glorify terrorism, which is why I have taken action to proscribe this group.” In September 2019 police arrested a 16-year-old member of the FKD on terrorism charges. Following the arrest, members of the FKD “distributed a list of police buildings and an image of a senior police officer with a gun to his head and the words “race traitor” across his eyes to its members, urging them to carry out attacks.” In February 2021, a sixteen year-old was arrested on terror charges who had “also become the British head of an international online neo-Nazi group called Feuerkrieg Division (FKD).” FKD claimed that they disbanded in February 2020, although they were subject to proscription in July 2020.
+:::
+ 
+::: {.callout-caution collapse="true"}
+### Atomwaffen Division (AWD) (19.4.2021)
+Proscribed by the Home Office under the Terrorism Act of 2000. Proscription order cited concerns over continuing ‘national security’ threat posed by White Supremacist Extremists, and the potential radicalisation and imprisonment of ‘young and vulnerable people.’ ‘The Home Secretary has asked Parliament to proscribe Atomwaffen Division, which is a predominantly US-based white supremacist group that celebrates and promotes the use of violence in order to bring about a fascist, white ethno-state by means of a ‘race war’.’ ‘Atomwaffen Division claimed it had disbanded in March 2020 following pressure from US law enforcement agencies, but in July 2020, National Socialist Order announced itself online as its ‘successor’. The government assesses that it is the same group operating under a different name but adhering to the same twisted ideology as it did when it was called Atomwaffen Division.’
+:::
+ 
+::: {.callout-caution collapse="true"}
+### National Socialist Order (NSO) (19.4.2021)
+Proscribed by the Home Office under the Terrorism Act of 2000. Proscription order cited concerns over continuing ‘national security’ threat posed by White Supremacist Extremists, and the potential radicalisation and imprisonment of ‘young and vulnerable people.’ Atomwaffen Division claimed it had disbanded in March 2020 following pressure from US law enforcement agencies, but in July 2020, National Socialist Order announced itself online as its ‘successor.’
+:::
+ 
+::: {.callout-caution collapse="true"}
+### The Base (12.7.2021)
+Proscribed by the Home Office under the Terrorism Act of 2000. Proscription order cited concerns over continuing ‘national [and public] security’ threat posed by White Supremacist Extremists, and to send a strong message that The Base’s ideology and their actions are unacceptable and won’t be tolerated in the UK.’
+:::
+
+:::
+
+
+You can download the PREO data by clicking the button below.
+
+```{r echo = F, collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE}
+library(downloadthis)
+
+preo %>% download_this(
+    output_name = "preo_data",
+    output_extension = ".xlsx",
+    button_label = "Download dataset as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+```
+
+
+## Country experts from PREO data collection
+
+This data would not be available without the input of a fantastic team of country experts who participated in data collection: 
+for Austria, [Vinicius Bivar](http://viniciusbivar.com/) and [Manès Weisskircher](https://www.sv.uio.no/iss/english/people/aca/manesw/index.html);
+for Belgium, [Ico Maly](https://www.tilburguniversity.edu/staff/i-e-l-maly);
+for Bulgaria, [Rositsa Dzhekova](https://ec.europa.eu/home-affairs/networks/radicalisation-awareness-network-ran/ran-participants/rositsa-dzhekova_en) and [Asya Metodieva](https://www.iir.cz/en/asya-metodieva);
+for Croatia, [Maja Gergorić](https://www.fpzg.unizg.hr/staff/maja.gergoric) and [Ivan Tranfić](http://cosmos.sns.it/person/ivan-tranfic/);
+for Czechia, Ondřej Kolář and [Eva Svatonova](https://pure.au.dk/portal/en/persons/eva-svatonova(85c831e4-421e-4e6c-b170-15a75226d2a5).html);
+for Denamrk, [Richard McNeil-Willson](https://www.universiteitleiden.nl/en/staffmembers/richard-mcneil-willson) and [Anita Nissen](https://vbn.aau.dk/en/persons/133121);
+for Estonia, [Stefano Braghiroli](https://www.etis.ee/CV/Stefano_Braghiroli/eng);
+for Finland, [Lynda Gilby](https://uta-fi.academia.edu/LyndaGilby) and [Tommi Kotonen](https://www.jyu.fi/hytk/fi/laitokset/yfi/en/staff/kotonen-tommi);
+for France, [Jean-Yves Camus](https://www.iris-france.org/experts/jean-yves-camus/), [Nicolas Lebourg](https://www.carnegiecouncil.org/people/nicolas-lebourg), and [Franziska Wagner](https://dsps.ceu.edu/people/franziska-wagner);
+for Germany, [Maik Fielitz](https://www.idz-jena.de/ueber-das-institut/mitarbeitende/maik-fielitz), Jana Hitziger, [Greta Jasser](https://www.uni-hildesheim.de/fb1/institute/institut-fuer-sozialwissenschaften/politikwissenschaft/mitglieder/wissenschaftliche-angestellte/greta-jasser/), [Sabine Volk](https://populism-europe.com/fatigue/early-stage-researchers/sabine-volk/), and [Michael C. Zeller](https://dsps.ceu.edu/people/michael-c-zeller);
+for Greece and for Cyrpus, [Andreas Dafnos](https://www.unibw.de/politikwissenschaft/professuren/unsichgesellord/team-unsicher/dr-andreas-dafnos-1) and [Vasiliki Tsagkroni](https://www.universiteitleiden.nl/en/staffmembers/vasiliki-tsagkroni);
+for Hungary, [Katherine Kondor](https://www.radicalrightanalysis.com/author/katherine-kondor/) and [Balša Lubarda](https://www.radicalrightanalysis.com/people/balsa-lubarda/);
+for Italy, [Alessio Scopelliti](https://research-information.bris.ac.uk/en/persons/alessio-scopelliti) and [Micaela Musacchio Strigone](https://www.sciencespo.fr/centre-etudes-europeennes/en/researcher/micaela-musacchio-strigone.html);
+for Latvia, [Valery Engel](https://www.radicalrightanalysis.com/people/dr-valery-engel/);
+for the Netherlands, [Sarah de Lange](https://www.uva.nl/en/profile/l/a/s.l.delange/s.l.delange.html);
+for Poland, [Michael Cole](https://ut-ee.academia.edu/MichaelCole) and [Justyna Kajta](https://youth.swps.pl/en/dr-justyna-kajta/);
+for Portugal, [Vinicius Bivar](http://viniciusbivar.com/) and [Raquel da Silva](https://cei.iscte-iul.pt/en/equipa/raquel-da-silva-2/);
+for Romania, [Roland Clark](https://www.liverpool.ac.uk/history/staff/roland-clark/) and [Cinpoeş Radu](https://www.kingston.ac.uk/staff/profile/dr-radu-cinpoes-708/);
+for Slovakia, [Miroslav Mareš](https://www.muni.cz/en/people/922-miroslav-mares) and [Eva Svatonova](https://pure.au.dk/portal/en/persons/eva-svatonova(85c831e4-421e-4e6c-b170-15a75226d2a5).html);
+for Slovenia, [Miroslav Mareš](https://www.muni.cz/en/people/922-miroslav-mares) and [Marko Milošev](https://history.ceu.edu/people/marko-milosev);
+for Spain, [Carmen Aguilera-Carnerero](https://www.ugr.es/en/staff/maria-carmen-aguilera-carnerero) and [Bàrbara Molas](https://www.tsas.ca/affiliate/barbara-molas/);
+for Sweden, [Tina Askanius](https://mau.se/en/persons/tina.askanius/) and [Patricia Rodi](https://www.qmul.ac.uk/politics/phd/postgraduateresearch/student-profiles/patricia-rodi.html);
+and for the United Kingdom and for Ireland, [William Allchorn](https://www.radicalrightanalysis.com/people/dr-william-allchorn/), [Andreas Dafnos](https://www.unibw.de/politikwissenschaft/professuren/unsichgesellord/team-unsicher/dr-andreas-dafnos-1), [Callum Downes](https://www.radicalrightanalysis.com/people/callum-downes/), and [Daniel Jones](https://www.northampton.ac.uk/directories/people/daniel-jones/).
 
