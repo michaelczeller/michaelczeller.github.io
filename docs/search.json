@@ -193,7 +193,7 @@
     "href": "data/index_data.html#density-map",
     "title": "Data",
     "section": "Density map",
-    "text": "Density map\n\n\n\n\n\nDots indicate the municipality where homicides with a right-wing extremist motive occurred. Black dots refer to those cases recognised as instances of right-wing extremist violence by the German government. Yellow dots refer to additional cases identified by or reported to the Amadeo Antonio Foundation. The states of Germany are shaded according to the density (by population, per 100,000 inhabitants) of homicides that have occurred therein. You can examine further evidence about a case by clicking on a dot.\n\n\n\n\n\n\n\nYou can download the data by clicking the button below.\n\n\n\n Download datasets as xlsx"
+    "text": "Density map\n\n\n\n\n\nDots indicate the municipality where homicides with a right-wing extremist motive occurred. Black dots refer to those cases recognised as instances of right-wing extremist violence by the German government. Yellow dots refer to additional cases identified by or reported to the Amadeo Antonio Foundation. The states of Germany are shaded according to the density (by population, per 100,000 inhabitants) of homicides that have occurred therein. You can examine further evidence about a case by clicking on a dot.\n\n\n\n\n\n\n\nYou can download the data by clicking the button below.\n\n\n\n Download dataset as xlsx"
   },
   {
     "objectID": "data/index_data.html#interactive-map",
@@ -586,5 +586,12 @@
     "title": "Shifting Political Dynamics and Democratic Disillusionment in Hungary’s Political Youth",
     "section": "Citation",
     "text": "Citation\n@article{zeller2016shifting,\n  title={Shifting Political Dynamics and Democratic Disillusionment in Hungary’s Political Youth},\n  author={Zeller, Michael C},\n  journal={The Eurasian Era},\n  volume={1},\n  number={1},\n  pages={3--11},\n  year={2016}\n}"
+  },
+  {
+    "objectID": "data/index_data.html#country-experts-from-preo-data-collection",
+    "href": "data/index_data.html#country-experts-from-preo-data-collection",
+    "title": "Data",
+    "section": "Country experts from PREO data collection",
+    "text": "Country experts from PREO data collection\nThis data would not be available without the input of a fantastic team of country experts who participated in data collection: for Austria, Vinicius Bivar and Manès Weisskircher; for Belgium, Ico Maly; for Bulgaria, Rositsa Dzhekova and Asya Metodieva; for Croatia, Maja Gergorić and Ivan Tranfić; for Czechia, Ondřej Kolář and Eva Svatonova; for Denamrk, Richard McNeil-Willson and Anita Nissen; for Estonia, Stefano Braghiroli; for Finland, Lynda Gilby and Tommi Kotonen; for France, Jean-Yves Camus, Nicolas Lebourg, and Franziska Wagner; for Germany, Maik Fielitz, Jana Hitziger, Greta Jasser, Sabine Volk, and Michael C. Zeller; for Greece and for Cyrpus, Andreas Dafnos and Vasiliki Tsagkroni; for Hungary, Katherine Kondor and Balša Lubarda; for Italy, Alessio Scopelliti and Micaela Musacchio Strigone; for Latvia, Valery Engel; for the Netherlands, Sarah de Lange; for Poland, Michael Cole and Justyna Kajta; for Portugal, Vinicius Bivar and Raquel da Silva; for Romania, Roland Clark and Cinpoeş Radu; for Slovakia, Miroslav Mareš and Eva Svatonova; for Slovenia, Miroslav Mareš and Marko Milošev; for Spain, Carmen Aguilera-Carnerero and Bàrbara Molas; for Sweden, Tina Askanius and Patricia Rodi; and for the United Kingdom and for Ireland, William Allchorn, Andreas Dafnos, Callum Downes, and Daniel Jones."
   }
 ]
