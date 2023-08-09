@@ -1,0 +1,84 @@
+---
+title: "Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects"
+date: 2023-08-09
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Department of Sociology, University of Bielefeld, Bielefeld, Germany
+  - name: Michael Vaughan
+    url: https://www.lse.ac.uk/International-Inequalities/People/Michael-Vaughan/Michael-Vaughan
+    orcid: 0000-0003-3582-3296
+    affiliation: International Inequalities Institute, The London School of Economics and Political Science, London, UK
+categories:
+  - proscription
+  - banning
+  - listing
+  - extremism
+  - terrorism
+  - Blood & Honour
+  - Nordic Resistance Movement
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong> and <a href="https://www.lse.ac.uk/International-Inequalities/People/Michael-Vaughan/Michael-Vaughan">Michael Vaughan</a>, “Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects,” <em>Terrorism and Political Violence</em> 0, no. 0 (2023): 1-23, doi: <a href="https://doi.org/10.1080/09546553.2023.2240446"><code>10.1080/09546553.2023.2240446</code></a>
+  links:
+  - name: Preprint
+    url: zeller-vaughan2023_tpv_preo_preprint.pdf
+    local: true
+    # icon: bi filetype-pdf
+  - name: Online version
+    url: https://doi.org/10.1080/09546553.2023.2240446
+    # icon: fa-solid fa-scroll
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=doi&q=10.1080/09546553.2023.2240446
+    # icon: ai ai-zotero
+  extra: >-
+    Michael Vaughan’s work was supported by the German Federal Ministry of Education and Research (funding code 16DII125). We would like to thank the all country experts who participated in data collection for this project: for Austria, Vinicius Bivar and Manès Weisskircher; for Belgium, Ico Maly; for Bulgaria, Rositsa Dzhekova and Asya Metodieva; for Croatia, Maja Gergorić and Ivan Tranfić; for Czechia, Ondrej Kolár and Eva Svatonova; for Denmark, Richard McNeil- Willson and Anita Nissen; for Estonia, Stefano Braghiroli; for Finland, Lynda Gilby and Tommi Kotonen; for France, Jean-Yves Camus, Nicolas Lebourg, and Franziska Wagner; for Germany, Maik Fielitz, Jana Hitziger, Greta Jasser, Sabine Volk, and Michael C. Zeller; for Greece and for Cyprus, Andreas Dafnos and Vasiliki Tsagkroni; for Hungary, Katherine Kondor and Balša Lubarda; for Italy, Alessio Scopelliti and Micaela Musacchio Strigone; for Latvia, Valery Engel; for the Netherlands, Sarah de Lange; for Poland, Michael Cole and Justyna Kajta; for Portugal, Vinicius Bivar and Raquel da Silva; for Romania, Roland Clark and Cinpoes Radu; for Slovakia, Miroslav Mareš and Eva Svatonova; for Slovenia, Miroslav Mareš and Marko Milošev; for Spain, Carmen Aguilera-Carnerero and Bàrbara Molas; for Sweden, Tina Askanius and Patricia Rodi; and for the United Kingdom and for Ireland, William Allchorn, Andreas Dafnos, Callum Downes, and Daniel Jones. We also thank Alina Iltutmus for assistance in preparing this article. 
+doi: 10.1080/09546553.2023.2240446
+haiku:
+  - <em>"... some states have proscribed right-wing extremist (RWE) organizations quite often, while others have used proscription laws only in isolated cases; still others eschew completely such legal instruments."</em>
+---
+
+## Important links
+
+- [Preprint](zeller-vaughan2023_tpv_preo_preprint.pdf)
+
+## Abstract
+
+Among the legal instruments that address organized right-wing extremism in Europe, proscription is one of the most severe. Yet there is scant comparative work on where, how frequently, and against which right-wing extremist organization proscriptions have been applied. This article presents a new dataset on Proscribed Right-wing Extremist Organizations (PREOs) in Europe. A typology of countries’ proscriptive regimes illuminates how proscription by executive decrees is more frequent than proscription by judicial ruling, and how proscription by executive decrees appears to be more responsive to high-profile incidents of extremist violence. We complement this descriptive overview with a close investigation of patterns in Germany, the state that has most frequently used proscription against right-wing extremist organizations. Furthermore, the article presents paired case studies of the proscriptions of Blood & Honour in Germany (by executive decree) and the Nordic Resistance Movement in Finland (by judicial ruling), which point to the causal factors underlying proscription of right-wing extremist organizations.
+
+
+## Important figures
+
+![Table 1. Modes and instances since 1990 (number in parentheses) of organizational proscription in European states](preo_tab1.png)
+
+![Figure 1. Proscribed right-wing extremist organizations since 1990 by year and country.](year_bar-1.png)
+
+![Figure 2. RTV and bans in Belgium, Finland, France, Greece, Spain, and the UK.](RTV-bans-six-countries-1.png)
+
+![Figure 3. Number of groups proscribed by year in Germany.](DE-ban-years-1.png)
+
+![Figure 4. Germany RWE bans and RTV incidents and fatalities.](Germany-RTV-bars-1.png)
+
+![Figure 5. Violent right-wing crimes and number of PREOs in Germany since 1990.](Germany-VfS-figs-1.png)
+
+![Figure 6. Map of Germany shaded according to the proportion of RWE-motivated homicides (source: RTV dataset) with the number of proscriptions since 1990 in each region. The numbers in parentheses indicate organizations that were proscribed by the federal government, but which were mainly active in the indicated region.](fig_2022-08-08RTV_de_map.png)
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1080/14742837.2021.1889493">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@article{zeller2023proscribing,
+  title={Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects},
+  author={Zeller, Michael C and Vaughan, Michael},
+  journal={Terrorism and Political Violence},
+  volume={0},
+  number={0},
+  pages={1--23},
+  year={2023},
+  publisher={Taylor \& Francis}
+}
+```
