@@ -1,0 +1,64 @@
+---
+title: COVID-19 and the Pause of Far-Right Demonstrations in Germany
+date: 2020-05-08
+description: "COVID-19 has shutdown numerous activities in the public spaces of Europe—including far-right demonstrations. Yet the relaxation of protective measures will surely bring renewed far-right demonstration activity."
+image: index_files/figure-html/fr_de_demos.png
+twitter-card:
+  image: "index_files/figure-html/fr_de_demos.png"
+open-graph:
+  image: "index_files/figure-html/fr_de_demos.png"
+categories:
+  - far right
+  - demonstrations
+  - COVID-19
+  - Germany
+---
+
+
+In most European countries, protective measures against COVID-19 have dramatically reduced activities in public space. While these measures have wide-ranging and diverse impacts, a particular effect on far-right social movements is noteworthy. Large public gatherings are widely prohibited because of the pandemic; this deprives the far right of one of its core activities: demonstrations. Far-right movements in Germany are particularly wedded to this tactic–to the extent that Fabian Virchow refers to the [central importance of *Demonstrationspolitik*](https://www.fachportal-paedagogik.de/literatur/vollanzeige.html?FId=765085#vollanzeige) (‘[demonstration politics](https://www.vielfalt-mediathek.de/mediathek/4300/dagegen-und-dann-rechtsextreme-stra-enpolitik-und-zivilgesellschaftliche-gegenst.html)’) for the German far right. Considering the many uses and advantages of demonstrations, this emphasis is unsurprising.
+
+# The importance of demonstrations
+
+Demonstrations are, as King and Soule assert, the [‘quintessential tactic’ of social movements](https://journals.sagepub.com/doi/abs/10.2189/asqu.52.3.413?casa_token=ilPijUR93twAAAAA:D5cqobbmjNA0hCRiMMPNxJ1QdaY872E0Vy6ioF4mv08ygpEu1Whsx4LbM28AHkNSRXgFITjRBnw). Evidently, demonstrations serve several important purposes for movement organisations: raising awareness, attracting new members and keeping existing members connected, promoting group solidarity, facilitating networking. Furthermore, demonstration participants bond over the experience, typically [reinforcing movement solidarity](https://www.cambridge.org/core/books/challenging-codes/5B604C6355B636022120D57E744128BA). Individually or in some permutation, these potential benefits have long recommended demonstration as an appealing tactic. Notwithstanding the expanding interest in movements within digital media, the physical presence they can muster with demonstrations remains essential (the cases of [youth radicalisation in Belgium](https://www.ijcv.org/index.php/ijcv/article/view/3084), and of [Black Lives Matter protests in Ferguson](https://www.tandfonline.com/doi/abs/10.1080/14742837.2018.1533810) exemplify this). Beyond such instrumental ends, demonstrations provide meaningful references to past events, preceding mobilisations within social movements, and can fulfil other symbolic objectives. Given these myriad purposes and benefits, [mobilising a large group to demonstrate is often a primary concern of movement organisers](https://doi.org/10.17813/maiq.16.2.h686775x423496wh). They are exhibitions of strength and are the centre-piece of the contentious repertoire in modern society.
+
+Demonstration are particularly common and particularly important within the far-right movement field. Undoubtedly, demonstrations serve all or most of the instrumental purposes listed above, but for the far right symbolic motivations are perhaps even more significant. Processing down the main thoroughfare of a city or town, or convening a large rally harks back to the far right’s ‘glorious past’: the fascist regimes of the inter-war years and their mass displays of martial pomp. Nazima Kadir argues that [nostalgia is an especially native element of radical social movements](https://manchesteruniversitypress.co.uk/9781784994112/) – she refers to the radical left, but the notion holds for the far right. By demonstrating, far-right movements boldly claim their space in the public sphere, unwilling to accept---as most far-right movements had to after the Second World War---a more furtive existence. As a result, there is typically not much internal pressure to abandon demonstration campaigns. Far-right demonstration campaigns have a common property of inertia: not tending to stop or change unless acted on by an outside force. COVID-19 undoubtedly qualifies as such an outside force; it’s an exogenous shock, a critical event,  a unique demobilising pressure.
+
+# German far-right demonstrations
+
+```{r german FR demos graphic, eval=FALSE, echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+
+# demos <- c(25,30,21,27,19,40,46,32,18,18,21,28,29,56,39,18,24,40,30,38,48,42,45,51,44,65,35,33,92,99,109,277,196,121,83,80,48,62,48,26,37,56,39,60,30,36,23,41)
+# period <- c(2008.1,2008.2,2008.3,2008.4,2009.1,2009.2,2009.3,2009.4,2010.1,2010.2,2010.3,2010.4,2011.1,2011.2,2011.3,2011.4,2012.1,2012.2,2012.3,2012.4,2013.1,2013.2,2013.3,2013.4,2014.1,2014.2,2014.3,2014.4,2015.1,2015.2,2015.3,2015.4,2016.1,2016.2,2016.3,2016.4,2017.1,2017.2,2017.3,2017.4,2018.1,2018.2,2018.3,2018.4,2019.1,2019.2,2019.3,2019.4)
+
+df <- data.frame(
+  demos=c(25,30,21,27,19,40,46,32,18,18,21,28,29,56,39,18,24,40,30,38,48,42,45,51,44,65,35,33,92,99,109,277,196,121,83,80,48,62,48,26,37,56,39,60,30,36,23,41) ,
+  period=as.numeric(c(2008.1,2008.2,2008.3,2008.4,2009.1,2009.2,2009.3,2009.4,2010.1,2010.2,2010.3,2010.4,2011.1,2011.2,2011.3,2011.4,2012.1,2012.2,2012.3,2012.4,2013.1,2013.2,2013.3,2013.4,2014.1,2014.2,2014.3,2014.4,2015.1,2015.2,2015.3,2015.4,2016.1,2016.2,2016.3,2016.4,2017.1,2017.2,2017.3,2017.4,2018.1,2018.2,2018.3,2018.4,2019.1,2019.2,2019.3,2019.4))
+  )
+
+barplot(df$demos, space = 0.2, names.arg = df$period, col = "red", border = TRUE, ylab = "Number of far-right demonstrations in Germany", ylim = c(0,300), axes = TRUE, las=2)
+
+grid(col = "black")
+
+barplot(df$demos, space = 0.2, names.arg = df$period, col = "red", border = TRUE, ylab = "Number of far-right demonstrations in Germany", ylim = c(0,300), axes = TRUE, las=2, add = T)
+
+
+# 2015_1: includes 43 anti-Islam (49 regular); 2015_2: includes 19 anti-Islam (72 regular); 2015_3: includes 26 anti-Islam (83 regular); 2015_4: includes 70 anti-Islam (207 regular); 2016_1: includes 79 anti-Islam (117 regular); 2016_2: includes 48 anti-Islam (73 regular); 2016_3: includes 32 anti-Islam (51 regular); 2016_4: includes 36 anti-Islam (44 regular); 2017_1: includes 32 anti-Islam (16 regular); 2017_2: includes 22 anti-Islam (40 regular); 2017_3: includes 20 anti-Islam (28 regular); 2017_4: includes 9 anti-Islam (17 regular); 2018_1: includes 15 anti-Islam (22 regular); 2018_2: includes 19 anti-Islam (37 regular); 2018_3: includes 16 anti-Islam (23 regular); 2018_4: includes 17 anti-Islam (43 regular); 2019_1: includes 3 anti-Islam (27 regular); 2019_2: includes 3 anti-Islam (33 regular); 2019_3: includes 0 anti-Islam (23 regular); 2019_4: includes 3 anti-Islam (38 regular)
+
+
+```
+
+
+Proscriptions against large public gatherings have halted far-right demonstrations in Germany. Even [PEGIDA, which has impressively sustained a campaign of weekly demonstrations in Dresden since late 2014, was forced to suspend its (offline) activity](https://www.radicalrightanalysis.com/2020/04/07/germany-is-the-covid-19-pandemic-weakening-the-far-right/). (PEGIDA has attempted to continue its campaign and adapt to COVID-19 restrictions by holding [digital demonstrations](https://www.belltower.news/chemnitz-dresden-rechtsextreme-mobilisierung-in-coronavirus-zeiten-98543/)---though something is plainly lost in this shift to virtual collective action.) But the measures against COVID-19 will eventually abate. Looking at the past decade of the German far right’s demonstration activity suggests that far-right organisations will regroup and renew their mobilisation. The figure below shows a fairly steady rate of demonstrations across quarterly periods of the year; apart from the spike of demonstrations during the refugee crisis of 2015-2016, German far-right movement organisations typically mobilise between 30 and 40 demonstrations in every three-month period. (The newspaper Westdeutsche Allgemeine Zeitung created a cartographic visualisation of this demonstration data, available at <https://interaktiv.waz.de/rechte-demos/>.)
+
+![Number of far-right demonstrations in Germany in annual quarters since 2008. Note that figures from 2015 onward include ‘anti-islamification’ demonstrations by ‘GIDA’ groups. Source: Germany’s Federal Ministry of the Interior](fr_de_demos.png)
+
+The level of mobilisation, moreover, has endured through many shifts in opportunity structure. For instance, revelations in late 2011 about the terrorist activities of the so-called ‘National Socialist Underground’ spurred public outrage and state pressure against far-right entities. This plausibly explains a dip in the number of demonstrations in this period (i.e., 2011.4 and 2012.1 in the figure above). Yet Germany’s far right quickly regrouped and resumed its more typical frequency of demonstrations.
+
+Though it may be consequential for those who attend, participation in far-right demonstrations is generally low, not often numbering more than a few hundred. However, a [handful of regular events, whether for the scale and development of the mobilisation (i.e., high and/or rising participant numbers) or for their long continuity, have acquired a noteworthy significance](https://www.buendnis-toleranz.de/service/publikationen/168437/sammelband-wunsiedel-ist-bunt-nicht-braun). Through the 2000s and 2010s, these include annual commemorations of the bombing of Dresden in the Second World War (mid-February), demonstrations on May Day, memorial marches to honour Rudolf Hess (mid-August), and processions to a Waffen-SS cemetary in Halbe (mid-November). These regular, big events stand out like mile-markers in the far-right activists’ calendar, moments to assemble, make or renew connections, and present the far-right movement in public.
+
+Among the many novelties imposed by measures against COVID-19 in Germany (and around Europe), the cessation of far-right demonstration activity is conspicuous. The cacophony of marches and rallies by far-right skinheads, football hooligans, and neo-Nazis has been silenced. But this is certainly only temporary. The restoration of normal circumstances of public life and of activity in the public space will surely include renewed far-right demonstration activity. Though it may effect a pause, COVID-19 is not likely to deter the far right from their *Demonstrationspolitik*.
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">Originally published as a blog with the Centre for the Analysis of the Radical Right: <a href="https://www.radicalrightanalysis.com/2020/05/08/covid-19-and-the-pause-of-far-right-demonstrations-in-germany/">https://www.radicalrightanalysis.com/2020/05/08/covid-19-and-the-pause-of-far-right-demonstrations-in-germany/</a></span>

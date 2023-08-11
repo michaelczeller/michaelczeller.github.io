@@ -1,6 +1,6 @@
 /*-- scss:defaults --*/
 
-$theme: "ath" !default;
+$theme: "mcz" !default;
 
 //
 // Color system
@@ -61,7 +61,7 @@ $footer-font-family: "Jost" !default;
 $body-color: $gray-900 !default;
 
 // Links
-$link-color: $orange !default;
+$link-color: $green !default;
 $link-decoration: none !default;
 $link-hover-color: $red !default;
 $link-hover-decoration: underline !default;
@@ -74,17 +74,17 @@ $code-color: $gray-900 !default;
 $btn-code-copy-color-active: $orange !default;
 
 // TOC
-$toc-color: $orange;
+$toc-color: $green;
 $toc-font-size: 1em;
 
 // Navbar
 $navbar-bg: $purple !default;
-$navbar-fg: $white !default;
+$navbar-fg: $teal !default;
 $navbar-hl: $light-orange !default;
 
 // Footer
-$footer-bg: $gray-900 !default;
-$footer-fg: $gray-300 !default;
+$footer-bg: $gray-500 !default;
+$footer-fg: $gray-900 !default;
 
 /*-- scss:rules --*/
 
@@ -196,17 +196,12 @@ pre.text, pre.sourceCode, .cell-output pre {
     font-family: $footer-font-family;
 
     a {
-        color: $light-orange;
+        color: $green;
     }
 
     .faux-block {
         display: block;
-        padding-bottom: 0.4em;
-    }
-
-    .fingerprint {
-        font-family: $font-family-monospace;
-        font-size: 0.8em;
+        padding-bottom: 0.1em;
     }
 
     // In the default Quarto template, .nav-footer-center has position: absolute 
@@ -543,7 +538,7 @@ pre.text, pre.sourceCode, .cell-output pre {
             li {
                 display: inline-block;
                 white-space: nowrap;
-                background-color: $orange;
+                background-color: $green;
                 margin: 0 0.2em 0.4em 0;
                 padding: 0.2em 0.4em;
                 font-size: 0.85em;

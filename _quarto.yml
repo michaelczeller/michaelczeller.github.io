@@ -57,6 +57,8 @@ website:
         text: "About"
       - href: cv/index_cv.qmd
         text: "CV"
+      - href: blog/index.qmd
+        text: "Blog"
       - href: research/index_research.qmd
         text: "Research"
       - href: teaching/index_teaching.qmd
@@ -82,16 +84,17 @@ website:
 
 format:
   html:
-    theme: 
-      dark: [darkly, mcz.scss] # or 'flatly'
-      light: [flatly, mcz.scss]
+    theme:
+      - html/mcz.scss
+      # dark: [darkly, mcz.scss] # or 'flatly'
+      # light: [flatly, mcz.scss]
       # mcz.scss [cosmo, theme-dark.scss]
     # mainfont: arial
     # fontsize: 1.5rem
     # fontcolor: "#0013d5"
     # linkcolor: "#ff33f0"
     # monofont: courier new
-    css: styles.css
+    # css: styles.css
     toc: true
 
     

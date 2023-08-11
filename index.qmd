@@ -9,7 +9,7 @@ about:
 pagetitle: "{{< meta website.title >}}"
 main-photo: /files/profiles/zeller2019.jpg
 main-photo-square: /files/profiles/zeller2019-square.jpg
-title-block-banner: "#00bc8c"
+title-block-banner: "#170C3A"
 format:
   html:
     quarto-template-params:

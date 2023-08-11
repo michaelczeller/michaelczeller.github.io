@@ -27,5 +27,12 @@
   {
     "listing": "/teaching/index_teaching.html",
     "items": []
+  },
+  {
+    "listing": "/blog/index.html",
+    "items": [
+      "/blog/2020/08/06/laugh-away-the-far-right/index.html",
+      "/blog/2020/05/08/covid-FR-demos-pause/index.html"
+    ]
   }
 ]

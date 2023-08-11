@@ -28,7 +28,7 @@ listing:
   #   contents: ay_older.yml
   #   sort: "date desc"
   #   template: ../html/teaching/listing.ejs
-title-block-banner: "#00bc8c"
+title-block-banner: "#170C3A"
 page-layout: full
 toc: true
 toc-location: right

@@ -1,6 +1,6 @@
 ---
 title: "Data"
-title-block-banner: "#00bc8c"
+title-block-banner: "#170C3A"
 ---
 
 On this page you can find data from past and present projects, replication code, data visualisations, and other resources that might be useful.
