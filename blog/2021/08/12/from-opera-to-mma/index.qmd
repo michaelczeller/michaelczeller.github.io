@@ -1,0 +1,38 @@
+---
+title: From Opera to MMA -- Nationalist Symbolism and the German Far Right
+date: 2021-08-12
+description: "The symbolism of the Nibelungenlied has a long history of co-option by Germany’s extremists."
+image: wagner.png
+twitter-card:
+  image: "wagner.png"
+open-graph:
+  image: "wagner.png"
+categories:
+  - Kampf der Nibelungen
+  - Nibelungenlied
+  - Wagner
+  - far right
+  - Germany
+---
+
+<span style="font-family:Garamond; font-size:0.7em;"> Photo: Monument to Richard Wagner, Berlin, Germany, 08/01/2008 <i class="bi-c-circle"></i> ArTono / Shutterstock.</span>
+
+The German far right is awash with allusion. Like elsewhere, coded communication is the rule among far-right German organizations and activists. References to old Norse myths abound, and many readers, whether from familiarity with mythology, white nationalism or Norse-inspired superhero movies, would recognize [Thor’s hammer](https://www.adl.org/education/references/hate-symbols/thors-hammer) or a smattering of runic symbols like the [Sigrune](https://commons.wikimedia.org/wiki/File:Sig_runes.svg), the [Odalrune](https://en.wikipedia.org/wiki/File:Flag_with_Odal_rune.svg) and the [Wolfsangel](https://commons.wikimedia.org/wiki/File:Wolfsangel_1.svg), all subject to [specific bans](https://www.verfassungsschutz.de/DE/themen/rechtsextremismus/verbotsmassnahmen/verbotsmassnahmen_artikel.html) in Germany. However, a less familiar but persistent presence in German far-right codes is the Nibelungenlied, a medieval epic poem long co-opted by nationalists.
+
+The [Nibelungenlied](https://www.gutenberg.org/files/7321/7321-h/7321-h.htm) story centers on Siegfried, a hero in the mold of Beowulf: a strong, nearly invincible warrior who has won riches through his exploits, a powerful sword and a cloak of invisibility. Siegfried is very much the belle of the medieval bro-ball. The poem begins with Siegfried traveling to the German town of Worms to propose marriage to Kriemhild, the Burgundian princess. Her brother, King Gunther, consents to the match, but only if Siegfried helps him win the hand of Brunhild, the warrior queen of Isenland. It’s to be a double wedding.
+
+Following the nuptials (and a disturbing episode involving the marital rape of Brunhild), a feud emerges between Kriemhild and Brunhild. The conflict culminates in one of Gunther’s kinsmen murdering Siegfried, thrusting a spear into the vulnerable spot in his back. The remainder of the poem (the whole second half, that is) revolves around Kriemhild’s revenge, which results in the violent death of pretty much all the main characters, including Kriemhild herself. Taken together, the Nibelungenlied is an illuminating portrayal of ancient Germanic heroism and courtly drama.
+
+Rediscovered in the mid-18th century, the popularity of the poem swelled with the rising tide of German nationalism in the 19th century. Most famously, the composer Richard Wagner, a German nationalist and virulent anti-Semite, reimagined the story in an epic four-part opera consisting of “The Rhinegold,” “The Valkyrie,” “Siegfried” and “Twilight of the Gods,” collectively known as “[The Ring of the Nibelung](https://www.lyricopera.org/lyric-lately/beginners-guide-wagner-ring-cycle/)” or the Ring cycle, for short. Of course, several of the operas’ leitmotifs are instantly recognizable, not least the “[Ride of the Valkyries](https://www.youtube.com/watch?v=XRU1AJsXN1g).” Wagner’s Ring cycle became a landmark of German art and is still performed today, occasionally in back-to-back-to-back-to-back [marathon productions](https://www.youtube.com/watch?v=JWhRThHJGoE).
+
+The Nazi regime was preternaturally keen to memorialize German lore, especially the Nibelungenlied, given its association with Wagner. An enthused Hitler was an [honored guest](https://www.dw.com/en/how-much-hitler-is-there-in-wagner/a-39903954) in Bayreuth, home to Wagner’s own theater. Several symbols from both the original and Wagner’s version appealed to the Nazis, perhaps most notably the murder of Siegfried. It reflected the “[stabbed in the back](https://www.britannica.com/topic/Dolchstoss-im-Rucken)” (*Dolchstoß*) conspiracy theory that the Nazis propagated, namely that the German army was betrayed during the First World War by treasonous Jews and leftists.
+
+The regime supported several projects stamped with the label of the Nibelungs. Chief among them was the cavernous Nibelungenhalle in Passau, the putative home of the original composer of the Nibelungenlied, which was used for mass indoor rallies. In the postwar era, far-right parties like the German People’s Union and the National Democratic Party of Germany organized assemblies with the specific intention of using the nationalist cachet of the Nibelungs — until Passau’s authorities [demolished](https://taz.de/Blut-und-Boden-und-die-Abrissbirne/!789111/) the building in 2004.
+
+Still, appropriation of the Nibelungs legend endures among Germany’s far right. Beginning in 2013, right-wing extremists organized the “[Kampf der Nibelungen](https://www1.wdr.de/daserste/monitor/videos/video-extrem-gewaltbereit-kampfsport-in-der-rechten-szene-100.html)” (KdN, the “Battle of the Nibelungs”), a mixed martial arts competition catering to far-right fighters and fans from around Europe. The event attracted 850 spectators in 2018 and was one of the biggest MMA competitions in Europe. It was [banned](https://www.spiegel.de/panorama/justiz/dresden-kampf-der-nibelungen-bleibt-verboten-a-1290754.html) in 2019, and organizers were [prevented](https://www.belltower.news/interview-in-rechtsextremen-kampfsportgruppen-ist-die-grenze-zum-rechtsterrorismus-fliessend-105129/) from live-streaming KdN fights in 2020, but it may yet resurface in 2021.
+
+Symbols and allusions to the Nibelungenlied sadly will persist amid Germany’s far-right scene. This symbolism has a long history of co-option by extremists. Even though the [chords](https://www.theguardian.com/music/2016/apr/22/matthew-dancona-the-politics-of-wagners-ring-cycle-opera-north) of Wagner’s operas are not anti-Semitic, their endorsement by the Nazi regime touched Nibelung lore with an association that inescapably appeals to the far right. Yet references to the Nibelungenlied are more than far-right supporters’ fetishization of a twisted version of German cultural history. They form a part of the vast book of codes used by far-right actors to communicate. Cracking these is often the key to decoding how the far right organizes, mobilizes and ultimately understands the world in which it operates.
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">Originally published as a blog with the Fair Observer: <a href="https://www.fairobserver.com/region/europe/michael-c-zeller-richard-wagner-opera-nibelungenlied-nationalist-symbolism-far-right-germany-news-915421/">https://www.fairobserver.com/region/europe/michael-c-zeller-richard-wagner-opera-nibelungenlied-nationalist-symbolism-far-right-germany-news-915421/</a></span>

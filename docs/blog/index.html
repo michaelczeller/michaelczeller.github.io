@@ -65,6 +65,34 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-posts_2021 .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      
+      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-posts_2021'] = new List('listing-posts_2021', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-posts_2020 .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
@@ -207,7 +235,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Year</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">2020</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">2021</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">2020</a></li>
   </ul>
 </nav>
     </div>
@@ -223,11 +252,99 @@ ul.task-list li input[type="checkbox"] {
 <!-- ## 2022 -->
 <!-- :::{#posts_2022} -->
 <!-- ::: -->
-<!-- ## 2021 -->
-<!-- :::{#posts_2021} -->
-<!-- ::: -->
 <section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">2020</h2>
+<h2 class="anchored" data-anchor-id="section">2021</h2>
+<div id="listing-posts_2021" class="quarto-listing quarto-listing-container-custom">
+<div class="list blog">
+    <div class="blog-entry" data-index="0" data-categories="demobilisation,far right,counter-mobilisation,Germany" data-listing-date-sort="1635458400000" data-listing-file-modified-sort="1691844248571" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12">
+        <div class="metadata">          
+            <p class="date listing-date">29 October 2021</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2021/10/29/how-to-demobilize-far-right/index.html">How to Demobilize the Far Right</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('demobilisation'); return false;">
+                    demobilisation
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('counter-mobilisation'); return false;">
+                    counter-mobilisation
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+            </div>
+            <p class="description listing-description">... there are many means of demobilising the far right. Most striking, though, is the importance of non-state actors: sometimes their actions alone are enough to demobilise far-right campaigns; at other times state intervention is key, but non-state actors often spark and spur on state action.</p>
+        </div>
+        <div class="thumbnail">
+            <img src="../blog/2021/10/29/how-to-demobilize-far-right/achtung_nazi.png" alt="How to Demobilize the Far Right" title="How to Demobilize the Far Right">
+        </div>
+    </div>
+    <div class="blog-entry" data-index="1" data-categories="Kampf der Nibelungen,Nibelungenlied,Wagner,far right,Germany" data-listing-date-sort="1628719200000" data-listing-file-modified-sort="1691786502484" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+        <div class="metadata">          
+            <p class="date listing-date">12 August 2021</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2021/08/12/from-opera-to-mma/index.html">From Opera to MMA -- Nationalist Symbolism and the German Far Right</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Kampf der Nibelungen'); return false;">
+                    Kampf der Nibelungen
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Nibelungenlied'); return false;">
+                    Nibelungenlied
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Wagner'); return false;">
+                    Wagner
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+            </div>
+            <p class="description listing-description">The symbolism of the Nibelungenlied has a long history of co-option by Germany’s extremists.</p>
+        </div>
+        <div class="thumbnail">
+            <img src="../blog/2021/08/12/from-opera-to-mma/wagner.png" alt="From Opera to MMA -- Nationalist Symbolism and the German Far Right" title="From Opera to MMA -- Nationalist Symbolism and the German Far Right">
+        </div>
+    </div>
+    <div class="blog-entry" data-index="2" data-categories="Alternative für Deutschland (AfD),election,far right,Germany" data-listing-date-sort="1615503600000" data-listing-file-modified-sort="1691763248223" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+        <div class="metadata">          
+            <p class="date listing-date">12 March 2021</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2021/03/12/AfD-failing-to-keep-up/index.html">Alternative for Germany Is Failing to Keep Up</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Alternative für Deutschland (AfD)'); return false;">
+                    Alternative für Deutschland (AfD)
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('election'); return false;">
+                    election
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+            </div>
+            <p class="description listing-description">... the federal election in September could deprive the AfD of its position as the largest party of the opposition ...</p>
+        </div>
+        <div class="thumbnail">
+            <img src="../blog/2021/03/12/AfD-failing-to-keep-up/afd_covid.png" alt="Alternative for Germany Is Failing to Keep Up" title="Alternative for Germany Is Failing to Keep Up">
+        </div>
+    </div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1">2020</h2>
 <div id="listing-posts_2020" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
     <div class="blog-entry" data-index="0" data-categories="far right,humour,social movements,counter-mobilisation,Germany" data-listing-date-sort="1596664800000" data-listing-file-modified-sort="1691752223962" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
