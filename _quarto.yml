@@ -59,7 +59,7 @@ website:
         text: "CV"
       - href: blog/index.qmd
         text: "Blog"
-      - href: research/index_research.qmd
+      - href: research/index.qmd
         text: "Research"
       - href: teaching/index_teaching.qmd
         text: "Teaching"
