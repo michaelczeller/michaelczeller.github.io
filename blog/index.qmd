@@ -3,11 +3,11 @@ title: "Blog"
 author: ""
 description-meta: "Michael C. Zeller's blog"
 listing:
-  # - id: posts_2023
-  #   contents: "2023/**/index.qmd"
-  #   sort: "date desc"
-  #   template: ../html/blog/listing.ejs
-  #   categories: true
+  - id: posts_2023
+    contents: "2023/**/index.qmd"
+    sort: "date desc"
+    template: ../html/blog/listing.ejs
+    categories: true
   # - id: posts_2022
   #   contents: "2022/**/index.qmd"
   #   sort: "date desc"
@@ -28,10 +28,10 @@ code-tools: false
 # comments: false
 ---
 
-<!-- ## 2023 -->
+## 2023
 
-<!-- :::{#posts_2023} -->
-<!-- ::: -->
+:::{#posts_2023}
+:::
 
 <!-- ## 2022 -->
 
