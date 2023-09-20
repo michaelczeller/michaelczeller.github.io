@@ -1,0 +1,41 @@
+---
+title: Hammerskins Deutschland proscribed for politics?
+date: 2023-09-20
+description: "Federal Interior Minister Faeser announces ban of longstanding right-wing extremist hub, but political motivations are likely at least as important as the objective of 'breaking up right-wing extremist structures.'"
+image: faeser.png
+twitter-card:
+  image: "faeser.png"
+open-graph:
+  image: "faeser.png"
+categories:
+  - proscription
+  - banning
+  - right-wing extremism
+  - far right
+  - Germany
+  - Hammerskins
+---
+
+Yesterday, 19 September, Federal Interior Minister Nancy Faeser [announced](https://www.bmi.bund.de/SharedDocs/pressemitteilungen/DE/2023/09/verbot-hammerskins.html) the proscription of the neo-Nazi *Hammerskins Deutschland* group. According to the Minister, this ban is the culmination of more than a year of preparation, involving coordination with federal and regional agencies and cooperation with American authorities. ('Hammerskins Nation' was founded in the United States, where it remains active.) Notwithstanding the complexity of these preparations, we should ask why the Hammerskins have been proscribed now. The group has been active in Germany for three decades. Its functions within Germany's neo-Nazi scene, organising concerts and providing a means of networking, are largely unchanged throughout that period. The group's size, estimated at 120 in [1999 by the Federal Office for the Protection of the Constitution](https://verfassungsschutzberichte.de/pdfs/vsbericht-1999.pdf), is essentially the same (now estimated at 130). And Hammerskins has not recently been connected to any major incidents that might have led to increased public demands for a ban against the group. So why *now*?
+
+In a recent [article](https://doi.org/10.1080/09546553.2023.2240446) in *Terrorism and Political Violence*, [Michael Vaughan](https://www.lse.ac.uk/International-Inequalities/People/Michael-Vaughan/Michael-Vaughan) and I describe proscription powers, practices, and patterns [around Europe](https://michaelzeller.de/data/index_data.html#proscribed-right-wing-extremist-organisations-preos). Germany belongs to a set of countries that enable the proscription of organisations through the executive, specifically through ministerial decree. This mode contrasts with countries, such as [Finland](https://journals.sfu.ca/jd/index.php/jd/article/view/533), that proscribe through judicial processes. It is hard to say which of these modes is preferable and why---though Nicola McGarrity and George Williams [reflect](https://doi.org/10.1080/09546553.2018.1432200) on this point---but a couple salient points are clear. 
+
+First, proscription is inherently political and marked by political considerations. This is most obvious in the executive mode of proscription, where party politicians in ministerial posts exercise a discretionary power. Even in judicial processes, where legal considerations are and ought to be paramount, the [role of political 'veto players' in agreeing to initiate a procedure is important](https://doi.org/10.1080/13510347.2021.2012160). 
+
+Second, whereas proscriptions through the judiciary are open and the legal justifications are made clear in rulings, proscriptions through the executive are often opaque. In Germany, proscription decisions are announced through a ministerial press release and sometimes through a statement by the minister. Some justifications are usually offered: the group is directed against the constitutional order, or against international understanding, or its activities violate criminal laws. These are the three grounds for proscription mentioned in the Law on Associations (*Vereinsgesetz*). But reading these justifications and any vague substantiating evidence that the ministry offers leaves one to wonder: why now? The organisation was presumably always directed against the constitutional order, opposed to international understanding (Nazis have a bad track record when it comes to international understanding...), and operating contrary to certain laws. What element(s) additional to the legal considerations spurred on ministerial action?
+<!-- https://www.bundesregierung.de/breg-de/service/bulletin/verbot-der-rechtsextremistischen-vereinigung-deutsche-alternative--791634 -->
+
+The *Hammerskins Deutschland* ban was [justified](https://www.bmi.bund.de/SharedDocs/pressemitteilungen/DE/2023/09/verbot-hammerskins.html) on all three of these grounds. Yet the group had not significantly changed since the early years of its activity in Germany; it was always directed against the constitutional order, opposed to international understanding, and operating contrary to certain laws.
+
+What's new then? Well, Nancy Faeser is leading the Social Democratic Party (SPD) into regional elections in Hessen set for 8 October. In an [advert](https://www.youtube.com/watch?v=IdfehSB4PHY) aiming for comedy and coming only so far as comically bad, Faeser is to be seen striding down the street and acknowledging an adoring audience---setting out her stall to become Hessen's first SPD governor (*Ministerpräsident*) since 1999. 
+
+Faeser entered into her current ministerial post calling right-wing extremism the '[greatest danger in our democracy](https://www.zeit.de/politik/deutschland/2022-01/nancy-faeser-rechtsextremismus-demokratie)' and formulating an [action plan](https://www.bmi.bund.de/SharedDocs/downloads/DE/veroeffentlichungen/2022/aktionsplan-rechtsextremismus.pdf;jsessionid=6F6C006A072C8CEF8EDD13ABF75C6D2C.1_cid360?__blob=publicationFile&v=3) to combat it: 
+
+> Right-wing extremism must be combated holistically---with prevention and a hard hand. The state must not wait until right-wing extremist worldviews turn into violent acts. ... This also includes stopping the activities of right-wing extremist organisations that spread hate, agitation, and anti-constitutional ideas online and into our society. Where this manifests itself in structures, **we will not hesitate to make use of organisational bans**.
+
+In Germany, proscription is seemingly always a plausible option for ministers. The right-wing extremist scene is large and active, with many organisations operating in contravention of the criminal code. Yet, as I show in an article currently under review, there is an underlying inconsistency in the German government’s banning practices. Organisational characteristics alone are not enough to explain which organisations get banned. Looking only at *Hammerskins Deutschland*'s characteristics just leads us right back to the puzzling question, why now. Situational factors are causally significant and cannot be ignored. The necessary combination of situational and organisational conditions helps not only to explain why some right-wing extremist organisations are banned but also why some are not. The crucial implication is that the practice of  proscription in Germany’s militant democracy is not purely about dealing with dangerous extremist elements. It is also about politics and may even be about enhancing the political profile of a party and candidate for regional office.
+
+
+
+
+
