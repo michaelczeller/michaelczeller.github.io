@@ -69,7 +69,7 @@ website:
     right:
       - icon: envelope
         aria-label: email
-        href: "mailto:michael.zeller@uni-bielefeld.de"
+        href: "mailto:m.zeller@lmu.de"
       - icon: twitter
         aria-label: twitter
         href: https://twitter.com/michaelczeller
