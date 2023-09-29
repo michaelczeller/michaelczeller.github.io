@@ -39,9 +39,9 @@ format:
 <!-- ::: {.g-col-12 .g-col-sm-8} -->
 
 
-I'm a research associate in the [Faculty of Sociology](https://www.uni-bielefeld.de/fakultaeten/soziologie/) at [Universität Bielefeld](https://www.uni-bielefeld.de/). I earned a Ph.D. in political science from Central European University's [Doctoral School of Political Science, Public Policy and International Relations](https://dsps.ceu.edu/) in 2023.
+<!-- I'm a research associate in the [Faculty of Sociology](https://www.uni-bielefeld.de/fakultaeten/soziologie/) at [Universität Bielefeld](https://www.uni-bielefeld.de/). I earned a Ph.D. in political science from Central European University's [Doctoral School of Political Science, Public Policy and International Relations](https://dsps.ceu.edu/) in 2023. -->
 
-<!-- I'm an assistant professor in [comparative politics](https://www.gsi.uni-muenchen.de/lehreinheiten/ls_vp/team/mitarbeiter/index.html) at the [Geschwister-Scholl-Institut für Politikwissenschaft (GSI)](https://www.gsi.uni-muenchen.de/index.html) at [Ludwig-Maximilians-Universität München](https://www.lmu.de/de/index.html). I earned a Ph.D. in political science from Central European University's [Doctoral School of Political Science, Public Policy and International Relations](https://dsps.ceu.edu/) in 2023. -->
+I'm an Assistant Professor in [comparative politics](https://www.gsi.uni-muenchen.de/lehreinheiten/ls_vp/team/mitarbeiter/index.html) at the [Geschwister-Scholl-Institut für Politikwissenschaft (GSI)](https://www.gsi.uni-muenchen.de/index.html) at [Ludwig-Maximilians-Universität München](https://www.lmu.de/de/index.html). I earned a Ph.D. in political science from Central European University's [Doctoral School of Political Science, Public Policy and International Relations](https://dsps.ceu.edu/) in 2023.
 
 I study political violence and far-right socio-politics, as well as collaborating with colleagues on an array of topics within the area of comparative politics. My research applies a diverse array of methodological techniques, especially qualitative methods such as qualitative comparative analysis (QCA) and case study designs. I am a member of the Radicalisation Awareness Network Policy Support (RAN PS), the European Research Community on Radicalisation (ERCOR) Researchers’ Directory.
 
