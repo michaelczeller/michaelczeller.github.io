@@ -7,7 +7,7 @@ csl: files/bib/chicago-author-date.csl
 
 # Metadata stuff
 pagetitle: "{{< meta title >}} | Dr. Michael C. Zeller"
-description-meta: "Michael C. Zeller is an assistant professor at XXX, researching political violence and far-right socio-politics."
+description-meta: "Michael C. Zeller is an Assistant Professor at Ludwig-Maximilians-Universität München, researching political violence and far-right socio-politics."
 author-meta: "Michael C. Zeller"
 
 website:
