@@ -1,0 +1,36 @@
+---
+title: Poland is moving further towards autocracy 
+date: 2020-09-01
+description: "In Poland, the right-wing ruling party uses polarisation to pursue its conservative autocratic agenda."
+image: pl_duda_rally.png
+twitter-card:
+  image: "pl_duda_rally.png"
+open-graph:
+  image: "pl_duda_rally.png"
+categories:
+  - far right
+  - Poland
+  - elections
+---
+
+Poland is in a precarious position. Long characterised by consensual politics after the transition from communism, the country has witnessed the rise of polarisation over the last decade. The recent presidential election, decided by the slimmest of margins, splitting the country in two, is the latest epitomisation of this trend. Most troublingly, the religious and gendered character of polarisation in Poland are dimensions with which Polish society is least equipped to cope.
+
+In mid-July, Poland's incumbent President Andrzej Duda won a narrow victory that reaffirmed the 'Law and Justice' (PiS) party's hold on power. Duda consistently [demonised so-called 'LGBT ideology'](https://www.bbc.com/news/world-europe-53039864) and, concomitantly, promised to [withdraw Poland from the Istanbul Convention](https://www.france24.com/en/20200628-andrzej-duda-polish-president-loyal-to-ruling-right-wing), which commits signatories to prevent and combat violence against women. Duda's campaign drew upon religious cleavages in Poland, aligning himself with the conservative Catholic Church and casting his opponent, Rafał Trzaskowski, as the face of liberal Catholics and secular Poles. This polarising strategy was reflected in the election result: a population divided (with Duda garnering 51 percent to Trzaskowski's 49 percent) along east-west, rural-urban, and religious lines. And this poses a serious problem: polarisation is on the rise, but Poland does not have the resilience to cope with it.
+
+For many years after the collapse of communism Poland's political landscape was characterised by consensus. But consensual politics frayed in the mid-2000s and gave way to contention between two main political parties, PiS and Civic Platform. The rivalry of these two parties has fostered polarisation in Poland. Since 2015, when PiS won an outright majority in parliamentary elections and when Duda first became President, PiS has aggressively pursued its policy agenda (including [troubling reforms to the judiciary](https://www.nytimes.com/2020/02/04/world/europe/Poland-judiciary-law.html), [anti-abortion measures](https://www.theguardian.com/world/2020/apr/14/concerns-over-polish-government-tightening-abortion-laws-during-covid-19-crisis), and [politically targeting LGBTQ individuals)](https://www.nytimes.com/2019/04/07/world/europe/poland-gay-rights.html), pushing [Poland's liberal democracy toward conservative autocracy](https://www.postcommunistregimes.com/trajectories/). In turn, the government's actions have stoked the fires of polarisation.
+
+Yet Poland is ill-equipped to fight these flames. The [toolkit created by the Building Resilience to Violent Extremism (BRaVE) project](http://brave-h2020.eu/toolkit) compiles indicators both of polarisation and of resilience in five areas: (1) ethnicity and race, (2) religion, (3) politics, (4) gender and sexual orientation, and (5) socio-economics.
+
+> Poland is among the most polarised countries in the EU along religious and gender and sexual orientation
+
+In some of these areas, Poland's levels of polarisation and resilience are not particularly worrying. For example, Poland has mostly below average ethnic/racial polarisation, which is not surprising given the homogeneity of the population (upwards of 95 percent ethnic Poles). Similarly, Poland has low levels of ethnic/racial resilience; it [scores the lowest of 10 EU countries on fostering 'community cohesion' and a 'supportive environment' for minorities](http://brave-h2020.eu/toolkit/0/Poland/resilience). This resilience deficiency is less concerning than if ethnic/racial polarisation was high.
+
+What about when polarisation gets ratcheted up? The PiS government has been marked by [politicisation of gender equality](https://pure.uva.nl/ws/files/42886884/Roggeband_C_and_A_Krizsan_background_paper_final_EGM_B_25_BGP.1.pdf) and regression for LGBTQ Poles. Quite often, actions in these areas have been justified on political bases with few appeals to biblical canon or Catholic dogma. Nevertheless, Poland's Catholic establishment (chiefly, the Polish Episcopal Conference) and religious conservative voters endorse and take succour from PiS's reactionary measures. Resultantly, Poland is among the most polarised countries in the EU along [religious](http://brave-h2020.eu/toolkit/1/Poland) and [gender and sexual orientation](http://brave-h2020.eu/toolkit/3/Poland) dimensions.
+
+Resilience is the ability ["to face and respond to adversity, and the capacity to draw on various sources of strength and social resources to adapt and cope with challenges and situations of strain, stress or trauma"](https://cadmus.eui.eu//handle/1814/65664). In other words, on a societal level resilience is an attribute that helps protect against strains like polarisation. It is deeply worrying, therefore, that Poland has low levels of [religious resilience](http://brave-h2020.eu/toolkit/1/Poland/resilience) and of [gender and sexual orientation resilience](http://brave-h2020.eu/toolkit/3/Poland/resilience). Precisely these areas are the ones under most strain in contemporary Poland; and Polish society does not possess much capacity to handle polarisation strains.
+
+Events following President Duda's re-election, such as the [arrest of an LGBT activist and resultant protests](https://www.zeit.de/gesellschaft/zeitgeschehen/2020-08/polen-proteste-festnahme-lgbt-aktivistin) as well as the persistence of so-called ['LGBT free zones' in several Polish towns](https://www.nytimes.com/2020/07/30/world/europe/LGBT-free-poland-EU-funds.html), have signaled the continuation of polarisation trends. As long as PiS retains its control of governing authority---which it will do at the national level for at least three more years, until the November 2023 parliamentary elections---polarisation is a useful strategy that allows the party to pursue its conservative autocratic agenda. The liberal opponents of PiS are left to pursue resistance through collective action and to build resilience in local communities.
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">Originally published as a blog by Open Democracy: <a href="https://www.opendemocracy.net/en/global-extremes/poland-moving-further-towards-autocracy/">https://www.opendemocracy.net/en/global-extremes/poland-moving-further-towards-autocracy/</a>.</span>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.353">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -59,7 +59,8 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -146,6 +147,34 @@ ul.task-list li input[type="checkbox"] {
       window['quarto-listing-loaded']();
     }
   })
+  
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-posts_2019 .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      
+      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-posts_2019'] = new List('listing-posts_2019', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
   </script>
 <style>
 
@@ -218,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="mailto:michael.zeller@uni-bielefeld.de" rel="" target=""><i class="bi bi-envelope" role="img" aria-label="email">
+    <a class="nav-link" href="mailto:m.zeller@lmu.de" rel="" target=""><i class="bi bi-envelope" role="img" aria-label="email">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -266,9 +295,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">2023</a></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">2021</a></li>
   <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">2020</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">2019</a></li>
   </ul>
 </nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="Alternative für Deutschland (AfD)">Alternative für Deutschland (AfD) <span class="quarto-category-count">(1)</span></div><div class="category" data-category="COVID-19">COVID-19 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Germany">Germany <span class="quarto-category-count">(7)</span></div><div class="category" data-category="Hammerskins">Hammerskins <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Kampf der Nibelungen">Kampf der Nibelungen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Nibelungenlied">Nibelungenlied <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Wagner">Wagner <span class="quarto-category-count">(1)</span></div><div class="category" data-category="banning">banning <span class="quarto-category-count">(2)</span></div><div class="category" data-category="counter-mobilisation">counter-mobilisation <span class="quarto-category-count">(2)</span></div><div class="category" data-category="demobilisation">demobilisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="demonstrations">demonstrations <span class="quarto-category-count">(1)</span></div><div class="category" data-category="election">election <span class="quarto-category-count">(1)</span></div><div class="category" data-category="far right">far right <span class="quarto-category-count">(7)</span></div><div class="category" data-category="humour">humour <span class="quarto-category-count">(1)</span></div><div class="category" data-category="proscription">proscription <span class="quarto-category-count">(2)</span></div><div class="category" data-category="right-wing extremism">right-wing extremism <span class="quarto-category-count">(2)</span></div><div class="category" data-category="social movements">social movements <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(11)</span></div><div class="category" data-category="Alternative für Deutschland (AfD)">Alternative für Deutschland (AfD) <span class="quarto-category-count">(1)</span></div><div class="category" data-category="COVID-19">COVID-19 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Combat 18">Combat 18 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Germany">Germany <span class="quarto-category-count">(9)</span></div><div class="category" data-category="Hammerskins">Hammerskins <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Kampf der Nibelungen">Kampf der Nibelungen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Nibelungenlied">Nibelungenlied <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Poland">Poland <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Wagner">Wagner <span class="quarto-category-count">(1)</span></div><div class="category" data-category="banning">banning <span class="quarto-category-count">(3)</span></div><div class="category" data-category="counter-mobilisation">counter-mobilisation <span class="quarto-category-count">(2)</span></div><div class="category" data-category="demobilisation">demobilisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="demonstrations">demonstrations <span class="quarto-category-count">(2)</span></div><div class="category" data-category="election">election <span class="quarto-category-count">(1)</span></div><div class="category" data-category="elections">elections <span class="quarto-category-count">(2)</span></div><div class="category" data-category="extremism">extremism <span class="quarto-category-count">(2)</span></div><div class="category" data-category="far right">far right <span class="quarto-category-count">(11)</span></div><div class="category" data-category="humour">humour <span class="quarto-category-count">(1)</span></div><div class="category" data-category="proscription">proscription <span class="quarto-category-count">(3)</span></div><div class="category" data-category="right-wing extremism">right-wing extremism <span class="quarto-category-count">(2)</span></div><div class="category" data-category="social movements">social movements <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -444,12 +474,35 @@ No matching items
 <h2 class="anchored" data-anchor-id="section-2">2020</h2>
 <div id="listing-posts_2020" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="far right,humour,social movements,counter-mobilisation,Germany" data-listing-date-sort="1596664800000" data-listing-file-modified-sort="1691752223962" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+    <div class="blog-entry" data-index="0" data-categories="far right,Poland,elections" data-listing-date-sort="1598911200000" data-listing-file-modified-sort="1698075293176" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
         <div class="metadata">          
-            <p class="date listing-date">6 August 2020</p>
+            <p class="date listing-date">1 September 2020</p>
         </div>
         <div class="body">
-            <p class="title listing-title"><a href="../blog/2020/08/06/laugh-away-the-far-right/index.html">How to laugh away the far-right -- lessons from Germany</a></p>
+            <p class="title listing-title"><a href="../blog/2020/09/01/poland-towards-autocracy/index.html">Poland is moving further towards autocracy</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Poland'); return false;">
+                    Poland
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('elections'); return false;">
+                    elections
+                </div>
+            </div>
+            <p class="description listing-description">In Poland, the right-wing ruling party uses polarisation to pursue its conservative autocratic agenda.</p>
+        </div>
+        <div class="thumbnail">
+            <img src="../blog/2020/09/01/poland-towards-autocracy/pl_duda_rally.png" alt="Poland is moving further towards autocracy" title="Poland is moving further towards autocracy">
+        </div>
+    </div>
+    <div class="blog-entry" data-index="1" data-categories="far right,humour,social movements,counter-mobilisation,Germany" data-listing-date-sort="1596060000000" data-listing-file-modified-sort="1698071824847" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
+        <div class="metadata">          
+            <p class="date listing-date">30 July 2020</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/07/30/laugh-away-the-far-right/index.html">How to laugh away the far-right -- lessons from Germany</a></p>
             <div class="post-categories listing-categories">
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
                     far right
@@ -470,10 +523,39 @@ No matching items
             <p class="description listing-description">Anti-fascist activists have repeatedly turned to ‘tactical frivolity’ or calculated silliness to disrupt the attempts of far-right groups to perform dignified actions.</p>
         </div>
         <div class="thumbnail">
-            <img src="../blog/2020/08/06/laugh-away-the-far-right/fahne.png" alt="How to laugh away the far-right -- lessons from Germany" title="How to laugh away the far-right -- lessons from Germany">
+            <img src="../blog/2020/07/30/laugh-away-the-far-right/fahne.png" alt="How to laugh away the far-right -- lessons from Germany" title="How to laugh away the far-right -- lessons from Germany">
         </div>
     </div>
-    <div class="blog-entry" data-index="1" data-categories="far right,demonstrations,COVID-19,Germany" data-listing-date-sort="1588888800000" data-listing-file-modified-sort="1691751577815" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+    <div class="blog-entry" data-index="2" data-categories="far right,Germany,COVID-19,extremism,demonstrations" data-listing-date-sort="1589234400000" data-listing-file-modified-sort="1698074555205" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+        <div class="metadata">          
+            <p class="date listing-date">12 May 2020</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/05/12/extremists-thrive-in-crisis/index.html">Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('COVID-19'); return false;">
+                    COVID-19
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('extremism'); return false;">
+                    extremism
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('demonstrations'); return false;">
+                    demonstrations
+                </div>
+            </div>
+            <p class="description listing-description">The pandemic crisis offers opportunities for extremist groups to attract those most hardly hit, but there are ways to prevent this.</p>
+        </div>
+        <div class="thumbnail">
+            <img src="../blog/2020/05/12/extremists-thrive-in-crisis/sachsen2020-4-20.png" alt="Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception" title="Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception">
+        </div>
+    </div>
+    <div class="blog-entry" data-index="3" data-categories="far right,demonstrations,COVID-19,Germany" data-listing-date-sort="1588888800000" data-listing-file-modified-sort="1691751577815" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
         <div class="metadata">          
             <p class="date listing-date">8 May 2020</p>
         </div>
@@ -499,11 +581,79 @@ No matching items
             <img src="../blog/2020/05/08/covid-FR-demos-pause/index_files/figure-html/fr_de_demos.png" alt="COVID-19 and the Pause of Far-Right Demonstrations in Germany" title="COVID-19 and the Pause of Far-Right Demonstrations in Germany">
         </div>
     </div>
+    <div class="blog-entry" data-index="4" data-categories="far right,Germany,Combat 18,extremism,banning,proscription" data-listing-date-sort="1581894000000" data-listing-file-modified-sort="1698073845680" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+        <div class="metadata">          
+            <p class="date listing-date">17 February 2020</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/02/17/germany-is-banning-enough/index.html">Germany -- Is banning far-right groups enough?</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Combat 18'); return false;">
+                    Combat 18
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('extremism'); return false;">
+                    extremism
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
+                    banning
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
+                    proscription
+                </div>
+            </div>
+            <p class="description listing-description">The case of far-right group Combat 18 has prompted a wider re-examination of far-right extremism and the utility of bans.</p>
+        </div>
+        <div class="thumbnail">
+            <img src="../blog/2020/02/17/germany-is-banning-enough/de_FR_graffiti.png" alt="Germany -- Is banning far-right groups enough?" title="Germany -- Is banning far-right groups enough?">
+        </div>
+    </div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
 </div>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">2019</h2>
+<div id="listing-posts_2019" class="quarto-listing quarto-listing-container-custom">
+<div class="list blog">
+    <div class="blog-entry" data-index="0" data-categories="far right,Poland,elections" data-listing-date-sort="1572127200000" data-listing-file-modified-sort="1698072581313" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+        <div class="metadata">          
+            <p class="date listing-date">27 October 2019</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2019/10/27/whither-poland/index.html">Whither Poland? After the 2019 parliamentary elections</a></p>
+            <div class="post-categories listing-categories">
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Poland'); return false;">
+                    Poland
+                </div>
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('elections'); return false;">
+                    elections
+                </div>
+            </div>
+            <p class="description listing-description">The 2020 Presidential election will be the first indicator of how the Polish electorate is responding to the work of the second PiS government.</p>
+        </div>
+        <div class="thumbnail">
+            <img src="../blog/2019/10/27/whither-poland/pl_election_breakdown.png" alt="Whither Poland? After the 2019 parliamentary elections" title="Whither Poland? After the 2019 parliamentary elections">
+        </div>
+    </div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+<!-- ## 2018 -->
+<!-- :::{#posts_2018} -->
+<!-- ::: -->
 
 
 

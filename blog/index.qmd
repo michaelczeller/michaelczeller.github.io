@@ -20,6 +20,10 @@ listing:
     contents: "2020/**/index.qmd"
     sort: "date desc"
     template: ../html/blog/listing.ejs
+  - id: posts_2019
+    contents: "2019/**/index.qmd"
+    sort: "date desc"
+    template: ../html/blog/listing.ejs
 page-layout: full
 toc-title: Year
 toc-location: right
@@ -48,4 +52,12 @@ code-tools: false
 :::{#posts_2020}
 :::
 
+## 2019
 
+:::{#posts_2019}
+:::
+
+<!-- ## 2018 -->
+
+<!-- :::{#posts_2018} -->
+<!-- ::: -->

@@ -1,0 +1,54 @@
+---
+title: Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception
+date: 2020-05-12
+description: "The pandemic crisis offers opportunities for extremist groups to attract those most hardly hit, but there are ways to prevent this."
+image: sachsen2020-4-20.png
+twitter-card:
+  image: "sachsen2020-4-20.png"
+open-graph:
+  image: "sachsen2020-4-20.png"
+categories:
+  - far right
+  - Germany
+  - COVID-19
+  - extremism
+  - demonstrations
+---
+
+During crisis, the most serious impacts can be the result of disruptions to essential or important services creating a void that hits hardest society’s most vulnerable. Supply chains break down when they are pushed beyond capacity, or when employees are unable to go to work because of illness or due to protective measures. The [selective scarcity of yeast, flour, and toilet paper in many countries’ grocery stores](https://www.vox.com/first-person/2020/4/6/21207065/coronavirus-grocery-shortage-toilet-paper-yeast-insecurity) and the [strains or temporary closures of food and service providers due to COVID-19](https://www.youtube.com/watch?v=vVVXcGEnRKM), exemplify this breakdown.
+
+Oftentimes, other social actors (e.g., social movements, collective action agents) step in to fill this void. At its best, this [ersatz service provision can simply](https://www.interfacejournal.net/wp-content/uploads/2020/04/Zeller.pdf) [aid individuals and groups](https://www.interfacejournal.net/wp-content/uploads/2020/04/Zeller.pdf) that are imperiled or seriously encumbered by crisis disruptions. Yet service provision during crisis or in other deprived settings can be a target for malign, ideological projects: extremists have long recognised and frequently exploited such opportunities to employ ‘community politics’---and the current COVID-19 crisis is no exception.
+
+Extremist actors have a long history of benefiting from crisis. Social psychological research has repeatedly confirmed a [positive relationship between perceived threats---always heightened by crisis---and authoritarian attitudes](https://onlinelibrary.wiley.com/doi/abs/10.1111/0162-895x.00077). Many individuals are more inclined [under crisis conditions to turn to extremist actors that portray themselves as guarantors of order and stability](https://onlinelibrary.wiley.com/doi/abs/10.1111/pops.12014).
+
+The Nazi party is a good case in point: in the early 1920s when Germany was gripped by hyperinflation and political instability, the Nazis and Adolf Hitler were quite popular, finding considerable responsiveness for their extremist narratives; but later, at the national election in May 1928 (i.e., before the economic crash) when Germany was more stable and prosperous, the Nazi party garnered a paltry 2.6 percent of votes; four years later, after Germany’s economy had been severely affected by the Great Depression, the Nazis won a clear majority of votes in successive elections and were nearing their seizure of absolute power.
+
+> Research has repeatedly confirmed a positive relationship between perceived threats---always heightened by crisis---and authoritarian attitudes
+
+Similarly, when resources or services are scarce, extremists can profit by acting as community organisers and service providers. In the late 1980s in the Egyptian capital of Cairo, the militant ‘Egyptian Islamic Group’ initiated a [political strategy to provide services (especially prenatal and maternity services) to an underserved and neglected slum neighbourhood](https://onlinelibrary.wiley.com/doi/abs/10.1111/gove.12054). Such activity helped them gain favour in the community and went hand-in-hand with their assertion of control over local politics. In this way, the Trojan Horse of service provision smuggles extremist ideology through the gates.
+
+Service provision comprises part of what can be termed ‘community politics.’ This refers to highly localised political action, centred around looking after the basic needs and everyday concerns of residents. Extremist actors have turned to community politics as a way of surviving and growing even without the impetus of major social crisis.
+
+For example, the far-right British National Party (BNP) came to prominence in the 1980s as an extremist group focused on traditional ‘street politics’: organising marches and rallies, and terrorising minorities with gang violence. Yet militant counter-mobilisation by the [Anti-Fascist Action group effectively ‘beat the BNP off the street’](https://freedompress.org.uk/product/beating-the-fascists/) by the early 1990s. Nigel Copsey describes how, faced with this robust opposition, the [BNP shifted away from the street and toward community organising and outreach](https://www.palgrave.com/gp/book/9780230574366). This adaptation eventually led to numerous electoral gains for the BNP, making it the United Kingdoms’s most successful extremist party ever.
+
+> When resources or services are scarce, extremists can profit by acting as community organisers and service providers
+
+Community politics are a powerful strategy for extremists. They transform the shouting extremist down the road into the helpful bloke knocking at the door, where extremist ideas can seem less aggressive and menacing. Times of crisis, when normal services are disrupted, are when community politics can have their most profound effect.
+
+The COVID-19 crisis and its knock-on effects are an opportunity for extremists to advance their ideological projects. In many European countries, [far-right extremists are using community aid projects to spread their message and recruit](https://www.radicalrightanalysis.com/2020/04/20/for-the-far-right-the-covid-19-crisis-is-a-pr-opportunity/).
+
+Germany’s far-right extremists have been particularly active: members of the ‘National Democratic Party of Germany’s’ (the *Nationaldemokratische Partei Deutschlands*, NPD) [youth wing offer to go shopping for pensioners, help the homeless, and donate to animal shelters](https://taz.de/Nazis-nutzen-Coronakrise/!5678947/). ‘The Third Way’ (*Der Dritte Weg*), a small neo-Nazi party, has promoted its [offer of neighbourhood aid alongside conspiracies about the ‘true’ origins and purpose of COVID-19](https://blog.zeit.de/stoerungsmelder/2020/04/01/neonazis-und-corona-zwischen-verschwoerungstheorien-und-nachbarschaftshilfe_29686), as well as advertising for planned demonstrations later in the year.
+
+The peddling of extremism by providing emergency assistance is blatant, but the pressures and strains of crisis surely push several individuals to accept the help and heed the extremist ideology.
+
+> In many European countries, far-right extremists are using community aid projects to spread their message and recruit
+
+What can reduce and prevent the appeal of extremist community politics? The solution is demanding, but simple: greater attention has to be directed toward communities to diminish the social vulnerabilities that extremists prey upon.
+
+The Marshall Plan that funded reconstruction in Germany and western Europe after the Second World War was partially motivated by the U.S. government’s intention to undermine the appeal of extremist ideologies. After repressing the Egyptian Islamic Group in the early 1990s, the [Egyptian government directed more resources toward Cairo’s slums](https://onlinelibrary.wiley.com/doi/abs/10.1111/gove.12054) so that they would be less willing to accept extremist actors’ service provision. The BNP’s shift to community politics [compelled anti-fascists to transition to community action](https://research.tees.ac.uk/en/publications/from-direct-action-to-community-action-the-changing-dynamics-of-a) in order to fight back against the party’s growth.
+
+Recent examples of counter-mobilising against extremist community politics---such as [in Boxberg](https://blog.zeit.de/stoerungsmelder/2020/03/06/wie-sich-buerger-gegen-neonazi-konzerte-wehren_29624)---show how slow and difficult this process can be. But it is the action that is required when extremists use crises and community organising campaigns to spread their toxic ideologies.
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">Originally published as a blog by Open Democracy: <a href="https://www.opendemocracy.net/en/global-extremes/extremists-strive-times-crisis-covid-19-pandemic-no-exception/">https://www.opendemocracy.net/en/global-extremes/extremists-strive-times-crisis-covid-19-pandemic-no-exception/</a></span>
