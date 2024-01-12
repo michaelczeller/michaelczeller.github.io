@@ -3,6 +3,11 @@ title: "Blog"
 author: ""
 description-meta: "Michael C. Zeller's blog"
 listing:
+  - id: posts_2024
+    contents: "2024/**/index.qmd"
+    sort: "date desc"
+    template: ../html/blog/listing.ejs
+    categories: true
   - id: posts_2023
     contents: "2023/**/index.qmd"
     sort: "date desc"
@@ -31,6 +36,12 @@ date-format: "D MMMM YYYY"
 code-tools: false
 # comments: false
 ---
+
+## 2024
+
+:::{#posts_2024}
+:::
+
 
 ## 2023
 

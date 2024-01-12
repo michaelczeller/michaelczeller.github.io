@@ -1,0 +1,58 @@
+---
+title: Requesting a letter of recommenadtion
+date: 2024-01-12
+description: "what to send me: (1) **[essential information]{.underline}**: for what university, programme, scholarship, job, internship is the letter needed? When is it due? How should it be submitted? (2) **[A bit of detail]{.underline}**: what will you do if your application is successful? Why? (3) **[Tips for what to highlight]{.underline}**: were you in my class? What did you contribute? Did I assist you on a project? Remind me. What specific points might I emphasise? (4) **[A reminder]{.underline}** 3 or 4 days ahead of the deadline (if I have not already confirmed submission)"
+image: email_composition_comic.png
+twitter-card:
+  image: "email_composition_comic.png"
+open-graph:
+  image: "email_composition_comic.png"
+categories:
+  - for students
+---
+
+![](email_composition_comic.png)
+
+Through some unidentified concatenation of coincidences, I have landed in a position where I am no longer (solely) asking for letters of recommendation, but rather writing them. Outraged academics and baffled administrators are rapidly seeking a remedy to this unacceptable state of affairs, but in the meantime, I need to field requests from students, colleagues, and friends for recommendations. An acquaintance of mine, Prof. Levente Littvay, who kindly wrote a couple letters for me, provides a [guide to students](https://levente.littvay.hu/letter/) on requesting recommendations. Borrowing much from his advice, below are instructions about what to send me in one email so that I am informed and in a good mood when I am describing how magnificent you are to some selection committee.
+
+Writing letters of recommendation is part of an academic job. You should not feel hesitant about requesting one. What you should be wary of is making a confused, multi-email, short deadline request that puzzles and irritates in equal measure. Follow some simple steps to avoid that.
+
+First, give me the essential info: tell me what you are applying for. **What's the university, programme, scholarship, job, internship etc.** To whom will I address the letter? Add to this the logistical information: **when is the letter due** (preferably, you should email me your request at least a couple weeks in advance)? **Where should it be sent or how should it be submitted**? Without a doubt, this is the most important information to send along. It should be at the start of your email, maybe in **bold**. 
+
+Sometimes the letter needs to be emailed. Sometimes they require that the email comes from my institutional email address. Sometimes the form needs to be printed and mailed. It is your job to tell me what I need to do. If there are forms (electronic or paper copy) make sure you read the form first and fill out the parts that is your job to fill out (like your full name, address, etc.); Maybe be nice and fill out my name and contact as well, so that I can focus on explaining why you are the perfect candidate for this thing.
+
+Second, after providing this headline information fill in some detail. What do you want to do if your application is successful? Why would this be beneficial for you? For example...
+
+> I am applying for this doctoral programme to continue research on voting for radical right parties that I started during my graduate degree. The programme is particularly attractive because it will help me build on my knowledge of qualitative methods: there is an empahsis on methods. 
+
+These two sentences have reminded me what you are interested in or working on, *why* you are making this application, and how some of the programme offerings will benefit you. It is brief and informative. Aim for similar concision.
+
+You may be tempted to just send a link for referees or a template. That may be helpful, **but don't do only that**! Please make it easier for me. Summarise. Links or templates may be useful for reference---you might also want to attach your CV---but needing to peruse these documents to figure out what is required is tiresome. 
+
+Third, give me a few points that I might highlight about you and your application. You were in my class? Great! What did you write your essay about or what was your most impressive contribution to the course? I gave you feedback on your project? Super! Remind me about the project and maybe how it fits with what you are planning to do now. What can I write that will meaningfully capture our interaction together and enhance your application? Perhaps you have good methods skills that I can attest to; maybe you have expertise subject knowledge that you demonstrated to me. Give me an idea of what to emphasise. Be specific. 
+
+If you explain to me those three parts clearly and concisely, it should be no trouble for me to write you a recommendation. I will try to confirm when I have submitted the letter, but if you have not heard from me, send a reminder a few (i.e., 3 or 4) days ahead of the deadline. Just a short email: "*Have you had time to submit my recommendation letter yet? Do you need anything else from me?*" That will suffice for me either to confirm or else get my shit together and write the letter.
+
+Let's recap what to do: send me...
+
+- essential information: 
+    + For what university, programme, scholarship, job, internship is the letter needed? 
+    + When is it due? 
+    + How should it be submitted?
+- a bit of detail:
+    + What will you do if your application is successful? Why?
+- tips for what to highlight:
+    + Were you in my class? What did you contribute?
+    + Did I assist you on a project? Remind me.
+    + What specific points might I emphasise?
+- a reminder 3 or 4 days ahead of the deadline (if I have not already confirmed submission)
+
+Finally, in some cases, I may ask you to draft some of the letter yourself. I know, this is weird. Writing parts of your own recommendation can feel surreal. If I ask that, it means I am really pressed for time and it will be easier and quicker for me to adapt your text than wholly compose my own. Take the list of things you want me to highlight and write them up as if it was written by me. No need to be effusive in praising yourself: the substance of what you have done and how you are an ideal candidate is what matters. Don't worry, I will be sure to add some detail about how you are a magnificent candidate. 
+
+That's it! Follow this guide and I will do my best to support you and help you get whatever you are applying for.
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">As acknowledged above, this guide was informed by Levente Littvay's blog on requesting recommendations: <a href="https://levente.littvay.hu/letter/">https://levente.littvay.hu/letter/</a>.</a></span>
+
+
