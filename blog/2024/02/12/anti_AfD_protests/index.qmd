@@ -17,6 +17,8 @@ categories:
   - proscription
 ---
 
+*<span style="font-family:Garamond; font-size:0.8em;">updated on 18 February 2024</span>*
+
 Germany has witnessed a wave of demonstrations in recent weeks. Revelations about a meeting of far-right politicians, most conspicuously from the Alternative für Deutschland (AfD), discussing plans for mass deportations has led millions of people to pour out onto the streets across Germany. Demonstrators' demands have ranged from encouraging but vague---'Show civil courage!', 'Everyone, together, against fascism!'---to highly specific---'Ban the AfD!', 'Suspend Bjorn Höcke's political rights!'. Amid the flood of demonstrations, the distinction between political tasks and legal considerations has sometimes been obscured by demonstrators. But demonstrations have different prospects for achieving an impact in political and legal arenas. In this post, I will discuss the prospects for impact in those arenas---and whether the recent wave of demonstrations has the power to reach those impacts. 
 
 ```{r overall-map, message = FALSE, warning=FALSE, echo=FALSE, fig.cap="Figure 1. All demonstrations against the AfD since 11 January 2024. The red circles represent demonstrations of 50,000 or more; the orange, between 10,000 and 50,000; the yellow, between 1000 and 10,000; and the green, fewer than 1000 participants. (Data from the TAZ newspaper.)"}
@@ -32,7 +34,7 @@ library(leafpop)
 library(readxl)
 
 # ## UNCOMMENT AND RERUN UNTIL LOADING XLSX COMMAND, IF UPDATING DATA
-# antiAfD <- read.csv("demos_past.csv", header = T)
+# antiAfD <- read.csv("demos_past_updated.csv", header = T)
 # # head(antiAfD)
 # 
 # antiAfD$Land <- "Deutschland"
@@ -45,14 +47,17 @@ library(readxl)
 #                          antiAfD$Mindestangabe.Teilnehmerzahl == "100",
 #                        "24.01.2024", antiAfD$Datum)
 # 
-# # antiAfD$Datum = ifelse(antiAfD$Ort == "Friedrichstadt" &
-# #                          antiAfD$Link.zum.Bericht == "https://www.ndr.de/nachrichten/schleswig-holstein/Mehrere-Tausend-Menschen-bei-Demos-gegen-Rechtsextremismus,demo4174.html",
-# #                        "02.02.2024", antiAfD$Datum)
-# 
 # antiAfD$Datum <- as.Date(antiAfD$Datum, "%d.%m.%Y")
 # 
 # antiAfD$Woche <- strftime(antiAfD$Datum, format = "%V")
 # 
+# antiAfD_geo <- antiAfD
+# names(antiAfD_geo)[names(antiAfD_geo) == 'Breitengrad'] <- 'lat'
+# names(antiAfD_geo)[names(antiAfD_geo) == 'Längengrad'] <- 'long'
+# 
+# antiAfD_geo$lat = ifelse(antiAfD_geo$Ort ==  "Bad Neuen-Ahrweiler", 50.541771903238335, antiAfD_geo$lat)
+# antiAfD_geo$long = ifelse(antiAfD_geo$Ort == "Bad Neuen-Ahrweiler", 7.122505881478744, antiAfD_geo$long)
+
 # # write.csv(antiAfD, file = "antiAfD_demos.csv")
 # 
 # # ## TAKES AT LEAST 15 MINUTES TO RUN
@@ -68,6 +73,10 @@ library(readxl)
 # 
 # # DROP POSTPONED DEMO
 # antiAfD_geo <- antiAfD_geo[!(antiAfD_geo$Ort %in% "Emden - verschoben"),]
+# 
+# antiAfD$Datum = ifelse(antiAfD$Ort == "Friedrichstadt" &
+#                          antiAfD$Bericht_Link == "https://www.ndr.de/nachrichten/schleswig-holstein/Mehrere-Tausend-Menschen-bei-Demos-gegen-Rechtsextremismus,demo4174.html",
+#                        "02.02.2024", antiAfD$Datum)
 # 
 # antiAfD_geo$lat = ifelse(antiAfD_geo$Ort == "Westerland/Sylt", 54.89905576580019, antiAfD_geo$lat)
 # antiAfD_geo$long = ifelse(antiAfD_geo$Ort == "Westerland/Sylt", 8.33547801856511, antiAfD_geo$long)
@@ -157,7 +166,7 @@ library(readxl)
 # 
 # # antiAfD_geo <- antiAfD_geo %>% drop_na(long)
 
-antiAfD_geo <- read_excel("antiAfD_data.xlsx")
+antiAfD_geo <- read_excel("antiAfD_data_updated.xlsx")
 
 antiAfD_geo$latJIT <- jitter(antiAfD_geo$lat, factor = 300)
 antiAfD_geo$longJIT <- jitter(antiAfD_geo$long, factor = 300)
@@ -307,7 +316,7 @@ antiAfD_geo_sf_w3 <- subset(antiAfD_geo_sf, Woche == "03")
 antiAfD_geo_sf_w4 <- subset(antiAfD_geo_sf, Woche == "04")
 antiAfD_geo_sf_w5 <- subset(antiAfD_geo_sf, Woche == "05")
 antiAfD_geo_sf_w6 <- subset(antiAfD_geo_sf, Woche == "06")
-# antiAfD_geo_sf_w7
+antiAfD_geo_sf_w7 <- subset(antiAfD_geo_sf, Woche == "07")
 
 antiAfD_density_w2 <- ggplot() +
   geom_sf(data = de_states, fill = "grey50", col = NA) + 
@@ -399,10 +408,29 @@ antiAfD_density_w6 <- ggplot() +
   theme(legend.position="none")
 # antiAfD_density_w6
 
+antiAfD_density_w7 <- ggplot() +
+  geom_sf(data = de_states, fill = "grey50", col = NA) + 
+  # geom_sf(data = de, aes(fill = "grey"), col = NA) + 
+  # scale_fill_viridis_c(option = "magma") +
+  # scale_fill_gradientn(colours = c("grey50", "grey10")) +
+  geom_sf(data = st_boundary(de_states)) +
+  geom_sf(data = subset(antiAfD_geo_sf_w7, Großenkategorie %in% "1"), shape = 1,
+          size = 1, colour = "green", stroke = 0.5, fill = NA) + 
+  geom_sf(data = subset(antiAfD_geo_sf_w7, Großenkategorie %in% "2"), shape = 1,
+          size = 2, colour = "yellow", stroke = 0.5, fill = NA) + 
+  geom_sf(data = subset(antiAfD_geo_sf_w7, Großenkategorie %in% "3"), shape = 1,
+          size = 3, colour = "orange", stroke = 1, fill = NA) + 
+  geom_sf(data = subset(antiAfD_geo_sf_w7, Großenkategorie %in% "4"), shape = 1,
+          size = 5, colour = "red", stroke = 1, fill = NA) + 
+  theme_void() + labs(title="12-18 February") + theme(plot.title = element_text(hjust = 0.5)) +
+  theme(legend.position="none")
+# antiAfD_density_w7
+
 library(cowplot)
 maps.combined <- plot_grid(antiAfD_density_w2, antiAfD_density_w3,
                        antiAfD_density_w4, antiAfD_density_w5,
-                       antiAfD_density_w6, nrow = 2, align = "h")
+                       antiAfD_density_w6, antiAfD_density_w7, 
+                       nrow = 2, align = "h")
 maps.combined
 
 # png(file=paste0("antiAfD_maps_combined", as.character(Sys.Date()), ".png"), width = 300, height = 150, units = 'mm', res = 600)
@@ -453,46 +481,54 @@ The discussion of a party ban of the AfD is good. Such legal measures exist for 
 
 ```{r demos-interactive, message = FALSE, warning=FALSE, echo=FALSE, fig.cap="An interactive map of demonstrations against the AfD in the weeks since 11 January 2024. (Data from the TAZ newspaper.)"}
 
-mapview(antiAfD_geo_sf_w2, col.regions = "blue", label = "Ort",
+mapview(antiAfD_geo_sf_w2, col.regions = "purple", label = "Ort",
         legend = T, layer.name = '11-14 January', cex = "Großenkategorie",
         map.types = c("CartoDB.DarkMatter","CartoDB.Positron"),
         popup = popupTable(antiAfD_geo_sf_w2,
                            zcol = c("Ort","Datum",
                                     "Mindestangabe.Teilnehmerzahl",
                                     "Höchstangabe.Teilnehmerzahl",
-                                    "Link.zum.Bericht"))) + 
-  mapview(antiAfD_geo_sf_w3, col.regions = "green", label = "Ort",
+                                    "Bericht_Link"))) + 
+  mapview(antiAfD_geo_sf_w3, col.regions = "blue", label = "Ort",
           legend = T, layer.name = '15-21 January', cex = "Großenkategorie",
           map.types = c("CartoDB.DarkMatter","CartoDB.Positron"),
           popup = popupTable(antiAfD_geo_sf_w3,
                              zcol = c("Ort","Datum",
                                       "Mindestangabe.Teilnehmerzahl",
                                       "Höchstangabe.Teilnehmerzahl",
-                                      "Link.zum.Bericht"))) +
-  mapview(antiAfD_geo_sf_w4, col.regions = "yellow", label = "Ort",
+                                      "Bericht_Link"))) +
+  mapview(antiAfD_geo_sf_w4, col.regions = "green", label = "Ort",
           legend = T, layer.name = '22-28 January', cex = "Großenkategorie",
           map.types = c("CartoDB.DarkMatter","CartoDB.Positron"),
           popup = popupTable(antiAfD_geo_sf_w4,
                              zcol = c("Ort","Datum",
                                       "Mindestangabe.Teilnehmerzahl",
                                       "Höchstangabe.Teilnehmerzahl",
-                                      "Link.zum.Bericht"))) +
-  mapview(antiAfD_geo_sf_w5, col.regions = "orange", label = "Ort",
+                                      "Bericht_Link"))) +
+  mapview(antiAfD_geo_sf_w5, col.regions = "yellow", label = "Ort",
           legend = T, layer.name = '29 Jan.-4 Feb.', cex = "Großenkategorie",
           map.types = c("CartoDB.DarkMatter","CartoDB.Positron"),
           popup = popupTable(antiAfD_geo_sf_w5,
                              zcol = c("Ort","Datum",
                                       "Mindestangabe.Teilnehmerzahl",
                                       "Höchstangabe.Teilnehmerzahl",
-                                      "Link.zum.Bericht"))) +
-  mapview(antiAfD_geo_sf_w6, col.regions = "red", label = "Ort",
+                                      "Bericht_Link"))) +
+  mapview(antiAfD_geo_sf_w6, col.regions = "orange", label = "Ort",
           legend = T, layer.name = '5-11 February', cex = "Großenkategorie",
           map.types = c("CartoDB.DarkMatter","CartoDB.Positron"),
           popup = popupTable(antiAfD_geo_sf_w6,
                              zcol = c("Ort","Datum",
                                       "Mindestangabe.Teilnehmerzahl",
                                       "Höchstangabe.Teilnehmerzahl",
-                                      "Link.zum.Bericht")))
+                                      "Bericht_Link"))) +
+  mapview(antiAfD_geo_sf_w7, col.regions = "red", label = "Ort",
+          legend = T, layer.name = '12-18 February', cex = "Großenkategorie",
+          map.types = c("CartoDB.DarkMatter","CartoDB.Positron"),
+          popup = popupTable(antiAfD_geo_sf_w7,
+                             zcol = c("Ort","Datum",
+                                      "Mindestangabe.Teilnehmerzahl",
+                                      "Höchstangabe.Teilnehmerzahl",
+                                      "Bericht_Link")))
 
 ```
 
