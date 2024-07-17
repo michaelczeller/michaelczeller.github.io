@@ -1,0 +1,233 @@
+---
+title: COMPACT banned!
+date: 2024-07-17
+description: "Banning an organisation acting as a 'news' provider is rare. But Interior Minister Nancy Faeser has judged the far-right media company Compact as worthy of a ban. It is not an unprecedented action---but nevertheless bold."
+image: compact_ban_logo.png
+twitter-card:
+  image: "compact_ban_logo.png"
+open-graph:
+  image: "compact_ban_logo.png"
+categories:
+  - COMPACT
+  - Germany
+  - banning
+  - far right
+  - proscription
+---
+
+Germany's Interior Minister, Nancy Faeser, [announced](https://www.bmi.bund.de/SharedDocs/pressemitteilungen/DE/2024/07/exekutive1.html) on Tuesday (16 July) a ban order against *Compact-Magazin GmbH*, the limited liability company that publishes---well, I suppose that should be 'published'---COMPACT Magazine. This is the third far-right^[In banning Compact, Faeser [declared](https://www.bmi.bund.de/SharedDocs/pressemitteilungen/DE/2024/07/exekutive1.html) it to be 'right-wing extremist'.] organisation banned under Faeser's leadership of the Interior Ministry, with both 'Hammerskins Deutschland' and 'Artgemeinschaft - Germanische Glaubens-Gemeinschaft wesensgemaesser Lebensgestaltung e.V.' banned in September 2023. Although banning Compact fits with the ongoing efforts of Faeser's ministry to address far-right activity in Germany, this case is marked by unique features, most importantly: it is a company and publisher, not an association like most banning cases.
+
+# What is (was) Compact?
+
+Compact-Magazin GmbH was a company founded in 2010 to manage the monthly publication of COMPACT-Magazin. It was the initiative of three men: Andreas Rieger, Kai Homilius, and Jürgen Elsässer. Rieger converted to Islam in the 1990s and, at the founding of Compact, was the publisher of *Islamischen Zeitung* ('Islamic Newspaper'). He left the company in 2014, ruing the 'racist and nationalist positions' taken by the magazine. Homilius is a businessman mainly occupied with running *9 Leben* ('9 Lives'), a Magdeburg based shop selling vitamins and dietary supplements---but his role in the company was seemingly passive. The main managing director is Elsässer.
+
+Jürgen Elsässer was not always the far-right 'central network actor' that he is described as in recent [reports](https://www.verfassungsschutz.de/DE/service/publikationen/publikationen_node.html) from Germany's *Verfassungsschutz* ('Constitutional Protection Office'). Throughout the 1990s and into the 2000s, he opposed the rise in nationalism following the reunification of Germany and espoused committed communist ideology, writing for left-wing extremist publications like *konkret*. A long march across the ideological spectrum transformed Elsässer into a major figure in Germany's far-right scene where he is closely connected with the likes of Martin Sellner, the co-founder of Identitarian groups in Austria and Germany, and Björn Höcke, the figurehead of the extreme wing of the *Alternative für Deutschland* (AfD) party. 
+
+```{r fig-compact-youtube-bar, message = FALSE, warning=FALSE, echo=FALSE, fig.cap="COMPACT's subscribers on Youtube (figures from Verfassungsschutz reports)."}
+library(ggplot2)
+
+year <- c(2020,2021,2022,2023)
+abos <- c(148000,153000,167000,250000)
+
+compact_youtube <- data.frame(year, abos)
+
+c_y <- ggplot(compact_youtube, aes(year, abos)) +
+  geom_bar(stat = "identity", position = "dodge", aes(y = abos), fill="gray60", color="black") +
+  scale_y_continuous("Youtube subscribers", 
+                     breaks = seq(0,300000,50000),
+                     limits = c(0,300000)) + 
+  scale_x_continuous("",breaks = seq(2020,2023,1)) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=0.5, size=11))
+
+c_y
+
+```
+
+As Compact's sole managing director since 2018, Elsässer has overseen a diversification of the company's operations. An incorporated film company, CONSPECT FILM GmbH, was created to produce video content. Operating a Youtube channel, COMPACTTV, saw the company build to a quarter of a million subscribers (@fig-compact-youtube-bar), dwarfing the reported sales of 40,000 magazines per month. Added to magazine sales and online advertising revenues, the finances of Compact were buoyed up by merchandise sales in 'Compact Shop', regular donation drives, and regular cash infusions from a few wealthy businessmen, including Hans-Ulrich Kopp and Jörgen-Arne Fischer-van Diepenbrock. Until recently, these additional sources of income had been necessary since Compact's annual financial reports show net losses until 2021 (@fig-compact-fin-line).^[Copies of these reports, for 2011 and 2016 to 2021 are accessible by going to the Bundesanzeiger (<https://www.bundesanzeiger.de/pub/de/suche?6#>) and searching for 'Compact-Magazin GmbH'.]
+
+```{r fig-compact-fin-line, message = FALSE, warning=FALSE, echo=FALSE, fig.cap="COMPACT's profits (figures from annual financial reports from the Bundesanzeiger)."}
+library(ggplot2)
+library(scales)
+
+year <- c(2016, 2017,2018,2019,2020,2021)
+net <- c(-15335.81, -167066.56, -308299.21, -466021.03, -326675.26, 141551.10)
+
+compact_net <- data.frame(year, net)
+
+c_n <- ggplot(compact_net, aes(year, net)) +
+  # geom_line(aes(y = abos))+
+  geom_line(linewidth=1, color="black") + 
+  geom_point() +
+  geom_hline(yintercept=4, linetype='dotted', col = 'red')+
+  scale_y_continuous("Statement of income (in Euros)", labels = comma,
+                     breaks = seq(-500000,200000,100000),
+                     limits = c(-500000,200000)) + 
+  scale_x_continuous("",breaks = seq(2016,2021,1)) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 0, vjust = 0.5, hjust=0.5, size=11))
+
+c_n
+
+```
+
+
+Compact was placed under observation as a suspected extremist case (*Verdachtsfall*) in 2020 and then confirmed as extremist in 2021. This means that Germany's security services have been able to surveil the company and all its operations for roughly the last three years. Minister Faeser's ban order, as is typical, exercised the power granted to the government in the 'Law on Associations' (*[Vereinsgesetz](https://www.gesetze-im-internet.de/vereinsg/BJNR005930964.html)*), in which §3 enables a ban where an organisation's 
+
+> purposes or activities are contrary to criminal law or that it is directed against the constitutional order or the idea of international understanding; the order must order the dissolution of the association (ban).
+
+[Bans in Germany](https://michaelzeller.de/blog/2023/09/01/proscribing-reos/) are [usually applied](https://www.tandfonline.com/doi/abs/10.1080/09546553.2023.2240446) to registered associations---not company's like Compact. Accordingly, Faeser referred to §17 which further empowers the government to ban commercial organisations. While there have been many bans imposed in recent decades, bans against commercial entities is a rarity: only three other such organisations have been banned.^[On 27 January 2016, another far-right media organisation, *Altermedia*, a neo-Nazi website, was [banned](https://www.bundesregierung.de/breg-de/aktuelles/rechtsextremistisches-online-portal-verboten-746858); on 14 August 2017, the leftist online portal 'linksunten' was [banned](https://www.bmi.bund.de/SharedDocs/downloads/DE/veroeffentlichungen/2017/verbotsverfuegung-linksunten.pdf;jsessionid=6E96CF6ADEC53D9B9DF90BC382C0E786.live881?__blob=publicationFile&v=3); and on 12 February 2019, the *Mezopotamien Verlag und Vertrieb GmbH* and the *MIR Multimedia GmbH* were [declared](https://www.bmi.bund.de/DE/themen/sicherheit/extremismus/vereinsverbote/vereinsverbote-node.html) to be part of the 'Kurdish Workers' Party' (*Arbeiterpartei Kurdistans*, PKK), banned in 1993, and thus banned.] German governments are hesitant to apply such bans because they entail not only a restriction on the freedom of association but also, since these groups operate as 'news' providers, on the freedom of the press. Thus, the ban against Compact is not unprecedented---but nevertheless **bold**.
+
+# Why ban? Why now?
+
+Announcing the ban, Minister Faeser [offered](https://www.bmi.bund.de/SharedDocs/pressemitteilungen/DE/2024/07/exekutive1.html) several justifications:
+
+> It is a central mouthpiece of the right-wing extremist scene. This magazine incites in an unspeakable way against Jews, against people with a migration background and against our parliamentary democracy. ... In its wide-reaching publications and products, "COMPACT-Magazin GmbH" spreads anti-Semitic, racist, anti-minority, historical revisionist and conspiracy-theoretical content. It agitates against a pluralistic social system that respects the human dignity of the individual and the free and equal participation of all citizens in political decision-making. In its publications and online presence, "COMPACT-Magazin GmbH" propagates a nationalistic, ethnic concept of society that, in its view, seeks to exclude "ethnic foreigners" from the nation. The human dignity of those who do not fit into this ethnic concept is disregarded. ... The content distributed by "COMPACT-Magazin GmbH" also aims to denigrate members of certain ethnic groups, particularly those of Arab descent, as second-class citizens. ... "COMPACT-Magazin GmbH" also distributes anti-Semitic content. Conspiracy theories are spread, for example by an omnipotent Jewish financial elite, in order to stir up hatred against Jews.
+
+These points are well-founded in the content produced by Compact and also echoed in statements by Elsässer himself. In an interview for the May 2018 edition of Compact, Elsässer said, 'The task of the opposition media is to contribute to the overthrow of the regime' (p. 29).^[The interviewer for the article was Götz Kubitschek, another far-right publisher.] 
+
+Yet, as much as the agitation in editions of Compact, it may be the recent actions of Compact and Elsässer that helped spur on a ban order. Elsässer has cultivated close ties with other far-right actors. Besides Compact hosting a regular column by Martin Sellner, who was [briefly banned from entering Germany](https://www.zeit.de/gesellschaft/zeitgeschehen/2024-05/martin-sellner-bundesweites-einreiseverbot-aufgehoben) due to his extremist campaigning, Elsässer is well connected to the AfD. Party members have written articles for Compact; they have shared the megaphone at far-right demonstrations; and he long employed (now) AfD politician Lars Günther as his personal assistant. 
+
+
+```{r tbl-compact-bwr-events, message = FALSE, warning=FALSE, echo=FALSE}
+library(dplyr)
+library(kableExtra)
+library(readxl)
+
+compact_bwr <- read_excel("COMPACT_DieBlaueWelleRollt.xlsx")
+
+compact_bwr_events <- compact_bwr %>% select(Date, Region, City, Location, Size)
+
+knitr::kable(compact_bwr_events, booktabs = TRUE, escape=F, linesep="", caption = 'Compact "Die Blaue Welle Rollt" (The Blue Wave is rolling) campaign events.', col.names = c("Date","Region","City","Location","Size")) %>% kable_styling(font_size = 9) %>%  #latex_options = c("striped"), latex_options = c('hold_position')
+  row_spec(0,bold=TRUE) 
+
+```
+
+The links to the AfD are longstanding, but this year Elsässer and Compact set out to campaign explicitly for the party in this 'super election year'. Under the motto 'The Blue Wave is rolling' ('blue' referencing AfD's party colour), Compact organised a series of demonstrations (@tbl-compact-bwr-events) to support the AfD's electioneering for the European Parliament and for regional parliaments in three eastern states. Spread across (mostly) mid-eastern Germany (@fig-blaue-welle-map), these rallies skirted the boundary of being an [illegal campaign contribution](https://www.kontextwochenzeitung.de/gesellschaft/688/volksfest-fuer-die-afd-9574.html). The full motivation and complete rationale for bans on organisations in Germany is never clear, but the decision to ban Compact now, after several years of observation, may be due in part to its growing reach (Figure @fig-compact-youtube-bar) and ostentatious partisan advocacy for the AfD.
+
+<!-- COMPACT background -->
+<!-- -founded -->
+<!-- -articles (40000 Exemplare im Monat verkauft [2020, 2021]) -->
+<!-- --COMPACTTV -->
+<!-- ---148.000 Abonnenten Stand: 05.01.2021. -->
+<!-- ---153.000 Abonnenten Stand 26.12.2021 -->
+<!-- ---167.000 Abonnenten, Stand Dezember 2022 -->
+<!-- ---250.000 Abonnenten, Stand Dezember 2023 -->
+<!-- -finances (interpreting: https://www.englishbusiness.com/blog/5-things-you-should-know-about-financial-report-translations-from-german-ifrs/) -->
+<!-- -under observation since 2020 (Verdachtsfall) and 2021 (confirmed) -->
+<!-- -ban under Vereinsverbot with reference to section 17 -->
+<!-- --bans on linksunten (2017) and PKK media (2019) and Altermedia (2016) -->
+
+<!-- Why now -->
+<!-- -Elsaesser's inflammatory comments -->
+<!-- -political campaigning -->
+
+<!-- Quo vadis -->
+<!-- -knocks out an active partisan for the AfD ahead of autumn elections -->
+<!-- --political reaction of the AfD -->
+<!-- -note the preemptive adaptation of IfS and Kubitschek -->
+
+```{r fig-blaue-welle-map, message = FALSE, warning=FALSE, echo=FALSE, fig.cap="COMPACT's 'Die Blaue Welle Rollt' (The Blue Wave is rolling) campaign: events held and planned (though now cancelled due to the ban of Compact)."}
+library(tidyverse)
+library(tidygeocoder)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(mapview)
+library(dplyr)
+library(spatstat)
+library(leafpop)
+library(readxl)
+
+compact_bwr <- read_excel("COMPACT_DieBlaueWelleRollt.xlsx")
+
+compact_bwr_sf <- compact_bwr %>% 
+  st_as_sf(
+    coords = c("Longitude", "Latitude"),
+    crs = st_crs("EPSG:32632") # CRS for Germany
+  )
+
+de = ne_countries(scale = 50, returnclass = "sf") |>
+  filter(admin == "Germany") 
+
+mapData <- ne_countries(scale = 10, continent = c("Europe"), returnclass = "sf")
+de_states <- ne_states(country = "germany", returnclass = "sf")
+de_states <- dplyr::select(de_states, name, geometry)
+
+st_crs(compact_bwr_sf) <- st_crs(de)
+
+pp = st_geometry(compact_bwr_sf)
+window = st_geometry(de)
+
+crs = st_crs("EPSG:32632") # CRS for Germany
+pp = st_transform(pp, crs)[!st_is_empty(pp)]
+window = st_transform(window, crs)
+wt = as.ppp(c(window, pp))
+
+# Smooth points
+density_spatstat <- density(wt, dimyx = 500)
+# Convert density_spatstat into a stars object.
+density_stars <- stars::st_as_stars(density_spatstat)
+# Convert density_stars into an sf object
+density_sf <- st_as_sf(density_stars) %>% st_set_crs(32632)
+
+compact_bwr_density <- ggplot() +
+  geom_sf(data = density_sf, aes(fill = v), col = NA) + 
+  # scale_fill_viridis_c(option = "magma") +
+  # scale_fill_gradientn(colours = c("grey80", "grey10")) +
+  geom_sf(data = st_boundary(de_states)) +
+  geom_sf(data = compact_bwr_sf, shape = 1,
+          size = 5, colour = "red", stroke = 1, fill = NA) + 
+  theme_void() + 
+  theme(legend.position="none")
+# compact_bwr_density
+
+
+mapview(compact_bwr_sf, col.regions = "lightblue", label = "Date",
+        legend = T, layer.name = 'Blaue Welle Rollt campaign',
+        map.types = c("CartoDB.DarkMatter","CartoDB.Positron"),
+        popup = popupTable(compact_bwr_sf,
+                           zcol = c("Date","Region","City","Location",
+                                    "Size","Source1","Source2","CompactLink",
+                                    "CounterCampaign")))
+```
+
+# *Quo vadis*
+
+Elsässer may still appeal the ban. In fact, given his famous litigiousness---he was mocked for his aggressive suits in a [hit song](https://www.youtube.com/watch?v=Y-B0lXnierw) by Danger Dan---an appeal is likely forthcoming. But the prospects for overturning the order seem remote. 
+
+Presuming that the ban against Compact stands, what does this mean for Germany's far right? First, it disrupts the network of organisations and activists surrounding Compact. In morning raids of Elsässer's home in Falkensee (Brandenburg) and in locations in Hessen, Sachsen and Sachsen-Anhalt, property was seized. Assets have been confiscated. And Compact's array of online presences, its website, Youtube channel, social media accounts, have been disabled. Bans are costly and, at least for a time, somewhat debilitating for the far-right milieu.^[In a closely related case, the publisher Götz Kubitschek [dissolved](https://www.tagesschau.de/inland/gesellschaft/kubitschek-verein-unternehmen-100.html) his *Institut für Staatspolitik*, which had been under observation by state security and reorganised operations under the *Menschenpark Veranstaltungs UG* und *Metapolitik Verlags UG* organisations. It does not preclude a ban---after all, the publications of these organisations, most notably *Sezession*, have much in common with Compact---but it is at least an obfuscating dodge that could delay one.] 
+
+The ban also removes a staunch ally of the AfD ahead of regional elections in September. It is an interesting and open question of how much support, how many extra votes Compact could mobilise for the AfD, but the response of AfD politicians is clear. The AfD's leader in Sachsen [railed](https://afd-fraktion-sachsen.de/verbot-des-compact-magazins-anschlag-auf-die-meinungsfreiheit/) against the ban decision in a post, accusing Faeser of 'trampling on both freedom of the press and freedom of expression' and using the ban powers to conduct arbitrary raids. 
+
+The effects of banning Compact will unfold in the coming weeks and months. However, in any case, this decision seems to form part of the Faeser Ministry's [strategy](https://www.bmi.bund.de/SharedDocs/downloads/DE/publikationen/themen/ministerium/BMI24021.pdf?__blob=publicationFile&v=7) to address forcefully extremist actors in Germany.
+
+<!-- {{< video https://www.youtube.com/watch?v=EDxuMXb0joE >}} -->
+
+<!-- > Wehrt euch, leistet Widerstand -->
+<!-- > gegen den Faschismus hier im Land. -->
+<!-- > Auf die Barrikaden, auf die Barrikaden! -->
+
+
+<!-- You can download the data by clicking the button below. -->
+
+
+<!-- ```{r echo = F, collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE} -->
+<!-- library(downloadthis) -->
+
+<!-- antiAfD_geo_sf %>% download_this( -->
+<!--     output_name = "compact_bwr", -->
+<!--     output_extension = ".xlsx", -->
+<!--     button_label = "Download dataset as xlsx", -->
+<!--     button_type = "warning", -->
+<!--     has_icon = TRUE, -->
+<!--     icon = "fa fa-save" -->
+<!--   ) -->
+<!-- ``` -->
+
+
+<!-- ****** -->
+
+<!-- <span style="font-family:Garamond; font-size:0.8em;">The basic data is taken from the monitoring by the <a href="https://taz.de/">TAZ newspaper</a>, which has kept a monitor of the recent demonstrations against the AfD, available at <a href="https://taz.de/demo">https://taz.de/demo</a>.</a></span> -->
+
+
