@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>michaelczeller.github.io/index.html</loc>
-    <lastmod>2024-09-14T19:38:31.454Z</lastmod>
+    <lastmod>2024-11-13T15:54:05.713Z</lastmod>
   </url>
   <url>
     <loc>michaelczeller.github.io/maptest.html</loc>
@@ -110,7 +110,7 @@
   </url>
   <url>
     <loc>michaelczeller.github.io/blog/index.html</loc>
-    <lastmod>2024-09-14T19:38:48.340Z</lastmod>
+    <lastmod>2024-11-13T15:53:15.279Z</lastmod>
   </url>
   <url>
     <loc>michaelczeller.github.io/blog/2020/05/08/covid-FR-demos-pause/index.html</loc>
@@ -191,5 +191,9 @@
   <url>
     <loc>michaelczeller.github.io/blog/2024/09/17/greece/index_cop.html</loc>
     <lastmod>2024-09-12T18:40:29.970Z</lastmod>
+  </url>
+  <url>
+    <loc>michaelczeller.github.io/blog/2024/11/13/italian_partisans/index.html</loc>
+    <lastmod>2024-11-13T15:53:14.401Z</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,441 @@
+---
+title: Italian Partisans
+date: 2024-11-13
+description: "Data on Italian resistance against fascism."
+image: partisans_it.png
+twitter-card:
+  image: "partisans_it.png"
+open-graph:
+  image: "partisans_it.png"
+categories:
+  - counter-mobilisation
+  - social movements
+---
+
+
+Travelling in Italy a couple of times in the last few months, my eye was drawn to a few commemorations of anti-fascist partisans. 
+
+In Gargnano, on the Lago di Garda, there is a monument to Mario Boldini. 
+
+![Memorial to Mario Boldini in Gargnano.](mario_boldini.png)
+
+In Firenze, there is a garden named in honour of Silvano Sarti. In fact, the [Biblioteca delle Oblate](https://cultura.comune.fi.it/pagina/le-biblioteche-comunali-fiorentine/biblioteca-delle-oblate) has a small exhibition about the resistance in Firenze: <https://memoriediresistenza.comune.fi.it/blog>. 
+
+![Garden named in honour of Silvano Sarti in Firenze](silvano_sarti.png)
+
+
+```{r data-setup, message = FALSE, warning=FALSE, echo=FALSE}
+library(tidyverse)
+library(tidygeocoder)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(mapview)
+library(dplyr)
+library(spatstat)
+library(leafpop)
+library(readxl)
+fullANPI <- read_excel("fullANPI.xlsx")
+
+library(reshape2)
+
+fullANPI_wide <- fullANPI %>% 
+  dplyr::select(Name, units, Summary, 
+                place1, place2, place3, place4, place5, place6,
+                Caduti, Militari, Perseguitati_Politici, 
+                Perseguitati_Razziali, Internati_Militari, 
+                Deportati, Religiosi, 
+                itGoldMedal, itSilverMedal, itBronzeMedal, 
+                itWarCross, itGoldCivilMerit, 
+                IsraelRighteous, frWarCross, 
+                usBronzeStar, plMeritCross, 
+                bioURLs, Birthplace, ProvinceOfBirth, RegionOfBirth, COB, lat, long)
+
+fullANPI_long <- fullANPI_wide %>% 
+  pivot_longer(names_to = "placeholder", values_to="Place",
+               place1:place6) %>% 
+  drop_na(Place) %>% 
+  dplyr::select(-placeholder)
+
+## FIX PLACES
+
+fullANPI_long$Place=ifelse(fullANPI_long$Place=="Emilia - Romagna",
+                             "Emilia-Romagna", fullANPI_long$Place)
+fullANPI_long$Place=ifelse(fullANPI_long$Place=="Emilia Romagna",
+                           "Emilia-Romagna", fullANPI_long$Place)
+fullANPI_long$Place=ifelse(fullANPI_long$Place=="Puglia",
+                           "Apulia", fullANPI_long$Place)
+fullANPI_long$Place=ifelse(fullANPI_long$Place=="Friuli - Venezia Giulia",
+                           "Friuli-Venezia Giulia", fullANPI_long$Place)
+fullANPI_long$Place=ifelse(fullANPI_long$Place=="Sicilia",
+                           "Sicily", fullANPI_long$Place)
+fullANPI_long$Place=ifelse(fullANPI_long$Place=="Trentino - Alto Adige",
+                           "Trentino-Alto Adige", fullANPI_long$Place)
+
+## ADD COUNTRY VARIABLES
+
+fullANPI_long$Country <- "Italy"
+
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Grecia",
+                             "Greece", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Germania",
+                             "Germany", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Francia",
+                             "France", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Svizzera",
+                             "Switzerland", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Belgio",
+                             "Belgium", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Lussemburgo",
+                             "Luxembourg", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="URSS",
+                             "Soviet Union", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Spagna",
+                             "Spain", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Albania",
+                             "Albania", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Tunisia",
+                             "Tunisia", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="USA",
+                             "USA", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Balcani",
+                             "Yugoslavia", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Istria",
+                             "Yugoslavia", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Dalmazia",
+                             "Yugoslavia", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Montenegro",
+                             "Yugoslavia", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Argentina",
+                             "Argentina", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Egitto",
+                             "Egypt", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Etiopia",
+                             "Ethiopia", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Ungheria",
+                             "Hungary", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Slovacchia",
+                             "Slovakia", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Gran Bretagna",
+                             "UK", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Cina",
+                             "China", fullANPI_long$Country)
+fullANPI_long$Country=ifelse(fullANPI_long$Place=="Messico",
+                             "Mexico", fullANPI_long$Country)
+
+
+```
+
+
+After chancing upon a sign from the 'ANPI', the 'National Association of Italian Partisans' (*Associazione Nazionale Partigiani d'Italia*), I saw that it maintains a [list](https://www.anpi.it/donne-e-uomini-della-resistenza) of resistance fighters.^[The list was originally compiled by journalist Fernando Strambaci.] As the ANPI acknowledges, this list represents only a 'drop in the ocean' (*una autentica goccia nel mare*): it estimates (easily) upwards of 100,000 men and women were directly involved in the resistance against fascism, so the `r nrow(fullANPI)` names in their current database is only a fraction. (Boldini and Sarti actually are not yet included.) With luck, further historical memory work can add to this catalogue. Nevertheless, even this sample can reveal interesting things about loci of resistance to fascist forces.
+
+I used R to scrape the data from ANPI's website, wrangle it, and visualise it. The biographical accounts in ANPI's catalogue offers more variables, so I will probably update this page. For now, the data on where they were born and (typically, if sometimes only initially) active is revealing. 
+
+The density map in @fig-map-density shows that the (apparent) centre of anti-fascist resistance was in the northwest.
+
+```{r map-density, message = FALSE, warning=FALSE, fig.cap="Density map of resistance activists in ANPI by place of birth."}
+#| label: fig-map-density
+
+fullANPI_trim <- fullANPI %>% drop_na(long)
+fullANPI_trim <- fullANPI_trim %>% subset(COB=="Italy")
+
+fullANPI_trim <- as.data.frame(fullANPI_trim)
+
+fullANPI_trim$Latitude  <- fullANPI_trim$lat
+fullANPI_trim$Longitude <- fullANPI_trim$long
+
+fullANPI_trim$latJIT <- jitter(fullANPI_trim$lat, factor = 100)
+fullANPI_trim$longJIT <- jitter(fullANPI_trim$long, factor = 100)
+
+fullANPI_trim_sf <- fullANPI_trim %>% 
+  st_as_sf(
+    coords = c("long", "lat"),
+    crs = st_crs("EPSG:6875") # CRS 
+  )
+
+it = ne_countries(scale = 50, returnclass = "sf") |>
+  filter(admin == "Italy") 
+
+mapData <- ne_countries(scale = 10, continent = c("Europe"), returnclass = "sf")
+it_states <- ne_states(country = "italy", returnclass = "sf")
+it_states <- dplyr::select(it_states, name, geometry)
+
+IT = ne_states(country = "italy", returnclass = "sf")
+IT <- IT %>% dplyr::select(province = name, region, geometry)
+
+st_crs(fullANPI_trim_sf) <- st_crs(it)
+
+pp = st_geometry(fullANPI_trim_sf)
+window = st_geometry(it)
+
+crs = st_crs("EPSG:6875") # CRS 
+pp = st_transform(pp, crs)[!st_is_empty(pp)]
+window = st_transform(window, crs)
+wt = as.ppp(c(window, pp))
+
+# Smooth points
+density_spatstat <- density(wt, dimyx = 500)
+# Convert density_spatstat into a stars object.
+density_stars <- stars::st_as_stars(density_spatstat)
+# Convert density_stars into an sf object
+density_sf <- st_as_sf(density_stars) %>% st_set_crs(32632)
+
+map_density <- ggplot() +
+  geom_sf(data = density_sf, aes(fill = v), col = NA) + 
+  scale_fill_viridis_c(option = "magma") +
+  # scale_fill_gradientn(colours = c("grey80", "grey10")) +
+  # geom_sf(data = st_boundary(it_states)) + 
+  theme_void() + 
+  theme(legend.position="none")
+map_density
+
+```
+
+
+@fig-map-regions shows the highest number of resistance activists came from the northern regions of Piedmont, Emilia-Romagna, and Lombardy.
+
+```{r map-regions, message = FALSE, warning=FALSE, fig.cap="Map of resistance activists in ANPI by region of birth."}
+#| label: fig-map-regions
+
+fullANPI_long_IT <- fullANPI_long %>% subset(Country=="Italy")
+
+df.grouped <- fullANPI_long_IT %>% 
+  group_by(Place) %>% 
+  summarise(COUNT=n())
+
+df.grouped$TOT <- sum(df.grouped$COUNT)
+df.grouped$PROP <- df.grouped$COUNT / df.grouped$TOT
+df.grouped$PERCENT <- df.grouped$PROP*100
+
+IT = ne_states(country = "italy", returnclass = "sf")
+
+IT <- IT %>% dplyr::select(province = name, region, geometry)
+
+IT_REGION <- IT %>% group_by(region) %>% summarise(n = n())
+
+mappedANPI_it <- IT_REGION %>%
+  left_join(df.grouped, # df.sf
+            by = c("region" = "Place"))
+
+mappedANPI_it[is.na(mappedANPI_it)] <- 0
+
+italy_ANPI_region <- ggplot(mappedANPI_it) +
+  geom_sf(aes(fill = COUNT))+
+  geom_sf_text(aes(label=COUNT), colour="red")+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("Number of resistance activists", low = "white", high = "gray20")+
+  theme_void()+ # theme(legend.position = "none")+
+  labs(title="")+theme(plot.title = element_text(hjust = 0.5))
+italy_ANPI_region
+
+```
+ 
+ 
+Zooming in, @fig-map-provinces shows particularly dense clusters in the provinces of Torino, Milano, Bologna, and Roma. Unsurprisingly, the largest numbers come from the largest population centres. Today, these areas continue to be represent a more leftist political orientation---even compared to other Italian cities. Along with Firenze, they were the provinces won by the Left coalition in the [2022 Italian election](https://www.theguardian.com/world/ng-interactive/2022/sep/25/italian-election-2022-live-official-results).
+
+```{r map-provinces, message = FALSE, warning=FALSE, fig.cap="Map of resistance activists in ANPI by province of birth."}
+#| label: fig-map-provinces
+
+fullANPI_pob <- fullANPI %>% subset(COB=="Italy")
+
+df.grouped <- fullANPI_pob %>% 
+  group_by(ProvinceOfBirth) %>% 
+  summarise(COUNT=n())
+
+df.grouped$TOT <- sum(df.grouped$COUNT)
+df.grouped$PROP <- df.grouped$COUNT / df.grouped$TOT
+df.grouped$PERCENT <- df.grouped$PROP*100
+
+IT = ne_states(country = "italy", returnclass = "sf")
+
+IT <- IT %>% dplyr::select(province = name, region, geometry)
+
+mappedANPI_it <- IT %>%
+  left_join(df.grouped, # df.sf
+            by = c("province" = "ProvinceOfBirth"))
+
+mappedANPI_it[is.na(mappedANPI_it)] <- 0
+
+italy_ANPI_region <- ggplot(mappedANPI_it) +
+  geom_sf(aes(fill = COUNT))+
+  geom_sf_text(aes(label=COUNT), colour="red", size=3)+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("Number of resisters", low = "white", high = "gray20")+
+  theme_void()+ # theme(legend.position = "none")+
+  labs(title="")+theme(plot.title = element_text(hjust = 0.5))
+italy_ANPI_region
+
+```
+
+<!-- @vanbaalen -->
+Sebastian Van Baalen has a nice map visualisation in his recent APSR [article](https://www.cambridge.org/core/journals/american-political-science-review/article/civilian-protest-in-civil-war-insights-from-cote-divoire/7C2038DD8DD083768A929DBF7D46D263), which adapted slightly shows again the clusters of resistance activists from different birthplaces, in @fig-map-vanbaalen.
+
+```{r map-vanbaalen, message = FALSE, warning=FALSE, echo=FALSE, fig.cap="Plot of resistance activists in ANPI by province of birth, similar to the map in Van Baalen (2024)."}
+#| label: fig-map-vanbaalen
+
+fullANPI_trim_sf_add <- fullANPI_trim_sf %>% 
+  sf::st_intersection(IT)
+
+fullANPI_Loc <- fullANPI_trim_sf_add %>% 
+  group_by(ProvinceOfBirth) %>% 
+  summarise(Resisters=n())
+
+ggplot() +
+  geom_sf(data = IT, fill = "aquamarine")+
+  geom_sf(data = st_boundary(IT), 
+          linewidth=0.05, color=alpha("grey30", 0.7), fill="grey30", alpha=0.7)+
+  coord_sf(xlim = c(6, 19), ylim = c(35, 47.5), expand = FALSE)+
+  geom_count(data=fullANPI_trim_sf, aes(x=Longitude, y=Latitude),
+             fill="red", shape=21, alpha=0.6, color="black", stroke=0.5)+
+  scale_size(name = "Number of resistance activists", range = c(1, 10))+
+  theme_void()
+
+```
+
+<!-- @hellmeier2022DynamicsDeterminantsRightwing  -->
+Sebastian Hellmeier has a nice map visualisation in his 2022 [article](https://www.tandfonline.com/doi/full/10.1080/01402382.2022.2135909#d1e300), so for just a bit of mapping fun, we can make a similar map with the ANPI data in @fig-map-hellmeier.
+
+```{r map-hellmeier, message = FALSE, warning=FALSE, echo=FALSE, fig.cap="Plot of resistance activists in ANPI by province of birth, similar to the map in Hellmeier (2022)."}
+#| label: fig-map-hellmeier
+
+province_points <- st_join(fullANPI_trim_sf_add, IT, left=TRUE) %>% 
+  rename(province=province.x) %>%
+  group_by(province) %>% 
+  summarise(resisters = n()) %>% 
+  arrange(resisters) %>% 
+  st_as_sf(., coords = c("Longitude", "Latitude")) %>% 
+  st_set_crs(., 6875) %>% 
+  # strip out the multipoints
+  st_cast("POINT")
+
+st_crs(province_points) <- st_crs(IT)
+
+# Create breaks for the color scale
+mybreaks <- c(0, 1, 10, 25, 50, 190)
+mylabels <- c("0", "1", "10", "25", "50", "190")
+
+## https://ggrepel.slowkow.com/articles/examples.html
+library(ggrepel)
+
+ggplot()+
+  geom_sf(data=IT, fill="aquamarine4", alpha=0.3, lwd=.2, color="grey40")+
+  # plot circles in districts where demonstrations occurred
+  geom_sf(data=province_points %>% filter(resisters<10), 
+          aes(geometry=geometry, fill=resisters, alpha=resisters), shape=21, size=3)+
+  geom_sf(data=province_points %>% filter(resisters>10), 
+          aes(geometry=geometry, fill=resisters, alpha=resisters), shape=21, size=7)+
+  # # this can plot cities/places where no demos occurred
+  # geom_sf(data=kreise_points %>% filter(events==0), 
+  #         aes(geometry=geometry), color="black", alpha=0.5, shape=21, size=7)+
+  # add black text labels for number of demos (over 10) where occurred, inside circles
+  geom_sf_text(data=province_points %>% filter(resisters>10 & resisters<100), 
+               aes(geometry=geometry, label=resisters), colour="#000000", size=3)+
+  # add white text labels to highlight the places where there were many demos
+  geom_sf_text(data=province_points %>% filter(resisters>100), 
+               aes(geometry=geometry, label=resisters), colour="#FFFFFF", size=3)+
+  # label some of the locations
+  # geom_label_repel(data=kreise_points %>% subset(district=="Berlin"),
+  #                 aes(x=st_coordinates(geometry)[,1],
+  #                     y=st_coordinates(geometry)[,2], label=district),
+  #                 fill="white",
+  #                 nudge_x=1.5, nudge_y=0.5, # segment.curvature = -1e-20,
+  #                 segment.size  = 0.2, segment.color = "grey20", seed=42)+
+  geom_label_repel(data=province_points %>% subset(resisters>100 & st_coordinates(geometry)[,2]>45),
+                   aes(x=st_coordinates(geometry)[,1],
+                       y=st_coordinates(geometry)[,2], label=province),
+                   nudge_y=47-st_coordinates(subset(province_points, resisters>100 & st_coordinates(geometry)[,2]>45))[,2], direction="x",
+                   fill="white", # segment.curvature = -1e-20,
+                   segment.size=0.2, segment.color="grey20", seed=42)+
+  geom_label_repel(data=province_points %>% subset(resisters>90 & st_coordinates(geometry)[,2]>44 & st_coordinates(geometry)[,1]>10.5),
+                   aes(x=st_coordinates(geometry)[,1],
+                       y=st_coordinates(geometry)[,2], label=province),
+                   nudge_x=15.5-st_coordinates(subset(province_points, resisters>90 & st_coordinates(geometry)[,1]>10.5))[,1], direction="y",
+                   nudge_y=45-st_coordinates(subset(province_points, resisters>90 & st_coordinates(geometry)[,2]>44))[,2], 
+                   fill="white", 
+                   segment.size=0.2, segment.color="grey20", seed=42)+
+  geom_label_repel(data=province_points %>% subset(resisters>90 & st_coordinates(geometry)[,2]<44),
+                   aes(x=st_coordinates(geometry)[,1],
+                       y=st_coordinates(geometry)[,2], label=province),
+                   nudge_y=40-st_coordinates(subset(province_points, resisters>90 & st_coordinates(geometry)[,2]<44))[,2], direction="x",
+                   fill="white", # segment.curvature = -1e-20,
+                   segment.size=0.2, segment.color="grey20", seed=42)+
+  geom_label_repel(data=province_points %>% subset(resisters>90 & st_coordinates(geometry)[,2]<45 & st_coordinates(geometry)[,1]<10.5),
+                   aes(x=st_coordinates(geometry)[,1],
+                       y=st_coordinates(geometry)[,2], label=province),
+                   nudge_x=7-st_coordinates(subset(province_points, resisters>90 & st_coordinates(geometry)[,1]<10.5))[,1], direction="y",
+                   nudge_y=42-st_coordinates(subset(province_points, resisters>90 & st_coordinates(geometry)[,2]<45))[,2], 
+                   fill="white", 
+                   segment.size=0.2, segment.color="grey20", seed=42)+
+  scale_fill_gradient(name="Partisans", trans="log1p", low="yellow",high="red",
+                      # low="grey80", high="darkblue",
+                      breaks = mybreaks, labels = mylabels) +
+  scale_alpha_continuous(name="Partisans", trans="log1p", range=c(.8,.95),
+                         breaks=mybreaks, labels=mylabels, guide='none')+
+  theme_void()+theme(legend.position=c(0.97, 0.8), legend.margin=margin(6,6,6,6),
+                     legend.background=element_rect(fill="grey85",linewidth=0.2, 
+                                                    linetype="solid", 
+                                                    colour="grey20"))+
+  guides(colour=guide_legend()) 
+
+```
+ 
+ 
+ 
+As mentioned above, I plan to continue working on this data, as time allows. In the meantime, the messy interactive map in @fig-interactive-map. plots the birthplaces of the ANPI-listed resistance activists (slightly jittered in a seemingly futile attempt to increase visibility).
+
+```{r interactive-map, message = FALSE, warning=FALSE, fig.cap="Map of resistance activists in ANPI."}
+#| label: fig-interactive-map
+
+fullANPI_trim <- fullANPI %>% drop_na(long)
+fullANPI_trim <- as.data.frame(fullANPI_trim)
+
+fullANPI_trim$latJIT <- jitter(fullANPI_trim$lat, factor = 50)
+fullANPI_trim$longJIT <- jitter(fullANPI_trim$long, factor = 50)
+
+fullANPI_trim_sf_JIT <- fullANPI_trim %>% 
+  st_as_sf(
+    coords = c("longJIT", "latJIT"),
+    crs = st_crs("EPSG:6875") # CRS 
+  )
+
+st_crs(fullANPI_trim_sf_JIT) <- st_crs(it)
+
+
+mapview(fullANPI_trim_sf_JIT, col.regions = "maroon", label = "Name",
+        legend = T, layer.name = 'ANPI resistance activists',
+        map.types = c("CartoDB.Positron","CartoDB.DarkMatter"),
+        popup = popupTable(fullANPI_trim_sf_JIT,
+                           zcol = c("units","Birthplace","COB","Summary")))
+```
+
+
+
+<!-- {{< video https://www.youtube.com/watch?v=EDxuMXb0joE >}} -->
+
+<!-- > Wehrt euch, leistet Widerstand -->
+<!-- > gegen den Faschismus hier im Land. -->
+<!-- > Auf die Barrikaden, auf die Barrikaden! -->
+
+
+<!-- You can download the data by clicking the button below. -->
+
+
+<!-- ```{r echo = F, collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE} -->
+<!-- library(downloadthis) -->
+
+<!-- antiAfD_geo_sf %>% download_this( -->
+<!--     output_name = "compact_bwr", -->
+<!--     output_extension = ".xlsx", -->
+<!--     button_label = "Download dataset as xlsx", -->
+<!--     button_type = "warning", -->
+<!--     has_icon = TRUE, -->
+<!--     icon = "fa fa-save" -->
+<!--   ) -->
+<!-- ``` -->
+
+
+<!-- ****** -->
+
+<!-- <span style="font-family:Garamond; font-size:0.8em;">The basic data is taken from the monitoring by the <a href="https://taz.de/">TAZ newspaper</a>, which has kept a monitor of the recent demonstrations against the AfD, available at <a href="https://taz.de/demo">https://taz.de/demo</a>.</a></span> -->
+
+
