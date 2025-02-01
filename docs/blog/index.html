@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Michael C. Zeller">
 <meta name="description" content="Michael C. Zeller’s blog">
 
-<title>Blog | Dr.&nbsp;Michael C. Zeller</title>
+<title>Blog | Dr.&nbsp;Michael C. Zeller – Dr. Michael C. Zeller</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -49,7 +49,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -58,12 +64,41 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
 }</script>
 <script>
+
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-posts_2025 .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-posts_2025'] = new List('listing-posts_2025', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-posts_2024 .list');
@@ -73,9 +108,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -101,9 +136,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -129,9 +164,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -157,9 +192,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -185,9 +220,9 @@ ul.task-list li input[type="checkbox"] {
     }
 
     const options = {
-      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] }],
+      valueNames: ['listing-project','listing-bibliography','listing-csl','listing-pagetitle','listing-description-meta','listing-author-meta','listing-website','listing-format','listing-_quarto-vars','listing-language','listing-date-format','listing-title-block-banner','listing-toc','listing-toc-title','listing-toc-location','listing-freeze','listing-execute','listing-author','listing-title','listing-date','listing-description','listing-image','listing-twitter-card','listing-open-graph','listing-categories','listing-path','listing-outputHref','listing-date-modified','listing-filename','listing-file-modified','listing-reading-time','listing-word-count',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-date-modified-sort'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
       
-      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time"],
+      searchColumns: ["listing-project","listing-bibliography","listing-csl","listing-pagetitle","listing-description-meta","listing-author-meta","listing-website","listing-format","listing-_quarto-vars","listing-language","listing-date-format","listing-title-block-banner","listing-toc","listing-toc-title","listing-toc-location","listing-freeze","listing-execute","listing-author","listing-title","listing-date","listing-description","listing-image","listing-twitter-card","listing-open-graph","listing-categories","listing-path","listing-outputHref","listing-date-modified","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -211,13 +246,40 @@ ul.task-list li input[type="checkbox"] {
       }
 </style>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="Blog | Dr.&nbsp;Michael C. Zeller">
 <meta property="og:description" content="Michael C. Zeller’s blog">
 <meta property="og:image" content="michaelczeller.github.io/files/favicon4.png">
-<meta property="og:site-name" content="Dr. Michael C. Zeller">
+<meta property="og:site_name" content="Dr. Michael C. Zeller">
 <meta property="og:locale" content="en_UK">
 <meta property="og:image:height" content="652">
 <meta property="og:image:width" content="650">
@@ -234,64 +296,64 @@ ul.task-list li input[type="checkbox"] {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Dr.&nbsp;Michael C. Zeller</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">About</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv/index_cv.html" rel="" target="">
- <span class="menu-text">CV</span></a>
+    <a class="nav-link" href="../cv/index_cv.html"> 
+<span class="menu-text">CV</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../blog/index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link active" href="../blog/index.html" aria-current="page"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../research/index.html" rel="" target="">
- <span class="menu-text">Research</span></a>
+    <a class="nav-link" href="../research/index.html"> 
+<span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching/index_teaching.html" rel="" target="">
- <span class="menu-text">Teaching</span></a>
+    <a class="nav-link" href="../teaching/index_teaching.html"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../data/index_data.html" rel="" target="">
- <span class="menu-text">Data</span></a>
+    <a class="nav-link" href="../data/index_data.html"> 
+<span class="menu-text">Data</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="mailto:m.zeller@lmu.de" rel="" target=""><i class="bi bi-envelope" role="img" aria-label="email">
+    <a class="nav-link" href="mailto:m.zeller@lmu.de"> <i class="bi bi-envelope" role="img" aria-label="email">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/michaelczeller" rel="me" target=""><i class="bi bi-twitter" role="img" aria-label="twitter">
+    <a class="nav-link" href="https://twitter.com/michaelczeller" rel="me"> <i class="bi bi-twitter" role="img" aria-label="twitter">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv/mz_cv.pdf" rel="" target="">
- <span class="menu-text">CV</span></a>
+    <a class="nav-link" href="../cv/mz_cv.pdf"> 
+<span class="menu-text">CV</span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -304,7 +366,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
     
   
-  <div class="quarto-title-meta">
+  <div class="quarto-title-meta column-page-left">
 
       
     
@@ -320,125 +382,57 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Year</h2>
    
   <ul>
-  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">2024</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">2023</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">2021</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">2020</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">2019</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link active" data-scroll-target="#section">2025</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">2024</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">2023</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">2021</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">2020</a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5">2019</a></li>
   </ul>
 </nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(15)</span></div><div class="category" data-category="Alternative für Deutschland (AfD)">Alternative für Deutschland (AfD) <span class="quarto-category-count">(2)</span></div><div class="category" data-category="COMPACT">COMPACT <span class="quarto-category-count">(1)</span></div><div class="category" data-category="COVID-19">COVID-19 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Combat 18">Combat 18 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Germany">Germany <span class="quarto-category-count">(11)</span></div><div class="category" data-category="Hammerskins">Hammerskins <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Kampf der Nibelungen">Kampf der Nibelungen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Nibelungenlied">Nibelungenlied <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Poland">Poland <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Wagner">Wagner <span class="quarto-category-count">(1)</span></div><div class="category" data-category="banning">banning <span class="quarto-category-count">(5)</span></div><div class="category" data-category="counter-mobilisation">counter-mobilisation <span class="quarto-category-count">(4)</span></div><div class="category" data-category="demobilisation">demobilisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="demonstrations">demonstrations <span class="quarto-category-count">(3)</span></div><div class="category" data-category="election">election <span class="quarto-category-count">(1)</span></div><div class="category" data-category="elections">elections <span class="quarto-category-count">(2)</span></div><div class="category" data-category="extremism">extremism <span class="quarto-category-count">(2)</span></div><div class="category" data-category="far right">far right <span class="quarto-category-count">(13)</span></div><div class="category" data-category="for students">for students <span class="quarto-category-count">(1)</span></div><div class="category" data-category="humour">humour <span class="quarto-category-count">(1)</span></div><div class="category" data-category="proscription">proscription <span class="quarto-category-count">(5)</span></div><div class="category" data-category="right-wing extremism">right-wing extremism <span class="quarto-category-count">(2)</span></div><div class="category" data-category="social movements">social movements <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(16)</span></div><div class="category" data-category="Alternative für Deutschland (AfD)">Alternative für Deutschland (AfD) <span class="quarto-category-count">(2)</span></div><div class="category" data-category="COMPACT">COMPACT <span class="quarto-category-count">(1)</span></div><div class="category" data-category="COVID-19">COVID-19 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Combat 18">Combat 18 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Germany">Germany <span class="quarto-category-count">(11)</span></div><div class="category" data-category="Hammerskins">Hammerskins <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Kampf der Nibelungen">Kampf der Nibelungen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Nibelungenlied">Nibelungenlied <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Poland">Poland <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Wagner">Wagner <span class="quarto-category-count">(1)</span></div><div class="category" data-category="banning">banning <span class="quarto-category-count">(5)</span></div><div class="category" data-category="counter-mobilisation">counter-mobilisation <span class="quarto-category-count">(5)</span></div><div class="category" data-category="demobilisation">demobilisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="demonstrations">demonstrations <span class="quarto-category-count">(3)</span></div><div class="category" data-category="election">election <span class="quarto-category-count">(1)</span></div><div class="category" data-category="elections">elections <span class="quarto-category-count">(2)</span></div><div class="category" data-category="extremism">extremism <span class="quarto-category-count">(2)</span></div><div class="category" data-category="far right">far right <span class="quarto-category-count">(13)</span></div><div class="category" data-category="for students">for students <span class="quarto-category-count">(1)</span></div><div class="category" data-category="humour">humour <span class="quarto-category-count">(1)</span></div><div class="category" data-category="proscription">proscription <span class="quarto-category-count">(5)</span></div><div class="category" data-category="right-wing extremism">right-wing extremism <span class="quarto-category-count">(2)</span></div><div class="category" data-category="social movements">social movements <span class="quarto-category-count">(3)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
 
+
 <section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section">2024</h2>
-<div id="listing-posts_2024" class="quarto-listing quarto-listing-container-custom">
+<h2 class="anchored" data-anchor-id="section">2025</h2>
+<div id="listing-posts_2025" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="counter-mobilisation,social movements" data-listing-date-sort="1731452400000" data-listing-file-modified-sort="1731513129913" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18">
+    
+    <div class="blog-entry" data-index="0" data-categories="social movements,counter-mobilisation" data-listing-date-sort="1738364400000" data-listing-file-modified-sort="1738425086341" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-word-count-sort="4140">
         <div class="metadata">          
-            <p class="date listing-date">13 November 2024</p>
+            <p class="date listing-date">1 February 2025</p>
         </div>
         <div class="body">
-            <p class="title listing-title"><a href="../blog/2024/11/13/italian_partisans/index.html">Italian Partisans</a></p>
+            <p class="title listing-title"><a href="../blog/2025/02/01/Serbia_protests/index.html">Serbia anti-corruption protests</a></p>
+
+            
             <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('counter-mobilisation'); return false;">
-                    counter-mobilisation
-                </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('social movements'); return false;">
                     social movements
                 </div>
-            </div>
-            <p class="description listing-description">Data on Italian resistance against fascism.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="../blog/2024/11/13/italian_partisans/partisans_it.png" alt="Italian Partisans" title="Italian Partisans">
-        </div>
-    </div>
-    <div class="blog-entry" data-index="1" data-categories="COMPACT,Germany,banning,far right,proscription" data-listing-date-sort="1721167200000" data-listing-file-modified-sort="1721175244651" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12">
-        <div class="metadata">          
-            <p class="date listing-date">17 July 2024</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2024/07/17/compact-for-afd/index.html">COMPACT banned!</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('COMPACT'); return false;">
-                    COMPACT
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
-                    Germany
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
-                    banning
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
-                    far right
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
-                    proscription
-                </div>
-            </div>
-            <p class="description listing-description">Banning an organisation acting as a 'news' provider is rare. But Interior Minister Nancy Faeser has judged the far-right media company Compact as worthy of a ban. It is not an unprecedented action---but nevertheless bold.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="../blog/2024/07/17/compact-for-afd/compact_ban_logo.png" alt="COMPACT banned!" title="COMPACT banned!">
-        </div>
-    </div>
-    <div class="blog-entry" data-index="2" data-categories="Alternative für Deutschland (AfD),counter-mobilisation,Germany,banning,demonstrations,far right,proscription" data-listing-date-sort="1707692400000" data-listing-file-modified-sort="1708294848978" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31">
-        <div class="metadata">          
-            <p class="date listing-date">12 February 2024</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2024/02/12/anti_AfD_protests/index.html">Counter-mobilisation against the AfD - politics and law</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Alternative für Deutschland (AfD)'); return false;">
-                    Alternative für Deutschland (AfD)
-                </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('counter-mobilisation'); return false;">
                     counter-mobilisation
                 </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
-                    Germany
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
-                    banning
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('demonstrations'); return false;">
-                    demonstrations
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
-                    far right
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
-                    proscription
-                </div>
+                
             </div>
-            <p class="description listing-description">Demonstrators against the AfD should mind the distinction between the political arena and the legal logic of the courts. Counter-mobilisation can hardly affect the material facts that are decisive in legal measures against the AfD, but counter-mobilisation in the political arena can present a powerful challenge to the AfD.</p>
+            
+
+            <p class="description listing-description">Data on Serbia anti-corruption protests.</p>
         </div>
+        
         <div class="thumbnail">
-            <img src="../blog/2024/02/12/anti_AfD_protests/2024-02-10antiAfD_density.png" alt="Counter-mobilisation against the AfD - politics and law" title="Counter-mobilisation against the AfD - politics and law">
+            <img src="../blog/2025/02/01/Serbia_protests/srb_protests.png" alt="Serbia anti-corruption protests" title="Serbia anti-corruption protests">
         </div>
+        
     </div>
-    <div class="blog-entry" data-index="3" data-categories="for students" data-listing-date-sort="1705014000000" data-listing-file-modified-sort="1705068972300" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
-        <div class="metadata">          
-            <p class="date listing-date">12 January 2024</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2024/01/12/rec_requests/index.html">Requesting a letter of recommenadtion</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('for students'); return false;">
-                    for students
-                </div>
-            </div>
-            <p class="description listing-description">what to send me: (1) **[essential information]{.underline}**: for what university, programme, scholarship, job, internship is the letter needed? When is it due? How should it be submitted? (2) **[A bit of detail]{.underline}**: what will you do if your application is successful? Why? (3) **[Tips for what to highlight]{.underline}**: were you in my class? What did you contribute? Did I assist you on a project? Remind me. What specific points might I emphasise? (4) **[A reminder]{.underline}** 3 or 4 days ahead of the deadline (if I have not already confirmed submission)</p>
-        </div>
-        <div class="thumbnail">
-            <img src="../blog/2024/01/12/rec_requests/email_composition_comic.png" alt="Requesting a letter of recommenadtion" title="Requesting a letter of recommenadtion">
-        </div>
-    </div>
+    
 </div>
 <div class="listing-no-matching d-none">
 No matching items
@@ -446,70 +440,257 @@ No matching items
 </div>
 </section>
 <section id="section-1" class="level2">
-<h2 class="anchored" data-anchor-id="section-1">2023</h2>
+<h2 class="anchored" data-anchor-id="section-1">2024</h2>
+<div id="listing-posts_2024" class="quarto-listing quarto-listing-container-custom">
+<div class="list blog">
+    
+    <div class="blog-entry" data-index="0" data-categories="counter-mobilisation,social movements" data-listing-date-sort="1731452400000" data-listing-file-modified-sort="1731513129913" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3485">
+        <div class="metadata">          
+            <p class="date listing-date">13 November 2024</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2024/11/13/italian_partisans/index.html">Italian Partisans</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('counter-mobilisation'); return false;">
+                    counter-mobilisation
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('social movements'); return false;">
+                    social movements
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">Data on Italian resistance against fascism.</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2024/11/13/italian_partisans/partisans_it.png" alt="Italian Partisans" title="Italian Partisans">
+        </div>
+        
+    </div>
+    
+    <div class="blog-entry" data-index="1" data-categories="COMPACT,Germany,banning,far right,proscription" data-listing-date-sort="1721167200000" data-listing-file-modified-sort="1721175244651" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2370">
+        <div class="metadata">          
+            <p class="date listing-date">17 July 2024</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2024/07/17/compact-for-afd/index.html">COMPACT banned!</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('COMPACT'); return false;">
+                    COMPACT
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
+                    banning
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
+                    proscription
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">Banning an organisation acting as a 'news' provider is rare. But Interior Minister Nancy Faeser has judged the far-right media company Compact as worthy of a ban. It is not an unprecedented action---but nevertheless bold.</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2024/07/17/compact-for-afd/compact_ban_logo.png" alt="COMPACT banned!" title="COMPACT banned!">
+        </div>
+        
+    </div>
+    
+    <div class="blog-entry" data-index="2" data-categories="Alternative für Deutschland (AfD),counter-mobilisation,Germany,banning,demonstrations,far right,proscription" data-listing-date-sort="1707692400000" data-listing-file-modified-sort="1708294848978" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="31" data-listing-word-count-sort="6086">
+        <div class="metadata">          
+            <p class="date listing-date">12 February 2024</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2024/02/12/anti_AfD_protests/index.html">Counter-mobilisation against the AfD - politics and law</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Alternative für Deutschland (AfD)'); return false;">
+                    Alternative für Deutschland (AfD)
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('counter-mobilisation'); return false;">
+                    counter-mobilisation
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
+                    banning
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('demonstrations'); return false;">
+                    demonstrations
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
+                    proscription
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">Demonstrators against the AfD should mind the distinction between the political arena and the legal logic of the courts. Counter-mobilisation can hardly affect the material facts that are decisive in legal measures against the AfD, but counter-mobilisation in the political arena can present a powerful challenge to the AfD.</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2024/02/12/anti_AfD_protests/2024-02-10antiAfD_density.png" alt="Counter-mobilisation against the AfD - politics and law" title="Counter-mobilisation against the AfD - politics and law">
+        </div>
+        
+    </div>
+    
+    <div class="blog-entry" data-index="3" data-categories="for students" data-listing-date-sort="1705014000000" data-listing-file-modified-sort="1705068972300" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1015">
+        <div class="metadata">          
+            <p class="date listing-date">12 January 2024</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2024/01/12/rec_requests/index.html">Requesting a letter of recommenadtion</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('for students'); return false;">
+                    for students
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">what to send me: (1) **[essential information]{.underline}**: for what university, programme, scholarship, job, internship is the letter needed? When is it due? How should it be submitted? (2) **[A bit of detail]{.underline}**: what will you do if your application is successful? Why? (3) **[Tips for what to highlight]{.underline}**: were you in my class? What did you contribute? Did I assist you on a project? Remind me. What specific points might I emphasise? (4) **[A reminder]{.underline}** 3 or 4 days ahead of the deadline (if I have not already confirmed submission)</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2024/01/12/rec_requests/email_composition_comic.png" alt="Requesting a letter of recommenadtion" title="Requesting a letter of recommenadtion">
+        </div>
+        
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2">2023</h2>
 <div id="listing-posts_2023" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="proscription,banning,right-wing extremism,far right,Germany,Hammerskins" data-listing-date-sort="1695160800000" data-listing-file-modified-sort="1695199961243" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+    
+    <div class="blog-entry" data-index="0" data-categories="proscription,banning,right-wing extremism,far right,Germany,Hammerskins" data-listing-date-sort="1695160800000" data-listing-file-modified-sort="1695199961243" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
         <div class="metadata">          
             <p class="date listing-date">20 September 2023</p>
         </div>
         <div class="body">
             <p class="title listing-title"><a href="../blog/2023/09/20/hammerskins/index.html">Hammerskins Deutschland proscribed for politics?</a></p>
+
+            
             <div class="post-categories listing-categories">
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
                     proscription
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
                     banning
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('right-wing extremism'); return false;">
                     right-wing extremism
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
                     far right
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
                     Germany
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Hammerskins'); return false;">
                     Hammerskins
                 </div>
+                
             </div>
+            
+
             <p class="description listing-description">Federal Interior Minister Faeser announces ban of longstanding right-wing extremist hub, but political motivations are likely at least as important as the objective of 'breaking up right-wing extremist structures.'</p>
         </div>
+        
         <div class="thumbnail">
             <img src="../blog/2023/09/20/hammerskins/faeser.png" alt="Hammerskins Deutschland proscribed for politics?" title="Hammerskins Deutschland proscribed for politics?">
         </div>
+        
     </div>
-    <div class="blog-entry" data-index="1" data-categories="proscription,banning,right-wing extremism,far right,Germany" data-listing-date-sort="1693519200000" data-listing-file-modified-sort="1693567633942" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16">
+    
+    <div class="blog-entry" data-index="1" data-categories="proscription,banning,right-wing extremism,far right,Germany" data-listing-date-sort="1693519200000" data-listing-file-modified-sort="1693567633942" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="16" data-listing-word-count-sort="3032">
         <div class="metadata">          
             <p class="date listing-date">1 September 2023</p>
         </div>
         <div class="body">
             <p class="title listing-title"><a href="../blog/2023/09/01/proscribing-reos/index.html">An overview of Proscribing Right-Wing Extremist Organisations in Europe</a></p>
+
+            
             <div class="post-categories listing-categories">
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
                     proscription
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
                     banning
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('right-wing extremism'); return false;">
                     right-wing extremism
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
                     far right
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
                     Germany
                 </div>
+                
             </div>
+            
+
             <p class="description listing-description">... some states have proscribed right-wing extremist (RWE) organisations quite often, while others have used proscription laws only in isolated cases; still others eschew completely such legal instruments.</p>
         </div>
+        
         <div class="thumbnail">
             <img src="../blog/2023/09/01/proscribing-reos/fig_2022-08-08RTV_de_map.png" alt="An overview of Proscribing Right-Wing Extremist Organisations in Europe" title="An overview of Proscribing Right-Wing Extremist Organisations in Europe">
         </div>
+        
     </div>
+    
 </div>
 <div class="listing-no-matching d-none">
 No matching items
@@ -519,240 +700,129 @@ No matching items
 <!-- :::{#posts_2022} -->
 <!-- ::: -->
 </section>
-<section id="section-2" class="level2">
-<h2 class="anchored" data-anchor-id="section-2">2021</h2>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3">2021</h2>
 <div id="listing-posts_2021" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="demobilisation,far right,counter-mobilisation,Germany" data-listing-date-sort="1635458400000" data-listing-file-modified-sort="1691849995130" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+    
+    <div class="blog-entry" data-index="0" data-categories="demobilisation,far right,counter-mobilisation,Germany" data-listing-date-sort="1635458400000" data-listing-file-modified-sort="1691849995130" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2156">
         <div class="metadata">          
             <p class="date listing-date">29 October 2021</p>
         </div>
         <div class="body">
             <p class="title listing-title"><a href="../blog/2021/10/29/how-to-demobilize-far-right/index.html">How to Demobilize the Far Right</a></p>
+
+            
             <div class="post-categories listing-categories">
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('demobilisation'); return false;">
                     demobilisation
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
                     far right
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('counter-mobilisation'); return false;">
                     counter-mobilisation
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
                     Germany
                 </div>
+                
             </div>
+            
+
             <p class="description listing-description">... there are many means of demobilising the far right. Most striking, though, is the importance of non-state actors: sometimes their actions alone are enough to demobilise far-right campaigns; at other times state intervention is key, but non-state actors often spark and spur on state action.</p>
         </div>
+        
         <div class="thumbnail">
             <img src="../blog/2021/10/29/how-to-demobilize-far-right/achtung_nazi.png" alt="How to Demobilize the Far Right" title="How to Demobilize the Far Right">
         </div>
+        
     </div>
-    <div class="blog-entry" data-index="1" data-categories="Kampf der Nibelungen,Nibelungenlied,Wagner,far right,Germany" data-listing-date-sort="1628719200000" data-listing-file-modified-sort="1691786502484" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+    
+    <div class="blog-entry" data-index="1" data-categories="Kampf der Nibelungen,Nibelungenlied,Wagner,far right,Germany" data-listing-date-sort="1628719200000" data-listing-file-modified-sort="1691786502484" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="743">
         <div class="metadata">          
             <p class="date listing-date">12 August 2021</p>
         </div>
         <div class="body">
             <p class="title listing-title"><a href="../blog/2021/08/12/from-opera-to-mma/index.html">From Opera to MMA -- Nationalist Symbolism and the German Far Right</a></p>
+
+            
             <div class="post-categories listing-categories">
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Kampf der Nibelungen'); return false;">
                     Kampf der Nibelungen
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Nibelungenlied'); return false;">
                     Nibelungenlied
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Wagner'); return false;">
                     Wagner
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
                     far right
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
                     Germany
                 </div>
+                
             </div>
+            
+
             <p class="description listing-description">The symbolism of the Nibelungenlied has a long history of co-option by Germany’s extremists.</p>
         </div>
+        
         <div class="thumbnail">
             <img src="../blog/2021/08/12/from-opera-to-mma/wagner.png" alt="From Opera to MMA -- Nationalist Symbolism and the German Far Right" title="From Opera to MMA -- Nationalist Symbolism and the German Far Right">
         </div>
+        
     </div>
-    <div class="blog-entry" data-index="2" data-categories="Alternative für Deutschland (AfD),election,far right,Germany" data-listing-date-sort="1615503600000" data-listing-file-modified-sort="1691763248223" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+    
+    <div class="blog-entry" data-index="2" data-categories="Alternative für Deutschland (AfD),election,far right,Germany" data-listing-date-sort="1615503600000" data-listing-file-modified-sort="1691763248223" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="728">
         <div class="metadata">          
             <p class="date listing-date">12 March 2021</p>
         </div>
         <div class="body">
             <p class="title listing-title"><a href="../blog/2021/03/12/AfD-failing-to-keep-up/index.html">Alternative for Germany Is Failing to Keep Up</a></p>
+
+            
             <div class="post-categories listing-categories">
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Alternative für Deutschland (AfD)'); return false;">
                     Alternative für Deutschland (AfD)
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('election'); return false;">
                     election
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
                     far right
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
                     Germany
                 </div>
+                
             </div>
+            
+
             <p class="description listing-description">... the federal election in September could deprive the AfD of its position as the largest party of the opposition ...</p>
         </div>
+        
         <div class="thumbnail">
             <img src="../blog/2021/03/12/AfD-failing-to-keep-up/afd_covid.png" alt="Alternative for Germany Is Failing to Keep Up" title="Alternative for Germany Is Failing to Keep Up">
         </div>
+        
     </div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
-</section>
-<section id="section-3" class="level2">
-<h2 class="anchored" data-anchor-id="section-3">2020</h2>
-<div id="listing-posts_2020" class="quarto-listing quarto-listing-container-custom">
-<div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="far right,Poland,elections" data-listing-date-sort="1598911200000" data-listing-file-modified-sort="1698075293176" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
-        <div class="metadata">          
-            <p class="date listing-date">1 September 2020</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2020/09/01/poland-towards-autocracy/index.html">Poland is moving further towards autocracy</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
-                    far right
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Poland'); return false;">
-                    Poland
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('elections'); return false;">
-                    elections
-                </div>
-            </div>
-            <p class="description listing-description">In Poland, the right-wing ruling party uses polarisation to pursue its conservative autocratic agenda.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="../blog/2020/09/01/poland-towards-autocracy/pl_duda_rally.png" alt="Poland is moving further towards autocracy" title="Poland is moving further towards autocracy">
-        </div>
-    </div>
-    <div class="blog-entry" data-index="1" data-categories="far right,humour,social movements,counter-mobilisation,Germany" data-listing-date-sort="1596060000000" data-listing-file-modified-sort="1698071824847" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
-        <div class="metadata">          
-            <p class="date listing-date">30 July 2020</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2020/07/30/laugh-away-the-far-right/index.html">How to laugh away the far-right -- lessons from Germany</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
-                    far right
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('humour'); return false;">
-                    humour
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('social movements'); return false;">
-                    social movements
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('counter-mobilisation'); return false;">
-                    counter-mobilisation
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
-                    Germany
-                </div>
-            </div>
-            <p class="description listing-description">Anti-fascist activists have repeatedly turned to ‘tactical frivolity’ or calculated silliness to disrupt the attempts of far-right groups to perform dignified actions.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="../blog/2020/07/30/laugh-away-the-far-right/fahne.png" alt="How to laugh away the far-right -- lessons from Germany" title="How to laugh away the far-right -- lessons from Germany">
-        </div>
-    </div>
-    <div class="blog-entry" data-index="2" data-categories="far right,Germany,COVID-19,extremism,demonstrations" data-listing-date-sort="1589234400000" data-listing-file-modified-sort="1698074555205" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
-        <div class="metadata">          
-            <p class="date listing-date">12 May 2020</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2020/05/12/extremists-thrive-in-crisis/index.html">Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
-                    far right
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
-                    Germany
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('COVID-19'); return false;">
-                    COVID-19
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('extremism'); return false;">
-                    extremism
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('demonstrations'); return false;">
-                    demonstrations
-                </div>
-            </div>
-            <p class="description listing-description">The pandemic crisis offers opportunities for extremist groups to attract those most hardly hit, but there are ways to prevent this.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="../blog/2020/05/12/extremists-thrive-in-crisis/sachsen2020-4-20.png" alt="Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception" title="Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception">
-        </div>
-    </div>
-    <div class="blog-entry" data-index="3" data-categories="far right,demonstrations,COVID-19,Germany" data-listing-date-sort="1588888800000" data-listing-file-modified-sort="1691751577815" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
-        <div class="metadata">          
-            <p class="date listing-date">8 May 2020</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2020/05/08/covid-FR-demos-pause/index.html">COVID-19 and the Pause of Far-Right Demonstrations in Germany</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
-                    far right
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('demonstrations'); return false;">
-                    demonstrations
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('COVID-19'); return false;">
-                    COVID-19
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
-                    Germany
-                </div>
-            </div>
-            <p class="description listing-description">COVID-19 has shutdown numerous activities in the public spaces of Europe—including far-right demonstrations. Yet the relaxation of protective measures will surely bring renewed far-right demonstration activity.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="../blog/2020/05/08/covid-FR-demos-pause/index_files/figure-html/fr_de_demos.png" alt="COVID-19 and the Pause of Far-Right Demonstrations in Germany" title="COVID-19 and the Pause of Far-Right Demonstrations in Germany">
-        </div>
-    </div>
-    <div class="blog-entry" data-index="4" data-categories="far right,Germany,Combat 18,extremism,banning,proscription" data-listing-date-sort="1581894000000" data-listing-file-modified-sort="1698073845680" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
-        <div class="metadata">          
-            <p class="date listing-date">17 February 2020</p>
-        </div>
-        <div class="body">
-            <p class="title listing-title"><a href="../blog/2020/02/17/germany-is-banning-enough/index.html">Germany -- Is banning far-right groups enough?</a></p>
-            <div class="post-categories listing-categories">
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
-                    far right
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
-                    Germany
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('Combat 18'); return false;">
-                    Combat 18
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('extremism'); return false;">
-                    extremism
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
-                    banning
-                </div>
-                <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
-                    proscription
-                </div>
-            </div>
-            <p class="description listing-description">The case of far-right group Combat 18 has prompted a wider re-examination of far-right extremism and the utility of bans.</p>
-        </div>
-        <div class="thumbnail">
-            <img src="../blog/2020/02/17/germany-is-banning-enough/de_FR_graffiti.png" alt="Germany -- Is banning far-right groups enough?" title="Germany -- Is banning far-right groups enough?">
-        </div>
-    </div>
+    
 </div>
 <div class="listing-no-matching d-none">
 No matching items
@@ -760,32 +830,257 @@ No matching items
 </div>
 </section>
 <section id="section-4" class="level2">
-<h2 class="anchored" data-anchor-id="section-4">2019</h2>
+<h2 class="anchored" data-anchor-id="section-4">2020</h2>
+<div id="listing-posts_2020" class="quarto-listing quarto-listing-container-custom">
+<div class="list blog">
+    
+    <div class="blog-entry" data-index="0" data-categories="far right,Poland,elections" data-listing-date-sort="1598911200000" data-listing-file-modified-sort="1698075293176" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="729">
+        <div class="metadata">          
+            <p class="date listing-date">1 September 2020</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/09/01/poland-towards-autocracy/index.html">Poland is moving further towards autocracy</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Poland'); return false;">
+                    Poland
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('elections'); return false;">
+                    elections
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">In Poland, the right-wing ruling party uses polarisation to pursue its conservative autocratic agenda.</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2020/09/01/poland-towards-autocracy/pl_duda_rally.png" alt="Poland is moving further towards autocracy" title="Poland is moving further towards autocracy">
+        </div>
+        
+    </div>
+    
+    <div class="blog-entry" data-index="1" data-categories="far right,humour,social movements,counter-mobilisation,Germany" data-listing-date-sort="1596060000000" data-listing-file-modified-sort="1698071824847" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1480">
+        <div class="metadata">          
+            <p class="date listing-date">30 July 2020</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/07/30/laugh-away-the-far-right/index.html">How to laugh away the far-right -- lessons from Germany</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('humour'); return false;">
+                    humour
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('social movements'); return false;">
+                    social movements
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('counter-mobilisation'); return false;">
+                    counter-mobilisation
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">Anti-fascist activists have repeatedly turned to ‘tactical frivolity’ or calculated silliness to disrupt the attempts of far-right groups to perform dignified actions.</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2020/07/30/laugh-away-the-far-right/fahne.png" alt="How to laugh away the far-right -- lessons from Germany" title="How to laugh away the far-right -- lessons from Germany">
+        </div>
+        
+    </div>
+    
+    <div class="blog-entry" data-index="2" data-categories="far right,Germany,COVID-19,extremism,demonstrations" data-listing-date-sort="1589234400000" data-listing-file-modified-sort="1698074555205" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="939">
+        <div class="metadata">          
+            <p class="date listing-date">12 May 2020</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/05/12/extremists-thrive-in-crisis/index.html">Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('COVID-19'); return false;">
+                    COVID-19
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('extremism'); return false;">
+                    extremism
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('demonstrations'); return false;">
+                    demonstrations
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">The pandemic crisis offers opportunities for extremist groups to attract those most hardly hit, but there are ways to prevent this.</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2020/05/12/extremists-thrive-in-crisis/sachsen2020-4-20.png" alt="Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception" title="Extremists thrive in times of crisis -- the COVID-19 pandemic is no exception">
+        </div>
+        
+    </div>
+    
+    <div class="blog-entry" data-index="3" data-categories="far right,demonstrations,COVID-19,Germany" data-listing-date-sort="1588888800000" data-listing-file-modified-sort="1691751577815" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1114">
+        <div class="metadata">          
+            <p class="date listing-date">8 May 2020</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/05/08/covid-FR-demos-pause/index.html">COVID-19 and the Pause of Far-Right Demonstrations in Germany</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('demonstrations'); return false;">
+                    demonstrations
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('COVID-19'); return false;">
+                    COVID-19
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">COVID-19 has shutdown numerous activities in the public spaces of Europe—including far-right demonstrations. Yet the relaxation of protective measures will surely bring renewed far-right demonstration activity.</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2020/05/08/covid-FR-demos-pause/index_files/figure-html/fr_de_demos.png" alt="COVID-19 and the Pause of Far-Right Demonstrations in Germany" title="COVID-19 and the Pause of Far-Right Demonstrations in Germany">
+        </div>
+        
+    </div>
+    
+    <div class="blog-entry" data-index="4" data-categories="far right,Germany,Combat 18,extremism,banning,proscription" data-listing-date-sort="1581894000000" data-listing-file-modified-sort="1698073845680" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1141">
+        <div class="metadata">          
+            <p class="date listing-date">17 February 2020</p>
+        </div>
+        <div class="body">
+            <p class="title listing-title"><a href="../blog/2020/02/17/germany-is-banning-enough/index.html">Germany -- Is banning far-right groups enough?</a></p>
+
+            
+            <div class="post-categories listing-categories">
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
+                    far right
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Germany'); return false;">
+                    Germany
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('Combat 18'); return false;">
+                    Combat 18
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('extremism'); return false;">
+                    extremism
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('banning'); return false;">
+                    banning
+                </div>
+                
+                <div class="post-category listing-category" onclick="window.quartoListingCategory('proscription'); return false;">
+                    proscription
+                </div>
+                
+            </div>
+            
+
+            <p class="description listing-description">The case of far-right group Combat 18 has prompted a wider re-examination of far-right extremism and the utility of bans.</p>
+        </div>
+        
+        <div class="thumbnail">
+            <img src="../blog/2020/02/17/germany-is-banning-enough/de_FR_graffiti.png" alt="Germany -- Is banning far-right groups enough?" title="Germany -- Is banning far-right groups enough?">
+        </div>
+        
+    </div>
+    
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5">2019</h2>
 <div id="listing-posts_2019" class="quarto-listing quarto-listing-container-custom">
 <div class="list blog">
-    <div class="blog-entry" data-index="0" data-categories="far right,Poland,elections" data-listing-date-sort="1572127200000" data-listing-file-modified-sort="1698072581313" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+    
+    <div class="blog-entry" data-index="0" data-categories="far right,Poland,elections" data-listing-date-sort="1572127200000" data-listing-file-modified-sort="1698072581313" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="726">
         <div class="metadata">          
             <p class="date listing-date">27 October 2019</p>
         </div>
         <div class="body">
             <p class="title listing-title"><a href="../blog/2019/10/27/whither-poland/index.html">Whither Poland? After the 2019 parliamentary elections</a></p>
+
+            
             <div class="post-categories listing-categories">
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('far right'); return false;">
                     far right
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('Poland'); return false;">
                     Poland
                 </div>
+                
                 <div class="post-category listing-category" onclick="window.quartoListingCategory('elections'); return false;">
                     elections
                 </div>
+                
             </div>
+            
+
             <p class="description listing-description">The 2020 Presidential election will be the first indicator of how the Polish electorate is responding to the work of the second PiS government.</p>
         </div>
+        
         <div class="thumbnail">
             <img src="../blog/2019/10/27/whither-poland/pl_election_breakdown.png" alt="Whither Poland? After the 2019 parliamentary elections" title="Whither Poland? After the 2019 parliamentary elections">
         </div>
+        
     </div>
+    
 </div>
 <div class="listing-no-matching d-none">
 No matching items
@@ -835,18 +1130,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -878,11 +1162,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("michaelczeller\.github\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -892,8 +1215,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -905,7 +1237,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -949,6 +1404,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -974,6 +1430,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1036,13 +1518,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left"><span class="faux-block"><i class="bi-cc-circle"></i> 2022–2024 Michael C. Zeller <br></span> <span class="faux-block">All content licensed under <br></span> <span class="faux-block"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><i class="bi-cc-circle"></i> Creative Commons CC BY-SA 4.0</a></span><br>
+    <div class="nav-footer-left">
+<p><span class="faux-block"><i class="bi-cc-circle"></i> 2022–2024 Michael C. Zeller <br></span> <span class="faux-block">All content licensed under <br></span> <span class="faux-block"><a href="https://creativecommons.org/licenses/by-sa/4.0/"><i class="bi-cc-circle"></i> Creative Commons CC BY-SA 4.0</a></span></p>
 </div>   
-    <div class="nav-footer-center"><span class="faux-block"><strong>ORCID</strong> <a href="https://orcid.org/0000-0002-2422-3896">0000-0002-2422-3896</a><br></span> <span class="faux-block"><a href="https://scholar.google.com/citations?user=rmMObtUAAAAJ&amp;hl=en&amp;oi=ao"><i class="bi-google"></i> - Google Scholar</a></span><br>
+    <div class="nav-footer-center">
+<p><span class="faux-block"><strong>ORCID</strong> <a href="https://orcid.org/0000-0002-2422-3896">0000-0002-2422-3896</a><br></span> <span class="faux-block"><a href="https://scholar.google.com/citations?user=rmMObtUAAAAJ&amp;hl=en&amp;oi=ao"><i class="bi-google"></i> - Google Scholar</a></span></p>
 </div>
-    <div class="nav-footer-right"><span class="faux-block">Made with ‘R’ and <a href="https://quarto.org/">Quarto</a><br></span> <span class="faux-block"><a href="https://twitter.com/michaelczeller"><i class="bi-twitter"></i></a> <a href="https://github.com/michaelczeller"><i class="bi-github"></i></a></span></div>
+    <div class="nav-footer-right">
+<p><span class="faux-block">Made with ‘R’ and <a href="https://quarto.org/">Quarto</a><br></span> <span class="faux-block"><a href="https://twitter.com/michaelczeller"><i class="bi-twitter"></i></a> <a href="https://github.com/michaelczeller"><i class="bi-github"></i></a></span></p>
+</div>
   </div>
 </footer>
+
 
 
 
