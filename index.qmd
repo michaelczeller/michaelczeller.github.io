@@ -6,7 +6,7 @@ about:
   template: trestles
   image-shape: rounded
   image-width: 20em
-pagetitle: "{{< meta website.title >}}"
+pagetitle: "{{< meta title >}}"
 main-photo: /files/profiles/zeller2019.jpg
 main-photo-square: /files/profiles/zeller2019-square.jpg
 title-block-banner: "#170C3A"

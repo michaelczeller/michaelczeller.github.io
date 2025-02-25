@@ -388,7 +388,7 @@ bundestag
 
 @fig-interactive-map shows the Wahlkreise and, by clicking on them, results for the most prominent parties.
 
-```{r interactive-map, message = FALSE, warning=FALSE, fig.cap="Map of Wahlkreise."}
+```{r interactive-map, message = FALSE, warning=FALSE, fig.cap="Map of Wahlkreise coloured by strongest party (Zweitstimmen)."}
 #| label: fig-interactive-map
 
 ## Zweitstimme
@@ -407,15 +407,39 @@ kerg_2_wide <- kerg_2 %>%
   select(Gebietsnummer, Gebietsname, Gruppenname, Prozent) %>% 
   pivot_wider(names_from = "Gruppenname", values_from = "Prozent")
 
+kerg_2_wide$CDU[is.na(kerg_2_wide$CDU)] <- 0
+kerg_2_wide$CSU[is.na(kerg_2_wide$CSU)] <- 0
+
+kerg_2_wide <- kerg_2_wide %>% 
+  mutate(Winner=case_when(
+    SPD == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "SPD",
+    CDU == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "CDU",
+    CSU == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "CSU",
+    GRÜNE==pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "GRÜNE",
+    FDP == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "FDP",
+    AfD == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "AfD",
+    BSW == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "BSW",
+    `Die Linke`==pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "LINKE",
+  ))
+
 wkr_2 <- DE25 %>% left_join(kerg_2_wide, by = c("WKR_NR" = "Gebietsnummer"))
 
-mapview(wkr_2, alpha.regions = 0.2, aplha = 1,
+colours<-mapviewColors(
+  x=wkr_2,
+  zcol = "Winner",
+  colors=c("brown","#000000","navy","#FFED00","#64A12D","#BE3075","#EB001F"),
+  # "#009EE0"
+  at=c("AfD","CDU","CSU","FDP","GRÜNE","LINKE","SPD")
+  )
+
+mapview(wkr_2, # alpha.regions = 0.2, aplha = 1,
+        zcol = "Winner",col.regions = colours,
         label="Gebietsname", legend=F, layer.name='2025 BTW',
         map.types = c("CartoDB.Positron","CartoDB.DarkMatter"),
         popup = popupTable(kerg_2_wide,
-                           zcol = c("Gebietsname",
-                                    "AfD","CDU","CSU","SPD",
-                                    "GRÜNE","Die Linke", "BSW","FDP")))
+                           zcol = c("Gebietsname", "Winner",
+                                    "AfD","BSW","CDU","CSU","FDP",
+                                    "GRÜNE","Die Linke","SPD")))
 
 ```
 
