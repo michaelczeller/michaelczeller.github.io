@@ -443,7 +443,28 @@ mapview(wkr_2, # alpha.regions = 0.2, aplha = 1,
 
 ```
 
+@fig-tmap shows the Wahlkreise and, by clicking on them, results for the most prominent parties.
 
+```{r tmap, message = FALSE, warning=FALSE, fig.cap="Map of Wahlkreise coloured by strongest party (Zweitstimmen)."}
+#| label: fig-tmap
+
+library(tmap)
+
+tmap_mode("view")
+
+tm_shape(wkr_2) + 
+  tm_polygons("Winner", 
+    palette = c(
+      "AfD" = "brown",
+      "CDU" = "#000000", 
+      "CSU" = "navy", 
+      "GRÜNE" = "#64A12D",
+      "LINKE" = "#BE3075",
+      "SPD" = "#EB001F")
+    )+
+  tm_basemap(NULL)
+
+```
 
 <!-- {{< video https://www.youtube.com/watch?v=EDxuMXb0joE >}} -->
 
