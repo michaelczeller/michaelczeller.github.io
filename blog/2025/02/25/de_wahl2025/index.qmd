@@ -1,0 +1,1574 @@
+---
+title: Bundestagswahl 2025
+date: 2025-02-25
+description: "Germany's 2025 federal parliamentary election results."
+image: btw2025.png
+twitter-card:
+  image: "btw2025.png"
+open-graph:
+  image: "btw2025.png"
+categories:
+  - Germany
+  - elections
+---
+
+Data and visualisation of the 2025 federal parliamentary election results in Germany. Shapefile and election results from Bundeswahlleiterin: <https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata/btw25/daten/>
+
+```{r data-setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidygeocoder)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(mapview)
+library(dplyr)
+library(spatstat)
+library(leafpop)
+library(readxl)
+
+DE25<-st_read("btw25_geometrie_wahlkreise_vg250_shp_geo/btw25_geometrie_wahlkreise_vg250_shp_geo.shp")
+
+kerg <- read_delim("kerg2_00285.csv", delim = ";", 
+                   escape_double = FALSE, trim_ws = TRUE, skip = 9)
+
+kerg$Gebietsnummer <- as.numeric(kerg$Gebietsnummer)
+
+kerg$Prozent        <- gsub(",", ".", kerg$Prozent)
+kerg$VorpProzent    <- gsub(",", ".", kerg$VorpProzent)
+kerg$DiffProzent    <- gsub(",", ".", kerg$DiffProzent)
+kerg$DiffProzentPkt <- gsub(",", ".", kerg$DiffProzentPkt)
+
+kerg$Prozent        <- as.numeric(kerg$Prozent)
+kerg$VorpProzent    <- as.numeric(kerg$VorpProzent)
+kerg$DiffProzent    <- as.numeric(kerg$DiffProzent)
+kerg$DiffProzentPkt <- as.numeric(kerg$DiffProzentPkt)
+
+```
+
+
+@fig-results-bar shows the results of the five principal parties entering the Bundestag (i.e., excluding SSW).
+
+```{r results-bar, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Electoral results of the largest parties.", fig.width=8.5}
+#| label: fig-results-bar
+
+## Zweitstimme votes
+zs<-kerg %>% dplyr::filter(Stimme==2 & Gebietsart=="Bund" & Gruppenname=="SPD" | 
+                           Stimme==2 & Gebietsart=="Bund" & Gruppenname=="CDU" |
+                           Stimme==2 & Gebietsart=="Bund" & Gruppenname=="CSU" |
+                           Stimme==2 & Gebietsart=="Bund" & Gruppenname=="FDP" |
+                           Stimme==2 & Gebietsart=="Bund" & Gruppenname=="AfD" |
+                         Stimme==2 & Gebietsart=="Bund" & Gruppenname=="GRÜNE" |
+                         Stimme==2 & Gebietsart=="Bund" & Gruppenname=="Die Linke"
+                         )
+
+## create new joint CDU/CSU total
+anz <- zs %>% dplyr::filter(Gruppenname=="CDU" | Gruppenname=="CSU") %>% summarise(TOT=sum(Anzahl))
+pro <- zs %>% dplyr::filter(Gruppenname=="CDU" | Gruppenname=="CSU") %>% summarise(PRO=sum(Prozent))
+Vanz <- zs %>% dplyr::filter(Gruppenname=="CDU" | Gruppenname=="CSU") %>% summarise(vTOT=sum(VorpAnzahl))
+Vpro <- zs %>% dplyr::filter(Gruppenname=="CDU" | Gruppenname=="CSU") %>% summarise(vPRO=sum(VorpProzent))
+diffPkt <- zs %>% dplyr::filter(Gruppenname=="CDU" | Gruppenname=="CSU") %>% summarise(vdiffPkt=sum(DiffProzentPkt))
+
+zs <- add_row(zs, Wahlart = "BT", Wahltag = "23.02.2025", Gebietsart = "Bund", 
+              Gebietsnummer=99, Gebietsname="Bundesgebiet", Gruppenart="Partei",
+              Gruppenname="CDU/CSU", Stimme = 2,
+              Anzahl=anz$TOT,
+              Prozent=pro$PRO,
+              VorpAnzahl=Vanz$vTOT,
+              VorpProzent=Vpro$vPRO,
+              DiffProzentPkt=diffPkt$vdiffPkt
+              )
+
+## keep CDU/CSU
+zs1<-zs %>% dplyr::filter(Gruppenname=="SPD" | 
+                          Gruppenname=="CDU/CSU" |
+                          Gruppenname=="FDP" |
+                          Gruppenname=="AfD" |
+                          Gruppenname=="GRÜNE" |
+                          Gruppenname=="Die Linke"
+                          )
+
+ggplot(zs1, aes(x=Gruppenname, y=Prozent, fill=Gruppenname))+
+  geom_bar(colour="black", linewidth=0.4,stat = "identity")+
+  geom_text(aes(y=(Prozent-2), label=round(Prozent, 1)), color="black", size=7)+
+  geom_text(data=zs1 %>% filter(Gruppenname=="CDU/CSU"),
+            aes(y=(Prozent-2), label=round(Prozent, 2)), color="grey", size=7)+
+  scale_fill_manual(values = c("AfD"="brown", # "#009EE0"
+                               "CDU/CSU"="black",
+                               "FDP"="#FFED00", # "gold",
+                               "GRÜNE"="#64A12D",
+                               "Die Linke"="#BE3075",
+                               "SPD"="#EB001F")) +
+  theme_minimal()+xlab("")+
+  scale_y_continuous("Percent", breaks=seq(0,30,5), minor_breaks=seq(0,30,1), limits=c(0,30))+
+  theme(axis.text.x = element_text(angle = 45, vjust = 1.0, hjust=1, size=12),
+        axis.text.y = element_text(size = 12),
+        axis.title.y = element_text(size = 12),
+        legend.position = "none")
+
+```
+
+
+```{r change-bar, message=FALSE, warning=FALSE, fig.cap="Change in electoral results from 2021 results.", fig.width=8.5}
+#| label: fig-change-bar
+
+ggplot(zs1, aes(x=Gruppenname, y=DiffProzentPkt)) +
+  geom_bar(stat="identity", colour="black", aes(fill=Gruppenname), legend=FALSE)+ 
+  scale_fill_manual(values = c("AfD"="brown", # "#009EE0"
+                               "CDU/CSU"="black",
+                               "FDP"="#FFED00", # "gold",
+                               "GRÜNE"="#64A12D",
+                               "Die Linke"="#BE3075",
+                               "SPD"="#EB001F")) +
+  theme_void()+xlab("")+
+  geom_text(aes(label = paste(round(DiffProzentPkt, 1), "%"),
+                vjust = ifelse(DiffProzentPkt >= 0, 1.5, -0.5)), size=7)+
+  geom_text(data=zs1 %>% filter(Gruppenname=="CDU/CSU"),
+            aes(label = paste(round(DiffProzentPkt, 1), "%"),
+                vjust = ifelse(DiffProzentPkt >= 0, 1.5, -0.5)), 
+            color="grey", size=7)+
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust=1, size=12),
+        legend.position = "none")
+```
+
+# Wahlkreis plots
+
+@fig-panel-maps shows the areas of electoral strength for the parliamentary parties as well as the generally high election participation.
+
+```{r panel-maps, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Maps of electoral performance of the five main parties entering the Bundestag.", fig.height=16}
+#| label: fig-panel-maps
+
+## SPD - Zweitstimme
+kerg_SPD2 <- kerg %>% dplyr::filter(Stimme == 2 & 
+                                      Gebietsart == "Wahlkreis" &
+                                      Gruppenname == "SPD")
+
+wkr_SPD2 <- DE25 %>% left_join(kerg_SPD2, by = c("WKR_NR" = "Gebietsnummer"))
+
+map_SPD2 <- ggplot(wkr_SPD2) +
+  geom_sf(aes(fill = Prozent))+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("SPD %", low = "white", high = "#EB001F")+
+  guides(fill = guide_colourbar(position = "bottom")) +
+  theme_void()
+
+## AfD - Zweitstimme
+kerg_AfD2 <- kerg %>% dplyr::filter(Stimme == 2 & 
+                                      Gebietsart == "Wahlkreis" &
+                                      Gruppenname == "AfD")
+
+wkr_AfD2 <- DE25 %>% left_join(kerg_AfD2, by = c("WKR_NR" = "Gebietsnummer"))
+
+map_AfD2 <- ggplot(wkr_AfD2) +
+  geom_sf(aes(fill = Prozent))+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("AfD %", low = "white", high = "brown")+ # "#009EE0"
+  guides(fill = guide_colourbar(position = "bottom")) +
+  theme_void()
+
+## GRÜNE - Zweitstimme
+kerg_GRÜNE2 <- kerg %>% dplyr::filter(Stimme == 2 & 
+                                      Gebietsart == "Wahlkreis" &
+                                      Gruppenname == "GRÜNE")
+
+wkr_GRÜNE2 <- DE25 %>% left_join(kerg_GRÜNE2, by = c("WKR_NR" = "Gebietsnummer"))
+
+map_GRÜNE2 <- ggplot(wkr_GRÜNE2) +
+  geom_sf(aes(fill = Prozent))+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("GRÜNE %", low = "white", high = "#64A12D")+
+  guides(fill = guide_colourbar(position = "bottom")) +
+  theme_void()
+
+## CDU/CSU - Zweitstimme
+kerg_CDU_CSU2 <- kerg %>% dplyr::filter(Stimme == 2 & 
+                                      Gebietsart == "Wahlkreis" &
+                                      Gruppenname == "CDU" | 
+                                      Stimme == 2 & 
+                                      Gebietsart == "Wahlkreis" &
+                                      Gruppenname == "CSU" )
+
+wkr_CDU_CSU2 <- DE25 %>% left_join(kerg_CDU_CSU2, by = c("WKR_NR" = "Gebietsnummer"))
+
+map_CDU_CSU2 <- ggplot(wkr_CDU_CSU2) +
+  geom_sf(aes(fill = Prozent))+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("CDU/CSU %", low = "white", high = "black")+
+  guides(fill = guide_colourbar(position = "bottom")) +
+  theme_void()
+
+## Die Linke - Zweitstimme
+kerg_Die_Linke2 <- kerg %>% dplyr::filter(Stimme == 2 & 
+                                      Gebietsart == "Wahlkreis" &
+                                      Gruppenname == "Die Linke")
+
+wkr_Die_Linke2 <- DE25 %>% left_join(kerg_Die_Linke2, by = c("WKR_NR" = "Gebietsnummer"))
+
+map_Die_Linke2 <- ggplot(wkr_Die_Linke2) +
+  geom_sf(aes(fill = Prozent))+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("Die Linke %", low = "white", high = "#BE3075")+
+  guides(fill = guide_colourbar(position = "bottom")) +
+  # guides(fill = guide_legend(position = "bottom")) +
+  theme_void()
+
+# alpha("red",0.2)
+
+## PARTICIPATION
+kerg_part <- kerg %>% dplyr::filter(Gebietsart == "Wahlkreis" &
+                                      Gruppenname == "Wählende")
+
+wkr_part <- DE25 %>% left_join(kerg_part, by = c("WKR_NR" = "Gebietsnummer"))
+
+map_part <- ggplot(wkr_part) +
+  geom_sf(aes(fill = Prozent))+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("Participation %", low = "white", high = "purple")+
+  guides(fill = guide_colourbar(position = "bottom")) +
+  theme_void()
+
+library(cowplot)
+maps_btw2025 <- plot_grid(map_CDU_CSU2, map_AfD2, map_SPD2,
+                          map_GRÜNE2, map_Die_Linke2, map_part,
+                          nrow = 3, align = "h")+ # , labels = c('A', 'B')
+  theme(plot.background=element_rect(color = "black"))
+
+maps_btw2025
+
+# png(file=paste0("maps_btw2025", as.character(Sys.Date()), ".png"), width = 300, height = 270, units = 'mm', res = 300)
+# plot(maps_btw2025)
+# dev.off()
+```
+
+# Parliamentary seats distribution
+
+@fig-parl-seatsA shows the distribution of seats in the Bundestag following the election.
+
+```{r parl-seatsA, message=FALSE, warning=FALSE, fig.cap="Bundestag seat distribution.", fig.width=8.5}
+#| label: fig-parl-seatsA
+
+# https://stackoverflow.com/questions/42729174/creating-a-half-donut-or-parliamentary-seating-chart
+
+library(ggforce)
+
+parlDiag <- function(Parties, shares, cols = NULL, repr=c("absolute", "proportion")) {
+  repr = match.arg(repr)
+  stopifnot(length(Parties) == length(shares))
+  if (repr == "proportion") {
+    stopifnot(sum(shares) == 1)
+  }
+  if (!is.null(cols)) {
+    names(cols) <- Parties
+  }
+
+  # arc start/end in rads, last one reset bc rounding errors
+  cc <- cumsum(c(-pi/2, switch(repr, "absolute" = (shares / sum(shares)) * pi, "proportion" = shares * pi)))
+  cc[length(cc)] <- pi/2
+
+  # get angle of arc midpoints
+  meanAngles <- colMeans(rbind(cc[2:length(cc)], cc[1:length(cc)-1]))
+
+  # unit circle
+  labelX <- sin(meanAngles)
+  labelY <- cos(meanAngles)
+
+  # prevent bounding box < y=0
+  labelY <- ifelse(labelY < 0.015, 0.015, labelY)
+
+  p <- ggplot() + theme_no_axes() + coord_fixed() +
+    expand_limits(x = c(-1.3, 1.3), y = c(0, 1.3)) + 
+    theme(panel.border = element_blank()) +
+    theme(legend.position = "none") +
+
+    geom_arc_bar(aes(x0 = 0, y0 = 0, r0 = 0.5, r = 1,
+                     start = cc[1:length(shares)], 
+                     end = c(cc[2:length(shares)], pi/2), fill = Parties)) +
+
+    switch(is.null(cols)+1, scale_fill_manual(values = cols), NULL) + 
+
+    # for label and line positions, just scale sin & cos to get in and out of arc
+    geom_path(aes(x = c(0.9 * labelX, 1.15 * labelX), y = c(0.9 * labelY, 1.15 * labelY),
+                  group = rep(1:length(shares), 2)), colour = "white", size = 2) +
+    geom_path(aes(x = c(0.9 * labelX, 1.15 * labelX), y = c(0.9 * labelY, 1.15 * labelY),
+                  group = rep(1:length(shares), 2)), size = 1) +
+
+    geom_label(aes(x = 1.15 * labelX, y = 1.15 * labelY, 
+                   label = switch(repr,
+                                  "absolute" = sprintf("%s\n%i", Parties, shares),
+                                  "proportion" = sprintf("%s\n%i%%", Parties, round(shares*100)))), fontface = "bold", 
+               label.padding = unit(1, "points")) +
+
+    geom_point(aes(x = 0.9 * labelX, y = 0.9 * labelY), colour = "white", size = 2) +
+    geom_point(aes(x = 0.9 * labelX, y = 0.9 * labelY)) +
+    geom_text(aes(x = 0, y = 0, label = switch(repr, 
+                                               "absolute" = (sprintf("Total: %i MPs", sum(shares))), 
+                                               "proportion" = "")),
+              fontface = "bold", size = 7) 
+
+  return(p)
+}
+
+bt <- data.frame(parties = c("AfD", "CDU/CSU", "SPD", "Grüne", "Linke", "SSW"),
+                 seats   = c(152,   208,       120,   85,      64,      1),
+                 cols    = c("brown","black", "red", "green", "hotpink", "navy"),
+                 colour  = c("brown","#000000","#EB001F","#64A12D","#BE3075","navy"), # "#009EE0"
+                 stringsAsFactors = FALSE)
+
+parlDiag(bt$parties, bt$seats, cols = bt$colour)
+
+```
+
+@fig-parl-seatsB shows the distribution of seats in the Bundestag following the election.
+
+```{r parl-seatsB, message=FALSE, warning=FALSE, fig.cap="Bundestag seat distribution.", fig.height=4}
+#| label: fig-parl-seatsB
+
+# <https://stackoverflow.com/questions/28917150/parliamentary-seats-graph-colors-and-labels>
+
+seats <- function(N,M, r0=2.5){ 
+ radii <- seq(r0, 1, len=M)
+
+ counts <- numeric(M)
+ pts = do.call(rbind,
+            lapply(1:M, function(i){
+              counts[i] <<- round(N*radii[i]/sum(radii[i:M]))
+              theta <- seq(0, pi, len = counts[i])
+              N <<- N - counts[i]
+              data.frame(x=radii[i]*cos(theta), y=radii[i]*sin(theta), r=i,
+                         theta=theta)
+            }  )
+  )
+   pts = pts[order(-pts$theta,-pts$r),]
+   pts
+ }
+
+
+election <- function(seats, counts){
+stopifnot(sum(counts)==nrow(seats))
+seats$party = rep(1:length(counts),counts)
+seats
+}
+
+layout = seats(630,16)
+result = election(layout, bt$seats) 
+
+# plot(result$x, result$y, 
+#     col=c("brown","black", "red", "green", "hotpink", "navy")[result$party], #numeric index
+#     pch=19, asp=1, 
+#      frame.plot=FALSE, # gets rid of the surrounding rectangle
+#     axes="F")   # gets rid of the numbers and ticks
+
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## https://github.com/zmeers/ggparliament
+library(ggparliament)
+
+bt <- data.frame(parties = c("AfD", "CDU/CSU", "SPD", "Grüne", "Linke", "SSW"),
+                 seats   = c(152,   208,       120,   85,      64,      1),
+                 cols    = c("brown","black", "red", "green", "hotpink", "navy"),
+                 colour  = c("#009EE0","#000000","#EB001F","#64A12D","#BE3075","navy"),
+                 stringsAsFactors = FALSE)
+
+germany <- parliament_data(election_data = bt, 
+                           parl_rows = 10,
+                           type = 'semicircle',
+                           party_seats = bt$seats)
+
+bundestag <- ggplot(germany, aes(x, y, colour = parties)) +
+  geom_parliament_seats(size = 3) +
+  labs(colour="Party") +  
+  theme_ggparliament(legend = TRUE) +
+  theme(legend.text=element_text(size=12),
+        legend.title=element_blank(),
+        legend.position = c(0.5, 0.25),
+        # legend.position = "bottom",
+        legend.background = element_rect(linetype = 1, linewidth = 0.5, colour = 1))+
+  scale_colour_manual(values = germany$colour, 
+                      limits = germany$parties) 
+
+bundestag
+
+```
+
+# mapview Interactive Map
+
+@fig-interactive-map shows the Wahlkreise and, by clicking on them, results for the most prominent parties.
+
+```{r interactive-map, message = FALSE, warning=FALSE, fig.cap="Map of Wahlkreise coloured by strongest party (Zweitstimmen)."}
+#| label: fig-interactive-map
+
+## Zweitstimme
+kerg_2 <- kerg %>% dplyr::filter(Stimme == 2 & Gebietsart == "Wahlkreis")
+
+kerg_2 <- kerg_2 %>% dplyr::filter(Gruppenname == "AfD"|
+                                     Gruppenname == "CDU"|
+                                     Gruppenname == "CSU"|
+                                     Gruppenname == "FDP"|
+                                     Gruppenname == "Die Linke"|
+                                     Gruppenname == "GRÜNE"|
+                                     Gruppenname == "BSW"|
+                                     Gruppenname == "SPD")
+
+kerg_2_wide <- kerg_2 %>% 
+  select(Gebietsnummer, Gebietsname, Gruppenname, Prozent) %>% 
+  pivot_wider(names_from = "Gruppenname", values_from = "Prozent")
+
+kerg_2_wide$CDU[is.na(kerg_2_wide$CDU)] <- 0
+kerg_2_wide$CSU[is.na(kerg_2_wide$CSU)] <- 0
+
+kerg_2_wide <- kerg_2_wide %>% 
+  mutate(Winner=case_when(
+    SPD == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "SPD",
+    CDU == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "CDU",
+    CSU == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "CSU",
+    GRÜNE==pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "GRÜNE",
+    FDP == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "FDP",
+    AfD == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "AfD",
+    BSW == pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "BSW",
+    `Die Linke`==pmax(SPD, CDU, GRÜNE, FDP, AfD, `Die Linke`, BSW, CSU) ~ "LINKE",
+  ))
+
+wkr_2 <- DE25 %>% left_join(kerg_2_wide, by = c("WKR_NR" = "Gebietsnummer"))
+
+colours<-mapviewColors(
+  x=wkr_2,
+  zcol = "Winner",
+  colors=c("brown","#000000","navy","#FFED00","#64A12D","#BE3075","#EB001F"),
+  # "#009EE0"
+  at=c("AfD","CDU","CSU","FDP","GRÜNE","LINKE","SPD")
+  )
+
+mapview(wkr_2, # alpha.regions = 0.2, aplha = 1,
+        zcol = "Winner",col.regions = colours,
+        label="Gebietsname", legend=F, layer.name='2025 BTW',
+        map.types = c("CartoDB.Positron","CartoDB.DarkMatter"),
+        popup = popupTable(kerg_2_wide,
+                           zcol = c("Gebietsname", "Winner",
+                                    "AfD","BSW","CDU","CSU","FDP",
+                                    "GRÜNE","Die Linke","SPD")))
+
+```
+
+# tmap Interactive Map
+
+@fig-tmap shows the Wahlkreise and, by clicking on them, results for the most prominent parties.
+
+```{r tmap, message = FALSE, warning=FALSE, fig.cap="Map of Wahlkreise coloured by strongest party (Zweitstimmen)."}
+#| label: fig-tmap
+
+library(tmap)
+
+tmap_mode("view")
+
+tm_shape(wkr_2) + 
+  tm_polygons("Winner", 
+    palette = c(
+      "AfD" = "brown",
+      "CDU" = "#000000", 
+      "CSU" = "navy", 
+      "GRÜNE" = "#64A12D",
+      "LINKE" = "#BE3075",
+      "SPD" = "#EB001F")
+    )+
+  tm_basemap(NULL)
+
+```
+
+<!-- {{< video https://www.youtube.com/watch?v=EDxuMXb0joE >}} -->
+
+<!-- > Wehrt euch, leistet Widerstand -->
+
+<!-- > gegen den Faschismus hier im Land. -->
+
+<!-- > Auf die Barrikaden, auf die Barrikaden! -->
+
+# Data download
+
+You can download the data by clicking the button below.
+
+```{r collapse = TRUE, comment = "#>", message = FALSE, warning=FALSE}
+
+library(downloadthis)
+
+kerg %>% download_this(
+    output_name = "kerg2_00285",
+    output_extension = ".csv",
+    button_label = "Download dataset as csv",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+
+DE25 %>% download_this(
+    output_name = "DE25",
+    output_extension = ".csv",
+    button_label = "Download shapefile as csv",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+
+```
+
+
+# A coda: polling data
+
+Wilko Zicht and Matthias Cantow have helpfully compiled political polling data from various survey institutes in Germany, available at <https://www.wahlrecht.de/umfragen/index.htm>.
+
+This data can be easily scraped and visualised, as below.
+
+```{r polling-lines, message=FALSE, warning=FALSE, fig.cap="German polling data."}
+#| label: fig-polling-lines
+
+library(rvest)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(tidyr)
+library(lubridate)
+
+# Allensbach --------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/allensbach.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:5), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+tab_allen <- table_df
+
+# Forsa -------------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/forsa.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+tab_forsa <- table_df
+
+# GMS -------------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/gms.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+tab_gms <- table_df
+
+# Infratest ----------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/dimap.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:3), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+tab_infratest <- table_df
+
+# Insa ----------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/insa.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Datum)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+table_df <- table_df %>% dplyr::select(-Var.15)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+tab_insa <- table_df
+
+# Forschungsgruppe Wahlen (Politbarometer) ------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/politbarometer.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## set column names
+colnames(table_df) <- table_df[1,]
+
+## remove header rows
+table_df <- table_df[-c(1:3), ] 
+
+## clean up table
+colnames(table_df)[1] <- "PollDate"
+colnames(table_df)[2] <- "PollSource"
+colnames(table_df)[12] <- "Var.12"
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## rename CDU/CSU
+table_df <- rename(table_df, "CDU.CSU" = "CDU/CSU")
+
+tab_fg_wahlen <- table_df
+
+# Verian -----------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/emnid.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+tab_verian <- table_df
+
+# YouGov -----------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/yougov.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+tab_yougov <- table_df
+
+# Bind tables together ----------------------------------------------------
+
+## remove unique column of tab_forsa
+tab_forsa <- tab_forsa %>% dplyr::select(-Nichtwähler.Unentschl.)
+
+tab_ALL <- rbind(tab_allen, tab_fg_wahlen, tab_forsa, tab_gms, 
+                 tab_infratest, tab_insa, tab_verian, tab_yougov)
+
+library(ggplot2)
+
+## remove percent signs
+tab_ALL$CDU.CSU <- str_remove_all(tab_ALL$CDU.CSU, " %")
+tab_ALL$SPD <- str_remove_all(tab_ALL$SPD, " %")
+tab_ALL$GRÜNE <- str_remove_all(tab_ALL$GRÜNE, " %")
+tab_ALL$FDP <- str_remove_all(tab_ALL$FDP, " %")
+tab_ALL$LINKE <- str_remove_all(tab_ALL$LINKE, " %")
+tab_ALL$AfD <- str_remove_all(tab_ALL$AfD, " %")
+tab_ALL$FW <- str_remove_all(tab_ALL$FW, " %")
+tab_ALL$BSW <- str_remove_all(tab_ALL$BSW, " %")
+tab_ALL$Sonstige <- str_remove_all(tab_ALL$Sonstige, " %")
+
+## swap comma separators for decimal points
+tab_ALL$CDU.CSU <- gsub(",", ".", tab_ALL$CDU.CSU)
+tab_ALL$SPD <- gsub(",", ".", tab_ALL$SPD)
+tab_ALL$GRÜNE <- gsub(",", ".", tab_ALL$GRÜNE)
+tab_ALL$FDP <- gsub(",", ".", tab_ALL$FDP)
+tab_ALL$LINKE <- gsub(",", ".", tab_ALL$LINKE)
+tab_ALL$AfD <- gsub(",", ".", tab_ALL$AfD)
+tab_ALL$FW <- gsub(",", ".", tab_ALL$FW)
+tab_ALL$BSW <- gsub(",", ".", tab_ALL$BSW)
+tab_ALL$Sonstige <- gsub(",", ".", tab_ALL$Sonstige)
+
+## make as numeric
+tab_ALL$CDU.CSU <- as.numeric(tab_ALL$CDU.CSU)
+tab_ALL$SPD <- as.numeric(tab_ALL$SPD)
+tab_ALL$GRÜNE <- as.numeric(tab_ALL$GRÜNE)
+tab_ALL$FDP <- as.numeric(tab_ALL$FDP)
+tab_ALL$LINKE <- as.numeric(tab_ALL$LINKE)
+tab_ALL$AfD <- as.numeric(tab_ALL$AfD)
+tab_ALL$FW <- as.numeric(tab_ALL$FW)
+tab_ALL$BSW <- as.numeric(tab_ALL$BSW)
+tab_ALL$Sonstige <- as.numeric(tab_ALL$Sonstige)
+
+tab_ALL_long <- tab_ALL %>% 
+  pivot_longer(cols=c(CDU.CSU:Sonstige), names_to='PARTY', values_to='VOTES')
+
+tab_ALL_long$PARTY <- factor(tab_ALL_long$PARTY,
+                             levels=c("CDU.CSU","SPD","GRÜNE","AfD",
+                                      "FDP","LINKE","BSW","FW","Sonstige"))
+
+### GROUP BY WEEK
+tab_ALL_long_mean <- tab_ALL_long %>% 
+  group_by(WEEK=floor_date(PollDate, "1 week"), PARTY) %>% 
+  summarise(WM = weighted.mean(VOTES, w = VOTES / sum(VOTES)))
+
+## pivot wide
+tab_ALL_wide_mean <- tab_ALL_long_mean %>% 
+  pivot_wider(names_from = PARTY, values_from = WM)
+
+ggplot(tab_ALL_long)+
+  geom_rect(aes(xmin=min(as.Date(-Inf)), xmax=max(as.Date(Inf)), ymin=-Inf, ymax=5), fill=alpha("grey85",0.01))+
+  geom_point(aes(x=PollDate, y=VOTES, colour=PARTY), 
+             shape=15, size=0.7, alpha=0.3)+
+  # stat_smooth(data=tab_ALL_long_mean, aes(x=PollDate, y=result, colour=PARTY),
+  #             method = "lm", formula = y ~ poly(x, 24), se = FALSE)+
+  geom_line(data=tab_ALL_long_mean, aes(x=WEEK, y=WM, colour=PARTY))+
+  geom_vline(xintercept=as.Date("2017-09-24","%Y-%m-%d"),
+             linetype="dashed",color="black")+
+  geom_text(aes(x=as.Date("2017-09-24","%Y-%m-%d")-56,y=42,label="Bundestagswahl"), 
+            size=3,angle=90,hjust=0,show.legend=F,color='black')+ 
+  geom_vline(xintercept=as.Date("2021-09-26","%Y-%m-%d"),
+             linetype="dashed",color="black")+
+  geom_text(aes(x=as.Date("2021-09-26","%Y-%m-%d")-56,y=42,label="Bundestagswahl"), 
+            size=3,angle=90,hjust=0,show.legend=F,color='black')+ 
+  geom_vline(xintercept=as.Date("2025-02-23","%Y-%m-%d"),
+             linetype="dashed",color="black")+
+  geom_text(aes(x=as.Date("2025-02-23","%Y-%m-%d")-56,y=42,label="Bundestagswahl"), 
+            size=3,angle=90,hjust=0,show.legend=F,color='black')+ 
+  theme_bw()+
+  scale_colour_manual(values=c("CDU.CSU"="black",
+                               "SPD"="#EB001F",
+                               "GRÜNE"="#64A12D",
+                               "FDP"="#FFED00",
+                               "LINKE"="#BE3075",
+                               "AfD"="#009EE0", # "brown"
+                               "FW"="orange",
+                               "BSW"="purple",
+                               "Sonstige"="grey"))+
+  scale_x_date("",date_labels="%Y",
+               date_breaks="1 year", minor_breaks="1 year", # minor_breaks="1 month", 
+               limits=c(min(tab_ALL_long$PollDate), max(tab_ALL_long$PollDate)), 
+               expand=c(0.02,0.02))+
+  scale_y_continuous("Percentage", breaks=seq(0,50,10), 
+                     minor_breaks=seq(0,50,10), limits=c(0,50))+
+  theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=1, size=10),
+        axis.text.y=element_text(size=12),
+        axis.title.y=element_text(size=12),
+        legend.position="bottom",
+        legend.title = element_blank())+
+  guides(colour=guide_legend(nrow=2,byrow=TRUE))
+
+
+
+```
+
+
+```{r scratch, message=FALSE, warning=FALSE}
+#| eval: false
+#| include: false
+
+# library(openxlsx)
+# write.xlsx(tab_ALL_long_mean, 'tab_ALL_long_mean.xlsx')
+# write.xlsx(tab_ALL_long, 'tab_ALL_long.xlsx')
+
+
+# Allensbach --------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/allensbach.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+# table_node <- html_nodes(webpage, "thead .dat2 , thead .befr, thead a, .wilko tbody td, .ws, thead .part, thead .dat")
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:5), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## remove percent signs
+table_df$CDU.CSU <- str_remove_all(table_df$CDU.CSU, " %")
+table_df$SPD <- str_remove_all(table_df$SPD, " %")
+table_df$GRÜNE <- str_remove_all(table_df$GRÜNE, " %")
+table_df$FDP <- str_remove_all(table_df$FDP, " %")
+table_df$LINKE <- str_remove_all(table_df$LINKE, " %")
+table_df$AfD <- str_remove_all(table_df$AfD, " %")
+table_df$FW <- str_remove_all(table_df$FW, " %")
+table_df$BSW <- str_remove_all(table_df$BSW, " %")
+table_df$Sonstige <- str_remove_all(table_df$Sonstige, " %")
+
+## swap comma separators for decimal points
+table_df$CDU.CSU <- gsub(",", ".", table_df$CDU.CSU)
+table_df$SPD <- gsub(",", ".", table_df$SPD)
+table_df$GRÜNE <- gsub(",", ".", table_df$GRÜNE)
+table_df$FDP <- gsub(",", ".", table_df$FDP)
+table_df$LINKE <- gsub(",", ".", table_df$LINKE)
+table_df$AfD <- gsub(",", ".", table_df$AfD)
+table_df$FW <- gsub(",", ".", table_df$FW)
+table_df$BSW <- gsub(",", ".", table_df$BSW)
+table_df$Sonstige <- gsub(",", ".", table_df$Sonstige)
+
+## make as numeric
+table_df$CDU.CSU <- as.numeric(table_df$CDU.CSU)
+table_df$SPD <- as.numeric(table_df$SPD)
+table_df$GRÜNE <- as.numeric(table_df$GRÜNE)
+table_df$FDP <- as.numeric(table_df$FDP)
+table_df$LINKE <- as.numeric(table_df$LINKE)
+table_df$AfD <- as.numeric(table_df$AfD)
+table_df$FW <- as.numeric(table_df$FW)
+table_df$BSW <- as.numeric(table_df$BSW)
+table_df$Sonstige <- as.numeric(table_df$Sonstige)
+
+tab_allen <- table_df
+
+# # ## remove dashes for missing values
+# # table_df$CDU.CSU <- gsub("-", "", table_df$CDU.CSU)
+# # table_df$SPD <- gsub("-", "", table_df$SPD)
+# # table_df$GRÜNE <- gsub("-", "", table_df$GRÜNE)
+# # table_df$FDP <- gsub("-", "", table_df$FDP)
+# # table_df$LINKE <- gsub("-", "", table_df$LINKE)
+# # table_df$AfD <- gsub("-", "", table_df$AfD)
+# # table_df$FW <- gsub("-", "", table_df$FW)
+# # table_df$BSW <- gsub("-", "", table_df$BSW)
+# # table_df$Sonstige <- gsub("-", "", table_df$Sonstige)
+# 
+# table_df <- table_df %>% 
+#   mutate_if(is.character, list(~na_if(., "-")))
+# 
+# table_df <- mutate_all(table_df, funs(replace(., .=='-', NA)))
+# 
+# table_df <- table_df %>% 
+#   mutate(across(c(CDU.CSU:Sonstige), na_if, "-"))
+# 
+# is.na(table_df) <- table_df == "-"
+# 
+# table_df <- table_df[table_df=="-"] <- NA
+# 
+# table_df$FW <- na_if(table_df$FW, "-")
+
+# Forsa -------------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/forsa.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+# table_node <- html_nodes(webpage, "thead .dat2 , thead .befr, thead a, .wilko tbody td, .ws, thead .part, thead .dat")
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## remove percent signs
+table_df$CDU.CSU <- str_remove_all(table_df$CDU.CSU, " %")
+table_df$SPD <- str_remove_all(table_df$SPD, " %")
+table_df$GRÜNE <- str_remove_all(table_df$GRÜNE, " %")
+table_df$FDP <- str_remove_all(table_df$FDP, " %")
+table_df$LINKE <- str_remove_all(table_df$LINKE, " %")
+table_df$AfD <- str_remove_all(table_df$AfD, " %")
+table_df$FW <- str_remove_all(table_df$FW, " %")
+table_df$BSW <- str_remove_all(table_df$BSW, " %")
+table_df$Sonstige <- str_remove_all(table_df$Sonstige, " %")
+
+## swap comma separators for decimal points
+table_df$CDU.CSU <- gsub(",", ".", table_df$CDU.CSU)
+table_df$SPD <- gsub(",", ".", table_df$SPD)
+table_df$GRÜNE <- gsub(",", ".", table_df$GRÜNE)
+table_df$FDP <- gsub(",", ".", table_df$FDP)
+table_df$LINKE <- gsub(",", ".", table_df$LINKE)
+table_df$AfD <- gsub(",", ".", table_df$AfD)
+table_df$FW <- gsub(",", ".", table_df$FW)
+table_df$BSW <- gsub(",", ".", table_df$BSW)
+table_df$Sonstige <- gsub(",", ".", table_df$Sonstige)
+
+## make as numeric
+table_df$CDU.CSU <- as.numeric(table_df$CDU.CSU)
+table_df$SPD <- as.numeric(table_df$SPD)
+table_df$GRÜNE <- as.numeric(table_df$GRÜNE)
+table_df$FDP <- as.numeric(table_df$FDP)
+table_df$LINKE <- as.numeric(table_df$LINKE)
+table_df$AfD <- as.numeric(table_df$AfD)
+table_df$FW <- as.numeric(table_df$FW)
+table_df$BSW <- as.numeric(table_df$BSW)
+table_df$Sonstige <- as.numeric(table_df$Sonstige)
+
+tab_forsa <- table_df
+
+# GMS -------------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/gms.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+# table_node <- html_nodes(webpage, "thead .dat2 , thead .befr, thead a, .wilko tbody td, .ws, thead .part, thead .dat")
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## remove percent signs
+table_df$CDU.CSU <- str_remove_all(table_df$CDU.CSU, " %")
+table_df$SPD <- str_remove_all(table_df$SPD, " %")
+table_df$GRÜNE <- str_remove_all(table_df$GRÜNE, " %")
+table_df$FDP <- str_remove_all(table_df$FDP, " %")
+table_df$LINKE <- str_remove_all(table_df$LINKE, " %")
+table_df$AfD <- str_remove_all(table_df$AfD, " %")
+table_df$FW <- str_remove_all(table_df$FW, " %")
+table_df$BSW <- str_remove_all(table_df$BSW, " %")
+table_df$Sonstige <- str_remove_all(table_df$Sonstige, " %")
+
+## swap comma separators for decimal points
+table_df$CDU.CSU <- gsub(",", ".", table_df$CDU.CSU)
+table_df$SPD <- gsub(",", ".", table_df$SPD)
+table_df$GRÜNE <- gsub(",", ".", table_df$GRÜNE)
+table_df$FDP <- gsub(",", ".", table_df$FDP)
+table_df$LINKE <- gsub(",", ".", table_df$LINKE)
+table_df$AfD <- gsub(",", ".", table_df$AfD)
+table_df$FW <- gsub(",", ".", table_df$FW)
+table_df$BSW <- gsub(",", ".", table_df$BSW)
+table_df$Sonstige <- gsub(",", ".", table_df$Sonstige)
+
+## make as numeric
+table_df$CDU.CSU <- as.numeric(table_df$CDU.CSU)
+table_df$SPD <- as.numeric(table_df$SPD)
+table_df$GRÜNE <- as.numeric(table_df$GRÜNE)
+table_df$FDP <- as.numeric(table_df$FDP)
+table_df$LINKE <- as.numeric(table_df$LINKE)
+table_df$AfD <- as.numeric(table_df$AfD)
+table_df$FW <- as.numeric(table_df$FW)
+table_df$BSW <- as.numeric(table_df$BSW)
+table_df$Sonstige <- as.numeric(table_df$Sonstige)
+
+tab_gms <- table_df
+
+# Infratest ----------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/dimap.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+# table_node <- html_nodes(webpage, "thead .dat2 , thead .befr, thead a, .wilko tbody td, .ws, thead .part, thead .dat")
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:3), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## remove percent signs
+table_df$CDU.CSU <- str_remove_all(table_df$CDU.CSU, " %")
+table_df$SPD <- str_remove_all(table_df$SPD, " %")
+table_df$GRÜNE <- str_remove_all(table_df$GRÜNE, " %")
+table_df$FDP <- str_remove_all(table_df$FDP, " %")
+table_df$LINKE <- str_remove_all(table_df$LINKE, " %")
+table_df$AfD <- str_remove_all(table_df$AfD, " %")
+table_df$FW <- str_remove_all(table_df$FW, " %")
+table_df$BSW <- str_remove_all(table_df$BSW, " %")
+table_df$Sonstige <- str_remove_all(table_df$Sonstige, " %")
+
+## swap comma separators for decimal points
+table_df$CDU.CSU <- gsub(",", ".", table_df$CDU.CSU)
+table_df$SPD <- gsub(",", ".", table_df$SPD)
+table_df$GRÜNE <- gsub(",", ".", table_df$GRÜNE)
+table_df$FDP <- gsub(",", ".", table_df$FDP)
+table_df$LINKE <- gsub(",", ".", table_df$LINKE)
+table_df$AfD <- gsub(",", ".", table_df$AfD)
+table_df$FW <- gsub(",", ".", table_df$FW)
+table_df$BSW <- gsub(",", ".", table_df$BSW)
+table_df$Sonstige <- gsub(",", ".", table_df$Sonstige)
+
+## make as numeric
+table_df$CDU.CSU <- as.numeric(table_df$CDU.CSU)
+table_df$SPD <- as.numeric(table_df$SPD)
+table_df$GRÜNE <- as.numeric(table_df$GRÜNE)
+table_df$FDP <- as.numeric(table_df$FDP)
+table_df$LINKE <- as.numeric(table_df$LINKE)
+table_df$AfD <- as.numeric(table_df$AfD)
+table_df$FW <- as.numeric(table_df$FW)
+table_df$BSW <- as.numeric(table_df$BSW)
+table_df$Sonstige <- as.numeric(table_df$Sonstige)
+
+tab_infratest <- table_df
+
+# Insa ----------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/insa.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+# table_node <- html_nodes(webpage, "thead .dat2 , thead .befr, thead a, .wilko tbody td, .ws, thead .part, thead .dat")
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Datum)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+table_df <- table_df %>% dplyr::select(-Var.15)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## remove percent signs
+table_df$CDU.CSU <- str_remove_all(table_df$CDU.CSU, " %")
+table_df$SPD <- str_remove_all(table_df$SPD, " %")
+table_df$GRÜNE <- str_remove_all(table_df$GRÜNE, " %")
+table_df$FDP <- str_remove_all(table_df$FDP, " %")
+table_df$LINKE <- str_remove_all(table_df$LINKE, " %")
+table_df$AfD <- str_remove_all(table_df$AfD, " %")
+table_df$FW <- str_remove_all(table_df$FW, " %")
+table_df$BSW <- str_remove_all(table_df$BSW, " %")
+table_df$Sonstige <- str_remove_all(table_df$Sonstige, " %")
+
+## swap comma separators for decimal points
+table_df$CDU.CSU <- gsub(",", ".", table_df$CDU.CSU)
+table_df$SPD <- gsub(",", ".", table_df$SPD)
+table_df$GRÜNE <- gsub(",", ".", table_df$GRÜNE)
+table_df$FDP <- gsub(",", ".", table_df$FDP)
+table_df$LINKE <- gsub(",", ".", table_df$LINKE)
+table_df$AfD <- gsub(",", ".", table_df$AfD)
+table_df$FW <- gsub(",", ".", table_df$FW)
+table_df$BSW <- gsub(",", ".", table_df$BSW)
+table_df$Sonstige <- gsub(",", ".", table_df$Sonstige)
+
+## make as numeric
+table_df$CDU.CSU <- as.numeric(table_df$CDU.CSU)
+table_df$SPD <- as.numeric(table_df$SPD)
+table_df$GRÜNE <- as.numeric(table_df$GRÜNE)
+table_df$FDP <- as.numeric(table_df$FDP)
+table_df$LINKE <- as.numeric(table_df$LINKE)
+table_df$AfD <- as.numeric(table_df$AfD)
+table_df$FW <- as.numeric(table_df$FW)
+table_df$BSW <- as.numeric(table_df$BSW)
+table_df$Sonstige <- as.numeric(table_df$Sonstige)
+
+tab_insa <- table_df
+
+# Forschungsgruppe Wahlen (Politbarometer) ------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/politbarometer.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+# table_node <- html_nodes(webpage, "thead .dat2 , thead .befr, thead a, .wilko tbody td, .ws, thead .part, thead .dat")
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## set column names
+colnames(table_df) <- table_df[1,]
+
+## remove header rows
+table_df <- table_df[-c(1:3), ] 
+
+## clean up table
+colnames(table_df)[1] <- "PollDate"
+colnames(table_df)[2] <- "PollSource"
+colnames(table_df)[12] <- "Var.12"
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## rename CDU/CSU
+table_df <- rename(table_df, "CDU.CSU" = "CDU/CSU")
+
+## remove percent signs
+table_df$CDU.CSU <- str_remove_all(table_df$CDU.CSU, " %")
+table_df$SPD <- str_remove_all(table_df$SPD, " %")
+table_df$GRÜNE <- str_remove_all(table_df$GRÜNE, " %")
+table_df$FDP <- str_remove_all(table_df$FDP, " %")
+table_df$LINKE <- str_remove_all(table_df$LINKE, " %")
+table_df$AfD <- str_remove_all(table_df$AfD, " %")
+table_df$FW <- str_remove_all(table_df$FW, " %")
+table_df$BSW <- str_remove_all(table_df$BSW, " %")
+table_df$Sonstige <- str_remove_all(table_df$Sonstige, " %")
+
+## swap comma separators for decimal points
+table_df$CDU.CSU <- gsub(",", ".", table_df$CDU.CSU)
+table_df$SPD <- gsub(",", ".", table_df$SPD)
+table_df$GRÜNE <- gsub(",", ".", table_df$GRÜNE)
+table_df$FDP <- gsub(",", ".", table_df$FDP)
+table_df$LINKE <- gsub(",", ".", table_df$LINKE)
+table_df$AfD <- gsub(",", ".", table_df$AfD)
+table_df$FW <- gsub(",", ".", table_df$FW)
+table_df$BSW <- gsub(",", ".", table_df$BSW)
+table_df$Sonstige <- gsub(",", ".", table_df$Sonstige)
+
+## make as numeric
+table_df$CDU.CSU <- as.numeric(table_df$CDU.CSU)
+table_df$SPD <- as.numeric(table_df$SPD)
+table_df$GRÜNE <- as.numeric(table_df$GRÜNE)
+table_df$FDP <- as.numeric(table_df$FDP)
+table_df$LINKE <- as.numeric(table_df$LINKE)
+table_df$AfD <- as.numeric(table_df$AfD)
+table_df$FW <- as.numeric(table_df$FW)
+table_df$BSW <- as.numeric(table_df$BSW)
+table_df$Sonstige <- as.numeric(table_df$Sonstige)
+
+tab_fg_wahlen <- table_df
+
+# Verian -----------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/emnid.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+# table_node <- html_nodes(webpage, "thead .dat2 , thead .befr, thead a, .wilko tbody td, .ws, thead .part, thead .dat")
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## remove percent signs
+table_df$CDU.CSU <- str_remove_all(table_df$CDU.CSU, " %")
+table_df$SPD <- str_remove_all(table_df$SPD, " %")
+table_df$GRÜNE <- str_remove_all(table_df$GRÜNE, " %")
+table_df$FDP <- str_remove_all(table_df$FDP, " %")
+table_df$LINKE <- str_remove_all(table_df$LINKE, " %")
+table_df$AfD <- str_remove_all(table_df$AfD, " %")
+table_df$FW <- str_remove_all(table_df$FW, " %")
+table_df$BSW <- str_remove_all(table_df$BSW, " %")
+table_df$Sonstige <- str_remove_all(table_df$Sonstige, " %")
+
+## swap comma separators for decimal points
+table_df$CDU.CSU <- gsub(",", ".", table_df$CDU.CSU)
+table_df$SPD <- gsub(",", ".", table_df$SPD)
+table_df$GRÜNE <- gsub(",", ".", table_df$GRÜNE)
+table_df$FDP <- gsub(",", ".", table_df$FDP)
+table_df$LINKE <- gsub(",", ".", table_df$LINKE)
+table_df$AfD <- gsub(",", ".", table_df$AfD)
+table_df$FW <- gsub(",", ".", table_df$FW)
+table_df$BSW <- gsub(",", ".", table_df$BSW)
+table_df$Sonstige <- gsub(",", ".", table_df$Sonstige)
+
+## make as numeric
+table_df$CDU.CSU <- as.numeric(table_df$CDU.CSU)
+table_df$SPD <- as.numeric(table_df$SPD)
+table_df$GRÜNE <- as.numeric(table_df$GRÜNE)
+table_df$FDP <- as.numeric(table_df$FDP)
+table_df$LINKE <- as.numeric(table_df$LINKE)
+table_df$AfD <- as.numeric(table_df$AfD)
+table_df$FW <- as.numeric(table_df$FW)
+table_df$BSW <- as.numeric(table_df$BSW)
+table_df$Sonstige <- as.numeric(table_df$Sonstige)
+
+tab_verian <- table_df
+
+# YouGov -----------------------------------------------------------------
+
+## read HTML content for the poll
+webpage <- read_html("https://www.wahlrecht.de/umfragen/yougov.htm")
+
+source <- html_nodes(webpage, "h1") %>% html_text()
+
+## select table using CSS selector 
+table_node <- html_nodes(webpage, ".wilko") 
+# table_node <- html_nodes(webpage, "thead .dat2 , thead .befr, thead a, .wilko tbody td, .ws, thead .part, thead .dat")
+
+table_content <- html_table(table_node)
+
+table_df <- data.frame(table_content)
+
+## remove header rows
+table_df <- table_df[-c(1:4), ] 
+
+## clean up table
+table_df <- rename(table_df, PollDate = Var.1)
+table_df <- rename(table_df, PollSource = Var.2)
+table_df <- table_df %>% dplyr::select(-Var.12)
+
+## add source
+table_df$PollSource <- source
+
+## make PollDate column a Date object
+table_df$PollDate <- as.Date(table_df$PollDate, format = "%d.%m.%Y")
+
+## remove percent signs
+table_df$CDU.CSU <- str_remove_all(table_df$CDU.CSU, " %")
+table_df$SPD <- str_remove_all(table_df$SPD, " %")
+table_df$GRÜNE <- str_remove_all(table_df$GRÜNE, " %")
+table_df$FDP <- str_remove_all(table_df$FDP, " %")
+table_df$LINKE <- str_remove_all(table_df$LINKE, " %")
+table_df$AfD <- str_remove_all(table_df$AfD, " %")
+table_df$FW <- str_remove_all(table_df$FW, " %")
+table_df$BSW <- str_remove_all(table_df$BSW, " %")
+table_df$Sonstige <- str_remove_all(table_df$Sonstige, " %")
+
+## swap comma separators for decimal points
+table_df$CDU.CSU <- gsub(",", ".", table_df$CDU.CSU)
+table_df$SPD <- gsub(",", ".", table_df$SPD)
+table_df$GRÜNE <- gsub(",", ".", table_df$GRÜNE)
+table_df$FDP <- gsub(",", ".", table_df$FDP)
+table_df$LINKE <- gsub(",", ".", table_df$LINKE)
+table_df$AfD <- gsub(",", ".", table_df$AfD)
+table_df$FW <- gsub(",", ".", table_df$FW)
+table_df$BSW <- gsub(",", ".", table_df$BSW)
+table_df$Sonstige <- gsub(",", ".", table_df$Sonstige)
+
+## make as numeric
+table_df$CDU.CSU <- as.numeric(table_df$CDU.CSU)
+table_df$SPD <- as.numeric(table_df$SPD)
+table_df$GRÜNE <- as.numeric(table_df$GRÜNE)
+table_df$FDP <- as.numeric(table_df$FDP)
+table_df$LINKE <- as.numeric(table_df$LINKE)
+table_df$AfD <- as.numeric(table_df$AfD)
+table_df$FW <- as.numeric(table_df$FW)
+table_df$BSW <- as.numeric(table_df$BSW)
+table_df$Sonstige <- as.numeric(table_df$Sonstige)
+
+tab_yougov <- table_df
+
+
+# Bind tables together ----------------------------------------------------
+
+# colnames(tab_allen)
+# colnames(tab_fg_wahlen)
+# colnames(tab_forsa)
+# colnames(tab_gms)
+# colnames(tab_infratest)
+# colnames(tab_insa)
+# colnames(tab_verian)
+# colnames(tab_yougov)
+
+## remove unique column of tab_forsa
+tab_forsa <- tab_forsa %>% dplyr::select(-Nichtwähler.Unentschl.)
+
+tab_ALL <- rbind(tab_allen, tab_fg_wahlen, tab_forsa, tab_gms, 
+                 tab_infratest, tab_insa, tab_verian, tab_yougov)
+
+library(ggplot2)
+
+ggplot(tab_ALL)+
+  geom_point(aes(x=PollDate, y=CDU.CSU), size=0.5, colour="black", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=CDU.CSU), colour="black")+
+  geom_point(aes(x=PollDate, y=SPD), size=0.5, colour="#EB001F", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=SPD), colour="#EB001F")+
+  geom_point(aes(x=PollDate, y=GRÜNE), size=0.5, colour="#64A12D", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=GRÜNE), colour="#64A12D")+
+  geom_point(aes(x=PollDate, y=FDP), size=0.5, colour="#FFED00", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=FDP), colour="#FFED00")+
+  geom_point(aes(x=PollDate, y=LINKE), size=0.5, colour="#BE3075", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=LINKE), colour="#BE3075")+
+  geom_point(aes(x=PollDate, y=AfD), size=0.5, colour="#009EE0", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=AfD), colour="#009EE0")+ # "brown"
+  geom_point(aes(x=PollDate, y=FW), size=0.5, colour="orange", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=FW), colour="orange")+
+  geom_point(aes(x=PollDate, y=BSW), size=0.5, colour="purple", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=BSW), colour="purple")+
+  geom_point(aes(x=PollDate, y=Sonstige), size=0.5, colour="grey", alpha=0.2)+
+  geom_smooth(aes(x=PollDate, y=Sonstige), colour="grey")
+
+tab_ALL_long <- tab_ALL %>% 
+  pivot_longer(cols=c(CDU.CSU:Sonstige), names_to='PARTY', values_to='VOTES')
+
+tab_ALL_long$PARTY <- factor(tab_ALL_long$PARTY,
+                             levels=c("CDU.CSU","SPD","GRÜNE","AfD",
+                                      "FDP","LINKE","BSW","FW","Sonstige"))
+
+### GROUP BY WEEK
+tab_ALL_long_mean <- tab_ALL_long %>% 
+  group_by(WEEK=floor_date(PollDate, "1 week"), PARTY) %>% 
+  summarise(WM = weighted.mean(VOTES, w = VOTES / sum(VOTES)))
+
+
+ggplot(tab_ALL_long)+
+  geom_point(aes(x=PollDate, y=VOTES, colour=PARTY), 
+             shape=15, size=0.7, alpha=0.3)+
+  # stat_smooth(data=tab_ALL_long_mean, aes(x=PollDate, y=result, colour=PARTY),
+  #             method = "lm", formula = y ~ poly(x, 24), se = FALSE)+
+  geom_line(data=tab_ALL_long_mean, aes(x=WEEK, y=WM, colour=PARTY))+
+  geom_vline(xintercept=as.Date("2017-09-24","%Y-%m-%d"),
+             linetype="dashed",color="black")+
+  geom_text(aes(x=as.Date("2017-09-24","%Y-%m-%d")-56,y=42,label="Bundestagswahl"), 
+            size=3,angle=90,hjust=0,show.legend=F,color='black')+ 
+  geom_vline(xintercept=as.Date("2021-09-26","%Y-%m-%d"),
+             linetype="dashed",color="black")+
+  geom_text(aes(x=as.Date("2021-09-26","%Y-%m-%d")-56,y=42,label="Bundestagswahl"), 
+            size=3,angle=90,hjust=0,show.legend=F,color='black')+ 
+  geom_vline(xintercept=as.Date("2025-02-23","%Y-%m-%d"),
+             linetype="dashed",color="black")+
+  geom_text(aes(x=as.Date("2025-02-23","%Y-%m-%d")-56,y=42,label="Bundestagswahl"), 
+            size=3,angle=90,hjust=0,show.legend=F,color='black')+ 
+  theme_bw()+
+  scale_colour_manual(values=c("CDU.CSU"="black",
+                               "SPD"="#EB001F",
+                               "GRÜNE"="#64A12D",
+                               "FDP"="#FFED00",
+                               "LINKE"="#BE3075",
+                               "AfD"="#009EE0", # "brown"
+                               "FW"="orange",
+                               "BSW"="purple",
+                               "Sonstige"="grey"))+
+  scale_x_date("",date_labels="%Y",
+               date_breaks="1 year",minor_breaks="1 month", 
+               limits=c(min(tab_ALL_long$PollDate), max(tab_ALL_long$PollDate)), 
+               expand=c(0.02,0.02))+
+  scale_y_continuous("Percentage", breaks=seq(0,50,5), 
+                     minor_breaks=seq(0,50,1), limits=c(0,50))+
+  theme(axis.text.x=element_text(angle=90, vjust=0.5, hjust=1, size=10),
+        axis.text.y=element_text(size=12),
+        axis.title.y=element_text(size=12))
+
+
+
+
+# add plotly vertical interactive reference lines to a ggplot -------
+
+library(plotly)
+library(dplyr)
+
+# Sample data: Dates and poll averages for political parties
+data <- data.frame(
+  date = as.Date('2025-01-01') + 0:9,  # 10 consecutive days
+  party_A = c(25, 27, 29, 30, 32, 34, 36, 38, 39, 40),
+  party_B = c(18, 19, 21, 23, 25, 27, 28, 30, 31, 32),
+  party_C = c(12, 13, 14, 15, 16, 17, 18, 19, 20, 21)
+)
+
+# Plot using plotly
+p <- plot_ly(data = data, x = ~date) %>%
+  add_lines(y = ~party_A, name = "Party A", line = list(color = 'blue')) %>%
+  add_lines(y = ~party_B, name = "Party B", line = list(color = 'red')) %>%
+  add_lines(y = ~party_C, name = "Party C", line = list(color = 'green')) %>%
+  
+  # Add the vertical line on hover
+  layout(
+    hovermode = "x unified",
+    xaxis = list(title = "Date"),
+    yaxis = list(title = "Poll Average (%)"),
+    shapes = list(
+      list(
+        type = "line",
+        x0 = 0,
+        x1 = 0,
+        y0 = 0,
+        y1 = 1,
+        line = list(color = "gray", dash = "dot")
+      )
+    )
+  )
+
+# Display the plot
+p
+
+```
+
+<!-- ****** -->
+
+<!-- <span style="font-family:Garamond; font-size:0.8em;">The basic data is taken from the monitoring by the <a href="https://taz.de/">TAZ newspaper</a>, which has kept a monitor of the recent demonstrations against the AfD, available at <a href="https://taz.de/demo">https://taz.de/demo</a>.</a></span> -->
