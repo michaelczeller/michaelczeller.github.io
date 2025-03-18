@@ -1,0 +1,19 @@
+---
+title: "Schedule"
+---
+
+# Navigation
+
+- [Main Course Page](index.html)
+- [Syllabus](syllabus.html)
+- [Schedule](schedule.html)
+
+## Schedule
+
+### Week 1:
+- Topic: Introduction to 
+- Readings: Chapter 1 of *CBM*
+
+### Week 2:
+- Topic:  Basics
+- Readings: Chapter 2 of *CBM*

@@ -1,0 +1,21 @@
+---
+title: "Case-based Methods"
+---
+
+## Case-based Methods
+
+Welcome to the course! 
+
+
+
+## Course 1 Navigation
+
+Here you can navigate between sections:
+
+- [Main Course Page](index.html)
+- [Syllabus](syllabus.html)
+- [Schedule](schedule.html)
+<!-- - [Content](content.html) -->
+
+
+<!-- - [Course Content](content.html) -->

@@ -1,0 +1,16 @@
+---
+title: "Syllabus"
+---
+
+# Navigation
+
+- [Main Course Page](index.html)
+- [Syllabus](syllabus.html)
+- [Schedule](schedule.html)
+
+
+## Course 1 Syllabus
+
+Here is the syllabus for the course.
+- **Course Objectives**: Introduction to ...
+- **Textbook**: "CBM"...
