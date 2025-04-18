@@ -2,38 +2,38 @@
   description: "This course familiarises students with the fundamentals of performing comparative research, introducing the main approaches and introducing exemplary research from important topical fields"
   university: Universität Bielefeld 
   number: 300458
-  url: https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=6A93F6B0185A4047EC18384B618CDC49?id=316181864
-  logo: logos/logo_cpr_small.png 
+  url: # https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=6A93F6B0185A4047EC18384B618CDC49?id=316181864
+  logo: logos/logo_cpr_grey.png 
   semester:
   - name: Summer 2023
-    url: https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=6A93F6B0185A4047EC18384B618CDC49?id=316181864
+    url: # https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=6A93F6B0185A4047EC18384B618CDC49?id=316181864
 
 - title: Political Violence
   description: "This course introduces students to the major aspects of political violence by presenting research covering violent extremism and terrorism, radicalisation and deradicalisation, repression, demobilisation."
   university: Universität Bielefeld
   number: 300459
-  url: https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=6A93F6B0185A4047EC18384B618CDC49?id=316181900
-  logo: logos/logo_pv_small.png
+  url: # https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=6A93F6B0185A4047EC18384B618CDC49?id=316181900
+  logo: logos/logo_pv_grey.png
   semester:
   - name: Summer 2023
-    url: https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=6A93F6B0185A4047EC18384B618CDC49?id=316181900
+    url: # https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=6A93F6B0185A4047EC18384B618CDC49?id=316181900
 
 - title: Case-based Methods for Social Science
   description: "This course introduces and provides basic training for students in case-based methods for social scientific research"
   university: Universität Bielefeld
   number: 300479
-  url: https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd?id=373433935
-  logo: logos/logo_cbm_small.png
+  url: # https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd?id=373433935
+  logo: logos/logo_cbm_grey.png
   semester:
   - name: Winter 2022
-    url: https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd?id=373433935
+    url: # https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd?id=373433935
 
 - title: Far-right Politics and Protest
   description: "This course familiarises students with the social scientific research of far-right politics and protest, and provides students with the conceptual tools and methodological clues to investigate for themselves."
   university: Universität Bielefeld
   number: 300478
-  url: https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=692F645CDB256F28E1E91A6A50752C91?id=373433074
-  logo: logos/logo_frp_small.png
+  url: # https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=692F645CDB256F28E1E91A6A50752C91?id=373433074
+  logo: logos/logo_frp_grey.png
   semester:
   - name: Winter 2022
-    url: https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=692F645CDB256F28E1E91A6A50752C91?id=373433074
+    url: # https://ekvv.uni-bielefeld.de/kvv_publ/publ/vd;jsessionid=692F645CDB256F28E1E91A6A50752C91?id=373433074

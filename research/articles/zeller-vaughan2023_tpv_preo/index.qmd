@@ -20,7 +20,7 @@ categories:
   - Nordic Resistance Movement
 pub-info:
   reference: >-
-    <strong>Michael C. Zeller</strong> and <a href="https://www.lse.ac.uk/International-Inequalities/People/Michael-Vaughan/Michael-Vaughan">Michael Vaughan</a>, “Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects,” <em>Terrorism and Political Violence</em> 0, no. 0 (2023): 1-23, doi: <a href="https://doi.org/10.1080/09546553.2023.2240446"><code>10.1080/09546553.2023.2240446</code></a>
+    <strong>Michael C. Zeller</strong> and <a href="https://www.lse.ac.uk/International-Inequalities/People/Michael-Vaughan/Michael-Vaughan">Michael Vaughan</a>, “Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects,” <em>Terrorism and Political Violence</em> 36, no. 8 (2023): 985-1007, doi: <a href="https://doi.org/10.1080/09546553.2023.2240446"><code>10.1080/09546553.2023.2240446</code></a>
   links:
   - name: Preprint
     url: zeller-vaughan2023_tpv_preo_preprint.pdf
@@ -75,9 +75,9 @@ Among the legal instruments that address organized right-wing extremism in Europ
   title={Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects},
   author={Zeller, Michael C and Vaughan, Michael},
   journal={Terrorism and Political Violence},
-  volume={0},
-  number={0},
-  pages={1--23},
+  volume={36},
+  number={8},
+  pages={985--1007},
   year={2023},
   publisher={Taylor \& Francis}
 }
