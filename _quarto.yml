@@ -16,6 +16,7 @@ website:
   favicon: "/files/favicon4.png"
   site-url: "michaelczeller.github.io"
   repo-url: "https://github.com/michaelczeller/michaelczeller.github.io"
+  google-analytics: "G-G5VJ265CYZ"
   
   twitter-card: 
     image: "/files/favicon4.png"
