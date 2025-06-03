@@ -291,162 +291,156 @@ datatable(tab_elec, rownames = FALSE,
 
 ## 2023 Sejm Election Results
 
-Geospatial patterns in the 2025 Presidential Run-Off were also present in the parliamentary elections of late 2023 (<https://sejmsenat2023.pkw.gov.pl/sejmsenat2023/en/dane_w_arkuszach>). FIG 
-<!-- @fig-map-sejm  -->
-show the electoral map of communes for the Sejm by grouping (in orange) the parties that eventually joined Donald Tusk's coalition government---KO, *Polska 2050*, *Polskie Stronnictwo Ludowe*, and *Nowa Lewica*---and grouping (in blue) the PiS-led United Right alliance and the far-right *Konfederacja* party. The same patterns of east-west and rural-urban are readily apparent, though the overall electoral performance by the then-opposition parties was stronger than Trzaskowski in the run-off.
+Geospatial patterns in the 2025 Presidential Run-Off were also present in the parliamentary elections of late 2023 (<https://sejmsenat2023.pkw.gov.pl/sejmsenat2023/en/dane_w_arkuszach>). @fig-map-sejm show the electoral map of communes for the Sejm by grouping (in orange) the parties that eventually joined Donald Tusk's coalition government---KO, *Polska 2050*, *Polskie Stronnictwo Ludowe*, and *Nowa Lewica*---and grouping (in blue) the PiS-led United Right alliance and the far-right *Konfederacja* party. The same patterns of east-west and rural-urban are readily apparent, though the overall electoral performance by the then-opposition parties was stronger than Trzaskowski in the run-off.
 
 <!-- - predict presidential vote totals in communes based on percentages in communes for parliamentary elections -->
 
-<!-- ```{r map_parl, fig.cap="Map of parliamentary election results", fig.width=6} -->
-<!-- #| label: fig-map-sejm -->
+```{r map_parl, fig.cap="Map of parliamentary election results", fig.width=6}
+#| label: fig-map-sejm
 
-<!-- # commune_parl <- read_delim("pl_parl2023/wyniki_gl_na_listy_po_gminach_proc_sejm_utf8.csv",  -->
-<!-- #     delim = ";", escape_double = FALSE, trim_ws = TRUE) -->
+# commune_parl <- read_delim("pl_parl2023/wyniki_gl_na_listy_po_gminach_proc_sejm_utf8.csv",
+#     delim = ";", escape_double = FALSE, trim_ws = TRUE)
 
-<!-- commune_parl <- read.csv2("~/Documents/webpages/michaelczeller.github.io/blog/2025/06/06/pl_presidential_election/pl_parl2023/wyniki_gl_na_listy_po_gminach_proc_sejm_utf8.csv", header=TRUE) -->
+commune_parl <- read.csv2("pl_parl2023/wyniki_gl_na_listy_po_gminach_proc_sejm_utf8.csv", header=TRUE)
 
-<!-- # View(commune_parl) -->
+# View(commune_parl)
 
-<!-- commune_parl <- commune_parl %>% -->
-<!--   dplyr::select(`TERYT.Gminy`, Gmina, Powiat, Województwo, -->
-<!--                 `KOALICYJNY.KOMITET.WYBORCZY.TRZECIA.DROGA.POLSKA.2050.SZYMONA.HOŁOWNI...POLSKIE.STRONNICTWO.LUDOWE`, -->
-<!--                 `KOMITET.WYBORCZY.NOWA.LEWICA`, -->
-<!--                 `KOMITET.WYBORCZY.PRAWO.I.SPRAWIEDLIWOŚĆ`, -->
-<!--                 `KOMITET.WYBORCZY.KONFEDERACJA.WOLNOŚĆ.I.NIEPODLEGŁOŚĆ`, -->
-<!--                 `KOALICYJNY.KOMITET.WYBORCZY.KOALICJA.OBYWATELSKA.PO..N.IPL.ZIELONI`) %>%  -->
-<!--   dplyr::rename(TERYT = `TERYT.Gminy`, -->
-<!--                 ThirdWay = `KOALICYJNY.KOMITET.WYBORCZY.TRZECIA.DROGA.POLSKA.2050.SZYMONA.HOŁOWNI...POLSKIE.STRONNICTWO.LUDOWE`, -->
-<!--                 NewLeft = `KOMITET.WYBORCZY.NOWA.LEWICA`, -->
-<!--                 PiS = `KOMITET.WYBORCZY.PRAWO.I.SPRAWIEDLIWOŚĆ`, -->
-<!--                 Konfed = `KOMITET.WYBORCZY.KONFEDERACJA.WOLNOŚĆ.I.NIEPODLEGŁOŚĆ`, -->
-<!--                 PO = `KOALICYJNY.KOMITET.WYBORCZY.KOALICJA.OBYWATELSKA.PO..N.IPL.ZIELONI`) -->
+commune_parl <- commune_parl %>%
+  dplyr::select(`TERYT.Gminy`, Gmina, Powiat, Województwo,
+                `KOALICYJNY.KOMITET.WYBORCZY.TRZECIA.DROGA.POLSKA.2050.SZYMONA.HOŁOWNI...POLSKIE.STRONNICTWO.LUDOWE`,
+                `KOMITET.WYBORCZY.NOWA.LEWICA`,
+                `KOMITET.WYBORCZY.PRAWO.I.SPRAWIEDLIWOŚĆ`,
+                `KOMITET.WYBORCZY.KONFEDERACJA.WOLNOŚĆ.I.NIEPODLEGŁOŚĆ`,
+                `KOALICYJNY.KOMITET.WYBORCZY.KOALICJA.OBYWATELSKA.PO..N.IPL.ZIELONI`) %>%
+  dplyr::rename(TERYT = `TERYT.Gminy`,
+                ThirdWay = `KOALICYJNY.KOMITET.WYBORCZY.TRZECIA.DROGA.POLSKA.2050.SZYMONA.HOŁOWNI...POLSKIE.STRONNICTWO.LUDOWE`,
+                NewLeft = `KOMITET.WYBORCZY.NOWA.LEWICA`,
+                PiS = `KOMITET.WYBORCZY.PRAWO.I.SPRAWIEDLIWOŚĆ`,
+                Konfed = `KOMITET.WYBORCZY.KONFEDERACJA.WOLNOŚĆ.I.NIEPODLEGŁOŚĆ`,
+                PO = `KOALICYJNY.KOMITET.WYBORCZY.KOALICJA.OBYWATELSKA.PO..N.IPL.ZIELONI`)
 
-<!-- ## remove rows with NA for TERYT -->
-<!-- commune_parl <- commune_parl[!is.na(commune_parl$TERYT),] -->
+## remove rows with NA for TERYT
+commune_parl <- commune_parl[!is.na(commune_parl$TERYT),]
 
-<!-- ## take out Warsaw districts and combine them -->
-<!-- warsaw <- commune_parl %>% filter(Powiat=="Warszawa") -->
+## take out Warsaw districts and combine them
+warsaw <- commune_parl %>% filter(Powiat=="Warszawa")
 
-<!-- warsaw_combined <- data.frame( -->
-<!--   "TERYT"=146501, -->
-<!--   "Gmina"='Warszawa_ALL', -->
-<!--   "Powiat"='Warszawa', -->
-<!--   "Województwo"='mazowieckie', -->
-<!--   "ThirdWay" = mean(warsaw$ThirdWay), -->
-<!--   "NewLeft" = mean(warsaw$NewLeft), -->
-<!--   "PiS" = mean(warsaw$PiS), -->
-<!--   "Konfed" = mean(warsaw$Konfed), -->
-<!--   "PO" = mean(warsaw$PO) -->
-<!-- ) -->
+warsaw_combined <- data.frame(
+  "TERYT"=146501,
+  "Gmina"='Warszawa_ALL',
+  "Powiat"='Warszawa',
+  "Województwo"='mazowieckie',
+  "ThirdWay" = mean(warsaw$ThirdWay),
+  "NewLeft" = mean(warsaw$NewLeft),
+  "PiS" = mean(warsaw$PiS),
+  "Konfed" = mean(warsaw$Konfed),
+  "PO" = mean(warsaw$PO)
+)
 
-<!-- ## remove the Warsaw districts -->
-<!-- commune_parl <- commune_parl %>% dplyr::filter(Powiat !="Warszawa") -->
+## remove the Warsaw districts
+commune_parl <- commune_parl %>% dplyr::filter(Powiat !="Warszawa")
 
-<!-- commune_parl <- rbind(commune_parl, warsaw_combined) -->
+commune_parl <- rbind(commune_parl, warsaw_combined)
 
-<!-- ## make gov and opposition groupings -->
+## make gov and opposition groupings
 
-<!-- commune_parl$new_coalition = (commune_parl$ThirdWay + commune_parl$NewLeft + commune_parl$PO) -->
-<!-- commune_parl$new_opposition = (commune_parl$PiS + commune_parl$Konfed) -->
+commune_parl$new_coalition = (commune_parl$ThirdWay + commune_parl$NewLeft + commune_parl$PO)
+commune_parl$new_opposition = (commune_parl$PiS + commune_parl$Konfed)
 
 
-<!-- ## merge data by ID column -->
-<!-- PL23 <- PL25 %>% left_join(commune_parl, by = c("CC_3" = "TERYT")) -->
+## merge data by ID column
+PL23 <- PL25 %>% left_join(commune_parl, by = c("CC_3" = "TERYT"))
 
-<!-- map_per_parl <- ggplot()+ -->
-<!--   geom_sf(data=PL23 %>% filter(new_opposition>new_coalition), -->
-<!--           aes(fill=new_opposition))+ -->
-<!--   scale_fill_distiller(palette = "PuBu", direction = 1, guide="none")+ -->
-<!--   new_scale_fill()+ -->
-<!--   geom_sf(data=PL23 %>% filter(new_coalition>new_opposition), -->
-<!--           aes(fill=new_coalition))+ -->
-<!--   scale_fill_distiller(palette = "Oranges", guide="none")+ -->
-<!--   theme_void() -->
-<!-- map_per_parl -->
+map_per_parl <- ggplot()+
+  geom_sf(data=PL23 %>% filter(new_opposition>new_coalition),
+          aes(fill=new_opposition))+
+  scale_fill_distiller(palette = "PuBu", direction = 1, guide="none")+
+  new_scale_fill()+
+  geom_sf(data=PL23 %>% filter(new_coalition>new_opposition),
+          aes(fill=new_coalition))+
+  scale_fill_distiller(palette = "Oranges", guide="none")+
+  theme_void()
+map_per_parl
 
-<!-- ``` -->
+```
 
 
 <!-- PL 2023 parl election: <https://sejmsenat2023.pkw.gov.pl/sejmsenat2023/en/dane_w_arkuszach> -->
 
 ## Change from 2023 to 2025 
 
-FIG
-<!-- @fig-prediction  -->
-shows that, whereas Trzaskowski underperformed from the 2023 cumulative election performance of the parties that eventually formed current government coalition, Nawrocki generally overperformed. 
+@fig-prediction shows that, whereas Trzaskowski underperformed from the 2023 cumulative election performance of the parties that eventually formed current government coalition, Nawrocki generally overperformed. 
 
 
-<!-- ```{r predict, message=FALSE, warning=FALSE, fig.cap="Correlation of 2023 Sejm results and 2025 Presidential Run-Off results."} -->
-<!-- #| label: fig-prediction -->
+```{r predict, message=FALSE, warning=FALSE, fig.cap="Correlation of 2023 Sejm results and 2025 Presidential Run-Off results."}
+#| label: fig-prediction
 
-<!-- commune_compare <- commune_r2 %>% left_join(commune_parl, by = c("TERYT" = "TERYT")) -->
+commune_compare <- commune_r2 %>% left_join(commune_parl, by = c("TERYT" = "TERYT"))
 
-<!-- # plot(x=commune_compare$new_coalition, y=commune_compare$per_RT) -->
+# plot(x=commune_compare$new_coalition, y=commune_compare$per_RT)
 
-<!-- # plot(x=commune_compare$new_opposition, y=commune_compare$per_KN) -->
+# plot(x=commune_compare$new_opposition, y=commune_compare$per_KN)
 
-<!-- commune_compare$new_diff = commune_compare$new_opposition - commune_compare$new_coalition -->
+commune_compare$new_diff = commune_compare$new_opposition - commune_compare$new_coalition
 
-<!-- # plot(x=commune_compare$new_diff, y=commune_compare$per_diff) -->
+# plot(x=commune_compare$new_diff, y=commune_compare$per_diff)
 
-<!-- scat_RT <- ggplot(commune_compare, aes(x=new_coalition, y=per_RT))+ -->
-<!--   geom_point(shape=18, color="#F68F2D") -->
+scat_RT <- ggplot(commune_compare, aes(x=new_coalition, y=per_RT))+
+  geom_point(shape=18, color="#F68F2D")
 
-<!-- scat_KN <- ggplot(commune_compare, aes(x=new_opposition, y=per_KN))+ -->
-<!--   geom_point(shape=18, color="#263778") -->
+scat_KN <- ggplot(commune_compare, aes(x=new_opposition, y=per_KN))+
+  geom_point(shape=18, color="#263778")
 
-<!-- scats <- plot_grid(scat_RT, scat_KN, -->
-<!--                        nrow = 2, align = "h") -->
-<!--   # theme(plot.background=element_rect(color = "black")) -->
+scats <- plot_grid(scat_RT, scat_KN,
+                       nrow = 2, align = "h")
+  # theme(plot.background=element_rect(color = "black"))
 
-<!-- # scats -->
+# scats
 
-<!-- ggplot(commune_compare)+ -->
-<!--   geom_point(aes(x=new_opposition, y=per_KN), -->
-<!--               shape=0, color="#263778")+ -->
-<!--   geom_smooth(aes(x=new_opposition, y=per_KN),  -->
-<!--               method="lm", color="#263778", se=FALSE)+ -->
-<!--   geom_point(aes(x=new_coalition, y=per_RT), -->
-<!--               shape=1, color="#F68F2D")+ -->
-<!--   geom_smooth(aes(x=new_coalition, y=per_RT),  -->
-<!--               method="lm", color="#F68F2D", se=FALSE)+ -->
-<!--   scale_x_continuous("2023 Parliamentary election commune vote %", -->
-<!--                      breaks=seq(0,100,25), limits=c(0,100))+ -->
-<!--   scale_y_continuous("2025 Presidential Run-Off election commune vote %", -->
-<!--                      breaks=seq(0,100,25), limits=c(0,100))+ -->
-<!--   theme_bw()+ -->
-<!--   theme(axis.text.x=element_text(size=14), -->
-<!--         axis.text.y=element_text(size=14),  -->
-<!--         axis.title.x=element_text(size=14), -->
-<!--         axis.title.y=element_text(size=14)) -->
+ggplot(commune_compare)+
+  geom_point(aes(x=new_opposition, y=per_KN),
+              shape=0, color="#263778")+
+  geom_smooth(aes(x=new_opposition, y=per_KN),
+              method="lm", color="#263778", se=FALSE)+
+  geom_point(aes(x=new_coalition, y=per_RT),
+              shape=1, color="#F68F2D")+
+  geom_smooth(aes(x=new_coalition, y=per_RT),
+              method="lm", color="#F68F2D", se=FALSE)+
+  scale_x_continuous("2023 Parliamentary election commune vote %",
+                     breaks=seq(0,100,25), limits=c(0,100))+
+  scale_y_continuous("2025 Presidential Run-Off election commune vote %",
+                     breaks=seq(0,100,25), limits=c(0,100))+
+  theme_bw()+
+  theme(axis.text.x=element_text(size=14),
+        axis.text.y=element_text(size=14),
+        axis.title.x=element_text(size=14),
+        axis.title.y=element_text(size=14))
 
-<!-- ``` -->
+```
 
 
-This differential is even clearer in FIG
-<!-- @fig-comparison  -->
-where most communes shifted their vote to Nawrocki.
+This differential is even clearer in @fig-comparison where most communes shifted their vote to Nawrocki.
 
-<!-- ```{r compare, message=FALSE, warning=FALSE, fig.cap="Map of shifts in election percentage. The sea of blue shades show that voting in most communes (whether due to changes in turnout or changes in voter preference) shifted from 2023 to 2025.", fig.width=6} -->
-<!-- #| label: fig-comparison -->
+```{r compare, message=FALSE, warning=FALSE, fig.cap="Map of shifts in election percentage. The sea of blue shades show that voting in most communes (whether due to changes in turnout or changes in voter preference) shifted from 2023 to 2025.", fig.width=6}
+#| label: fig-comparison
 
-<!-- commune_compare$net = commune_compare$per_diff - commune_compare$new_diff -->
+commune_compare$net = commune_compare$per_diff - commune_compare$new_diff
 
-<!-- PLcompare <- PL25 %>% left_join(commune_compare, by = c("CC_3" = "TERYT")) -->
+PLcompare <- PL25 %>% left_join(commune_compare, by = c("CC_3" = "TERYT"))
 
-<!-- commune_compare_per <- ggplot(PLcompare)+ -->
-<!--   geom_sf(aes(fill = net))+ -->
-<!--   scale_fill_gradient2( -->
-<!--     name = "change in percentage", -->
-<!--     low = "#F68F2D", -->
-<!--     mid = "white", -->
-<!--     high = "#263778", -->
-<!--     midpoint = 0 -->
-<!--   ) + -->
-<!--   guides(fill=guide_colourbar(position="bottom"))+ -->
-<!--   theme_void() -->
-<!-- commune_compare_per -->
-<!-- ``` -->
+commune_compare_per <- ggplot(PLcompare)+
+  geom_sf(aes(fill = net))+
+  scale_fill_gradient2(
+    name = "change in percentage",
+    low = "#F68F2D",
+    mid = "white",
+    high = "#263778",
+    midpoint = 0
+  ) +
+  guides(fill=guide_colourbar(position="bottom"))+
+  theme_void()
+commune_compare_per
+```
 
 
 These geospatial patterns overall represent continuity in Polish political divisions, perhaps combined with two elections of high oppositional turnout. But continued divided government, with parliament controlled by Tusk's centrist coalition and the presidency occupied by the PiS-aligned Nawrocki, will likely constrain or stymie Tusk's legislative agenda. Among other repercussions, this means that it will be harder to unwind some of the illiberalising changes imposed by the previous PiS-led governments.
