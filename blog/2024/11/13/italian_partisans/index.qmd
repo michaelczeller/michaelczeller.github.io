@@ -228,6 +228,11 @@ italy_ANPI_region <- ggplot(mappedANPI_it) +
   labs(title="")+theme(plot.title = element_text(hjust = 0.5))
 italy_ANPI_region
 
+## FOR MAPVIEW VERSION AT BOTTOM
+map_regio <- mappedANPI_it
+
+map_regio$PERCENT <- round(map_regio$PERCENT, 1)
+
 ```
  
  
@@ -409,6 +414,29 @@ mapview(fullANPI_trim_sf_JIT, col.regions = "maroon", label = "Name",
 ```
 
 
+
+
+
+
+```{r map-regions-mapv, message = FALSE, warning=FALSE, fig.cap="Interactive map of resistance activists in ANPI by region of birth."}
+#| label: fig-map-regions-mapview
+
+library(viridis)
+# pal <- magma(n=length(unique(map_regio$PERCENT)), direction=-1)
+pink2 = colorRampPalette(c('yellow', 'red'))
+
+mapview(map_regio, zcol = "PERCENT", 
+        # col.regions = pal,
+        col.regions = pink2, at = seq(0, 18, 3),
+        legend=T, layer.name = '% of ANPI activists',
+        map.types = c("CartoDB.Positron"),
+        popup = popupTable(map_regio,
+                           zcol = c("region","COUNT","PERCENT"))
+        )
+
+```
+ 
+ 
 
 <!-- {{< video https://www.youtube.com/watch?v=EDxuMXb0joE >}} -->
 
