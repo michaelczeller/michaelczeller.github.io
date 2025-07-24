@@ -25,9 +25,9 @@ pub-info:
   reference: >-
     <a href="https://people.ceu.edu/andrea_krizsan">Andrea Krizsán</a>, <a href="https://www.uva.nl/en/profile/r/o/c.m.roggeband/c.m.roggeband.html">Conny Roggeband</a>, and <strong>Michael C. Zeller</strong>, “Who is Afraid of the Istanbul Convention? Explaining Opposition to and Support for Gender Equality,” <em>Comparative Political Studies</em> 0, no. 0 (2024): 1-41, doi: <a href="https://doi.org/10.1177/00104140241290205"><code>10.1177/00104140241290205</code></a>
   links:
-  # - name: Preprint
-  #   url: zeller-vaughan2023_tpv_preo_preprint.pdf
-  #   local: true
+  - name: PDF
+    url: KrizsanRoggebandZeller2024-who-is-afraid-of-the-istanbul-convention-explaining-opposition-to-and-support-for-gender-equality.pdf
+    local: true
     # icon: bi filetype-pdf
   - name: Online version
     url: https://doi.org/10.1177/00104140241290205
@@ -603,12 +603,13 @@ plot(fit, fills = "transparent",
 ```bibtex
 @article{KrizsanRoggebandZeller2024,
   title={Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects},
-  author={Zeller, Michael C and Vaughan, Michael},
+  author={Krizsán, Andrea and Roggeband, Conny and Zeller, Michael C},
   journal={Comparative Political Studies},
-  volume={0},
-  number={0},
-  pages={1--41},
+  volume={58},
+  number={10},
+  pages={2161--2200},
   year={2024},
   publisher={Sage}
 }
 ```
+
