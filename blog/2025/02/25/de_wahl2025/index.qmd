@@ -12,7 +12,7 @@ categories:
   - elections
 ---
 
-Data and visualisation of the 2025 federal parliamentary election results in Germany. Shapefile and election results from Bundeswahlleiterin: <https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata/btw25/daten/>
+Data and visualisation of the 2025 federal parliamentary election results in Germany. Shapefile and election results from *Bundeswahlleiterin* (Federal Returning Officer): <https://www.bundeswahlleiterin.de/bundestagswahlen/2025/ergebnisse/opendata/btw25/daten/>
 
 ```{r data-setup, message=FALSE, warning=FALSE}
 library(tidyverse)
