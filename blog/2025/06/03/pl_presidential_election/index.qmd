@@ -36,7 +36,7 @@ knitr::opts_chunk$set(
 ```
 
 
-Poland's Run-Off Presidential Election saw Karol Tadeusz Nawrocki, aligned with the ultra-conservative Law and Justice (*Prawo i Sprawiedliwość*, PiS) party, narrowly defeat Rafał Kazimierz Trzaskowski, aligned with the Civic Coalition (*Koalicja Obywatelska*, KO) party and Donald Tusk's new centrist coalition. The results show familiar east-west and urban-rural divides in Polish politics, with eastern and rural areas favouring the ultra-conservatism of PiS and Nawrocki, and western and urban areas voting for Trzaskowski and tending to support centrist or left-wing parties.
+Poland's run-off Presidential Election saw Karol Tadeusz Nawrocki, aligned with the ultra-conservative Law and Justice (*Prawo i Sprawiedliwość*, PiS) party, narrowly defeat Rafał Kazimierz Trzaskowski, aligned with the Civic Coalition (*Koalicja Obywatelska*, KO) party and Donald Tusk's new centrist coalition. The results show familiar east-west and urban-rural divides in Polish politics, with eastern and rural areas favouring the ultra-conservatism of PiS and Nawrocki, and western and urban areas voting for Trzaskowski and tending to support centrist or left-wing parties.
 
 <!-- Election results from National Electoral Commission: <https://wybory.gov.pl/prezydent2025/en/dane_w_arkuszach> -->
 
