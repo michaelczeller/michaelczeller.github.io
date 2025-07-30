@@ -1,0 +1,35 @@
+---
+title: The Far Right on the March - Understanding Demonstrations
+date: 2021-01-19
+description: "Right Rising podcast on far-right demonstrations."
+resources: 
+  - 2021-01-19_RightRising_DellOmo.mp3
+image: rechte_demo_RobertFishman.png
+twitter-card:
+  image: "rechte_demo_RobertFishman.png"
+open-graph:
+  image: "rechte_demo_RobertFishman.png"
+categories:
+  - media appearance
+  - far right
+  - social movements
+  - demonstrations
+---
+
+On 19 January 2021, I was a guest on the [Right Rising podcast](https://rightrising.fireside.fm/), hosted by Augusta Dell'Omo. We discussed the importance of demonstrations for far-right social movements, particularly in the wake of the violent attack on the U.S. Capitol Building on 6 January 2021. 
+
+The podcast is available online---<https://rightrising.fireside.fm/episode13>---but also playable below.
+
+<figure>
+<figcaption>Click to listen</figcaption>
+<audio controls src="2021-01-19_RightRising_DellOmo.mp3">
+        Your browser does not support the
+        <code>audio</code> element.
+</audio>
+</figure>
+
+
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">Originally published by the Right Rising podcast: <a href="https://rightrising.fireside.fm/episode13">https://rightrising.fireside.fm/episode13</a></span>

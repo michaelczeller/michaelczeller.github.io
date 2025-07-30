@@ -9,7 +9,7 @@ open-graph:
   image: "afd_covid.png"
 categories:
   - Alternative für Deutschland (AfD)
-  - election
+  - elections
   - far right
   - Germany
 ---
