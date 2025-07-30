@@ -1,7 +1,7 @@
 ---
 title: The Far Right on the March - Understanding Demonstrations
 date: 2021-01-19
-description: "Right Rising podcast on far-right demonstrations."
+description: "Right Rising podcast on far-right demonstrations. (Photo: Robert B. Fishman (dpa))"
 resources: 
   - 2021-01-19_RightRising_DellOmo.mp3
 image: rechte_demo_RobertFishman.png

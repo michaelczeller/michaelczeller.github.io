@@ -1,0 +1,35 @@
+---
+title: Countering the Far Right
+date: 2021-04-05
+description: "KBOO radio: Old Mole Variety Hour"
+resources: 
+  - apr_5_20210_9am_oldmole_clean_patriciakullberg.mp3
+image: kboo_logo_1.png
+twitter-card:
+  image: "kboo_logo_1.png"
+open-graph:
+  image: "kboo_logo_1.png"
+categories:
+  - media appearance
+  - far right
+  - social movements
+  - demonstrations
+---
+
+On 5 April 2021, I was a guest on the [Old Mole Variety Hour](https://kboo.fm/program/old-mole-variety-hour) radio programme, hosted by Particia Kullberg. I was interviewed by Bill Resnick about the demobilisation of far-right, white supremacist demonstrations and marches, in particular the role of counter-mobilisation by the left, including very large and dramatic challenges at white supremacist events to demonstrate overwhelming popular opposition. We also discussed the importance of decisively defeating white supremacist political parties in electoral contests, and how that can be done. 
+
+The programme is available online---<https://kboo.fm/media/101898-old-mole-variety-hour-april-5-2021>---but also playable below.
+
+<figure>
+<figcaption>Click to listen</figcaption>
+<audio controls src="apr_5_20210_9am_oldmole_clean_patriciakullberg.mp3">
+        Your browser does not support the
+        <code>audio</code> element.
+</audio>
+</figure>
+
+
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">Originally published by KBOO radio, a station based in Portland (U.S.), for their Old Mole Variety Hour programme: <a href="https://kboo.fm/media/101898-old-mole-variety-hour-april-5-2021">https://kboo.fm/media/101898-old-mole-variety-hour-april-5-2021</a></span>
