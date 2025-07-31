@@ -1,0 +1,27 @@
+---
+title: Eurozine - *Standard Time* roundtable
+date: 2024-05-09
+description: "... That feeling of being involved in a 'European project' really does begin with being involved with just a handful of other people."
+image: EurozineLogo.png
+twitter-card:
+  image: "EurozineLogo.png"
+open-graph:
+  image: "EurozineLogo.png"
+categories:
+  - media appearance
+  - far right
+  - social movements
+  - demonstrations
+---
+
+On 9 May 2024, I was a guest on Eurozine's *Standard Time* roundtable programme: 'TikTok populism - A Europe Day special'.
+
+The programme is available online---<https://www.eurozine.com/tiktok-populism/>---but also playable below.
+
+{{< video https://www.youtube.com/watch?v=8aikq1-Cxyo 
+    title="TikTok Populism: Standard Time talk show S1E21"
+>}}
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">Originally published by Eurozine for their Standard Time programme: <a href="https://www.eurozine.com/tiktok-populism/">https://www.eurozine.com/tiktok-populism/</a></span>
