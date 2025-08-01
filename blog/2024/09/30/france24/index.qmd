@@ -9,8 +9,9 @@ open-graph:
   image: "FRANCE24_logo.png"
 categories:
   - media appearance
-  - far right
+  - Austria
   - elections
+  - far right
   - Freiheitliche Partei Österreichs (FPÖ)
 ---
 
