@@ -1,0 +1,21 @@
+---
+title: France 24 - Autriche - Herbert Kickl, ou le triomphe de l'extrême droite décomplexée
+date: 2024-09-30
+description: "...  a 'very dangerous drift for democracy' ..."
+image: FRANCE24_logo.png
+twitter-card:
+  image: "FRANCE24_logo.png"
+open-graph:
+  image: "FRANCE24_logo.png"
+categories:
+  - media appearance
+  - far right
+  - elections
+  - Freiheitliche Partei Österreichs (FPÖ)
+---
+
+For an article that appeared on 30 September 2024 in [France 24](https://novayagazeta.eu/), Sébastian Seibt interviewed me via telephone. The full article (in French) is available online: <https://www.france24.com/fr/europe/20240930-autiche-herbert-kickl-ou-le-triomphe-de-l-extr%C3%AAme-droite-d%C3%A9complex%C3%A9e>. 
+
+******
+
+<!-- <span style="font-family:Garamond; font-size:0.8em;">Originally published by Eurozine for their Standard Time programme: <a href="https://www.eurozine.com/tiktok-populism/">https://www.eurozine.com/tiktok-populism/</a></span> -->
