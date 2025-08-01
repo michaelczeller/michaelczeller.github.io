@@ -1,0 +1,42 @@
+---
+title: Novaya Gazeta - 'From heretics to mainstream'
+date: 2025-05-20
+description: "... When these factors combine, far-right parties can push past that 20 per cent ceiling and win electoral pluralities and even majorities. And when they do, they tend to erode the norms and institutions that uphold liberal democracy."
+image: novaya-gazeta.png
+twitter-card:
+  image: "novaya-gazeta.png"
+open-graph:
+  image: "novaya-gazeta.png"
+categories:
+  - media appearance
+  - far right
+  - elections
+---
+
+For an article that appeared on 20 May 2025 in [Novaya Gazeta Europe](https://novayagazeta.eu/), Nikolai Pershin (NP) interviewed me via email. The full article (in Russian) is available online---<https://novayagazeta.eu/articles/2025/05/20/iz-eretikov-v-meinstrim>---but below I share the questions that Nikolai posed and the answers I provided. 
+
+******
+
+NP: In February, a far-right gathering took place in Madrid, where such speeches were heard: "We are many, we are great, we are strong," "Yesterday we were heretics, now we are mainstream," "We must reclaim Europe, which belongs to us," and so on. Do you agree that the far right has entered and firmly established itself in European mainstream politics?
+
+> MZ: First, Europe's far right have tried many times before to coordinate transnationally and at the EU level---so far without much success. February's meeting in Madrid is another in a long line of attempts to generate that coordination. But I think serious divisions remain among Europe’s far-right parties. Second, far-right parties around Europe have successfully gained stable electoral bases of constituents. These parties are not going away anytime soon. That does not mean they are mainstream, though. In some countries, far-right parties are in government, influence governments, or are accepted as legitimate liberal democratic actors; yet in other countries, far-right parties are shunned and broadly viewed (outside their constituencies) as illegitimate. So, while the far right is a prominent political force in some countries, I do not think that overall far-right parties across Europe are firmly established in the political mainstream.
+
+NP: What key factors have contributed to the rise of popularity of the far right in a number of European countries in the recent years?
+
+> MZ: Several factors have propelled rising support for far-right parties. There are peculiarities to every national context, but, broadly, economic and cultural concerns about the consequences of migration, contention about gender politics, and increasing anxiety about the stability of global politics have all played an important role in boosting support for far-right parties.
+
+NP: There is an opinion that centrist parties are now also borrowing rhetoric from the far right. Do you agree with that? If yes, what are the examples?
+
+> MZ: Yes, several centrist parties have adopted the issue stances of far-right parties, particularly about immigration. Generally, this involves framing migration as a security issue (rather than, for example, a human rights issue). Centre-right parties have adopted these stances while also claiming greater competence than far-right parties in achieving related policy outcomes. For example, ahead of the EU elections last year Ursula von der Leyen campaigned on strict migration policy and claimed that her administration, with national leaders, had achieved results (especially with migrant processing agreements with countries neighbouring the EU) while far-right parties merely talked and fear-mongered about migration. Another example: Friedrich Merz has just led the German CDU party back into government. One of his first policy actions was to strengthen border controls around Germany. This is a consequence of adopting some migration policy positions that are similar to Germany’s AfD party.
+
+NP: How do far-right parties themselves change when they come to power? Do they always become less radical? We have examples of Meloni, the new Belgian Prime Minister etc...
+
+> MZ: Far-right parties have behaved in different ways when they came into government. For example, when Austria’s FPÖ first joined a coalition government in 2000, the party’s subsequent record and reputation was one of poor governance. This incompetence contributed to decreased support for the FPÖ in the next elections. Others seemingly have greater success, even if they are not forced to moderate their positions by coalition partners. You mention Giorgia Meloni in Italy. This is an intriguing case because her positions on the EU and international issues (especially Russia’s war on Ukraine) have moderated and she has become a ‘good partner’ for the EU and other European states. But while Meloni has moderated on international issues, she has pursued several radical domestic policies in Italy, including action against press freedom. So far, it seems this mixed strategy is effective in allowing her to lead a stable government and pursue her agenda. Overall, the examples we have of far-right parties show that they react in many different ways to entering into government. 
+
+NP: Talking about tendencies: are we just at the beginning of this trend of the rise of far right parties or there is a close ceiling for their popularity?
+
+> MZ: The majority of contemporary far-right parties’ constituencies come from voters with nativist and perhaps populist attitudes. This would typically limit far-right parties to an electoral ceiling of around 20 per cent. But far-right parties can gain more support under certain circumstances. Crises, where many voters fear for their security, can boost far-right support. Political instability can bolster support for the style of strong government that far-right parties often espouse. Frustration with mainstream parties and political disaffection can motivate voting for radical outsiders. When these factors combine, far-right parties can push past that 20 per cent ceiling and win electoral pluralities and even majorities. And when they do, they tend to erode the norms and institutions that uphold liberal democracy.
+
+******
+
+<span style="font-family:Garamond; font-size:0.8em;">Originally published by Eurozine for their Standard Time programme: <a href="https://www.eurozine.com/tiktok-populism/">https://www.eurozine.com/tiktok-populism/</a></span>
