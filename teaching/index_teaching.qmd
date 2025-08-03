@@ -1,6 +1,11 @@
 ---
 title: "Teaching"
 listing:
+  - id: ay_25-26
+    contents: ay_25-26.yml
+    sort: "date desc"
+    template: ../html/teaching/listing.ejs
+    # image-height: 0.1px
   - id: ay_24-25
     contents: ay_24-25.yml
     sort: "date desc"
@@ -45,11 +50,10 @@ toc-location: right
 toc-title: Academic year
 ---
 
-<!-- ## 2025 -->
+## 2025–26
 
-<!-- Here are courses I teach in the summer term of 2025: -->
-
-<!-- - [Case-based Methods](CBM/index.html) -->
+:::{#ay_25-26}
+:::
 
 ## 2024–25
 
