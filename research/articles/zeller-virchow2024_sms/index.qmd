@@ -1,0 +1,118 @@
+---
+title: "Far-right leadership in comparison: shifts and continuities in German-speaking movements"
+date: 2024-12-15
+author:
+  - name: Michael C. Zeller
+    url: https://michaelzeller.de/
+    orcid: 0000-0002-2422-3896
+    affiliation: Ludwig-Maximilians-Universität München, München, Germany
+  - name: Fabian Virchow
+    url: https://soz-kult.hs-duesseldorf.de/virchow
+    orcid: 0000-0002-5995-5472
+    affiliation: Hochschule Düsseldorf, Düsseldorf, Germany
+categories:
+  - leadership
+  - far right
+  - right-wing extremism
+  - Germany
+  - quantitative text analysis
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong> and Fabian Virchow, “Far-right leadership in comparison: shifts and continuities in German-speaking movements,” <em>Social Movement Studies</em> 0, no. 0 (2024): 1-23, doi: <a href="https://doi.org/10.1080/14742837.2024.2430974"><code>10.1080/14742837.2024.2430974</code></a>
+  links:
+  - name: PDF
+    url: ZellerVirchow2024_Far-rightLeadership.pdf
+    local: true
+    # icon: bi filetype-pdf
+  - name: Online version
+    url: https://doi.org/10.1080/14742837.2024.2430974
+    # icon: fa-solid fa-scroll
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=doi&q=10.1080/14742837.2024.2430974
+    # icon: ai ai-zotero
+doi: 10.1080/14742837.2024.2430974
+haiku:
+  - <em>"Worch is the archetypal post-reunification German activist. His concerns are the German ‘Volk’ and addressing grievances like American military bases in Germany. Sellner is a post-9/11 activist, concerned with supposed threats of Islamization. The scope of his activism is transnational and aided by social media and other Internet-based tools."</em>
+---
+
+
+## Important links
+
+- [Full article](ZellerVirchow2024_Far-rightLeadership.pdf)
+
+## Abstract
+
+Leadership has long been acknowledged as a crucial feature of social movement activity. Theorisation has delved into the types of leadership and, more recently, the activities performed by leaders. However, comparative research on leadership and detection of any changes over time is scant. Our paper attends to these tasks by looking at the activities of two German-speaking far-right leaders. For many years, Christian Worch was one of the most active and influential neo-Nazi leaders in Germany, communicating much of his activity and strategy in the mid-2000s through a regular circular (Rundbriefe). Similarly, Martin Sellner, both as leader of the Identitarian movement and independent activist, today exercises an outsized role in the German-speaking far-right scene, including through his regular publications in the magazines Compact and Sezession. Our paper uses data of Worch’s and Sellner’s writings, scraped from webpages and gathered from archives, in a mixed-methods comparative design to identify the tasks performed by these leaders, and how frequently. Quantitative text analysis techniques guide the qualitative evaluation of leaders’ activities and reveal shifts – and continuities – in far-right movement leadership. The paper thereby contributes to scholarship on an important aspect of contemporary far-right movements as well as broader social movement literature on the topic of leadership.
+
+## Quantitative text analysis corpus
+
+```{r}
+library(kableExtra)
+text_stats <- data.frame(
+  Author = c(rep("Worch", 8), rep("Sellner", 8), rep("Sellner", 6)),
+  Source = c(rep("Rundbriefe", 8), rep("Sezession", 8), rep("Compact", 6)),
+  Year = c(2005:2012, 2015:2022, 2016:2021),
+  No_of_texts = c(54, 57, 46, 36, 39, 14, 9, 5, 15, 12, 14, 10, 12, 12, 15, 10, 2, 7, 11, 12, 13, 9),
+  Mean_sentences = c(35.9, 39.2, 47.1, 41.3, 70.7, 45.9, 28.7, 63.0, 
+                     94.1, 92.0, 86.4, 95.7, 97.1, 90.0, 80.7, 76.0,
+                     55.0, 40.0, 34.9, 39.4, 39.6, 41.7),
+  Total_sentences = c(1940, 2235, 2165, 1488, 2757, 642, 258, 315, 
+                      1411, 1104, 1209, 957, 1165, 1079, 1211, 760,
+                      110, 280, 384, 473, 515, 375),
+  Mean_words = c(640.4, 719.7, 791.4, 737.2, 1286.5, 754.9, 475.7, 1093.8, 
+                 3429.0, 3617.8, 3302.6, 3639.2, 3931.7, 3728.6, 3430.7, 3339.4,
+                 899.0, 618.7, 588.5, 674.5, 625.5, 677.4),
+  Total_words = c(34580, 41023, 36406, 26538, 50175, 10569, 4281, 5469,
+                  51435, 43413, 46237, 36392, 47180, 44743, 51461, 33394,
+                  1798, 4331, 6474, 8094, 8132, 6097)
+)
+
+kable(text_stats,
+      caption="Table 1. Text data descriptive statistics.",
+      col.names=c("Author", "Source", "Year", "No. of Texts", 
+                "Mean Sentences", "Total Sentences", 
+                "Mean Words", "Total Words"),
+      align = c("l", "l", "r", "r", "r", "r", "r", "r"),
+      digits=1) %>% 
+  kable_styling(full_width=F, font_size=20) %>% 
+  row_spec(0, bold=T) %>% 
+  collapse_rows(columns = 1:2)
+
+```
+
+
+## Article figures
+
+![Figure 1. Leadership tasks represented in complete corpuses of Worch (left bar) and Sellner (right bar).](FIG_1.jpeg)
+
+
+
+![Figure 2. Leadership tasks represented in corpuses of Worch and Sellner by year.](FIG_2.jpeg)
+
+![Figure A1. Barplot of topic modeling of Worch Rundbriefe text corpus.](FIG_A1.jpeg)
+
+
+![Figure A2. Barplot of topic modeling of Sellner Compact and Sezession text corpuses.](FIG_A2.jpeg)
+
+
+
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1080/14742837.2024.2430974">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@article{ZellerVirchow2024,
+  title={Far-right leadership in comparison: shifts and continuities in German-speaking movements},
+  author={Zeller, Michael C and Noschese, Pasquale},
+  journal={Social Movement Studies},
+  volume={0},
+  number={0},
+  pages={1-23},
+  year={2024},
+  publisher={Sage}
+}
+```
+
