@@ -1,0 +1,93 @@
+---
+title: "Targeting Taxonomy and Patterns of Political Violence in Stable Societies: Evidence from the Far Right in Italy"
+date: 2025-07-31
+author:
+  - name: Michael C. Zeller
+    url: https://michaelzeller.de/
+    orcid: 0000-0002-2422-3896
+    affiliation: Ludwig-Maximilians-Universität München, München, Germany
+  - name: Pasquale Noschese
+    affiliation: University of Nottingham, Nottingham, United Kingdom
+categories:
+  - political violence
+  - targeting
+  - far right
+  - right-wing extremism
+  - Italian politics
+  - CasaPound
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong> and Pasquale Noschese, “Targeting Taxonomy and Patterns of Political Violence in Stable Societies: Evidence from the Far Right in Italy,” <em>Terrorism and Political Violence</em> 0, no. 0 (2025): 1-20, doi: <a href="https://doi.org/10.1080/09546553.2025.2528059"><code>10.1080/09546553.2025.2528059</code></a>
+  links:
+  - name: PDF
+    url: ZellerNoschese2025_Targeting_taxonomy.pdf
+    local: true
+    # icon: bi filetype-pdf
+  - name: Online version
+    url: https://doi.org/10.1080/09546553.2025.2528059
+    # icon: fa-solid fa-scroll
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=doi&q=10.1080/09546553.2025.2528059
+    # icon: ai ai-zotero
+doi: 10.1080/09546553.2025.2528059
+haiku:
+  - <em>"In this stable setting, where there is no ongoing civil war or armed conflict, violent groups and individuals also act violently, but target more situationally and collectively, less indiscriminately; the violence itself is typically non-critical; and, characteristic of far-right violence, it is directed more often against people than property."</em>
+---
+
+
+## Important links
+
+- [Full article](ZellerNoschese2025_Targeting_taxonomy.pdf)
+
+## Abstract
+
+Fundamental to research on political violence is a conceptual framework to identify and trace patterns of violence. The dimension of targeting has received considerable attention as research investigating these patterns have incorporated observations about the intention behind attacks. We contribute to this research agenda by proposing a taxonomy of targeting, which can be applied in political violence cases, from the typically high-intensity violence of civil war to the usually low-intensity violence of militant social movements. We position this targeting taxonomy in relation to the broader conceptual property space comprising patterns of political violence. To test the utility of our conceptual framework, we applied it to coding novel data on far-right political violence in Italy from 2013 to 2020. Our results reveal the trends of sustained political violence within a stable democracy like Italy. It is worth noting that Italy has less political stability than other European countries, most visible in the relatively frequent change of government. Nevertheless, its democratic system is stable: violent groups and individuals act violently, but target more situationally and collectively, less indiscriminately; the violence itself is typically non-critical; and, characteristic of far-right violence, it is directed more often against people than property. Our findings speak to the role of politically violent organisations within stable democracies, where violence is less intense than amid armed conflicts but nevertheless a menace to some social groups.
+
+## Article figures
+
+![Figure 1. Targeting taxonomy and conceptual property space.](FIG_1.jpeg)
+
+<!-- ::: {#fig-tikz} -->
+
+<!-- ```{r, engine = 'tikz'} -->
+<!-- \begin{tikzpicture} -->
+<!--  \draw (0,0) circle (1cm); -->
+<!--  % \draw (0,0) circle (2cm); -->
+<!-- \end{tikzpicture} -->
+<!-- ``` -->
+
+<!-- This is a caption -->
+<!-- ::: -->
+
+![Figure 2. Comparison of number of far-right violent incidents captured by the Antifascist Observatory project and by the RTV dataset.](FIG_2.jpeg)
+
+![Figure 3. Monthly patterns of far-right violence incidents in Italy, by targeting type, intensity, and targeted entity.](FIG_3.jpeg)
+
+
+![Figure 4. Map of violent incidents (X) connected to CPI, panelled by year. The underlying maps show provinces shaded where there is at least one CPI section (data from Froio et al. 2020; only available for 2013 and 2018, marked in the plots with * and **, respectively).](FIG_4.jpeg)
+
+![Figure 5. Measure of violent incidents connected to CPI within a radius of CPI section points. The observed (solid black) line shows that incidents consistently cluster around CPI sections rather than being more randomly distributed.](FIG_5.jpeg)
+
+
+![Figure 6. Monthly patterns of far-right violence incidents connected to CasaPound, by targeting type, intensity, and targeted entity.](FIG_6.jpeg)
+
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1080/09546553.2025.2528059">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@article{ZellerNoschese2025,
+  title={Targeting Taxonomy and Patterns of Political Violence in Stable Societies: Evidence from the Far Right in Italy},
+  author={Zeller, Michael C and Noschese, Pasquale},
+  journal={Terrorism and Political Violence},
+  volume={0},
+  number={0},
+  pages={1-20},
+  year={2025},
+  publisher={Sage}
+}
+```
+

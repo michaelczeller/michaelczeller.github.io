@@ -602,7 +602,7 @@ plot(fit, fills = "transparent",
 
 ```bibtex
 @article{KrizsanRoggebandZeller2024,
-  title={Proscribing Right-Wing Extremist Organizations in Europe: Variations, Trends, and Prospects},
+  title={Who is Afraid of the Istanbul Convention? Explaining Opposition to and Support for Gender Equality},
   author={Krizsán, Andrea and Roggeband, Conny and Zeller, Michael C},
   journal={Comparative Political Studies},
   volume={58},
