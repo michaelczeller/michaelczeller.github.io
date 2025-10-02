@@ -1,0 +1,156 @@
+---
+title: "Pragmatic rather than principled: organisational bans in democracies"
+date: 2025-10-02
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io/
+    orcid: 0000-0002-2422-3896
+    affiliation: Ludwig-Maximilians-Universität München, München, Germany
+categories:
+  - banning
+  - extremism 
+  - far right
+  - Germany
+  - process tracing
+  - proscription
+  - protest
+  - right-wing extremism
+  - qualitative comparative analysis (QCA)
+pub-info:
+  reference: >-
+    <strong>Michael C. Zeller</strong>, “Pragmatic rather than principled - organisational bans in democracies,” <em>European Journal of Political Research</em> 0, no. 0 (2025): 1-30, doi: <a href="https://doi.org/10.1017/S1475676525100121"><code>10.1017/S1475676525100121</code></a>
+  links:
+  - name: Preprint
+    url: banning_2step_ejpr_zeller.pdf
+    local: true
+    # icon: bi filetype-pdf
+  - name: Final version
+    url: https://doi.org/10.1017/S1475676525100121
+    # icon: fa-solid fa-scroll
+  # - name: Code and data
+  #   url: https://github.com/andrewheiss/cautioning-canary
+  #   icon: fa-brands fa-github
+  - name: Add to Zotero
+    url: https://www.zotero.org/save?type=doi&q=10.1017/S1475676525100121
+    # icon: ai ai-zotero
+  extra: >-
+    Maik Fielitz offered early and informative comments on this project. It was presented to the Humboldt University’s Contemporary Research on Far-Right Politics workshop. Members of the colloquium within the Chair of Comparative Politics at Ludwig-Maximilians-Universität München offered invaluable feedback about framing and presenting the analysis. Teresa Völker kindly offered comments to help polish the article.
+doi: 10.17813/1086-671X-26-3-267
+haiku:
+  - <em>"Many extremist organisations exist and operate in democratic societies. Some get banned by democratic authorities; others don’t. Why? Using data on far-right organisations from Germany, I explain why governments ban only some of the organisations working to undermine Germany’s constitutional democracy."</em>
+---
+
+## Important links
+
+- [Full article (open access)](https://doi.org/10.1017/S1475676525100121)
+- [Paper (preprint)](banning_2step_ejpr_zeller.pdf)
+
+## Abstract
+
+Why do governments ban some extremist organisations and not others? To answer this question, this article investigates the banning of far-right groups in Germany, the archetype of ‘militant democracy’, where there are laws and institutions that protect a state’s democratic order through selective and qualified restrictions of certain political rights. The study draws on data about far-right organisations mentioned in federal security agency reports since 1990. Two-step fuzzy-set qualitative comparative analysis (QCA) reveals that situations of high far-right visibility are necessary to take banning action. Within such situations, there are four sufficient combinations of organisational conditions that lead to banning action: Germany has imposed bans on neo-Nazi groups, longstanding organisational hubs in the far-right scene, aggressive militant organisations, and neo-Nazi sham parties. Two follow-on case studies identify related causal mechanisms underlying these sufficiency patterns. The article shows that Germany’s militant democracy practices are not applied as a matter of principle to every far-right organisation susceptible to a ban, but rather are used more pragmatically. This pragmatic approach implies that state actors should be especially attentive to the efficacy of using bans to disrupt and diminish extremist threats. Although there is some evidence of state actors considering efficacy, there are also indications that banning is sometimes a tool of politics rather than a targeted response to threats.
+
+## Summary
+
+Across Europe, more states are turning to [bans](https://www.tandfonline.com/doi/abs/10.1080/09546553.2023.2240446) as a way to rein in organised extremism. But there are often many extremist organisations within democratic societies, many antagonistic to constitutional democracy and many acting unlawfully. Which organisations get banned and why? As the archetype of [militant democracy](https://www.jstor.org/stable/1948164), where political rights can be selectively restricted in order to protect liberal democratic order, Germany has used powers to ban extremist organisations relatively frequently. Still, not every extremist group ends up on the receiving end of a ban. A new study dives into this puzzle, using two-step qualitative comparative analysis (QCA) to explain why German governments over the last three decades have decided to ban far-right organisations—and what these decisions reveal about democracy's limits.
+
+### Far-right visibility pressures governments to respond
+
+Germany’s Interior Minister (in the case of organisations) and its Federal Constitutional Court (in the case of political parties) can ban organisations that threaten Germany’s democratic order and constitutionally enshrined values. Figure 1 maps the dozens of far-right organisations monitored by Germany’s federal law enforcement between 1990 and 2023. In that time, German governments banned 31 far-right organisations.
+
+![Figure 1. Far-right organisations active in more than one region in Germany and monitored by the BfV, 1990–2023. The green circles represent the (main) sites of organisations not banned. The red crosses represent organisations banned under the Law of Associations or Criminal Code §§129/129a.](FIG_1.png)
+
+My [study](https://doi.org/10.1017/S1475676525100121) found that high far-right visibility is necessary for banning decisions (Table 1 and Figure 2). German governments banned far-right organisations only in years when far-right activity, in the form of violence or agitation, was highly visible. Conspicuous incidents of violence in particular were often a prod to proscriptive action. Organisational unlawfulness alone is not enough to explain banning decisions. Without public or political awareness, authorities appear unlikely to act, even if a group is technically illegal. Two case studies revealed that public outcry, media coverage, and political pressure often play a decisive role.
+
+```{r}
+library(kableExtra)
+
+df <- data.frame(
+  Disjunction = "HPRO+HVIO",
+  `Higher order concept` = "High far-right visibility",
+  inclN = 0.968,
+  RoN = 0.445,
+  covN = 0.546,
+  `Deviant cases consistency in kind?` = "no"
+)
+
+kable(df, 
+      col.names = c("Disjunction", "Higher order concept", "inclN", "RoN", "covN",
+                    "Deviant case(s) consistency in kind?"),
+      caption = "Table 1. Possible necessary disjunction. *inclN* refers to consistency, the degree to which data accord with the possible necessity relationship; *RoN* refers to relevance of necessity, the degree to which the necessity relationship is not trivial; *covN* refers to coverage, the relation in size between the disjunction and the outcome set.",
+      booktabs = TRUE, longtable = FALSE) %>%
+  kable_styling(latex_options = c("hold_position"))
+```
+
+![Figure 2. Necessary disjunction of situational conditions representing ‘high far-right visibility’ (HPRO + HVIO). Points jittered to display more clearly the clusters of cases.](FIG_2.png)
+
+This suggests that German governments’ responses to extremism are more pragmatic than principled. Banning is not just a matter of legal thresholds---it is also about timing, attention, and external pressure. In other words, bans happen not just because a group is dangerous, but because the danger becomes visible and urgent.
+
+### Four patterns of banning far-right organisations 
+
+Within high-visibility situations, German governments banned four types of far-right organisations: 
+
+1. **Neo-Nazi movement groups** – These organisations openly espoused National Socialist ideology—a legally sufficient basis for banning in Germany and several other countries—and promote racial hatred and violence.
+2. **Longstanding hubs** – These organisations exist for longer periods before being banned and serves as centres of far-right activism and networking.
+3. **Militant organisations** – These organisations embody particularly aggressive, confrontational far-right activism.
+4. **Neo-Nazi sham parties** – These organisations present themselves as political parties but adopt that guise in hopes of gaining more protection against organizational bans and spreading neo-Nazi ideology under a more legitimate cover.
+
+When the far right is highly visible, German governments repeatedly look to these types of organisations to take banning action. 
+
+### Bans reflect politics as much as law
+
+The findings challenge the idea that banning extremist organisations is simply a legal matter. Many far-right groups that meet the legal criteria are never banned. Some bans follow public incidents in which the targeted group was not directly involved.
+
+This highlights a key point: bans are often political tools. They help governments show responsiveness to public fear or outrage. They can also help neutralise growing extremist movements by disrupting organising and activism. Also, as a government once [explained](https://dserver.bundestag.de/btd/12/070/1207008.pdf), banning can have a desirable chilling effect: other far-right groups ‘have at least restricted their agitation activities in order to avoid bans.’ But bans can also be symbolic, signaling action without actually changing much on the ground, within the organizational ecologies of far-right activity.
+
+### Pragmatic banning: benefits and risks
+
+This sort of pragmatism underlying banning decisions entails benefits and risks. On one hand, it allows democracies to act swiftly when threats escalate. It also shows that public pressure matters—citizens and activists, media, and other parties can influence state decisions. On the other hand, it creates inconsistency. Two similar groups may be treated very differently depending on timing, media attention, or political mood.
+
+That inconsistency raises concerns about fairness and effectiveness. Arbitrary enforcement risks undermining trust in democratic institutions. It can also leave dangerous groups untouched if they manage to stay under the radar.
+
+Still, the study suggests that bans can be effective in disrupting extremist networks. In the cases examined, banning one group plausibly discouraged others or limited their ability to operate. Yet this effect depends on how well the state understands the broader ecosystem of extremist activity—and whether it sees bans as a strategy, not just a legal endpoint or political tool.
+
+### Banning beyond Germany
+
+While Germany is a special case because of its history, the large far-right movement scene, and governments’ longstanding banning practices, its example nevertheless holds lessons for other democracies. Many countries have used or adopted militant democracy tools, including laws for banning extremist organisations. Yet across contexts, the same basic challenge remains: laws exist, but enforcement varies.
+
+My research points to a common pattern: bans do not just follow the law—they follow pressure. Public visibility, political will, and social mobilisation all shape outcomes. This means that organisational bans and perhaps other militant democracy decisions are not solely in the hands of governments. Societal actors inform and influence how states and governments respond to extremism.
+
+
+
+
+
+## Other figures
+
+![Figure 3. Set intersections of QCA model. Red bars represent truth table rows where cases were banned; green, not banned; and orange, inconsistent rows.](FIG_3.png)
+
+![Figure 4. Sufficient solution. (Points jittered.) Points in upper-right quadrant represent banning cases covered by the solution. Two puzzling cases represented by the solution but not covered are in the lower-right quadrant. The upper-left quadrant represents deviant coverage cases, where the QCA model’s conditions apparently are not enough to explain why a ban was imposed.](FIG_4.png)
+
+![Figure 5. Solution patterns and overlaps. Circles are proportional representations of the coverage of each pattern.](FIG_5.png)
+
+![Figure 6. Causal process of banning Nationale Offensive (NO). The conditions (rectangles) are sufficient to trigger a political pressure mechanism (trapezoid), in turn causing a ban. Conditions in the first column were present from the NO’s creation; those in the second column manifested in the year it was banned. The hatched PARTY condition represents that this was rejected by authorities, whereas the shaded HVIO condition was causally pivotal.](FIG_6.png)
+
+
+![Figure 7. Causal process of banning Collegium Humanum (CH). The conditions (rectangles), especially far-right propaganda visibility, triggered a moral shock mechanism (trapezoid), in turn causing a ban. Additional conditions (dashed rectangles) also contributed to triggering the mechanism causing the ban.](FIG_7.png)
+
+
+
+
+
+## Citation
+
+<p class="buttons" style="text-align:center;">
+<a class="btn btn-danger" target="_blank" href="https://www.zotero.org/save?type=doi&q=10.1017/S1475676525100121">Add to Zotero <i class="bi-arrow-up-right-square"></i> </a>
+</p>
+
+```bibtex
+@article{zeller2025bans,
+  title={Pragmatic rather than principled - organisational bans in democracies},
+  author={Zeller, Michael C},
+  journal={European Journal of Political Research},
+  volume={0},
+  number={0},
+  pages={1--30},
+  year={2025}
+}
+```
