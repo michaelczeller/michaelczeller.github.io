@@ -1,5 +1,5 @@
 ---
-title: COMPACT banned!
+title: COMPACT banned! (*overturned on 2025-06-24*)
 date: 2024-07-17
 description: "Banning an organisation acting as a 'news' provider is rare. But Interior Minister Nancy Faeser has judged the far-right media company Compact as worthy of a ban. It is not an unprecedented action---but nevertheless bold."
 image: compact_ban_logo.png
@@ -14,6 +14,10 @@ categories:
   - far right
   - proscription
 ---
+
+<span style="font-family:Garamond; font-size:0.8em;">The following blog was written just after a ban order was announced by then-Federal Minister of the Interior Nancy Faeser. The ban was subsequently suspended (in August 2024) and finally overturned (in June 2025).</a></span>
+
+******
 
 Germany's Interior Minister, Nancy Faeser, [announced](https://www.bmi.bund.de/SharedDocs/pressemitteilungen/DE/2024/07/exekutive1.html) on Tuesday (16 July) a ban order against *Compact-Magazin GmbH*, the limited liability company that publishes---well, I suppose that should be 'published'---COMPACT Magazine. This is the third far-right^[In banning Compact, Faeser [declared](https://www.bmi.bund.de/SharedDocs/pressemitteilungen/DE/2024/07/exekutive1.html) it to be 'right-wing extremist'.] organisation banned under Faeser's leadership of the Interior Ministry, with both 'Hammerskins Deutschland' and 'Artgemeinschaft - Germanische Glaubens-Gemeinschaft wesensgemaesser Lebensgestaltung e.V.' banned in September 2023. Although banning Compact fits with the ongoing efforts of Faeser's ministry to address far-right activity in Germany, this case is marked by unique features, most importantly: it is a company and publisher, not an association like most banning cases.
 

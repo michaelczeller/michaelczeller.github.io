@@ -1,0 +1,405 @@
+---
+title: Active Clubs
+date: 2025-11-11
+description: "Neo-Nazi 'Active Clubs' have spread beyond the United States, emerging in numerous European states over the last few years. The Global Project Against Hate and Extremism (GPAHE) has charted this development."
+image: ac_logo_generic.png
+twitter-card:
+  image: "ac_logo_generic.png"
+open-graph:
+  image: "ac_logo_generic.png"
+categories:
+  - extremism 
+  - far right
+  - Germany
+  - Hammerskins
+  - Kampf der Nibelungen
+  - right-wing extremism
+  - social movements
+  - youth
+reading:
+  pdf1: "Active-Clubs-GPAHE-27_06_2025.pdf"
+---
+
+Recent years have witnessed a dramatic rise in neo-Nazi, white supremacist 'fight clubs'. Typically, these clubs bear the relatively innocuous moniker of 'Active Club' (AC). Though originally an American phenomenon, initiated by Robert Rundo, originally from California, ACs have spread to Europe and beyond, establishing chapters, building networks, recruiting young men under the guise of fitness, combat sports, and 'brotherhood'. This blog follows up on the valuable research done by the Global Project Against Hate and Extremism (GPAHE), which has tracked the diffusion of ACs (e.g., in a [2023 report](https://globalextremism.org/post/new-report-far-right-white-supremacist-transnational-network-of-active-clubs-surging/)). Specifically, it draws on the recent (late June 2025) release of [updated GPAHE data](https://globalextremism.org/wp-content/uploads/2025/06/Active-Clubs-GPAHE-27_06_2025.pdf) on extant ACs. The PDF of tabular data is available below. A reworked version of the data, correcting some inaccuracies and adding approximate locations is available for download at the bottom of this page. 
+
+::: {.callout-note collapse="true"}
+## Raw data file (PDF) from GPAHE
+```{css echo=FALSE}
+.embed-container {
+    position: relative;
+    padding-bottom: 129%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+```
+
+```{=html}
+<p class="text-center">
+  <a class="btn btn-primary btn-lg cv-download" href="`r rmarkdown::metadata$reading$pdf1`" target="_blank">
+    <i class="bi-download"></i>&ensp;Download GPAHE table
+  </a>
+</p>
+
+<div class="embed-container">
+  <iframe src="`r rmarkdown::metadata$reading$pdf1`" style="border: 0.5px"></iframe>
+</div>
+```
+:::
+
+```{r data-setup}
+#| echo: false
+#| message: false
+library(readxl)
+
+gpahe_ACs <- read_excel("gpahe_active.xlsx", sheet="cleaned_data") 
+
+
+## country bars
+library(ggplot2)
+library(ggpattern)
+library(flagon)
+library(dplyr)
+library(ggimage)
+library(ggnewscale)
+library(rsvg)
+
+## interactive maps
+library(tidyverse)
+library(tidygeocoder)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(mapview)
+library(spatstat)
+library(leafpop)
+
+```
+
+Active Clubs usually style themselves as male-oriented, fitness- and martial-arts organisations that more or less openly promote a white nationalist ideology. Rundo and co-originator Denis Kapustin, a Russian neo-Nazi, elaborated the idea of ACs as 'white nationalism 3.0', building on Louis Beam's idea of *[leaderless resistance](https://www.splcenter.org/resources/extremist-files/louis-beam/)* by aiming to create a network of sporting clubs that share symbols and ideological tenets. This pattern is similar to the model of groups like Blood & Honour, Hammerskins, and Identitarian groups. 
+
+## Active Clubs by country
+
+The rapid spread of ACs is perhaps unique. According to the June 2025 update by GPAHE, there are ACs in at least 27 countries. This proliferation has developed in the space of only a few years. While the plurality of ACs are located in North America (especially the United States), chapters have emerged in many European countries. Often, ACs in Europe have been incorporated into preexisting right-wing extremist organisational structures, such as *Der III. Weg* ('The Third Way') in Germany, and are more centrally organised than in the United States. 
+
+The chart below (which excludes the United States and the upwards of 90 ACs based there) shows that in Europe France and Germany have the most ACs, followed by Finland, Sweden, and the Netherlands. But there is at least one AC in most European states.
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r country-bars}
+ACs_country <- gpahe_ACs %>% 
+  filter(Country!="United States") %>% 
+  group_by(Country) %>% 
+  summarise(Groups = n())
+
+flags_df <- ACs_country %>%
+  distinct(Country) %>%
+  mutate(
+    iso2 = countrycode::countrycode(Country, origin = "country.name", destination = "iso2c")
+  ) %>%
+  mutate(
+    # fix EU ISO2 and provide custom flag
+    iso2 = ifelse(Country == "EU", "eu", iso2),
+    flag_url = ifelse(
+      Country == "EU",
+      "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg",  # EU flag from Wikipedia
+      paste0("https://flagcdn.com/w40/", tolower(iso2), ".png")
+    )
+  ) %>%
+  mutate(xpos = as.numeric(factor(Country)))
+
+flags_df <- flags_df %>% mutate(xpos = as.numeric(factor(Country)))
+
+ACs_country_bars <- ggplot()+
+  geom_col(data=ACs_country, aes(x=Country, y=Groups), color="black")+
+  scale_x_discrete("", labels = function(x) ifelse(x == "United Kingdom", "UK", x)) +
+  scale_y_continuous("Active Club groups", breaks=seq(0, max(ACs_country$Groups), by=5)) + #min(ACs_country$Groups)
+  theme_gray(base_size = 13) + 
+  theme(axis.text.x=element_text(angle=45, vjust=1, hjust=1, size=14), 
+    axis.text.y = element_text(size = 15), 
+    axis.title.y = element_text(size = 15)
+  ) + 
+  geom_image(
+    data=flags_df,
+    # aes(x=Country, y=min(ACs_country$Groups)-3, image=flag_url), 
+    aes(x=Country, y=ifelse(ACs_country$Groups > 20, (ACs_country$Groups - 1), (ACs_country$Groups + 1)), image=flag_url), 
+    inherit.aes=FALSE,
+    size=0.06
+  )
+
+```
+
+</details>
+
+```{r country-bars-plot}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+ACs_country_bars
+```
+
+The choice of fitness activities is strategic: it offers a veneer of respectability and an accessible hook for young men who may be searching for identity, camaraderie, or purpose. Once inside, ideological socialisation---centred around white supremacy, racial victimhood, and conspiracy theories such as the 'Great Replacement'---can proceed apace. 
+
+## Mapping Active Clubs 
+
+The following maps display the approximate locations of Active Clubs. Where the precise city of a club was known, it is charted. Other clubs are positioned at the largest city in the region unless other information suggested a more likely location. Where this latter approximation was used, it is identified with a 'Y' in the field *Loc_approx*.
+
+### Europe
+
+The first French national AC, 'Active Club France' was launched on 1 April 2022. Now, there are as many as two dozen. France also exemplifies the more top-down structure of AC organisation: the national chapter helps spawn and coordinate local chapters. Furthermore, France's ACs are closely connected to longstanding organisational hubs of French right-wing extremism, including *Action Française* and several groups that were created in the wake of the banning of *Génération Identitaire* in 2021. 
+
+In Germany, ACs have been organised but face stronger opposition from state authorities. Previous right-wing extremist fighting events, particularly the *Kampf der Nibelungen* ('Battle of the Nibelungs'), have been banned. ACs are already being monitored by state security agencies and are mentioned in annual reports from the *Verfassungsschutz* ('Office for the Protection of the Constitution').
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r ACs-europe-interactive, message = FALSE, warning=FALSE, echo=TRUE, fig.cap="Map of Active Club groups in Europe."}
+
+ACs_europe <- gpahe_ACs %>% 
+  filter(Country!="United States") %>% 
+  filter(Country!="Chile") %>% 
+  filter(Country!="Australia") %>% 
+  filter(Country!="Colombia") %>% 
+  filter(Country!="Canada") %>% 
+  filter(Country!="Brazil")
+
+## takes a couple moments to run
+ACs_europe_geo <- ACs_europe %>% 
+  tidygeocoder::geocode(
+    city = Location,
+    country = Country,
+    method = "osm"
+  )
+
+ACs_europe_geo$latJIT <- jitter(ACs_europe_geo$lat, factor = 10)
+ACs_europe_geo$longJIT <- jitter(ACs_europe_geo$long, factor = 10)
+
+ACs_europe_geo$col = NA
+
+ACs_europe_geo <- ACs_europe_geo %>% 
+  mutate(col = case_when(
+    Inactive == "Y" ~ "grey",
+    `New Account` == "Y" ~ "seagreen1",
+    TRUE ~ "red"
+  ))
+
+ACs_europe_geo_inact <- subset(ACs_europe_geo, col == "grey")
+ACs_europe_geo_new <-   subset(ACs_europe_geo, col == "seagreen1")
+ACs_europe_geo_rest <-  subset(ACs_europe_geo, col == "red")
+
+# ACs_europe_geo_sf <- ACs_europe_geo %>% 
+#   st_as_sf(
+#     coords = c("longJIT", "latJIT"),
+#     crs = st_crs("EPSG:4326") 
+#   )
+
+ACs_europe_geo_inact_sf <- ACs_europe_geo_inact %>% 
+  st_as_sf(
+    coords = c("longJIT", "latJIT"),
+    crs = st_crs("EPSG:4326") 
+  )
+
+ACs_europe_geo_new_sf <- ACs_europe_geo_new %>% 
+  st_as_sf(
+    coords = c("longJIT", "latJIT"),
+    crs = st_crs("EPSG:4326") 
+  )
+
+ACs_europe_geo_rest_sf <- ACs_europe_geo_rest %>% 
+  st_as_sf(
+    coords = c("longJIT", "latJIT"),
+    crs = st_crs("EPSG:4326") 
+  )
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+# ggplot(data = world) + geom_sf()
+
+world <- world %>% dplyr::select(country = name, name_long, pop_est, gdp_md, 
+                                 continent, region_un, subregion,
+                                 label_x, label_y, geometry)
+
+### VALUES JUST FROM EUROPE AND MAPPING
+europe <- world[which(world$continent == "Europe"),]
+
+# st_crs(ACs_europe_geo_sf) <- st_crs(europe)
+st_crs(ACs_europe_geo_inact_sf) <- st_crs(europe)
+st_crs(ACs_europe_geo_new_sf) <- st_crs(europe)
+st_crs(ACs_europe_geo_rest_sf) <- st_crs(europe)
+
+europe_map <- mapview(ACs_europe_geo_rest_sf, col.regions = "red", 
+        label = "Location",
+        legend = T, 
+        layer.name = 'Active Clubs', 
+        map.types = c("CartoDB.Positron", "CartoDB.DarkMatter"),
+        popup = popupTable(ACs_europe_geo_rest_sf,
+                           zcol=c("Name","Country","Location","Loc_approx")))+
+  mapview(ACs_europe_geo_new_sf, col.regions = "seagreen1", 
+        label = "Location",
+        legend = T, 
+        layer.name = 'new Active Clubs', 
+        map.types = c("CartoDB.Positron", "CartoDB.DarkMatter"),
+        popup = popupTable(ACs_europe_geo_new_sf,
+                           zcol=c("Name","Country","Location","Loc_approx")))+
+  mapview(ACs_europe_geo_inact_sf, col.regions = "grey", 
+        label = "Location",
+        legend = T, 
+        layer.name = 'inactive clubs', 
+        map.types = c("CartoDB.Positron", "CartoDB.DarkMatter"),
+        popup = popupTable(ACs_europe_geo_inact_sf,
+                           zcol=c("Name","Country","Location","Loc_approx")))
+
+```
+
+</details>
+
+```{r ACs-europe-interactive-plot, message = FALSE, warning=FALSE, echo=FALSE, fig.cap="Map of Active Club groups in Europe."}
+
+europe_map
+
+```
+
+Across Europe, ACs operate Telegram channels. These social media channels help facilitate recruitment, organisation, and coordination. 
+
+### North America
+
+<!-- FOLLOWING LOCATIONS ARE MISSED IN GEOCODING THAT INCLUDES 'State': New York, Washington Country (Utah), Chicago, Sioux Falls, Slidell, Kansas City, Fort Wayne, Cincinnati, Boston, Salem, Castle Rock, Boston, St. Louis, Ottawa, Lewiston (Washington), Bowling Green -->
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r ACs-america-interactive, echo=TRUE, fig.cap="Map of Active Club groups in North America", message=FALSE, warning=FALSE}
+
+ACs_america <- gpahe_ACs %>% 
+  filter(Country=="United States" | Country=="Canada")
+
+## takes a couple moments to run
+ACs_america_geo <- ACs_america %>% 
+  tidygeocoder::geocode(
+    city = Location,
+    # state = State,
+    country = Country,
+    method = "osm"
+  )
+
+ACs_america_geo$latJIT <- jitter(ACs_america_geo$lat, factor = 10)
+ACs_america_geo$longJIT <- jitter(ACs_america_geo$long, factor = 10)
+
+ACs_america_geo$col = NA
+
+ACs_america_geo <- ACs_america_geo %>% 
+  mutate(col = case_when(
+    Inactive == "Y" ~ "grey",
+    `New Account` == "Y" ~ "seagreen1",
+    TRUE ~ "red"
+  ))
+
+ACs_america_geo_inact <- subset(ACs_america_geo, col == "grey")
+ACs_america_geo_new <-   subset(ACs_america_geo, col == "seagreen1")
+ACs_america_geo_rest <-  subset(ACs_america_geo, col == "red")
+
+# ACs_america_geo_sf <- ACs_america_geo %>% 
+#   st_as_sf(
+#     coords = c("longJIT", "latJIT"),
+#     crs = st_crs("NAD83") 
+#   )
+
+ACs_america_geo_inact_sf <- ACs_america_geo_inact %>% 
+  st_as_sf(
+    coords = c("longJIT", "latJIT"),
+    crs = st_crs("NAD83") 
+  )
+
+ACs_america_geo_new_sf <- ACs_america_geo_new %>% 
+  st_as_sf(
+    coords = c("longJIT", "latJIT"),
+    crs = st_crs("NAD83") 
+  )
+
+ACs_america_geo_rest_sf <- ACs_america_geo_rest %>% 
+  st_as_sf(
+    coords = c("longJIT", "latJIT"),
+    crs = st_crs("NAD83") 
+  )
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+# ggplot(data = world) + geom_sf()
+
+world <- world %>% dplyr::select(country = name, name_long, pop_est, gdp_md, 
+                                 continent, region_un, subregion,
+                                 label_x, label_y, geometry)
+
+### VALUES JUST FROM EUROPE AND MAPPING
+nAmerica <- world[which(world$continent == "North America"),]
+
+# st_crs(ACs_america_geo_sf) <- st_crs(nAmerica)
+st_crs(ACs_america_geo_inact_sf) <- st_crs(nAmerica)
+st_crs(ACs_america_geo_new_sf) <- st_crs(nAmerica)
+st_crs(ACs_america_geo_rest_sf) <- st_crs(nAmerica)
+
+nA_map <- mapview(ACs_america_geo_rest_sf, col.regions = "red", 
+        label = "Location",
+        legend = T, 
+        layer.name = 'Active Clubs', 
+        map.types = c("CartoDB.Positron", "CartoDB.DarkMatter"),
+        popup = popupTable(ACs_america_geo_rest_sf,
+                           zcol=c("Name","Country","Location","Loc_approx")))+
+  mapview(ACs_america_geo_new_sf, col.regions = "seagreen1", 
+        label = "Location",
+        legend = T, 
+        layer.name = 'new Active Clubs', 
+        map.types = c("CartoDB.Positron", "CartoDB.DarkMatter"),
+        popup = popupTable(ACs_america_geo_new_sf,
+                           zcol=c("Name","Country","Location","Loc_approx")))+
+  mapview(ACs_america_geo_inact_sf, col.regions = "grey", 
+        label = "Location",
+        legend = T, 
+        layer.name = 'inactive clubs', 
+        map.types = c("CartoDB.Positron", "CartoDB.DarkMatter"),
+        popup = popupTable(ACs_america_geo_inact_sf,
+                           zcol=c("Name","Country","Location","Loc_approx")))
+
+```
+
+</details>
+
+```{r ACs-america-interactive-plot, echo=FALSE, fig.cap="Map of Active Club groups in North America.", message=FALSE, warning=FALSE}
+
+nA_map
+
+```
+
+## Wrangled data on Active Clubs
+
+```{r data-download, message=FALSE, warning=FALSE, collapse=TRUE, comment="#>"}
+#| echo: false
+library(downloadthis)
+
+gpahe_ACs %>% download_this(
+    output_name = "gpahe_active_clubs",
+    output_extension = ".xlsx",
+    button_label = "Download dataset as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+
+```
+
+
+
+******
+
+<!-- <span style="font-family:Garamond; font-size:0.8em;">A version of this blog was originally published by <a href="https://theloop.ecpr.eu/">The Loop</a></span>  -->
+<!-- <a href="https://www.eurozine.com/tiktok-populism/">https://www.eurozine.com/tiktok-populism/</a></span> -->
