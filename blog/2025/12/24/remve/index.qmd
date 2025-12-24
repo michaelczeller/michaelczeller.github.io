@@ -1,0 +1,275 @@
+---
+title: REMVE
+date: 2025-12-24
+description: "REMVE from UNC"
+image: dom_terror.png
+twitter-card:
+  image: "dom_terror.png"
+open-graph:
+  image: "dom_terror.png"
+categories:
+  - extremism 
+  - far right
+  - right-wing extremism
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE, 
+                      warning = FALSE, 
+                      paged.print = FALSE)
+```
+
+I have discussed with students in my courses on [Political Violence](https://michaelzeller.de/course-pv/) and on [Far-Right Socio-Politics](https://michaelzeller.de/course-fr/) facets of domestic terrorism and violent extremism. Recently, I was reminded of a dataset produced by the University of North Carolina (UNC) on *Racially and Ethnically Motivated Violent Extremism (REMVE) and Targeted Violence Arrests 2011-2020* (introduced in a brief blog here: <https://www.opendemocracy.net/en/countering-radical-right/documenting-domestic-terrorism-us-new-dataset-exposes-legal-response/>). The dataset consists of manually coded observations of "individuals arrested and charged for federal [NB: not state level] crimes linked to 'domestic' terrorism stemming from white supremacist, nationalist, accelerationist, and male supremacist ideological cultures and groups." 
+
+Unfortunately, the original dataset publication is no longer available; but fortunately, I had a copy saved. The interactive map^[This Observable JS map was produced with the assistance of Andrew Heiss's tutorial: Heiss, Andrew. 2025. “Using USAID Data to Make Fancy World Maps with Observable Plot.” February 10, 2025. <https://doi.org/10.59350/c0aep-hp989>.] below represents the full dataset. By hovering over a state, one can see how many REMVE federal arrests were made there over the 2010s. 
+
+
+```{r}
+library(readxl)
+library(dplyr)
+
+unc_remve <- read_excel("UNC-Dataset-8_8_2020.xlsx", sheet="edit") 
+
+unc_remve <- unc_remve %>% filter(!State == 'Alaska')
+
+```
+
+```{r}
+#| eval: false
+#| include: false
+
+unc_remve_grouped <- unc_remve %>% 
+  group_by(State) %>% 
+  summarise(COUNT=n())
+
+
+write.csv(unc_remve_grouped, "unc_remve_grouped.csv")
+
+
+##~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+library(sf)
+library(rnaturalearth)
+
+# Get low resolution Natural Earth data as map units instead of countries because of France
+# world <- ne_countries(scale = 110, type = "map_units")
+
+us_states <- ne_states(iso_a2="US", returnclass="sf")
+
+bbox <- c(xmin = -127, ymin = 20, xmax = -60, ymax = 50)
+us_states_cropped <- st_crop(us_states, bbox)
+
+# Save as geojson for Observable Plot
+st_write(
+  obj = us_states_cropped, 
+  dsn = "ne_us_cropped.geojson", 
+  driver = "GeoJSON"
+)
+
+```
+
+
+```{ojs}
+//| echo: false
+map_us = FileAttachment("ne_us_cropped.geojson").json()
+
+// Plot.plot({
+//   marks: [
+//     Plot.geo(map_us)
+//   ]
+// })
+
+// Plot.plot({
+//   marks: [
+//     Plot.frame({ fill: "#D9F0FF" }),  
+//     Plot.geo(map_us, { 
+//       stroke: "black", 
+//       strokeWidth: 0.5, 
+//       fill: "#facba6"
+//     }) 
+//   ]
+// })
+
+```
+
+<!-- https://observablehq.com/@observablehq/input-file -->
+
+```{ojs}
+//| echo: false
+
+oj_unc = FileAttachment("unc_remve_grouped.csv").csv()
+// oj_unc
+
+
+```
+
+```{ojs}
+//| echo: false
+
+state_totals = new Map(oj_unc.map(d => [d["State"], d.COUNT]))
+// state_totals
+
+function format_arrests_total(value) {
+  return value ? d3.format("d")(value) : "No arrests";
+}
+
+```
+
+```{ojs}
+//| echo: false
+
+Plot.plot({
+  marks: [
+    // Plot.frame({ stroke: "black", strokeWidth: 1} ),
+    Plot.geo(map_us, Plot.centroid({
+      fill: d => state_totals.get(d.properties.name),
+      channels: { 
+        State: d => d.properties.name, 
+      }, 
+      tip: { 
+        fontSize: 14, 
+        format: { 
+          State: true, 
+          fill: d => format_arrests_total(d) 
+        } 
+      } 
+    })),
+    Plot.geo(map_us, {
+      stroke: "black",
+      strokeWidth: 0.5
+    })
+  ],
+  // https://observablehq.com/@observablehq/plot-cheatsheets-colors
+  x:{axis:null},
+  y:{axis:null},
+  color: {  
+    scheme: "reds",  
+    unknown: "#f2f2f2",  
+    type: "log",   // "linear"
+    legend: true,  
+    label: "Total REMVE arrests",  
+    style: { 
+      "font-size": "16px" 
+    } 
+  }
+})
+
+
+```
+
+```{r}
+
+unc_remve <- read_excel("UNC-Dataset-8_8_2020.xlsx", sheet="edit") 
+unc_remve$Charged <- as.Date(unc_remve$ChargeDate_clean, "%m/%d/%Y")
+unc_remve$Arrested <- as.Date(unc_remve$ArrestDate_clean, "%m/%d/%Y")
+unc_remve$Indicted <- as.Date(unc_remve$IndictmentDate_clean, "%m/%d/%Y")
+unc_remve$Sentenced <- as.Date(unc_remve$SentenceDate_clean, "%m/%d/%Y")
+
+```
+
+
+The dataset contains **`r nrow(unc_remve)`** rows (i.e. arrests), most of which proceeded through to charges, indictment, and sentencing. **`r nrow(subset(unc_remve, Gender=='M'))`** of the named individuals are males, compared to **`r nrow(subset(unc_remve, Gender=='F'))`** females. The average age, where this information is available (in `r round(nrow(subset(unc_remve, !(is.na(Age))))/nrow(unc_remve)*100, 1)`% of cases), is **`r round(mean(subset(unc_remve, !(is.na(Age)))$Age), 0)`** years old.
+
+The dataset also contains, albeit inconsistently, with several missing values, dates of arrest, charging, indictment, and sentencing. These data are reflected in the bar graphs below.
+
+## Arrests
+
+```{r}
+library(ggplot2)
+library(lubridate)
+
+unc_remve %>% 
+  mutate(month=floor_date(Arrested, "month")) %>% 
+  group_by(month) %>% 
+  summarise(count=n()) %>%
+  ggplot(aes(x=month, y=count)) +
+  geom_bar(stat="identity", colour="black", fill="purple") +
+  ## format x-axis for months
+  scale_x_date(labels=scales::date_format("%b %Y"), breaks="6 month") + 
+  labs(x="", y="Arrests") +
+  theme_minimal() +
+  theme(
+    text=element_text(size=20),
+    axis.text.x=element_text(angle=90, hjust=1, vjust = 0.5)
+        )
+```
+
+## Charges
+
+```{r}
+
+unc_remve %>% 
+  mutate(month=floor_date(Charged, "month")) %>% 
+  group_by(month) %>% 
+  summarise(count=n()) %>%
+  ggplot(aes(x=month, y=count)) +
+  geom_bar(stat="identity", colour="black", fill="blue") +
+  ## format x-axis for months
+  scale_x_date(labels=scales::date_format("%b %Y"), breaks="6 month") + 
+  labs(x="", y="Charges") +
+  theme_minimal() +
+  theme(
+    text=element_text(size=20),
+    axis.text.x=element_text(angle=90, hjust=1, vjust = 0.5)
+        )
+```
+
+## Indictments
+
+```{r}
+unc_remve %>% 
+  mutate(month=floor_date(Indicted, "month")) %>% 
+  group_by(month) %>% 
+  summarise(count=n()) %>%
+  ggplot(aes(x=month, y=count)) +
+  geom_bar(stat="identity", colour="black", fill="goldenrod") +
+  scale_x_date(labels=scales::date_format("%b %Y"), breaks="6 month") + 
+  labs(x="", y="Indictments") +
+  theme_minimal() +
+  theme(
+    text=element_text(size=20),
+    axis.text.x=element_text(angle=90, hjust=1, vjust = 0.5)
+        )
+```
+
+## Sentences/Convictions
+
+```{r}
+unc_remve %>% 
+  mutate(month=floor_date(Sentenced, "month")) %>% 
+  group_by(month) %>% 
+  summarise(count=n()) %>%
+  ggplot(aes(x=month, y=count)) +
+  geom_bar(stat="identity", colour="black", fill="red") +
+  scale_x_date(labels=scales::date_format("%b %Y"), breaks="6 month") + 
+  labs(x="", y="Sentences/Convictions") +
+  theme_minimal() +
+  theme(
+    text=element_text(size=20),
+    axis.text.x=element_text(angle=90, hjust=1, vjust = 0.5),
+        # legend.position = "bottom"
+        )
+
+```
+
+
+The full dataset includes individual's names and personal details. Some of the legal proceedings involving these individuals were still pending when the data was collected. Since I am not certain how (or if!) these cases concluded, I will not publish the full identifiable information---just the demographic and procedural details in the sortable table below. One other particularly interesting element is contained in the original dataset: the group affiliation(s) of the arrested individuals. If time allows, I will do further work to pick out these data and represent them.
+
+```{r}
+library(DT)
+
+unc_remve_tab <- unc_remve %>% dplyr::select(District, State, Age, Gender, Race, `Group Affiliation`, `Multi-Person Arrest`, Arrested, Charged, Indicted, Sentenced)
+
+datatable(unc_remve_tab, rownames = FALSE,
+          caption = 'REMVE case details.',
+          filter = 'top', options = list(pageLength = 10, autoWidth = TRUE))
+```
+
+
+
+******
+
+<!-- <span style="font-family:Garamond; font-size:0.8em;">A version of this blog was originally published by <a href="https://theloop.ecpr.eu/">The Loop</a></span>  -->
+<!-- <a href="https://www.eurozine.com/tiktok-populism/">https://www.eurozine.com/tiktok-populism/</a></span> -->

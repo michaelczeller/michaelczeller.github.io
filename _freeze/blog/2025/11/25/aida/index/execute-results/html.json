@@ -1,0 +1,15 @@
+{
+  "hash": "cff0027ff61261a3a1899240e3de20f7",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: a.i.d.a.\ndate: 2025-11-11\ndescription: \"a.i.d.a. Chronik.\"\nimage: ac_logo_generic.png\ntwitter-card:\n  image: \"ac_logo_generic.png\"\nopen-graph:\n  image: \"ac_logo_generic.png\"\ncategories:\n  - extremism \n  - far right\n  - Germany\n  - right-wing extremism\n  - social movements\n---\n\n\n\n\n\nThe [Antifascist Information, Documentation and Archive Center Munich e.V.](https://www.aida-archiv.de/) (*Antifaschistische Informations-, Dokumentations- und Archivstelle München e. V.*), or **a.i.d.a.**, is a longstanding hub of information on far-right activity in Germany, especially in Bavaria. It has been accumulating material and monitoring far-right activity since 1990. One of its longest running projects is a [chronology](https://www.aida-archiv.de/chronologie/) of far-right activities and attacks in Bavaria, especially in Munich. \n\n\n\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stderr}\n\n```\nWarning: package 'sf' was built under R version 4.5.2\n```\n\n\n:::\n:::\n\n\n\n\n\n- Kable table of no. of incidents, ...\n- incidents within Mü\n- interactive map of all incidents \n\n\n\n\n\n\n\n******\n\n<!-- <span style=\"font-family:Garamond; font-size:0.8em;\">A version of this blog was originally published by <a href=\"https://theloop.ecpr.eu/\">The Loop</a></span>  -->\n<!-- <a href=\"https://www.eurozine.com/tiktok-populism/\">https://www.eurozine.com/tiktok-populism/</a></span> -->\n\n\n\n\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
