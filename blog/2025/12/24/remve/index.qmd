@@ -1,7 +1,7 @@
 ---
-title: REMVE
+title: Racially and Ethnically Motivated Violent Extremism (REMVE) and Targeted Violence Arrests 2011-2020
 date: 2025-12-24
-description: "REMVE from UNC"
+description: "A (recovered) dataset of federal arrests in the United States between 2011 and 2020 for racially and ethnically motivated violent extremism (REMVE). Original data collection by a team of researchers at the University of North Carolina."
 image: dom_terror.png
 twitter-card:
   image: "dom_terror.png"
