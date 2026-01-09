@@ -1,0 +1,789 @@
+---
+title: a.i.d.a.
+date: 2025-11-11
+description: "a.i.d.a. Chronik."
+image: ac_logo_generic.png
+twitter-card:
+  image: "ac_logo_generic.png"
+open-graph:
+  image: "ac_logo_generic.png"
+categories:
+  - extremism 
+  - far right
+  - Germany
+  - right-wing extremism
+  - social movements
+---
+
+The [Antifascist Information, Documentation and Archive Center Munich e.V.](https://www.aida-archiv.de/) (*Antifaschistische Informations-, Dokumentations- und Archivstelle München e. V.*), or **a.i.d.a.**, is a longstanding hub of information on far-right activity in Germany, especially in Bavaria. It has been accumulating material and monitoring far-right activity since 1990. One of its longest running projects is a [chronology](https://www.aida-archiv.de/chronologie/) of far-right activities and attacks in Bavaria, especially in Munich. 
+
+```{r data-setup}
+#| echo: false
+#| message: false
+library(readxl)
+
+aida <- read_excel("aida_df_updated.xlsx") # , sheet="cleaned_data"
+
+
+## country bars
+library(ggplot2)
+library(ggpattern)
+library(flagon)
+library(dplyr)
+library(ggimage)
+library(ggnewscale)
+library(rsvg)
+
+## interactive maps
+library(tidyverse)
+library(tidygeocoder)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(mapview)
+library(spatstat)
+library(leafpop)
+
+# library(chatgpt)
+# Sys.setenv(OPENAI_API_KEY = "sk-ijklmnopqrstuvwxijklmnopqrstuvwxijklmnop")
+
+```
+
+- Kable table of no. of incidents, ...
+- incidents within Mü
+- interactive map of all incidents 
+
+
+
+
+
+
+
+******
+
+<!-- <span style="font-family:Garamond; font-size:0.8em;">A version of this blog was originally published by <a href="https://theloop.ecpr.eu/">The Loop</a></span>  -->
+<!-- <a href="https://www.eurozine.com/tiktok-populism/">https://www.eurozine.com/tiktok-populism/</a></span> -->
+
+```{r SCRATCH-data-scraping-wrangling}
+#| eval: false
+#| include: false
+# https://www.aida-archiv.de/chronologie/
+# https://www.aida-archiv.de/chronologie/page/2/
+# https://www.aida-archiv.de/chronologie/page/348/
+
+library(rvest)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(tidyr)
+library(lubridate)
+
+
+MainPage <- "https://www.aida-archiv.de/chronologie/"
+
+MainPage_html <- read_html(MainPage)
+Dates <- MainPage_html %>% html_nodes(".post-title a") %>% html_text()
+hLinks <- MainPage_html %>% html_nodes(".post-title a") %>% html_attr("href")
+shortDesc <- MainPage_html %>% html_nodes("#loop-container p") %>% html_text()
+
+# df_p1 = data.frame(
+#   allDates = Dates,
+#   hLinks = hLinks
+# )
+
+
+## get number of a.i.d.a. Chronologie pages
+PageNos <- read_html(MainPage)%>%html_nodes("#main :nth-child(4)")%>%html_text()
+
+PageTot <- as.numeric(PageNos[[2]])
+# # update Nov. 2025
+# PageTot <- 13
+
+PageNos <- c(2:PageTot)
+# # update Nov. 2025
+# PageNos <- c(2:13)
+
+Pages <- paste0("https://www.aida-archiv.de/chronologie/page/", PageNos, "/")
+Pages <- data.frame(Pages)
+
+df_dates = data.frame()
+
+for (page_result in seq(from=2, to = PageTot, by=1)) {
+  link = paste0("https://www.aida-archiv.de/chronologie/page/", page_result, "/")
+  page = read_html(link)
+  
+  allDates = page %>% html_nodes(".post-title a") %>% html_text()
+  hLinks = page %>% html_nodes(".post-title a") %>% html_attr("href")
+  # shortDesc = page %>% html_nodes("#loop-container p") %>% html_text()
+  
+  df_dates = rbind(df_dates, data.frame(allDates, hLinks)) #, shortDesc
+  
+  print(paste("Page:", page_result))
+}
+
+df <- df_dates
+
+df$allDates <- gsub(". Januar ", "-01-", df$allDates)
+df$allDates <- gsub(". Februar ", "-02-", df$allDates)
+df$allDates <- gsub(". März ", "-03-", df$allDates)
+df$allDates <- gsub(". April ", "-04-", df$allDates)
+df$allDates <- gsub(". Mai ", "-05-", df$allDates)
+df$allDates <- gsub(". Juni ", "-06-", df$allDates)
+df$allDates <- gsub(". Juli ", "-07-", df$allDates)
+df$allDates <- gsub(". August ", "-08-", df$allDates)
+df$allDates <- gsub(". September ", "-09-", df$allDates)
+df$allDates <- gsub(". Oktober ", "-10-", df$allDates)
+df$allDates <- gsub(". November ", "-11-", df$allDates)
+df$allDates <- gsub(". Dezember ", "-12-", df$allDates)
+
+# ## this generates way too many entries... multiple 'p' tags??
+# Descr <- character(0)
+# Title <- character(0)
+# SpecificPages = data.frame()
+# 
+# for (i in 1:length(df_dates$hLinks)) {
+#   page <- read_html(df_dates$hLinks[i])
+#   Descr[i] <- page %>% html_nodes("p") %>% html_text()
+#   Title[i] <- page %>% html_nodes(".post-title") %>% html_text()
+#   
+#   SpecificPages = rbind(SpecificPages, data.frame(Title, Descr))
+#   
+#   print(paste("Link:", i, "of", length(df_dates$hLinks)))
+# }
+
+
+Post <- character(0)
+for (i in 1:length(df_dates$hLinks)) {
+  page <- read_html(df_dates$hLinks[i])
+  Post[i] <- page %>% html_nodes(".post-container") %>% html_text()
+
+  print(paste("Link:", i, "of", length(df_dates$hLinks)))
+}
+
+df$Description <- Post
+
+## extracts dates at the head of the text block 
+df$DescDate <- gsub(".*\\n\\t*\\n\\t*(.*?)\\n\\t*\\n.*", "\\1", df$Description)
+
+## remove the text prior to the year in the title
+
+## function to clean strings by removing newline and tab escape characters
+clean_string <- function(input_string) {
+  # Remove newlines and tabs using gsub
+  cleaned_string <- gsub("[\n\t]", "", input_string)
+  return(cleaned_string)
+}
+
+## apply cleaning function to all strings in the list
+df$Desc <- sapply(df$Description, clean_string)
+df$Desc <- sub(".*?\\d{4}(.*)", "\\1", df$Desc)
+df$Desc <- sub("^(.*?)Vorheriger Beitrag.*", "\\1", df$Desc)
+df$Desc <- trimws(df$Desc)
+
+## get the places at the start of the description
+df$Place <- sub("([^(.]*)[.()].*", "\\1", df$Desc)
+
+## fix the dates ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## function to process dates and return the most recent one in a standard format
+process_dates <- function(date_str) {
+  # Regular expression to match various date formats (e.g., "4-02-2025", "27. – 29-01-2025", etc.)
+  date_pattern <- "\\b(?:\\d{1,2}[./-]?\\d{1,2}[./-]?\\d{4}|\\d{1,2}[./-]?\\d{2}[./-]?\\d{2})\\b"
+  
+  # Extract all matching date-like strings from the input
+  dates_extracted <- regmatches(date_str, gregexpr(date_pattern, date_str))[[1]]
+  
+  # Clean extracted dates (e.g., "4./5-02-2025" -> "05-02-2025")
+  dates_cleaned <- gsub("[^0-9-]", "-", dates_extracted)  # Replace non-digit, non-dash with a dash
+  
+  # Convert the cleaned date strings into Date objects
+  dates_converted <- as.Date(dates_cleaned, format="%d-%m-%Y")
+  
+  # Select the most recent date
+  most_recent_date <- max(dates_converted, na.rm = TRUE)
+  
+  # Format the most recent date into the standard format
+  formatted_date <- format(most_recent_date, "%d-%m-%Y")
+  
+  return(formatted_date)
+}
+
+# Apply the function to all the strings
+processed_dates <- sapply(df$allDates, process_dates)
+processed_dates <- as.data.frame(processed_dates)
+
+df$Date <- processed_dates$processed_dates
+
+df$Date <- as.Date(df$Date, "%d-%m-%Y")
+
+# # update Nov. 2025
+df <- head(df, 134)
+
+df$Country <- "Germany"
+
+## fix the places ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# df$Place <- case_when(
+#   df$Place=="Neumarkt i" ~ "Neumarkt", # 16
+#   df$Place=="Weiden i" ~ "Weiden", # 19
+#   df$Place=="Landsberg a" ~ "Landsberg",
+#   df$Place=="Furth i" ~ "Furth",
+#   df$Place=="Mühldorf a" ~ "Mühldorf",
+#   df$Place=="Höchstadt a" ~ "Höchstadt",
+#   df$Place=="Altdorf b" ~ "Altdorf",
+#   
+#   df$Place=="Lkr" ~ "Freyung",
+#   TRUE~df$Place
+# )
+
+## translate descriptions ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# df <- aida_df
+
+library(gtranslate)
+start.time <- Sys.time()
+start.time
+
+for (i in 1:length(df$Desc)) {
+  df$Desc_en[i] <- gtranslate::translate(df$Desc[i], from="de", to="en")
+}
+
+end.time <- Sys.time()
+time.taken <- round(end.time - start.time,2)
+time.taken
+
+# start.time <- Sys.time()
+# start.time
+# for (i in 3333:length(df$Desc)) {
+#   df$Desc_en[i] <- gtranslate::translate(df$Desc[i], from="de", to="en")
+# }
+# end.time <- Sys.time()
+# time.taken <- round(end.time - start.time,2)
+# time.taken
+
+## geolocate ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# df_geo <- df %>% 
+#   tidygeocoder::geocode(
+#     city = Place,
+#     country = Country,
+#     method = "osm"
+#     )
+# 
+# df_geoNAs <- subset(df_geo,is.na(lat))
+# 
+# df_geo$lat <- case_when(
+#   df_geo$Place=="Unterschwenningen-Dennenlohe "                          ~ 49.09724014244028, 
+#   df_geo$Place=="Breitenbrunn-Loppenhausen "                             ~ 48.16243651318967, 
+#   df_geo$Place=="Gräfelfing-Lochham"                                     ~ 48.122472261555345, 
+#   df_geo$Place=="Bayernweit"                                             ~ 48.54078286256027,
+#   df_geo$Place=="Mühlhausen-Bachhausen"                                  ~ 49.15881796720042, 
+#   df_geo$Place=="Vaterstetten-Parsdorf"                                  ~ 48.142357012826096,
+#   df_geo$Place=="Starnberg-Percha"                                       ~ 47.99976121308698, 
+#   df_geo$Place=="München/Berlin"                                         ~ 48.1361130715356,
+#   df_geo$Place=="Planegg-Martinsried"                                    ~ 48.10891230454847, 
+#   df_geo$Place=="Taufkirchen bei München"                                ~ 48.04587012421106, 
+#   df_geo$Place=="Peutenhausen-Gachenbach"                                ~ 48.522218331556395, 
+#   df_geo$Place=="Eckental-Eschenau"                                      ~ 49.57414377404434,
+#   df_geo$Place=="Hergensweiler-Einöde"                                   ~ 47.61694086441874,
+#   df_geo$Place=="Roßtal-Defersdorf"                                      ~ 49.361510139548564, 
+#   df_geo$Place=="Echingen"                                               ~ 48.29883261408072, 
+#   df_geo$Place=="Michelau-Schwürbitz"                                    ~ 50.16828346078766, 
+#   df_geo$Place=="Roßtal/Oberasbach/Unterasbach"                          ~ 49.42052072217863, 
+#   df_geo$Place=="Pyrbaum-Rengersbricht"                                  ~ 49.27458083764135, 
+#   df_geo$Place=="Ichenhausen-Rieden an der Kötz"                         ~ 48.3852939039156, 
+#   df_geo$Place=="Kirchheim-Heimstetten"                                  ~ 48.157152798457936, 
+#   df_geo$Place=="Haßfurt/Zeil am Main/Gleisenau/Ebelsbach"               ~ 50.03813882629878, 
+#   df_geo$Place=="Weißensberg-Rothkreuz"                                  ~ 47.58709698233366, 
+#   df_geo$Place=="Vaterstetten-Baldham"                                   ~ 48.09901605046343, 
+#   df_geo$Place=="Neuberg an der Donau"                                   ~ 48.72833537505918, 
+#   df_geo$Place=="Bad Wörishofen/Memmingen"                               ~ 48.00575404039737, 
+#   df_geo$Place=="Kranzberg-Thurnsberg"                                   ~ 48.388543275022414, 
+#   df_geo$Place=="Fuchstal-Leeder"                                        ~ 47.934103447137325, 
+#   df_geo$Place=="Fürstenstein/Neukirchen vorm Wald/Tittling/Eging am See"~ 48.71677858285484, 
+#   df_geo$Place=="Unterallgäu"                                            ~ 48.05378201150369, 
+#   df_geo$Place=="Aschau im Chiemgau/Bernau am Chiemsee/Frasdorf"         ~ 47.775599209881705, 
+#   df_geo$Place=="Immenstadt/Bad Hindelang"                               ~ 47.55923272638944, 
+#   df_geo$Place=="Gunzenhausen/Treuchtlingen"                             ~ 49.119624562166, 
+#   df_geo$Place=="Erlangen-Höchstadt"                                     ~ 49.71144800599037,
+#   df_geo$Place=="Schwabhausen-Arnbach"                                   ~ 48.3361032784534, 
+#   df_geo$Place=="Fahrenzhausen-Großeisenbach"                            ~ 48.35813767895747,
+#   df_geo$Place=="Grafing/Glonn"                                          ~ 48.045627171068396, 
+#   df_geo$Place=="Kempten/Altusried"                                      ~ 47.728387571716624,
+#   df_geo$Place=="Fürstenfeldbruck-Buchenau"                              ~ 48.16164384895934, 
+#   df_geo$Place=="Gemünden-Langenprozelten"                               ~ 50.06144787634728,
+#   df_geo$Place=="Mellrichstadt-Sondheim im Grabfeld"                     ~ 50.41885008631204,
+#   df_geo$Place=="Westerheim-Rummeltshausen"                              ~ 48.04097526393487, 
+#   df_geo$Place=="Egloffstein-Hundshaupten"                               ~ 49.72041733620621, 
+#   df_geo$Place=="Ebern-Bramberg"                                         ~ 50.09822109464527, 
+#   df_geo$Place=="Karlsfeld/Dachau"                                       ~ 48.229367031655705, 
+#   df_geo$Place=="Fürstenfeldbruck/Emmering"                              ~ 48.18382439215207, 
+#   df_geo$Place=="Senden-Wullenstetten"                                   ~ 48.31897796086796, 
+#   df_geo$Place=="Unterschleißheim-Lohhof"                                ~ 48.280618896593225, 
+#   df_geo$Place=="Johannesberg-Rückersbach"                               ~ 50.04192267535876, 
+#   df_geo$Place=="Arnstorf-Mariakirchen"                                  ~ 48.5759987437596, 
+#   df_geo$Place=="Pfronten-Ried"                                          ~ 47.581733469926014,
+#   df_geo$Place=="Valley-Oberlainden"                                     ~ 47.87648996776502,
+#   df_geo$Place=="Zorneding/Kirchseeon"                                   ~ 48.07091978241208, 
+#   df_geo$Place=="Karlsfeld/Schwabhausen-Arnbach/Erdweg/Markt Indersdorf" ~ 48.229367031655705, 
+#   df_geo$Place=="Friedberg-Bachern"                                      ~ 48.3102132574858, 
+#   df_geo$Place=="Moosinning-Eichenried"                                  ~ 48.27625012827294, 
+#   df_geo$Place=="Augsburg/Donauwörth"                                    ~ 48.370142764399624, 
+#   df_geo$Place=="München/Baierbrunn"                                     ~ 48.020257935776016, 
+#   df_geo$Place=="Wiesau-Schönhaid"                                       ~ 49.89109718444669,
+#   df_geo$Place=="München/Freising"                                       ~ 48.40073136658053, 
+#   df_geo$Place=="München/Beirut"                                         ~ 48.12969728278903, 
+#   df_geo$Place=="München/Schongau"                                       ~ 47.81532404431674, 
+#   df_geo$Place=="Gräfenberg/Weißenohe"                                   ~ 49.62978158679691, 
+#   df_geo$Place=="München/Dachau"                                         ~ 48.26203004089057, 
+#   df_geo$Place=="München/Augsburg"                                       ~ 48.136102312953646, 
+#   df_geo$Place=="Sailauf-Eichenberg"                                     ~ 50.050228984769674, 
+#   df_geo$Place=="München/Markt Schwaben"                                 ~ 48.190949727782424, 
+#   df_geo$Place=="Prackenbach-Fichtental"                                 ~ 49.1051231152814, 
+#   df_geo$Place=="Peiting-Herzogsägmühle"                                 ~ 47.819851023498806, 
+#   df_geo$Place=="Manching-Oberstimm"                                     ~ 48.712151915822204, 
+#   df_geo$Place=="Neuburg am Inn-Pfenningbach"                            ~ 48.532593298855005, 
+#   df_geo$Place=="München/Fürstenfeldbruck"                               ~ 48.12969728278903,
+#   df_geo$Place=="München/Ingolstadt/Memmingen"                           ~ 48.12969728278903,
+#   df_geo$Place=="Rehau/Döhlau"                                           ~ 50.24927304255244,
+#   df_geo$Place=="Augsburg/Straubing"                                     ~ 48.36980428906737, 
+#   df_geo$Place=="Oy-Mittelberg-Oberzollhaus"                             ~ 47.66526058606529, 
+#   df_geo$Place=="Rauhenebrach-Fürnberg"                                  ~ 49.89326052197415, 
+#   df_geo$Place=="Moosthenning-Ottering"                                  ~ 48.706157516765046, 
+#   df_geo$Place=="Bamberg/Memmelsdorf"                                    ~ 49.89821707654513, 
+#   df_geo$Place=="Nürnberg/Stein"                                         ~ 49.45249504820011, 
+#   df_geo$Place=="Weiden in der Oberpfalz-Rothenstadt"                    ~ 49.633135633750555, 
+#   df_geo$Place=="Erding-Altenerding"                                     ~ 48.288618393691635,
+#   df_geo$Place=="Karlstadt-Wiesenfeld"                                   ~ 49.99181068843656, 
+#   df_geo$Place=="Dießen-Riederau"                                        ~ 47.983013216654314, 
+#   df_geo$Place=="Altenkunststadt"                                        ~ 50.13220565242359,
+#   df_geo$Place=="Ebersberg/ Markt Schwaben"                              ~ 48.07521405371613, 
+#   df_geo$Place=="Gröbenzell/Fürstenfeldbruck"                            ~ 48.19383946546949,
+#   df_geo$Place=="Kaufbeuren-Neugablonz"                                  ~ 47.91287421334135,
+#   df_geo$Place=="Freilassing/Berchtesgaden"                              ~ 47.84201356969576, 
+#   df_geo$Place=="Alzenau-Hörstein"                                       ~ 50.054594244283585, 
+#   df_geo$Place=="Augsburg/Mering"                                        ~ 48.368318133892764,
+#   df_geo$Place=="Waakirchen-Schaftlach"                                  ~ 47.79448443087443, 
+#   df_geo$Place=="Poing-Grub"                                             ~ 48.17051548210808, 
+#   df_geo$Place=="Straubing und nördlicher Landkreis Straubing-Bogen"     ~ 48.87718354885478, 
+#   df_geo$Place=="Ingolstadt/Oberschleißheim"                             ~ 48.767288922009094, 
+#   df_geo$Place=="Weißenburg/Treuchtlingen/Gunzenhausen"                  ~ 49.03414226197332, 
+#   df_geo$Place=="Bischofsheim an der Rhön/Unterweißenbrunn"              ~ 50.401512607368915, 
+#   df_geo$Place=="Röttenbach-Mühlstetten"                                 ~ 49.15359577129696, 
+#   df_geo$Place=="Cham/Bad Kötzing"                                       ~ 49.22487371695631, 
+#   df_geo$Place=="Markt Oberdorf"                                         ~ 47.780325513698074,
+#   df_geo$Place=="Pliening-Landsham"                                      ~ 48.18715325467426, 
+#   df_geo$Place=="Grostostheim-Wenigumstadt"                              ~ 49.89348318923861, 
+#   df_geo$Place=="Weibersbrunn-Rohrbrunn"                                 ~ 49.894465425657195, 
+#   df_geo$Place=="Gößweinstein-Behringersmühle"                           ~ 49.77922515785199, 
+#   df_geo$Place=="München/Nürnberg"                                       ~ 48.12969728278903,
+#   df_geo$Place=="Manching-Oberstimm"                                     ~ 48.712151915822204, 
+#   df_geo$Place=="Bad-Kissingen-Winkels"                                  ~ 50.204547319749835, 
+#   df_geo$Place=="München/Hannover/Deggendorf"                            ~ 48.12969728278903,
+#   df_geo$Place=="Schwabach-Limbach"                                      ~ 49.3373562887068, 
+#   df_geo$Place=="Dachau/Markt Indersdorf"                                ~ 48.35883241637403, 
+#   df_geo$Place=="Augsburg-Lechhausen"                                    ~ 48.38487371529789, 
+#   df_geo$Place=="Weilheim/Wielenbach"                                    ~ 47.87435906965194, 
+#   df_geo$Place=="Lindau-Aeschach"                                        ~ 47.557651308176, 
+#   df_geo$Place=="Burghausen-Silmoning"                                   ~ 48.172660056839156,
+#   df_geo$Place=="Lohr-Wombach/Neustadt am Main-Rodenbach"                ~ 49.959577188992945, 
+#   df_geo$Place=="Weyarn/Irschenberg"                                     ~ 47.857585081527816, 
+#   df_geo$Place=="Hochstadt am Main"                                      ~ 50.15064433551965, 
+#   df_geo$Place=="Nittendorf-Undorf"                                      ~ 49.02494008036328, 
+#   df_geo$Place=="Elfershausen-Machtilshausen"                            ~ 50.12305012811879, 
+#   df_geo$Place=="Lonnerstadt/Fetzelhofen"                                ~ 49.70279619472814, 
+#   df_geo$Place=="Parkstetten/Straubing"                                  ~ 48.91678997780913, 
+#   df_geo$Place=="Wiesenttal-Engelhardsberg"                              ~ 49.79748771502611,
+#   df_geo$Place=="Simbach/Landau"                                         ~ 48.56493871574047, 
+#   df_geo$Place=="Neumarkt in der Oberpfalz -Woffenbach"                  ~ 49.278091065725114,
+#   df_geo$Place=="Collenberg-Reistenhausen"                               ~ 49.77154316121255, 
+#   df_geo$Place=="Geretsried/Wolfratshausen"                              ~ 47.85472805706441, 
+#   df_geo$Place=="Kaufbeuren-Neugablonz"                                  ~ 47.9127016264555, 
+#   df_geo$Place=="Eckental-Eckenhaid"                                     ~ 49.57293981693467, 
+#   df_geo$Place=="Pfronten-Ried"                                          ~ 47.58173871699999, 
+#   df_geo$Place=="Ergoldsbach-Unterunsbach"                               ~ 48.65829636206389,
+#   df_geo$Place=="Edling-Hochhaus"                                        ~ 48.064820566753866, 
+#   df_geo$Place=="Velburg-Deusmauer"                                      ~ 49.252764760143585, 
+#   df_geo$Place=="Marktheidenfeld/Roden"                                  ~ 49.89452232667983, 
+#   df_geo$Place=="Sonnefeld-Hassenberg"                                   ~ 50.256063068414555, 
+#   df_geo$Place=="Würzburg-Unterdürrbach"                                 ~ 49.8106437704078, 
+#   df_geo$Place=="Bruckmühl-Heufeld"                                      ~ 47.87275705731849, 
+#   df_geo$Place=="Schweinfurt/Passau"                                     ~ 50.04982808078097, 
+#   df_geo$Place=="Landshut/Ergolding"                                     ~ 48.56494656827413, 
+#   df_geo$Place=="Vorra-Alfalter"                                         ~ 49.538826406746594, 
+#   df_geo$Place=="Schweinfurt/Arnstein"                                   ~ 50.04982808078097, 
+#   df_geo$Place=="Altlandkreis Memmingen"                                 ~ 47.98428208030433, 
+#   df_geo$Place=="Kolitzheim-Unterspiesheim"                              ~ 49.95321723723996, 
+#   df_geo$Place=="Gemünden am Main-Adelsberg"                             ~ 50.03363405390828, 
+#   df_geo$Place=="Roden-Ansbach"                                          ~ 49.91913774452091, 
+#   df_geo$Place=="Eggenfelden-Zainach"                                    ~ 48.394513930238, 
+#   df_geo$Place=="Kolitzheim-Stammheim"                                   ~ 49.90783731540495, 
+#   df_geo$Place=="Reichertshofen-Winden am Aign"                          ~ 48.649832685223714, 
+#   df_geo$Place=="Rennertshofen-Ammerfeld"                                ~ 48.79379853602982, 
+#   df_geo$Place=="Ingolstadt-Mailing"                                     ~ 48.772702006044135, 
+#   df_geo$Place=="Forchheim-Reuth"                                        ~ 49.72095939681322, 
+#   df_geo$Place=="Immenstadt-Akams"                                       ~ 47.59502203669763, 
+#   df_geo$Place=="Weidling-Dalking"                                       ~ 49.27387760373694, 
+#   df_geo$Place=="Langdorf-Außenried"                                     ~ 49.01520882760376, 
+#   df_geo$Place=="Schlüsselfeld-Aschbach"                                 ~ 49.771310883879856, 
+#   df_geo$Place=="Erlangen/Eisenach"                                      ~ 49.58892533850844, 
+#   df_geo$Place=="Pilsting-Großkölnbach"                                  ~ 48.697372388968056, 
+#   df_geo$Place=="Mallersdorf-Pfaffenberg-Niederlindhart"                 ~ 48.76519671804768, 
+#   df_geo$Place=="Unterneukirchen-Oberschroffen"                          ~ 48.152387476571526, 
+#   df_geo$Place=="Großostheim-Ringheim"                                   ~ 49.93291607583843, 
+#   df_geo$Place=="Nürnberg/Fürth"                                         ~ 49.45651224354146, 
+#   df_geo$Place=="Gerolzhofen-Dingolshausen"                              ~ 49.907080263516775, 
+#   df_geo$Place=="Neuburg-Schrobenhausen"                                 ~ 48.56178023151957, 
+#   df_geo$Place=="Traunstein/Waging"                                      ~ 47.93384837546745, 
+#   df_geo$Place=="Neuburg an der Donau-Zell"                              ~ 48.70395593925331, 
+#   df_geo$Place=="Teisendorf/Freilassing/Ainring"                         ~ 47.85017645504467, 
+#   df_geo$Place=="Veitsbronn-Bernbach"                                    ~ 49.50570703320743, 
+#   df_geo$Place=="Karlstadt-Laudenbach"                                   ~ 49.945016151474185, 
+#   df_geo$Place=="Leidersbach-Volkersbrunn"                               ~ 49.89696835683164, 
+#   df_geo$Place=="München-Sendling"                                       ~ 48.12969728278903,
+#   df_geo$Place=="München/Merkendorf"                                     ~ 48.12969728278903,
+#   df_geo$Place=="Wertingen-Roggden"                                      ~ 48.539350089965964, 
+#   df_geo$Place=="Rehau-Fohrenreuth"                                      ~ 50.22965205345454, 
+#   df_geo$Place=="Mainleus-Schwarzach"                                    ~ 50.110087306591375, 
+#   df_geo$Place=="Ausgburg"                                               ~ 48.369686612901944,
+#   df_geo$Place=="Lautertal-Rottenbach"                                   ~ 50.380730967243174, 
+#   df_geo$Place=="Ebersberg/Zorneding"                                    ~ 48.08742451899284, 
+#   df_geo$Place=="München/Dachau"                                         ~ 48.12969728278903,
+#   df_geo$Place=="Duisburg/München"                                       ~ 48.12969728278903,
+#   df_geo$Place=="Budapest/Bayern"                                        ~ 48.54078286256027,
+#   df_geo$Place=="Raum Dingolfing/Frontenhausen"                          ~ 48.54390659131713, 
+#   df_geo$Place=="Magdeburg/Wackersdorf"                                  ~ 49.31496451830421, 
+#   df_geo$Place=="München-Höllriegelskreuth"                              ~ 48.0517838938529, 
+#   df_geo$Place=="Raum Sachsen"                                           ~ 50.659872995722424, 
+#   df_geo$Place=="Iphofen-Hellmitzheim"                                   ~ 49.66904250262579, 
+#   df_geo$Place=="Plovdiv"                                                ~ 42.13925459587183, 
+#   df_geo$Place=="Ortenburg-Neustift"                                     ~ 48.581221868605816, 
+#   df_geo$Place=="Raum Franken"                                           ~ 48.76667554453663, 
+#   df_geo$Place=="Heidelberg/Ludwigshafen/Wackersdorf"                    ~ 49.400366518417364, 
+#   df_geo$Place=="Stendal/Laufach"                                        ~ 50.01309683026326, 
+#   df_geo$Place=="Mittelengland"                                          ~ 52.55816736010066, 
+#   df_geo$Place=="Erfurt/Dingolfing"                                      ~ 48.62743298976964, 
+#   df_geo$Place=="Manching bei Ingolstadt"                                ~ 48.717187006918316, 
+#   df_geo$Place=="Bad Windsheim/Ilesheim"                                 ~ 49.50108236124578, 
+#   df_geo$Place=="Puschendorf/Obermichelbach"                             ~ 49.523190173026975, 
+#   df_geo$Place=="Neu-Ulm-Reutti"                                         ~ 48.36192487961216, 
+#   df_geo$Place=="Frankfurt am Main/Ansbach"                              ~ 50.10724708613997, 
+#   df_geo$Place=="Vilshofen/Passau/Deggendorf"                            ~ 48.62814347523048, 
+#   df_geo$Place=="Regnitzlosau-Oberprex"                                  ~ 50.30280736307712, 
+#   df_geo$Place=="Nürnberg/Gera"                                          ~ 49.45472686403792, 
+#   df_geo$Place=="Geschwand-Obertrubach"                                  ~ 49.712663048363574, 
+#   df_geo$Place=="Köln/Freising"                                          ~ 48.401415175066646, 
+#   df_geo$Place=="Nienhagen/Mindelheim"                                   ~ 48.04529322237525, 
+#   df_geo$Place=="Feilitzsch/Rehau/Döhlau"                                ~ 50.28093417436888, 
+#   df_geo$Place=="Landshut/Geisenhausen"                                  ~ 48.474245830245586, 
+#   df_geo$Place=="Leinefelde-Worbis/Mering/Neuburg an der Donau"          ~ 48.73094397799963, 
+#   df_geo$Place=="Altötting/Burghausen/Winhöring"                         ~ 48.2243116082874, 
+#   df_geo$Place=="München/Murnau"                                         ~ 48.12969728278903,
+#   df_geo$Place=="Raum Allgäu"                                            ~ 47.70510209730325, 
+#   df_geo$Place=="Dresden/Hof/Coburg"                                     ~ 50.31410318586219, 
+#   df_geo$Place=="H-Budapest/Fürth/Erlangen/München"                      ~ 49.476844847419045, 
+#   df_geo$Place=="München/Putzbrunn"                                      ~ 48.12969728278903,
+#   df_geo$Place=="Nürnberg/München"                                       ~ 49.45472686403792, 
+#   df_geo$Place=="Haßlach-Stockheim"                                      ~ 50.30657036061058, 
+#   df_geo$Place=="Mindelheim – Mindelau"                                  ~ 48.02449090115382, 
+#   df_geo$Place=="Weißenhorn/Illertissen"                                 ~ 48.22496916680361, 
+#   df_geo$Place=="Theilenhofen-Dornhausen"                                ~ 49.08695982248, 
+#   df_geo$Place=="Buch-Obenhausen"                                        ~ 48.23594850772027, 
+#   df_geo$Place=="Gauting/Starnberg"                                      ~ 48.06924617226229, 
+#   df_geo$Place=="Mindelheim/Ebstorf"                                     ~ 48.04552274785905, 
+#   df_geo$Place=="Obertrubach-Geschwand"                                  ~ 49.71269079832672, 
+#   df_geo$Place=="Göggingen bei Augsburg"                                 ~ 48.334222785635326, 
+#   df_geo$Place=="Brno"                                                   ~ 49.197099862468164, 
+#   df_geo$Place=="Eisenach/Putzbrunn"                                     ~ 48.07565521734598, 
+#   df_geo$Place=="Berchtesgadener Land"                                   ~ 47.69410240110166, 
+#   df_geo$Place=="Thurmansbang/Deggendorf"                                ~ 48.766983520015266, 
+#   df_geo$Place=="Ermreuth/Leipzig"                                       ~ 49.640526927018676, 
+#   df_geo$Place=="Bruck-Sollbach"                                         ~ 49.23595050638156, 
+#   df_geo$Place=="München/Passau/Deggendorf"                              ~ 48.12969728278903,
+#   df_geo$Place=="Regnitzlosau/Oberprex"                                  ~ 50.30285533286705,
+#   df_geo$Place=="Obertrubach-Gschwand"                                   ~ 49.71269079832672, 
+#   df_geo$Place=="Töging/Altötting"                                       ~ 48.25861496442277, 
+#   df_geo$Place=="Bad Bocklet-Aschach"                                    ~ 50.25852578163782, 
+#   df_geo$Place=="Karlskron/Mändelfeld"                                   ~ 48.6951686493597, 
+#   df_geo$Place=="Suhl/München"                                           ~ 50.61181467373344, 
+#   df_geo$Place=="Kehlheim/Abensberg"                                     ~ 48.81745861773645, 
+#   df_geo$Place=="München/Remagen"                                        ~ 48.12969728278903,
+#   df_geo$Place=="München/Herford"                                        ~ 48.12969728278903,
+#   df_geo$Place=="Erlangen/Höchstadt"                                     ~ 49.709671930940914, 
+#   df_geo$Place=="Weilheim/Peißenberg"                                    ~ 47.84285224793485, 
+#   df_geo$Place=="Duisburg/München"                                       ~ 51.431561534501014, 
+#   df_geo$Place=="Ansbach/Gremsdorf/Wunsiedel"                            ~ 50.0410036353938, 
+#   df_geo$Place=="Cham/Regensburg"                                        ~ 49.22559970940073, 
+#   df_geo$Place=="München/Düsseldorf/Hamm"                                ~ 48.12969728278903,
+#   df_geo$Place=="Neuburg-Schrobenhausen"                                 ~ 48.56178023151957, 
+#   df_geo$Place=="Mulda"                                                  ~ 50.809213161999246, 
+#   df_geo$Place=="Berg am Starnberger See"                                ~ 47.9686535637373, 
+#   df_geo$Place=="Schweitenkirchen-Niederthann"                           ~ 48.49644386229643, 
+#   TRUE~df_geo$lat
+# )
+# 
+# df_geo$long <- case_when(
+#   df_geo$Place=="Unterschwenningen-Dennenlohe "                          ~ 10.609980784293029,
+#   df_geo$Place=="Breitenbrunn-Loppenhausen "                             ~ 10.395472893066719,
+#   df_geo$Place=="Gräfelfing-Lochham"                                     ~ 11.433850862793161,
+#   df_geo$Place=="Bayernweit"                                             ~ 11.574112910795291,
+#   df_geo$Place=="Mühlhausen-Bachhausen"                                  ~ 11.433676723698852,
+#   df_geo$Place=="Vaterstetten-Parsdorf"                                  ~ 11.787379919825309,
+#   df_geo$Place=="Starnberg-Percha"                                       ~ 11.36205105888542,
+#   df_geo$Place=="München/Berlin"                                         ~ 11.584354151441822,
+#   df_geo$Place=="Planegg-Martinsried"                                    ~ 11.452133170595557,
+#   df_geo$Place=="Taufkirchen bei München"                                ~ 11.61958699612674,
+#   df_geo$Place=="Peutenhausen-Gachenbach"                                ~ 11.230463641530816,
+#   df_geo$Place=="Eckental-Eschenau"                                      ~ 11.20115695182014,
+#   df_geo$Place=="Hergensweiler-Einöde"                                   ~ 9.782130911905824,
+#   df_geo$Place=="Roßtal-Defersdorf"                                      ~ 10.908458753245208,
+#   df_geo$Place=="Echingen"                                               ~ 11.624509219028138,
+#   df_geo$Place=="Michelau-Schwürbitz"                                    ~ 11.147341902567767,
+#   df_geo$Place=="Roßtal/Oberasbach/Unterasbach"                          ~ 10.98081444110421,
+#   df_geo$Place=="Pyrbaum-Rengersbricht"                                  ~ 11.303030951974387,
+#   df_geo$Place=="Ichenhausen-Rieden an der Kötz"                         ~ 10.258177561332312,
+#   df_geo$Place=="Kirchheim-Heimstetten"                                  ~ 11.762115146761,
+#   df_geo$Place=="Haßfurt/Zeil am Main/Gleisenau/Ebelsbach"               ~ 10.51440835033875,
+#   df_geo$Place=="Weißensberg-Rothkreuz"                                  ~ 9.72665006584994,
+#   df_geo$Place=="Vaterstetten-Baldham"                                   ~ 11.786922186404762,
+#   df_geo$Place=="Neuberg an der Donau"                                   ~ 11.187374372701331,
+#   df_geo$Place=="Bad Wörishofen/Memmingen"                               ~ 10.597907183095211,
+#   df_geo$Place=="Kranzberg-Thurnsberg"                                   ~ 11.589121479052185,
+#   df_geo$Place=="Fuchstal-Leeder"                                        ~ 10.82697289262296,
+#   df_geo$Place=="Fürstenstein/Neukirchen vorm Wald/Tittling/Eging am See"~ 13.329742084418356,
+#   df_geo$Place=="Unterallgäu"                                            ~ 10.40463039862692,
+#   df_geo$Place=="Aschau im Chiemgau/Bernau am Chiemsee/Frasdorf"         ~ 12.326139691692873,
+#   df_geo$Place=="Immenstadt/Bad Hindelang"                               ~ 10.224810935366046,
+#   df_geo$Place=="Gunzenhausen/Treuchtlingen"                             ~ 10.75715000224788,
+#   df_geo$Place=="Erlangen-Höchstadt"                                     ~ 10.810944046253162,
+#   df_geo$Place=="Schwabhausen-Arnbach"                                   ~ 11.344894709669598,
+#   df_geo$Place=="Fahrenzhausen-Großeisenbach"                            ~ 11.599661214084449,
+#   df_geo$Place=="Grafing/Glonn"                                          ~ 11.965514232786068,
+#   df_geo$Place=="Kempten/Altusried"                                      ~ 10.318056654722351,
+#   df_geo$Place=="Fürstenfeldbruck-Buchenau"                              ~ 11.225623183105396,
+#   df_geo$Place=="Gemünden-Langenprozelten"                               ~ 9.662204455243783,
+#   df_geo$Place=="Mellrichstadt-Sondheim im Grabfeld"                     ~ 10.381926431738293,
+#   df_geo$Place=="Westerheim-Rummeltshausen"                              ~ 10.279894486210072,
+#   df_geo$Place=="Egloffstein-Hundshaupten"                               ~ 11.221665158143663,
+#   df_geo$Place=="Ebern-Bramberg"                                         ~ 10.663142729620514,
+#   df_geo$Place=="Karlsfeld/Dachau"                                       ~ 11.473693967387813,
+#   df_geo$Place=="Fürstenfeldbruck/Emmering"                              ~ 11.274546996613182,
+#   df_geo$Place=="Senden-Wullenstetten"                                   ~ 10.071920835367662,
+#   df_geo$Place=="Unterschleißheim-Lohhof"                                ~ 11.574470183611425,
+#   df_geo$Place=="Johannesberg-Rückersbach"                               ~ 9.106249541516002,
+#   df_geo$Place=="Arnstorf-Mariakirchen"                                  ~ 12.865193392789132,
+#   df_geo$Place=="Pfronten-Ried"                                          ~ 10.556163587807061,
+#   df_geo$Place=="Valley-Oberlainden"                                     ~ 11.73593730790449,
+#   df_geo$Place=="Zorneding/Kirchseeon"                                   ~ 11.88768872245803,
+#   df_geo$Place=="Karlsfeld/Schwabhausen-Arnbach/Erdweg/Markt Indersdorf" ~ 11.473693967387813,
+#   df_geo$Place=="Friedberg-Bachern"                                      ~ 11.045480113321348,
+#   df_geo$Place=="Moosinning-Eichenried"                                  ~ 11.788895703632337,
+#   df_geo$Place=="Augsburg/Donauwörth"                                    ~ 10.895758975970715,
+#   df_geo$Place=="München/Baierbrunn"                                     ~ 11.482434394808141,
+#   df_geo$Place=="Wiesau-Schönhaid"                                       ~ 12.19848931979758,
+#   df_geo$Place=="München/Freising"                                       ~ 11.742228313614095,
+#   df_geo$Place=="München/Beirut"                                         ~ 11.566501368642262,
+#   df_geo$Place=="München/Schongau"                                       ~ 10.892662823521118,
+#   df_geo$Place=="Gräfenberg/Weißenohe"                                   ~ 11.256072212734118,
+#   df_geo$Place=="München/Dachau"                                         ~ 11.434874780773706,
+#   df_geo$Place=="München/Augsburg"                                       ~ 11.58259495210508,
+#   df_geo$Place=="Sailauf-Eichenberg"                                     ~ 9.261015822804527,
+#   df_geo$Place=="München/Markt Schwaben"                                 ~ 11.863355039056403,
+#   df_geo$Place=="Prackenbach-Fichtental"                                 ~ 12.846235208301698,
+#   df_geo$Place=="Peiting-Herzogsägmühle"                                 ~ 10.937713639609443,
+#   df_geo$Place=="Manching-Oberstimm"                                     ~ 11.45495816468513,
+#   df_geo$Place=="Neuburg am Inn-Pfenningbach"                            ~ 13.382162763323462,
+#   df_geo$Place=="München/Fürstenfeldbruck"                               ~ 11.566501368642262,
+#   df_geo$Place=="München/Ingolstadt/Memmingen"                           ~ 11.566501368642262,
+#   df_geo$Place=="Rehau/Döhlau"                                           ~ 12.03844703538381,
+#   df_geo$Place=="Augsburg/Straubing"                                     ~ 10.89577247461453,
+#   df_geo$Place=="Oy-Mittelberg-Oberzollhaus"                             ~ 10.422965809357066,
+#   df_geo$Place=="Rauhenebrach-Fürnberg"                                  ~ 10.632769597190721,
+#   df_geo$Place=="Moosthenning-Ottering"                                  ~ 12.531013081520875,
+#   df_geo$Place=="Bamberg/Memmelsdorf"                                    ~ 10.902184329893663,
+#   df_geo$Place=="Nürnberg/Stein"                                         ~ 11.066419492478609,
+#   df_geo$Place=="Weiden in der Oberpfalz-Rothenstadt"                    ~ 12.140177855790483,
+#   df_geo$Place=="Erding-Altenerding"                                     ~ 11.90465123181764,
+#   df_geo$Place=="Karlstadt-Wiesenfeld"                                   ~ 9.681194148235678,
+#   df_geo$Place=="Dießen-Riederau"                                        ~ 11.095638074245372,
+#   df_geo$Place=="Altenkunststadt"                                        ~ 11.246828113689629,
+#   df_geo$Place=="Ebersberg/ Markt Schwaben"                              ~ 11.970498230432527,
+#   df_geo$Place=="Gröbenzell/Fürstenfeldbruck"                            ~ 11.374988957984101,
+#   df_geo$Place=="Kaufbeuren-Neugablonz"                                  ~ 10.635751509623883,
+#   df_geo$Place=="Freilassing/Berchtesgaden"                              ~ 12.97287468536372,
+#   df_geo$Place=="Alzenau-Hörstein"                                       ~ 9.069924472451532,
+#   df_geo$Place=="Augsburg/Mering"                                        ~ 10.903312076385914,
+#   df_geo$Place=="Waakirchen-Schaftlach"                                  ~ 11.683195849339816,
+#   df_geo$Place=="Poing-Grub"                                             ~ 11.778500810567769,
+#   df_geo$Place=="Straubing und nördlicher Landkreis Straubing-Bogen"     ~ 12.581879694643785,
+#   df_geo$Place=="Ingolstadt/Oberschleißheim"                             ~ 11.42907668762377,
+#   df_geo$Place=="Weißenburg/Treuchtlingen/Gunzenhausen"                  ~ 10.969312105961869,
+#   df_geo$Place=="Bischofsheim an der Rhön/Unterweißenbrunn"              ~ 10.014622085814512,
+#   df_geo$Place=="Röttenbach-Mühlstetten"                                 ~ 11.005112814830113,
+#   df_geo$Place=="Cham/Bad Kötzing"                                       ~ 12.662864902022672,
+#   df_geo$Place=="Markt Oberdorf"                                         ~ 10.614342526978618,
+#   df_geo$Place=="Pliening-Landsham"                                      ~ 11.773279306656967,
+#   df_geo$Place=="Grostostheim-Wenigumstadt"                              ~ 9.04410807313911,
+#   df_geo$Place=="Weibersbrunn-Rohrbrunn"                                 ~ 9.396871189920853,
+#   df_geo$Place=="Gößweinstein-Behringersmühle"                           ~ 11.33237138486659,
+#   df_geo$Place=="München/Nürnberg"                                       ~ 11.566501368642262,
+#   df_geo$Place=="Manching-Oberstimm"                                     ~ 11.454443180565912,
+#   df_geo$Place=="Bad-Kissingen-Winkels"                                  ~ 10.10030732356728,
+#   df_geo$Place=="München/Hannover/Deggendorf"                            ~ 11.566501368642262,
+#   df_geo$Place=="Schwabach-Limbach"                                      ~ 11.04639504528346,
+#   df_geo$Place=="Dachau/Markt Indersdorf"                                ~ 11.376791799014736,
+#   df_geo$Place=="Augsburg-Lechhausen"                                    ~ 10.929956455825833,
+#   df_geo$Place=="Weilheim/Wielenbach"                                    ~ 11.159062530801162,
+#   df_geo$Place=="Lindau-Aeschach"                                        ~ 9.694704737979022,
+#   df_geo$Place=="Burghausen-Silmoning"                                   ~ 12.830307943063593,
+#   df_geo$Place=="Lohr-Wombach/Neustadt am Main-Rodenbach"                ~ 9.593454143879748,
+#   df_geo$Place=="Weyarn/Irschenberg"                                     ~ 11.800275543383497,
+#   df_geo$Place=="Hochstadt am Main"                                      ~ 11.173428202787816,
+#   df_geo$Place=="Nittendorf-Undorf"                                      ~ 11.935430737089133,
+#   df_geo$Place=="Elfershausen-Machtilshausen"                            ~ 9.969834135365192,
+#   df_geo$Place=="Lonnerstadt/Fetzelhofen"                                ~ 10.730287495253085,
+#   df_geo$Place=="Parkstetten/Straubing"                                  ~ 12.598230056991518,
+#   df_geo$Place=="Wiesenttal-Engelhardsberg"                              ~ 11.292269507062649,
+#   df_geo$Place=="Simbach/Landau"                                         ~ 12.742116375298052,
+#   df_geo$Place=="Neumarkt in der Oberpfalz -Woffenbach"                  ~ 11.440199876977593,
+#   df_geo$Place=="Collenberg-Reistenhausen"                               ~ 9.32187198608794,
+#   df_geo$Place=="Geretsried/Wolfratshausen"                              ~ 11.485255305337628,
+#   df_geo$Place=="Kaufbeuren-Neugablonz"                                  ~ 10.637038969921928,
+#   df_geo$Place=="Eckental-Eckenhaid"                                     ~ 11.218558150795378,
+#   df_geo$Place=="Pfronten-Ried"                                          ~ 10.555452997157015,
+#   df_geo$Place=="Ergoldsbach-Unterunsbach"                               ~ 12.213629946361673,
+#   df_geo$Place=="Edling-Hochhaus"                                        ~ 12.158541870604422,
+#   df_geo$Place=="Velburg-Deusmauer"                                      ~ 11.622715549594876,
+#   df_geo$Place=="Marktheidenfeld/Roden"                                  ~ 9.624866584558674,
+#   df_geo$Place=="Sonnefeld-Hassenberg"                                   ~ 11.189054621802487,
+#   df_geo$Place=="Würzburg-Unterdürrbach"                                 ~ 9.917476196966724,
+#   df_geo$Place=="Bruckmühl-Heufeld"                                      ~ 11.964348553891067,
+#   df_geo$Place=="Schweinfurt/Passau"                                     ~ 10.21763374091985,
+#   df_geo$Place=="Landshut/Ergolding"                                     ~ 12.16413420015531,
+#   df_geo$Place=="Vorra-Alfalter"                                         ~ 11.466527129202472,
+#   df_geo$Place=="Schweinfurt/Arnstein"                                   ~ 10.21763374091985,
+#   df_geo$Place=="Altlandkreis Memmingen"                                 ~ 10.178890876308913,
+#   df_geo$Place=="Kolitzheim-Unterspiesheim"                              ~ 10.263872616632407,
+#   df_geo$Place=="Gemünden am Main-Adelsberg"                             ~ 9.736270566516819,
+#   df_geo$Place=="Roden-Ansbach"                                          ~ 9.62242900900157,
+#   df_geo$Place=="Eggenfelden-Zainach"                                    ~ 12.72776609661317,
+#   df_geo$Place=="Kolitzheim-Stammheim"                                   ~ 10.193672916805438, 
+#   df_geo$Place=="Reichertshofen-Winden am Aign"                          ~ 11.508073251311965,
+#   df_geo$Place=="Rennertshofen-Ammerfeld"                                ~ 10.995365332982457,
+#   df_geo$Place=="Ingolstadt-Mailing"                                     ~ 11.483817422664691,
+#   df_geo$Place=="Forchheim-Reuth"                                        ~ 11.109548283883095,
+#   df_geo$Place=="Immenstadt-Akams"                                       ~ 10.21242850350847,
+#   df_geo$Place=="Weidling-Dalking"                                       ~ 12.748394669135909,
+#   df_geo$Place=="Langdorf-Außenried"                                     ~ 13.18820585353792,
+#   df_geo$Place=="Schlüsselfeld-Aschbach"                                 ~ 10.561179676326852,
+#   df_geo$Place=="Erlangen/Eisenach"                                      ~ 11.012289432967599,
+#   df_geo$Place=="Pilsting-Großkölnbach"                                  ~ 12.6053369875519,
+#   df_geo$Place=="Mallersdorf-Pfaffenberg-Niederlindhart"                 ~ 12.245337774387247,
+#   df_geo$Place=="Unterneukirchen-Oberschroffen"                          ~ 12.64714412930506,
+#   df_geo$Place=="Großostheim-Ringheim"                                   ~ 9.036954429583956,
+#   df_geo$Place=="Nürnberg/Fürth"                                         ~ 11.070539365432351,
+#   df_geo$Place=="Gerolzhofen-Dingolshausen"                              ~ 10.390432929240816,
+#   df_geo$Place=="Neuburg-Schrobenhausen"                                 ~ 11.264024288122059,
+#   df_geo$Place=="Traunstein/Waging"                                      ~ 12.735566222794917,
+#   df_geo$Place=="Neuburg an der Donau-Zell"                              ~ 11.246117037219227,
+#   df_geo$Place=="Teisendorf/Freilassing/Ainring"                         ~ 12.819936218238377,
+#   df_geo$Place=="Veitsbronn-Bernbach"                                    ~ 10.889790027324445, 
+#   df_geo$Place=="Karlstadt-Laudenbach"                                   ~ 9.766432932097064,
+#   df_geo$Place=="Leidersbach-Volkersbrunn"                               ~ 9.26848826798233, 
+#   df_geo$Place=="München-Sendling"                                       ~ 11.566501368642262,
+#   df_geo$Place=="München/Merkendorf"                                     ~ 11.566501368642262,
+#   df_geo$Place=="Wertingen-Roggden"                                      ~ 10.653477612570383,
+#   df_geo$Place=="Rehau-Fohrenreuth"                                      ~ 12.047205412829712,
+#   df_geo$Place=="Mainleus-Schwarzach"                                    ~ 11.364808624762325,
+#   df_geo$Place=="Ausgburg"                                               ~ 10.901252139909042,
+#   df_geo$Place=="Lautertal-Rottenbach"                                   ~ 10.925000594502514,
+#   df_geo$Place=="Ebersberg/Zorneding"                                    ~ 11.82778130074747, 
+#   df_geo$Place=="München/Dachau"                                         ~ 11.566501368642262,
+#   df_geo$Place=="Duisburg/München"                                       ~ 11.566501368642262,
+#   df_geo$Place=="Budapest/Bayern"                                        ~ 11.574112910795291,
+#   df_geo$Place=="Raum Dingolfing/Frontenhausen"                          ~ 12.528330880328417,
+#   df_geo$Place=="Magdeburg/Wackersdorf"                                  ~ 12.176706352447933,
+#   df_geo$Place=="München-Höllriegelskreuth"                              ~ 11.512116222383282,
+#   df_geo$Place=="Raum Sachsen"                                           ~ 12.702877288441078,
+#   df_geo$Place=="Iphofen-Hellmitzheim"                                   ~ 10.325129712486117,
+#   df_geo$Place=="Plovdiv"                                                ~ 24.747393583098777,
+#   df_geo$Place=="Ortenburg-Neustift"                                     ~ 13.195749204134914,
+#   df_geo$Place=="Raum Franken"                                           ~ 12.376006058729143,
+#   df_geo$Place=="Heidelberg/Ludwigshafen/Wackersdorf"                    ~ 8.672627820672055,
+#   df_geo$Place=="Stendal/Laufach"                                        ~ 9.294434833095277,
+#   df_geo$Place=="Mittelengland"                                          ~ -0.8498703682452565,
+#   df_geo$Place=="Erfurt/Dingolfing"                                      ~ 12.498141114768718,
+#   df_geo$Place=="Manching bei Ingolstadt"                                ~ 11.493914507145982,
+#   df_geo$Place=="Bad Windsheim/Ilesheim"                                 ~ 10.413237354792676,
+#   df_geo$Place=="Puschendorf/Obermichelbach"                             ~ 10.83258981236428,
+#   df_geo$Place=="Neu-Ulm-Reutti"                                         ~ 10.072041047039505,
+#   df_geo$Place=="Frankfurt am Main/Ansbach"                              ~ 8.663826612070007,
+#   df_geo$Place=="Vilshofen/Passau/Deggendorf"                            ~ 13.182514005352822,
+#   df_geo$Place=="Regnitzlosau-Oberprex"                                  ~ 12.102747535366841,
+#   df_geo$Place=="Nürnberg/Gera"                                          ~ 11.075345883878388,
+#   df_geo$Place=="Geschwand-Obertrubach"                                  ~ 11.31039473656064,
+#   df_geo$Place=="Köln/Freising"                                          ~ 11.743601604598677,
+#   df_geo$Place=="Nienhagen/Mindelheim"                                   ~ 10.497076984664085,
+#   df_geo$Place=="Feilitzsch/Rehau/Döhlau"                                ~ 11.943364908990507,
+#   df_geo$Place=="Landshut/Geisenhausen"                                  ~ 12.254328652799206,
+#   df_geo$Place=="Leinefelde-Worbis/Mering/Neuburg an der Donau"          ~ 11.185327825455303,
+#   df_geo$Place=="Altötting/Burghausen/Winhöring"                         ~ 12.6814600970977,
+#   df_geo$Place=="München/Murnau"                                         ~ 11.566501368642262,
+#   df_geo$Place=="Raum Allgäu"                                            ~ 10.154793723156308,
+#   df_geo$Place=="Dresden/Hof/Coburg"                                     ~ 11.910181587514863,
+#   df_geo$Place=="H-Budapest/Fürth/Erlangen/München"                      ~ 10.989654394206628,
+#   df_geo$Place=="München/Putzbrunn"                                      ~ 11.566501368642262,
+#   df_geo$Place=="Nürnberg/München"                                       ~ 11.075345883878388,
+#   df_geo$Place=="Haßlach-Stockheim"                                      ~ 11.288210481396892,
+#   df_geo$Place=="Mindelheim – Mindelau"                                  ~ 10.531335404150136,
+#   df_geo$Place=="Weißenhorn/Illertissen"                                 ~ 10.102355646073377,
+#   df_geo$Place=="Theilenhofen-Dornhausen"                                ~ 10.818649281591298,
+#   df_geo$Place=="Buch-Obenhausen"                                        ~ 10.177224925444817,
+#   df_geo$Place=="Gauting/Starnberg"                                      ~ 11.380354323562605,
+#   df_geo$Place=="Mindelheim/Ebstorf"                                     ~ 10.493987079948774,
+#   df_geo$Place=="Obertrubach-Geschwand"                                  ~ 11.310137244501043,
+#   df_geo$Place=="Göggingen bei Augsburg"                                 ~ 10.866743359774482,
+#   df_geo$Place=="Brno"                                                   ~ 16.60744054503626,
+#   df_geo$Place=="Eisenach/Putzbrunn"                                     ~ 11.716120875518996,
+#   df_geo$Place=="Berchtesgadener Land"                                   ~ 12.874764408458779,
+#   df_geo$Place=="Thurmansbang/Deggendorf"                                ~ 13.314931056672702,
+#   df_geo$Place=="Ermreuth/Leipzig"                                       ~ 11.191529091257001,
+#   df_geo$Place=="Bruck-Sollbach"                                         ~ 12.324447296143068,
+#   df_geo$Place=="München/Passau/Deggendorf"                              ~ 11.566501368642262,
+#   df_geo$Place=="Regnitzlosau/Oberprex"                                  ~ 12.102736806531023,
+#   df_geo$Place=="Obertrubach-Gschwand"                                   ~ 11.310137244501043,
+#   df_geo$Place=="Töging/Altötting"                                       ~ 12.587574062621202,
+#   df_geo$Place=="Bad Bocklet-Aschach"                                    ~ 10.059156474161222,
+#   df_geo$Place=="Karlskron/Mändelfeld"                                   ~ 11.427703259301492,
+#   df_geo$Place=="Suhl/München"                                           ~ 10.681514582878425,
+#   df_geo$Place=="Kehlheim/Abensberg"                                     ~ 11.850050615028799,
+#   df_geo$Place=="München/Remagen"                                        ~ 11.566501368642262,
+#   df_geo$Place=="München/Herford"                                        ~ 11.566501368642262,
+#   df_geo$Place=="Erlangen/Höchstadt"                                     ~ 10.821930374129826,
+#   df_geo$Place=="Weilheim/Peißenberg"                                    ~ 11.139497215463672,
+#   df_geo$Place=="Duisburg/München"                                       ~ 6.76774332303132,
+#   df_geo$Place=="Ansbach/Gremsdorf/Wunsiedel"                            ~ 12.00378253970632,
+#   df_geo$Place=="Cham/Regensburg"                                        ~ 12.662982465045706,
+#   df_geo$Place=="München/Düsseldorf/Hamm"                                ~ 11.566501368642262,
+#   df_geo$Place=="Neuburg-Schrobenhausen"                                 ~ 11.268144161075801,
+#   df_geo$Place=="Mulda"                                                  ~ 13.4117033160515,
+#   df_geo$Place=="Berg am Starnberger See"                                ~ 11.355433141647746,
+#   df_geo$Place=="Schweitenkirchen-Niederthann"                           ~ 11.581724043463417,
+#   TRUE~df_geo$long
+# )
+# 
+# 
+# df_geo$lat =ifelse(df_geo$Place=="Lkr" & df_geo$DescDate=="3. Februar 2022", 49.439682402878006, df_geo$lat)
+# df_geo$long=ifelse(df_geo$Place=="Lkr" & df_geo$DescDate=="3. Februar 2022", 11.862755218438531, df_geo$long)
+# 
+# df_geo$lat =ifelse(df_geo$Place=="Lkr" & df_geo$DescDate=="17. Januar 2018", 48.8778509333202, df_geo$lat)
+# df_geo$long=ifelse(df_geo$Place=="Lkr" & df_geo$DescDate=="17. Januar 2018", 12.567016484461641, df_geo$long)
+
+# df_geo$Country=ifelse(df_geo$Place=="Plovdiv", "Bulgaria", df_geo$Country)
+# df_geo$Country=ifelse(df_geo$Place=="Mittelengland", "United Kingdom", df_geo$Country)
+# df_geo$Country=ifelse(df_geo$Place=="Bern", "Switzerland", df_geo$Country)
+# df_geo$Country=ifelse(df_geo$Place=="Brno", "Czechia", df_geo$Country)
+
+# library(openxlsx)
+# write.xlsx(df_geo, 'aida_df_updated.xlsx')
+```
+

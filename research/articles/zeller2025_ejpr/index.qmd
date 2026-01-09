@@ -18,7 +18,7 @@ categories:
   - qualitative comparative analysis (QCA)
 pub-info:
   reference: >-
-    <strong>Michael C. Zeller</strong>, “Pragmatic rather than principled - organisational bans in democracies,” <em>European Journal of Political Research</em> 0, no. 0 (2025): 1-30, doi: <a href="https://doi.org/10.1017/S1475676525100121"><code>10.1017/S1475676525100121</code></a>
+    <strong>Michael C. Zeller</strong>, “Pragmatic rather than principled - organisational bans in democracies,” <em>European Journal of Political Research</em> 0, no. 0 (2025): 1-24, doi: <a href="https://doi.org/10.1017/S1475676525100121"><code>10.1017/S1475676525100121</code></a>
   links:
   - name: Preprint
     url: banning_2step_ejpr_zeller.pdf
