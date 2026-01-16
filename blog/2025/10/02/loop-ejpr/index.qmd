@@ -63,5 +63,5 @@ My research points to a common pattern: bans do not just follow the law—they f
 
 ******
 
-<span style="font-family:Garamond; font-size:0.8em;">A version of this blog was originally published by <a href="https://theloop.ecpr.eu/">The Loop</a></span> 
+<span style="font-family:Garamond; font-size:0.8em;">A version of this blog has been published by <a href="https://theloop.ecpr.eu/why-democracies-ban-extremist-organisations/">The Loop</a>.</span> 
 <!-- <a href="https://www.eurozine.com/tiktok-populism/">https://www.eurozine.com/tiktok-populism/</a></span> -->
