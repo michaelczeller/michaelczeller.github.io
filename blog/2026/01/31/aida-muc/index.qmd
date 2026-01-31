@@ -1,12 +1,17 @@
 ---
-title: a.i.d.a.
-date: 2025-11-11
-description: "a.i.d.a. Chronik."
-image: ac_logo_generic.png
+title: Far-right activities in München
+date: 2026-01-31
+author:
+  # - name: Annika Günther
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io
+    orcid: 0000-0002-2422-3896
+description: "Drawing on the data compiled by the 'Antifaschistische Informations-, Dokumentations- und Archivstelle München e. V.' (a.i.d.a.), we can see some of the spatial, temporal, and thematic trends of far-right activities in München."
+image: aida_logo.png
 twitter-card:
-  image: "ac_logo_generic.png"
+  image: "aida_logo.png"
 open-graph:
-  image: "ac_logo_generic.png"
+  image: "aida_logo.png"
 categories:
   - extremism 
   - far right
@@ -15,15 +20,18 @@ categories:
   - social movements
 ---
 
-The [Antifascist Information, Documentation and Archive Center Munich e.V.](https://www.aida-archiv.de/) (*Antifaschistische Informations-, Dokumentations- und Archivstelle München e. V.*), or **a.i.d.a.**, is a longstanding hub of information on far-right activity in Germany, especially in Bavaria. It has been accumulating material and monitoring far-right activity since 1990. One of its longest running projects is a [chronology](https://www.aida-archiv.de/chronologie/) of far-right activities and attacks in Bavaria, especially in Munich. 
+The [Antifascist Information, Documentation and Archive Center Munich e.V.](https://www.aida-archiv.de/) (*Antifaschistische Informations-, Dokumentations- und Archivstelle München e. V.*), or **a.i.d.a.**, is a longstanding hub of information on far-right activity in Germany, especially in Bayern It has been accumulating material and monitoring far-right activity since 1990. One of its longest running projects is a [chronology](https://www.aida-archiv.de/chronologie/) of far-right activities and attacks in Bayern, especially in München. 
 
 ```{r data-setup}
 #| echo: false
 #| message: false
+#| warning: false
+#| include: false
+#| paged-print: false
 library(readxl)
 
 aida <- read_excel("aida_df_updated.xlsx") # , sheet="cleaned_data"
-
+aida_muc <- read_excel("aida_df_updated.xlsx", sheet="MUC")
 
 ## country bars
 library(ggplot2)
@@ -44,16 +52,373 @@ library(mapview)
 library(spatstat)
 library(leafpop)
 
-# library(chatgpt)
-# Sys.setenv(OPENAI_API_KEY = "sk-ijklmnopqrstuvwxijklmnopqrstuvwxijklmnop")
+## https://opendata-esridech.hub.arcgis.com/datasets/f7f4d6e8090742c6b774379780bd7d9b/explore?location=48.154871%2C11.541844%2C10
+
+# MUC<-st_read("bezirke_muenchen_-8237817724309258366/bezirke_muenchen.shp")
+MUC<-st_read("bezirke_muenchen_4548018829711090310.geojson")
+# plot(st_geometry(MUC), border = 'red')
+
+## CAN REWRITE GEOJSON AS SHAPEFILE, IF WANTED
+# st_write(geo, "path/to/output/shapefile.shp")
+
+# DE25<-st_read("btw25_geometrie_wahlkreise_vg250_shp_geo/btw25_geometrie_wahlkreise_vg250_shp_geo.shp")
+# 
+# muec <- DE25[DE25$WKR_NAME %in% c("München-Nord", # "München-Land",
+#                                 "München-Ost", "München-Süd", "München-West/Mitte"), ]
+
+aida_muc <- as.data.frame(aida_muc)
+
+aida_muc$Latitude <- aida_muc$lat
+aida_muc$Longitude <- aida_muc$long
+
+aida_muc$Date <- as.Date(aida_muc$Date)
+
+aida_muc <- subset(aida_muc, Date > as.Date('2010-01-01'))
+
+# aida_muc <- aida_muc %>% select(-Description)
+
+# aida_muc <- aida_muc %>% drop_na(lat)
+# aida_muc <- aida_muc %>% drop_na(long)
+
+aida_muc <- aida_muc[!is.na(aida_muc$lat),]
+aida_muc <- aida_muc[!is.na(aida_muc$long),]
+
+aida_muc_sf <- aida_muc %>% 
+  st_as_sf(
+    coords = c("long", "lat"),
+    crs = st_crs("EPSG:32632") # CRS for Germany
+  )
+
+st_crs(aida_muc_sf) <- st_crs(MUC)
+
+# plot(st_geometry(muec), border = 'red')
+# plot(st_geometry(aida_muc_sf), add = TRUE, cex = .5)
 
 ```
 
-- Kable table of no. of incidents, ...
-- incidents within Mü
-- interactive map of all incidents 
+<!-- - Kable table of no. of incidents, ... -->
+<!-- - incidents within Mü -->
+<!-- - interactive map of all incidents  -->
+
+Using the precise descriptions for incidents since `r min(lubridate::year(aida_muc$Date), na.rm = TRUE)` in this chronology, incidents (*Vorfälle*) were provided a precise geolocational code. Mostly, these codes are accurate to within a dozen metres of the incident. Thus, it is possible to detect the distribution of incidents across München's districts. 
+
+```{r fig.cap="Far-right incidents in München from 2010 to 2025, by district in which they occurred."}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+
+# ggplot() +
+#   geom_sf(data = MUC, fill = "lightblue")+ # "aquamarine"
+#   geom_sf(data = st_boundary(MUC), 
+#           linewidth=0.05, color=alpha("grey30", 0.7), fill="grey30", alpha=0.7)+
+#   # coord_sf(xlim = c(18.8, 23), ylim = c(42.2, 46.2), expand = FALSE)+
+#   geom_point(data=aida_muc_sf, aes(x=Longitude, y=Latitude), color="black") # +
+#   # geom_count(data=SRB_sf, aes(x=Longitude, y=Latitude),
+#   #            fill="red", shape=21, alpha=0.6, color="black", stroke=0.5)+
+#   # scale_size(name = "Protests", 
+#   #            breaks = c(1, 10, 25, 50, 88),
+#   #            range = c(1, 8))+
+#   # theme_void()+theme(legend.position=c(0.8, 0.88))
+# 
+# ### ----------------------------------
+# ### ----------------------------------
+
+aida_muc_sf_add <- aida_muc_sf %>% sf::st_intersection(MUC)
+
+aida_muc_loc <- aida_muc_sf_add %>% 
+  group_by(name) %>% 
+  summarise(Incidents=n())
+
+aida_muc_loc$TOT <- sum(aida_muc_loc$Incidents)
+aida_muc_loc$PROP <- aida_muc_loc$Incidents / aida_muc_loc$TOT
+aida_muc_loc$PERCENT <- aida_muc_loc$PROP*100
+
+aida_muc_loc <- as.data.frame(aida_muc_loc)
+
+mapped_aida_muc_loc <- MUC %>% 
+  left_join(aida_muc_loc, by = c("name" = "name"))
+
+mapped_aida_muc_loc[is.na(mapped_aida_muc_loc)] <- 0
+
+MUC_incidents_bezirke <- ggplot(mapped_aida_muc_loc) +
+  geom_sf(aes(fill = Incidents))+
+  geom_sf_text(data=mapped_aida_muc_loc %>% filter(Incidents<100 & OBJECTID != "21" & OBJECTID != "11"),
+               aes(label=Incidents), colour="black", size = 5)+
+  geom_sf_text(data=mapped_aida_muc_loc %>% filter(Incidents>100 & Incidents<200),
+               aes(label=Incidents), colour="white", size = 5,
+               nudge_x = -0.007, nudge_y = -0.002)+
+  geom_sf_text(data=mapped_aida_muc_loc %>% filter(Incidents>200),
+               aes(label=Incidents), colour="white", size = 5,
+               nudge_x = -0.009, nudge_y = -0.004)+
+  # geom_sf_text(aes(label = scales::percent(PROP)))+
+  scale_fill_gradient("Vorfälle aus dem rechten Spektrum", low = "white", high = "gray20")+
+  theme_void()+ theme(legend.position = "bottom")+
+  labs(title="")+theme(plot.title = element_text(hjust = 0.5))
+MUC_incidents_bezirke
+
+# png(file=paste0("MUC_incidents_bezirke", as.character(Sys.Date()), ".png"), width = 150, height = 150, units = 'mm', res = 600)
+# plot(MUC_incidents_bezirke)
+# dev.off()
+
+```
+
+The two central districts, Ludwigsvorstadt-Isarvorstadt (which includes the main train station as well as München's most well-known synagogue) and Altstadt-Lehel account for the overwhelming majority of incidents. Note that, where no specific location in München is provided in the incident description, the default geolocational code is for the centre of München, in Altstadt-Lehel. So besides being a magnet of far-right (and other movement) activism in general, since it encompasses the  Marienplatz and Stachus, Altstadt-Lehel is also somewhat inflated as the default location. (Some further coding work is needed to filter out the 'general München' incidents that are agglomerated into figures for Altstadt-Lehel.)
+
+I plan some further fiddling with this data, but below is a quick interactive plot with all **`r nrow(aida_muc_sf_add)`** incidents in München from .
 
 
+```{r fig.cap="Interactive map of far-right incidents in München, 2010-2025."}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+
+st_crs(aida_muc_sf) <- st_crs(MUC)
+
+mapview(aida_muc_sf, col.regions = "maroon", label = "Date",
+        legend = T, layer.name = 'Vorfälle',
+        map.types = c("CartoDB.Positron","CartoDB.DarkMatter"),
+        popup = popupTable(aida_muc_sf,
+                           zcol = c("Desc_en")))
+```
+
+# Planned article with *Haidhauser Nachrichten*
+
+In particular, a short article for *[Haidhauser Nachrichten](https://haidhauser-nachrichten.com/)*, a local newspaper in München, is planned, looking at incidents in Au-Haidhausen. The third most incidents between `r min(lubridate::year(aida_muc_sf_add$Date), na.rm = TRUE)` and the end of `r max(lubridate::year(aida_muc_sf_add$Date), na.rm = TRUE)` occurred in Au-Haidhausen: 64. 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+## Haidhausen over time and categorical codes
+
+aida_muc_sf_add_haid <- aida_muc_sf_add %>% dplyr::filter(name=="Au-Haidhausen")
+
+aida_muc_sf_add_haid$type <- NA
+aida_muc_sf_add_haid$ideo <- NA
+
+# coding_subset_haid <- aida_muc_sf_add_haid %>% dplyr::select(Date, Desc_en)
+# coding_subset_haid <- as.data.frame(coding_subset_haid)
+
+aida_muc_sf_add_haid <- aida_muc_sf_add_haid %>% 
+  mutate(type = case_when(
+    Date==as.Date("2025-08-30") ~ "Graffiti", # Neonazismus
+    Date==as.Date("2025-06-08") ~ "Graffiti", # Neonazismus
+    Date==as.Date("2025-04-14") ~ "Schikanierung", # xenophobia/racism
+    Date==as.Date("2025-03-31") ~ "Schikanierung", # xenophobia/racism
+    Date==as.Date("2025-02-19") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2023-08-06") ~ "Unanständigkeit", # Neonazismus
+    Date==as.Date("2023-08-02") ~ "Graffiti", # Neonazismus
+    Date==as.Date("2023-07-10") ~ "Schikanierung", # xenophobia/racism
+    Date==as.Date("2022-09-23") ~ "Graffiti", # Neonazismus
+    Date==as.Date("2021-07-22") ~ "Drohung", # xenophobia/racism
+    Date==as.Date("2021-07-05") ~ "Schikanierung", # xenophobia/racism
+    Date==as.Date("2021-06-29") ~ "Schikanierung", # xenophobia/racism
+    Date==as.Date("2021-05-30") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2021-03-13") ~ "Schikanierung", # xenophobia/racism
+    Date==as.Date("2021-02-24") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2020-10-09") ~ "Schikanierung", # xenophobia/racism
+    Date==as.Date("2020-07-04") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2020-06-04") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2020-05-17") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2020-05-07") ~ "Unanständigkeit", # Neonazismus
+    Date==as.Date("2020-03-11") ~ "Unanständigkeit", # Neonazismus
+    Date==as.Date("2020-02-27") ~ "Graffiti", # Neonazismus
+    Date==as.Date("2020-01-17") ~ "Angriff", # Neonazismus
+    Date==as.Date("2020-01-16") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2019-12-13") ~ "Graffiti", # Neonazismus
+    Date==as.Date("2019-11-29") ~ "Graffiti", # Neonazismus
+    Date==as.Date("2019-11-22") ~ "Angriff", # homophobia/transphobia
+    Date==as.Date("2019-11-20") ~ "Sachbeschädigung", # antisemitism
+    Date==as.Date("2019-09-08") ~ "Schikanierung", # xenophobia/racism
+    Date==as.Date("2019-06-23") ~ "Unanständigkeit", # Neonazismus
+    Date==as.Date("2019-06-04") ~ "Unanständigkeit", # Neonazismus
+    Date==as.Date("2019-04-29") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2019-04-07") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2019-02-04") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2018-11-07") ~ "Drohung", # xenophobia/racism
+    Date==as.Date("2018-10-09") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2018-08-18") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2018-07-23") ~ "Angriff", # Neonazismus
+    Date==as.Date("2018-05-17") ~ "Sachbeschädigung", # political Feindschaft
+    Date==as.Date("2017-04-11") ~ "Drohung", # political Feindschaft
+    Date==as.Date("2016-07-17") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2016-07-05") ~ "Kundgebung", # homophobia/transphobia
+    Date==as.Date("2016-04-07") ~ "Schikanierung", # antisemitism
+    Date==as.Date("2015-07-11") ~ "Angriff", # homophobia/transphobia
+    Date==as.Date("2014-04-20") ~ "Kundgebung", # Neonazismus
+    Date==as.Date("2014-03-06") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2013-10-05") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2013-08-24") ~ "Kundgebung", # xenophobia/racism 
+    # 49 "2013-06-22"
+    # 50 "2013-06-22"
+    Date==as.Date("2013-06-18") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2013-06-15") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2013-06-04") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2013-04-02") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2013-03-16") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2012-11-07") ~ "Drohung", # Neonazismus
+    Date==as.Date("2012-10-22") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2012-08-29") ~ "Kundgebung", # Neonazismus
+    Date==as.Date("2012-05-19") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2012-05-12") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2012-03-10") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2011-07-17") ~ "Angriff", # xenophobia/racism
+    Date==as.Date("2011-01-17") ~ "Kundgebung", # xenophobia/racism
+    Date==as.Date("2010-03-16") ~ "Kundgebung", # Neonazismus
+    TRUE ~ "Kundgebung" # "2013-06-22" "2013-06-22" # xenophobia/racism
+  ))
+
+aida_muc_sf_add_haid <- aida_muc_sf_add_haid %>% 
+  mutate(ideo = case_when(
+    Date==as.Date("2025-08-30") ~ "Neonazismus", # 
+    Date==as.Date("2025-06-08") ~ "Neonazismus", # 
+    Date==as.Date("2025-04-14") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2025-03-31") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2025-02-19") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2023-08-06") ~ "Neonazismus", # 
+    Date==as.Date("2023-08-02") ~ "Neonazismus", # 
+    Date==as.Date("2023-07-10") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2022-09-23") ~ "Neonazismus", # 
+    Date==as.Date("2021-07-22") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2021-07-05") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2021-06-29") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2021-05-30") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2021-03-13") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2021-02-24") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2020-10-09") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2020-07-04") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2020-06-04") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2020-05-17") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2020-05-07") ~ "Neonazismus", # 
+    Date==as.Date("2020-03-11") ~ "Neonazismus", # 
+    Date==as.Date("2020-02-27") ~ "Neonazismus", # 
+    Date==as.Date("2020-01-17") ~ "Neonazismus", # 
+    Date==as.Date("2020-01-16") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2019-12-13") ~ "Neonazismus", # 
+    Date==as.Date("2019-11-29") ~ "Neonazismus", # 
+    Date==as.Date("2019-11-22") ~ "Homophobie/Transphobie", # 
+    Date==as.Date("2019-11-20") ~ "Antisemitismus", # Antisemitismus
+    Date==as.Date("2019-09-08") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2019-06-23") ~ "Neonazismus", # 
+    Date==as.Date("2019-06-04") ~ "Neonazismus", # 
+    Date==as.Date("2019-04-29") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2019-04-07") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2019-02-04") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2018-11-07") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2018-10-09") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2018-08-18") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2018-07-23") ~ "Neonazismus", # 
+    Date==as.Date("2018-05-17") ~ "politische Feindschaft", # 
+    Date==as.Date("2017-04-11") ~ "politische Feindschaft", # 
+    Date==as.Date("2016-07-17") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2016-07-05") ~ "Homophobie/Transphobie", # 
+    Date==as.Date("2016-04-07") ~ "Antisemitismus", # 
+    Date==as.Date("2015-07-11") ~ "Homophobie/Transphobie", # 
+    Date==as.Date("2014-04-20") ~ "Neonazismus", # 
+    Date==as.Date("2014-03-06") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2013-10-05") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2013-08-24") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    # 49 "2013-06-22"
+    # 50 "2013-06-22"
+    Date==as.Date("2013-06-18") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2013-06-15") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2013-06-04") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2013-04-02") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2013-03-16") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2012-11-07") ~ "Neonazismus", # 
+    Date==as.Date("2012-10-22") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2012-08-29") ~ "Neonazismus", # 
+    Date==as.Date("2012-05-19") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2012-05-12") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2012-03-10") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2011-07-17") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2011-01-17") ~ "Fremdenfeindlichkeit/Rassismus", # 
+    Date==as.Date("2010-03-16") ~ "Neonazismus", # 
+    TRUE ~ "Fremdenfeindlichkeit/Rassismus" # "2013-06-22" "2013-06-22" # 
+  ))
+
+```
+
+
+```{r fig.cap="Far-right incidents in Au-Haidhausen (München), 2010-2025."}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+## Haidhausen over time and categorical codes
+
+haid_bars <- aida_muc_sf_add_haid %>%
+  ggplot(aes(x = year(Date))) +
+  geom_bar() +
+  scale_x_continuous("", breaks = seq(2010,2025,1))+
+  scale_y_continuous("Vorfälle in Au-Haidhausen", breaks = seq(0,10,2), minor_breaks = seq(0,10,1), limits = c(0,10))+
+  theme_bw()+
+  theme(text = element_text(size=15), axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+haid_bars
+
+```
+
+```{r fig.cap="Categories of far-right incidents in Au-Haidhausen, 2010-2025."}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+
+library(ggpattern)
+
+# aida_muc_sf_add_haid %>%
+#   ggplot(aes(x = "", fill = type)) +
+#   geom_bar(width = 1) +
+#   coord_polar("y") +
+#   geom_text(
+#     stat = "count",
+#     aes(label = after_stat(count)),
+#     position = position_stack(vjust = 0.5)
+#   ) +
+#   theme_void()
+
+haid_pie <- aida_muc_sf_add_haid %>%
+  ggplot(aes(x = "", fill = type, pattern = type)) +
+  geom_bar_pattern(
+    width = 1,
+    colour = "black",
+    pattern_fill = "black",
+    pattern_density = 0.1,
+    pattern_spacing = 0.03
+  ) +
+  coord_polar("y") +
+  geom_label(
+    stat = "count",
+    aes(label = after_stat(count)),
+    position = position_stack(vjust = 0.5),
+    size = 5, 
+    fill = "white", 
+    colour = "black",
+    label.size = 0.2
+  ) +
+  theme_void() + 
+  scale_fill_manual(
+    name = "",
+    values=c("white", "black", "grey", "white", "grey", "white", "grey")
+    )+
+  scale_pattern_manual(
+    name = "",
+    values = c("none", "none", "stripe", "circle", "none", "stripe", "circle")
+    )
+haid_pie
+
+# png(file=paste0("MUC_incidents_haid_bar", as.character(Sys.Date()), ".png"), width = 200, height = 150, units = 'mm', res = 600)
+# plot(haid_bars)
+# dev.off()
+# 
+# png(file=paste0("MUC_incidents_haid_pie", as.character(Sys.Date()), ".png"), width = 150, height = 150, units = 'mm', res = 600)
+# plot(haid_pie)
+# dev.off()
+
+```
 
 
 
