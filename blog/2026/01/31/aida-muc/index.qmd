@@ -94,13 +94,119 @@ st_crs(aida_muc_sf) <- st_crs(MUC)
 # plot(st_geometry(muec), border = 'red')
 # plot(st_geometry(aida_muc_sf), add = TRUE, cex = .5)
 
+aida_muc_sf_add <- aida_muc_sf %>% sf::st_intersection(MUC)
+
+aida_muc_loc <- aida_muc_sf_add %>% 
+  group_by(name) %>% 
+  summarise(Incidents=n())
+
+aida_muc_loc$TOT <- sum(aida_muc_loc$Incidents)
+aida_muc_loc$PROP <- aida_muc_loc$Incidents / aida_muc_loc$TOT
+aida_muc_loc$PERCENT <- aida_muc_loc$PROP*100
+
+aida_muc_loc <- as.data.frame(aida_muc_loc)
+
+mapped_aida_muc_loc <- MUC %>% 
+  left_join(aida_muc_loc, by = c("name" = "name"))
+
+mapped_aida_muc_loc[is.na(mapped_aida_muc_loc)] <- 0
+
 ```
 
 <!-- - Kable table of no. of incidents, ... -->
 <!-- - incidents within Mü -->
 <!-- - interactive map of all incidents  -->
 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+## fig.cap="Far-right incidents in München, 2010-2025."
+
+incident_per_year <- aida_muc_sf_add %>%
+  mutate(Year = year(Date)) %>%  
+  group_by(Year) %>%  
+  summarise(Incidents = n(), .groups = "drop") %>% 
+  as.data.frame() %>% dplyr::select(Year, Incidents)
+
+# write.csv(incident_per_year, "incident_per_year.csv")
+
+
+```
+
+
 Using the precise descriptions for incidents since `r min(lubridate::year(aida_muc$Date), na.rm = TRUE)` in this chronology, incidents (*Vorfälle*) were provided a precise geolocational code. Mostly, these codes are accurate to within a dozen metres of the incident. Thus, it is possible to detect the distribution of incidents across München's districts. 
+
+```{r fig.cap="Far-right incidents in München from 2010 to 2025, by district in which they occurred."}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+library(tidyverse)
+# library(giscoR)
+library(ggiraph)
+
+## https://albert-rapp.de/posts/ggplot2-tips/28_maps/28_maps
+
+# MUC %>% ggplot(aes(geometry = geometry))+geom_sf()
+
+# interMUC_plot <- MUC %>% ggplot(aes(geometry = geometry))+
+#   geom_sf(aes(fill = name), color = "black", linewidth = 0.5)+
+#   geom_sf_interactive(
+#     fill = NA, 
+#     aes(
+#       data_id = name,
+#       tooltip = name
+#     ),
+#     linewidth = 0.1
+#   )+
+#   theme_void() +
+#   theme(
+#     legend.position = 'none'
+#   )
+# 
+# girafe(ggobj = interMUC_plot,
+#        options = list(
+#     opts_hover(
+#       css = girafe_css(
+#         css = '',
+#         area = 'stroke: black; fill: black;'
+#       )
+#     )
+#   ))
+
+
+
+interAIDA_plot <- mapped_aida_muc_loc %>% ggplot(aes(geometry = geometry.x))+
+  geom_sf(aes(fill = Incidents), color = "black", linewidth = 0.5)+
+  geom_sf_interactive(
+    fill = NA, 
+    aes(
+      data_id = name,
+      tooltip = glue::glue('{name}<br>2010-2025: {Incidents} incidents')
+    ),
+    linewidth = 0.1
+  )+
+  theme_void() +
+  scale_fill_gradient(low = "gold", high = "red")+
+  theme(
+    legend.position = 'none'
+  )
+
+girafe(ggobj = interAIDA_plot,
+       options = list(
+    opts_hover(
+      css = girafe_css(
+        css = '',
+        area = 'stroke: black; fill: black;'
+      )
+    )
+  ))
+
+```
+
 
 ```{r fig.cap="Far-right incidents in München from 2010 to 2025, by district in which they occurred."}
 #| echo: false
@@ -124,22 +230,6 @@ Using the precise descriptions for incidents since `r min(lubridate::year(aida_m
 # ### ----------------------------------
 # ### ----------------------------------
 
-aida_muc_sf_add <- aida_muc_sf %>% sf::st_intersection(MUC)
-
-aida_muc_loc <- aida_muc_sf_add %>% 
-  group_by(name) %>% 
-  summarise(Incidents=n())
-
-aida_muc_loc$TOT <- sum(aida_muc_loc$Incidents)
-aida_muc_loc$PROP <- aida_muc_loc$Incidents / aida_muc_loc$TOT
-aida_muc_loc$PERCENT <- aida_muc_loc$PROP*100
-
-aida_muc_loc <- as.data.frame(aida_muc_loc)
-
-mapped_aida_muc_loc <- MUC %>% 
-  left_join(aida_muc_loc, by = c("name" = "name"))
-
-mapped_aida_muc_loc[is.na(mapped_aida_muc_loc)] <- 0
 
 MUC_incidents_bezirke <- ggplot(mapped_aida_muc_loc) +
   geom_sf(aes(fill = Incidents))+
@@ -166,7 +256,6 @@ MUC_incidents_bezirke
 The two central districts, Ludwigsvorstadt-Isarvorstadt (which includes the main train station as well as München's most well-known synagogue) and Altstadt-Lehel account for the overwhelming majority of incidents. Note that, where no specific location in München is provided in the incident description, the default geolocational code is for the centre of München, in Altstadt-Lehel. So besides being a magnet of far-right (and other movement) activism in general, since it encompasses the  Marienplatz and Stachus, Altstadt-Lehel is also somewhat inflated as the default location. (Some further coding work is needed to filter out the 'general München' incidents that are agglomerated into figures for Altstadt-Lehel.)
 
 I plan some further fiddling with this data, but below is a quick interactive plot with all **`r nrow(aida_muc_sf_add)`** incidents in München from .
-
 
 ```{r fig.cap="Interactive map of far-right incidents in München, 2010-2025."}
 #| echo: false
@@ -419,7 +508,6 @@ haid_pie
 # dev.off()
 
 ```
-
 
 
 
