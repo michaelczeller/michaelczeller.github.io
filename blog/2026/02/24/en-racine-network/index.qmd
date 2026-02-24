@@ -1,0 +1,1033 @@
+---
+title: French radical right event networks
+date: 2026-02-24
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io
+    orcid: 0000-0002-2422-3896
+description: "'militant nationalist events' across France..."
+image: en_racine_logo.png
+twitter-card:
+  image: "en_racine_logo.png"
+open-graph:
+  image: "en_racine_logo.png"
+categories:
+  - far right
+  - France
+  - right-wing extremism
+  - social movements
+---
+
+<!-- TO-DO: -->
+<!-- - geospatial plots of event locations -->
+<!-- - *eventually*, interactive locational visualisation(s) (similar to Neue Rechte scraped data) -->
+<!--     + <https://kateto.net/network-visualization> 8 Overlaying networks on geographic maps -->
+<!-- - animated network plot over time <https://kateto.net/network-visualization> 7.2 Network evolution animations -->
+
+```{r data-setup}
+#| echo: false
+#| message: false
+#| warning: false
+#| include: true
+#| paged-print: false
+library(readxl)
+library(dplyr)
+library(tidyr)
+
+ER <- read_excel("en-racine2026-01-21.xlsx", sheet="Sheet 1")
+ER <- as.data.frame(ER)
+ER$event_date <- as.Date(ER$event_date)
+
+ER <- ER %>% 
+  mutate(
+    colour=case_when(
+      type=="Formation" ~ "darkred",
+      type=="Activisme" ~ "forestgreen",
+      type=="Communauté"~ "goldenrod",
+      TRUE ~ "lightblue"
+    )
+  )
+
+library(stringr) # for inline code before network section
+
+```
+
+Since 2024, French far-right activists^[Though it is not stated on the 'Rooted Calendar' website, the main progenitor of this catalogue of events is Clarisse L., who sometimes goes by the name Clarisse 'Soleil' (i.e., Clarisse 'Sun'). At least, this is the name repeatedly connected to the Rooted Calendar by [journalist](https://www.streetpress.com/sujet/1715700132-lyon-cocarde-lycee-vire-neofasciste-eliot-bertin-violences-saluts-nazis-extreme-droite-rn) and [antifascist](https://lahorde.info/IMG/pdf/cartographie_ed.pdf) sources.] have maintained the *[Calendrier Enraciné](https://en-racine.org/a-propos)*, or 'Rooted calendar,' a catalogue of 'militant nationalist events planned across France'^[In original: "...événements militants nationalistes prévus à travers la France".] in order to make it easier for interested persons to participate in nationalist demonstrations and other events. This Rooted Calendar is not an exhaustive list of far-right events. It tends toward radical-right (i.e., with an ideological character that accepts democratic governance while rejecting certain liberal norms, as opposed to extreme-right activity that opposes democracy) events. Many could fairly be described as 'Identitarian,' though there is some ambiguity to this label. In any case, the website operators explain^[See <https://en-racine.org/a-propos>.]: 
+
+> The content published on Racine comes from publications on the social networks and websites of the associations concerned, the information shared is public at the time of its publication on the site. ... Racine reserves the right to choose the events to share on the calendar. ... Racine reserves the right to choose the associations to highlight on the site, subject to availability of information.
+
+This means that the Rooted Calendar should be seen as a curated list, less likely to include more extreme events as well as less likely to include more spontaneous events. While these are limitations---it is always nicer to have 'more complete' data---the Rooted Calendar nevertheless offers insights into an important part of the French far-right scene. Many of the organisations represented therein have connections to more extreme organisations and/or to political party actors, most especially *Rassemblement National* (RN, formerly *Front National*) and Éric Zemmour's *Reconquête*. The data table below contains rows of events and shows some of the information scraped from the Rooted Calendar website, including date, place, and organiser(s) of the event.
+
+```{r data-table}
+#| echo: false
+#| message: false
+#| warning: false
+#| include: true
+#| paged-print: false
+library(DT)
+
+ER_tab <- ER %>% dplyr::select(group, type, event_date, loc, organisateurs, event_title, event_link)
+
+# options(knitr.kable.NA = '')
+
+datatable(ER_tab, rownames = FALSE,
+          caption = 'en-racine.org data table.',
+          filter = 'top', options = list(pageLength = 10, autoWidth = TRUE)) %>% 
+  formatStyle(columns = c(1:ncol(ER_tab)), fontSize = '70%')
+
+```
+
+# The basics
+
+As of 21 January 2026, there were **`r nrow(ER)`** events listed on the Rooted Calendar. @fig-events-bars shows that the catalogue covers events over the preceding 18 months as well as a handful upcoming events.
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r EventsBarsCode}
+#| echo: true
+#| message: false
+#| warning: false
+#| paged-print: false
+
+library(ggplot2)
+library(lubridate)
+
+events_bars <- ER %>%
+  mutate(month_period = floor_date(event_date, unit = "1 months")) %>%
+  count(month_period) %>%
+  ggplot(aes(x = month_period, y = n)) +
+  geom_col(colour="black", fill="brown") +
+  scale_x_date("", date_labels = "%B %Y", date_breaks = "1 month") +
+  scale_y_continuous("Events",
+    breaks = seq(0, 70, by = 10),  
+    minor_breaks = seq(0, 70, by = 5) 
+  ) +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 15),
+    axis.text.y = element_text(size = 15),  
+    axis.title.y = element_text(size = 17)
+  )
+```
+
+</details>
+
+```{r EventsBars}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+#| fig-cap: "Far-right events over time."
+#| label: fig-events-bars
+
+events_bars
+```
+
+The operators of the Rooted Calendar seem to have covered quite a few organisations. **`r n_distinct(ER$group)`** are represented in the data, though not all of these have organised an event (yet): **`r ER %>% filter(!is.na(event_date)) %>% summarise(unique_groups = n_distinct(group)) %>% pull(unique_groups)`** have organised at least one event. @fig-ERpiechart depicts this diffuse spread of organisers.  
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r piechartCode}
+#| echo: true
+#| message: false
+#| warning: false
+#| paged-print: false
+
+library(forcats)
+library(ggiraph)
+
+piechartER <- ER %>%
+  mutate(group = fct_lump_n(group, n = 10, other_level = "Other")) %>%
+  count(group) %>%
+  mutate(
+    group = fct_reorder(group, n, .desc = TRUE),
+    group = fct_relevel(group, "Other", after = Inf)
+  ) %>%
+  ggplot(aes(x = "", y = n, fill = group, tooltip = paste(group, ": ", n))) +
+  geom_bar_interactive(stat = "identity", width = 1, color = "white") +
+  coord_polar(theta = "y") +
+  scale_fill_manual(values = c(
+    "#1b9e77",
+    "#d95f02",
+    "#7570b3",
+    "#e7298a",
+    "#66a61e",
+    "#e6ab02",
+    "#a6761d",
+    "#1f78b4",
+    "#b2df8a",
+    "#fb9a99",
+    "grey70"
+  )) +
+  labs(
+    title = "Top 10 Event Organisers",
+    x = NULL,
+    y = NULL
+  ) +
+  theme_void() +
+  theme(
+    legend.title = element_blank(),
+    legend.text = element_text(size = 12)
+  )
+
+piechartERinteractive <- girafe(ggobj = piechartER,
+       options = list(
+    opts_hover(
+      css = girafe_css(
+        css = '',
+        area = 'stroke: black; fill: black;'
+      )
+    )
+  ))
+
+```
+
+</details>
+
+```{r piechart}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+#| fig-cap: "Predominant far-right event organisers."
+#| label: fig-ERpiechart
+
+piechartERinteractive
+```
+
+The majority of these events were the initiative of one organisation. However, there is also extensive collaboration between the organisations listed on the Rooted Calendar. **`r ER %>% filter(!is.na(organisateurs)) %>% mutate(organisers_count = str_count(str_trim(organisateurs), ";") ) %>% filter(organisers_count > 1) %>% summarise(events_with_multiple_organisers = n())`** events were the product of collaboration between two or more organisations. In this way the Rooted Calendar provides some insight into the networks of interaction between French far-right organisations.
+
+# Events and their organisers 
+
+The Rooted Calendar data allows for the construction of a classic 'affiliation network' (or two-mode network) with nodes for the events organised and the actors organising them. @fig-2mode-EventOrg shows a projection of this network, with circular blue nodes representing events and square red nodes representing the organisations connected to those events (and through them to other organisations). 
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r netEventOrgCode}
+#| echo: true
+#| message: false
+#| fig.width: 12
+#| fig.height: 10
+#| warning: false
+#| paged-print: false
+
+library(stringr)
+
+## split the column of named organisers 
+
+ER_clean <- ER %>%
+  mutate(
+    event_id = row_number(),
+    organisateurs = str_remove_all(organisateurs, "\\s*;\\s*$") # remove trailing ;
+  ) %>%
+  separate_rows(organisateurs, sep = ";") %>%
+  mutate(
+    organisateurs = str_trim(organisateurs)
+  )
+
+library(igraph)
+
+ER_edges_2mode <- ER_clean %>% select(event_id, organisateurs)
+
+ER_graph_2mode <- graph_from_data_frame(ER_edges_2mode, directed = FALSE)
+
+## distinguish node types (for two-mode plotting)
+V(ER_graph_2mode)$type <- V(ER_graph_2mode)$name %in% ER_clean$organisateurs
+
+V(ER_graph_2mode)$shape <- ifelse(V(ER_graph_2mode)$type, "square", "circle")
+V(ER_graph_2mode)$size <- ifelse(V(ER_graph_2mode)$type, 6, 3)
+
+## labels for only the organisations
+vertex_labels <- ifelse(V(ER_graph_2mode)$type == TRUE, V(ER_graph_2mode)$name, NA)
+
+par(mar = c(0, 0, 0, 0))
+
+# plot(
+#   ER_graph_2mode,
+#   vertex.color = ifelse(V(ER_graph_2mode)$type, "tomato", "skyblue"),
+#   vertex.label.cex = 0.6,
+#   # vertex.size = 6,
+#   layout = layout_as_bipartite(ER_graph_2mode)
+# )
+
+plotER_graph_2mode <- plot(
+  ER_graph_2mode,
+  vertex.color = ifelse(V(ER_graph_2mode)$type, "tomato", "skyblue"), ## organisations, events
+  edge.color = "red",
+  vertex.label = vertex_labels, 
+  vertex.label.family="Helvetica",
+  vertex.label.color=c("blue"),
+  vertex.label.font=2, # Font: 1plain, 2bold, 3italic, 4bold italic, 5symbol
+  vertex.label.cex=0.8,
+  # vertex.size = 6,
+  layout = layout_with_fr(ER_graph_2mode)
+)
+
+```
+
+</details>
+
+```{r netEventOrg}
+#| echo: false
+#| message: false
+#| fig.width: 12
+#| fig.height: 10
+#| warning: false
+#| paged-print: false
+#| fig-cap: "Predominant far-right event organisers."
+#| label: fig-2mode-EventOrg
+
+plotER_graph_2mode
+```
+
+Some organisations seem to keep to themselves. For example, none of the events organised by the IFP (*l'Institut de Formation Politique*), run by Alexandre Pesey, were co-organised with another organisation listed by the Rooted Calendar. Others seldom collaborate: [Action Française](https://cartofaf.streetpress.com/liste/action-francaise/), one of the oldest and largest French far-right organisations, is a highly active event organiser---the most prolific in the Rooted Calendar (@fig-ERpiechart)---but only rarely co-organises events. Still others are veritable hubs of interactivity. At the centre of the biggest cluster in @fig-2mode-EventOrg is [Academia Christiana](https://cartofaf.streetpress.com/liste/academia-christiana/), a radical right organisation that was at one point (in late 2023) faced the possibility of [organisational proscription](https://www.liberation.fr/politique/sous-la-menace-dune-dissolution-les-identitaires-cathos-dacademia-christiana-multiplient-les-associations-20250824_MVPUDQDENZADPFLZTBBM6ULQ2I/) by the [French state](https://www.lefigaro.fr/faits-divers/academia-christiana-depose-une-plainte-en-diffamation-contre-gerald-darmanin-20231212). 
+
+# Inter-organisation collaboration
+
+We can simplify the network graphic by focusing on the links between organisations, created by their collaboration on events. (This is the common procedure of projecting a two-mode network as a one-mode network.) @fig-1mode-OrgOrg shows a network composed just of organisations, with the edges (links between nodes) weighted according to the number of times the organisations co-organised events. Here, the different clusters of organisations that work together is clearer.
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r OrgOrgCode}
+#| echo: true
+#| message: false
+#| warning: false
+#| paged-print: false
+
+multi_events <- ER_clean %>%
+  group_by(event_id) %>%
+  filter(n() > 1) %>%
+  ungroup()
+
+edges_multi <- multi_events %>%
+  select(event_id, organisateurs)
+
+g_multi <- graph_from_data_frame(edges_multi, directed = FALSE)
+
+V(g_multi)$type <- V(g_multi)$name %in% multi_events$organisateurs
+
+proj <- bipartite_projection(g_multi)
+
+g_org <- proj$proj2   # organisation projection
+
+# plot(
+#   g_org,
+#   vertex.color = "tomato",
+#   vertex.size = 5, # igraph::degree(g_org) * 2,
+#   vertex.label.cex = 0.8,
+#   edge.width = E(g_org)$weight
+# )
+
+```
+
+</details>
+
+```{r OrgOrg}
+#| echo: false
+#| message: false
+#| fig.width: 12
+#| fig.height: 10
+#| warning: false
+#| paged-print: false
+#| fig-cap: "French far-right organisations-organisations network ..."
+#| label: fig-1mode-OrgOrg
+
+plot(
+  g_org,
+  vertex.color = "tomato",
+  vertex.size = 5, # igraph::degree(g_org) * 2,
+  vertex.label.cex = 0.8,
+  edge.width = E(g_org)$weight
+)
+```
+
+The *ggraph* package makes it a bit easier to add in some extra elements to the plot. @fig-1mode-gg-OrgOrg shows those weights of connection as well as sizing nodes by their centrality. 
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r ggOrgOrgCode}
+#| echo: false
+#| message: false
+#| fig.width: 12
+#| fig.height: 10
+#| warning: false
+#| paged-print: false
+
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(tidygraph)
+library(ggraph)
+library(igraph)
+
+ER_clean <- ER %>%
+  mutate(
+    event_id = row_number(),
+    organisateurs = str_remove_all(organisateurs, "\\s*;\\s*$")
+  ) %>%
+  separate_rows(organisateurs, sep = ";") %>%
+  mutate(organisateurs = str_trim(organisateurs))
+
+multi_events <- ER_clean %>%
+  group_by(event_id) %>%
+  filter(n() > 1) %>%
+  ungroup()
+
+edges <- multi_events %>%
+  select(event_id, organisateurs)
+
+g_bip <- graph_from_data_frame(edges, directed = FALSE)
+
+# Mark node types (TRUE = organisation)
+V(g_bip)$type <- V(g_bip)$name %in% multi_events$organisateurs
+
+proj <- bipartite_projection(g_bip)
+
+g_org_igraph <- proj$proj2
+
+g_org <- tidygraph::as_tbl_graph(g_org_igraph)
+
+# Edge width = number of shared events
+# Node size = number of collaborators
+# Labels repel automatically
+ggplot_g_org <- ggraph(g_org, layout = "fr") + # Fruchterman-Reingold layout OR 'stress'
+  geom_edge_link(aes(width = weight), alpha = 0.4) +
+  geom_node_point(aes(size = centrality_degree()), color = "tomato") +
+  geom_node_text(aes(label = name), repel = TRUE, size = 3) +
+  scale_edge_width(range = c(0.2, 2)) +
+  theme_graph()
+
+
+```
+
+</details>
+
+```{r ggOrgOrg}
+#| echo: false
+#| message: false
+#| fig.width: 12
+#| fig.height: 10
+#| warning: false
+#| paged-print: false
+#| fig-cap: "French far-right organisations-organisations network, advanced ..."
+#| label: fig-1mode-gg-OrgOrg
+
+ggplot_g_org
+```
+
+@fig-1mode-OrgOrgInteractive merely provides an interactive version of this organisation-to-organisation network, adding the classification ('type') listed on the Rooted Calendar. 
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r OrgOrgInteractiveCode}
+#| echo: false
+#| message: false
+#| fig.width: 12
+#| fig.height: 10
+#| warning: false
+#| paged-print: false
+
+## full set of options: https://datastorm-open.github.io/visNetwork/igraph.html
+library(visNetwork)
+## Basic vis
+# visNetwork::visIgraph(g_org, physics = FALSE, smooth = TRUE, idToLabel = TRUE)
+
+g_org_VN <- toVisNetworkData(g_org)
+
+g_org_VN$edges$value <- g_org_VN$edges$weight # to automatically weight the edges
+
+### adding shape -- if not using visGroups
+# g_org_VN$nodes$shape <- "diamond"
+
+# to auto-size the nodes 
+g_org_VN$nodes <- g_org_VN$nodes %>%
+  left_join(
+    g_org_VN$edges %>%
+      count(from, name = "value"),
+    by = c("id" = "from")
+  ) %>%
+  mutate(value = ifelse(is.na(value), 0, value))
+
+## add in the 'type' of organisation
+ER_unique <- ER %>%
+  group_by(group) %>%
+  summarise(type = first(type), .groups = "drop")
+
+g_org_VN$nodes <- g_org_VN$nodes %>%
+  left_join(ER_unique, by = c("id" = "group"))
+
+g_org_VN$nodes <- g_org_VN$nodes %>% dplyr::rename(group = type)
+
+### adding colour therefrom -- if not using visGroups
+# g_org_VN$nodes <- g_org_VN$nodes %>% 
+#   mutate(
+#     color=case_when(
+#       type=="Formation" ~ "darkred",
+#       type=="Activisme" ~ "forestgreen",
+#       type=="Communauté"~ "goldenrod",
+#       TRUE ~ "lightblue"
+#     )
+#   )
+
+plot_g_org_VN <- visNetwork(nodes=g_org_VN$nodes, edges=g_org_VN$edges,
+           physics = TRUE, smooth = TRUE, idToLabel = TRUE) %>% # , height = "500px"
+  visIgraphLayout() %>% # layout = "layout_in_circle"
+  visNodes(scaling = list(min = 15, max = 50)) %>%
+  visGroups(groupname = "Activisme", color = "forestgreen", shape = "triangle") %>% 
+  visGroups(groupname = "Communauté", color = "goldenrod", shape = "diamond") %>% 
+  visGroups(groupname = "Formation", color = "darkred", shape = "square") %>% 
+  visEdges(scaling = list(min = 5, max = 30),
+           color = list(color = "navy", highlight = "red")) %>% 
+  visOptions(selectedBy = "group", 
+             highlightNearest = list(enabled = T, hover = T), 
+             nodesIdSelection = T) %>% 
+  visPhysics(stabilization = FALSE) %>% 
+  visLegend(width = 0.2, position = "right", main = "Group type") %>% 
+  
+  # visConfigure(enabled = TRUE) %>%
+  visLayout(randomSeed = 12) # to have always the same network 
+
+```
+
+</details>
+
+```{r OrgOrgInteractive}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+#| fig-cap: "Interactive visualisation of French far-right organisations-to-organisations network. Nodes are sized based on the number of (co-organised) events by an organisation. Node colours and shapes reflect the 'type' listed on the 'Rooted Calendar'. Edges are sized by number of collaboratively organised events between organisations."
+#| label: fig-1mode-OrgOrgInteractive
+
+plot_g_org_VN
+```
+
+
+# network measures 
+
+With such a limited, curated set of events and collaborations, it does not make much sense to provide network-wide metrics. For those a fuller dataset is needed. But we can meaninfully quantify some node metrics: 
+
+- **degree centrality**: number of direct connections a node has. High degree means the node is directly connected to many others. 
+- **strength**: sum of the weights of a node's connections. High strength means the node has strong or high-volume connections.
+- **betweenness centrality**: how often a node lies on the shortest paths between other nodes. High betweenness means the node acts as a bridge or broker between different parts of the network.
+- **closeness centrality**: how close a node is to all other nodes in the network (by shortest paths). High closeness means the node can connect to others quickly (i.e., few steps away).
+- **Eigenvector centrality**: a node's importance based on both (i) how many connections it has and (ii) how important its neighbours are. High eigenvector centrality means the node is connected to other well-connected nodes.
+- **pagerank**: the probability that a random walker moving through the network would land on a given node. High PageRank means the node is frequently reached via incoming links from important nodes.
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r NetworkNodeMeasuresTableCode}
+#| echo: false
+#| message: false
+#| warning: false
+#| include: true
+#| paged-print: false
+library(DT)
+
+g_org <- g_org %>%
+  activate(nodes) %>%
+  mutate(
+    degree = centrality_degree(),
+    strength = centrality_degree(weights = weight),
+    betweenness = centrality_betweenness(weights = weight, normalized = TRUE),
+    closeness = centrality_closeness(),
+    eigenvector = centrality_eigen(weights = weight),
+    pagerank = centrality_pagerank(weights = weight)
+  )
+
+centrality_df <- g_org %>%
+  activate(nodes) %>%
+  as_tibble() %>%
+  select(name, degree, strength, betweenness,
+         closeness, eigenvector, pagerank)
+
+centrality_df_tab <- centrality_df %>% 
+  mutate_at(vars(betweenness, closeness, eigenvector, pagerank),
+            funs(round(., 3)))
+
+dt_node_measures <- datatable(centrality_df_tab, rownames = FALSE,
+          caption = 'Node metrics.',
+          filter = 'top', options = list(pageLength = 10, autoWidth = TRUE)) %>% 
+  formatStyle(columns = c(1:ncol(centrality_df_tab)), fontSize = '70%')
+
+```
+
+</details>
+
+```{r NetworkNodeMeasuresTable}
+#| echo: false
+#| message: false
+#| warning: false
+#| paged-print: false
+
+dt_node_measures
+```
+
+
+# Data
+
+## Raw data scraped from <https://en-racine.org/>
+
+```{r data-download, message=FALSE, warning=FALSE, collapse=TRUE, comment="#>"}
+#| echo: false
+library(downloadthis)
+
+ER %>% download_this(
+    output_name = "en-racine",
+    output_extension = ".xlsx",
+    button_label = "Download dataset as xlsx",
+    button_type = "warning",
+    has_icon = TRUE,
+    icon = "fa fa-save"
+  )
+
+```
+
+
+## scraping code
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r scraping-Jan-2026}
+#| eval: false
+#| echo: true
+#| message: false
+#| warning: false
+#| paged-print: false
+
+library(tibble)
+library(rvest)
+library(purrr)
+library(dplyr)
+library(tidyr)
+library(stringr)
+
+## a bit hacky, but since the website is in JS, one can look at the 
+## developer side of the site and manually pull out the list of 
+## organisations and their 'type'
+
+text_data <- "Academia Christiana
+Formation
+Action Française
+Activisme
+Alamans Strasbourg
+Activisme
+Allobroges
+Activisme
+Animus Fortis
+Activisme
+An Tour-Tan
+Activisme
+Aquila Popularis
+Activisme
+Arduin Patriam
+Activisme
+Arlé
+Activisme
+Auctorum
+Activisme
+Audace
+Activisme
+Aurelianorum Corda
+Activisme
+Aurora
+Activisme
+Auvernha Christana
+Communauté
+Bastide Bordelaise
+Activisme
+Bloc Montpelliérain
+Activisme
+Carré Saint-Louis
+Communauté
+Cénomans
+Activisme
+Cercle Burdigala
+Communauté
+Cercle des Capitouls
+Formation
+Cercle Parisien
+Communauté
+Cercle patrimoine champenois
+Communauté
+Cervus Picardae
+Activisme
+Clermont Non Conforme
+Activisme
+Cocarde Étudiante
+Activisme
+Coeur Yonnais
+Communauté
+Columna
+Activisme
+Comité du 9 Mai
+Activisme
+Communauté Lyonnaise
+Communauté
+Comunautat Occitana
+Communauté
+Défends Marseille
+Activisme
+Des Tours et des Lys
+Activisme
+Esprit de Corps
+Communauté
+Forez Front
+Activisme
+Fraternité Comtoise
+Activisme
+Furie Tolosa
+Activisme
+Hélix
+Activisme
+Heritage Lyon
+Activisme
+Heritage Savoie
+Activisme
+IFP
+Formation
+Institut Georges Valois
+Formation
+Institut Iliade
+Formation
+Jeunes d'Oc
+Activisme
+Jeunesse Mendoise
+Activisme
+Krak
+Activisme
+L'Alérion
+Activisme
+Le 7.59
+Communauté
+Le Maquis
+Activisme
+Le Mora
+Communauté
+Les Bayards
+Activisme
+Les Braves
+Communauté
+Les Hesperianoí
+Communauté
+Les Natifs
+Activisme
+Les Normaux
+Activisme
+Les Téméraires
+Communauté
+Les Vénètes
+Communauté
+Liga Carcinola
+Communauté
+Ligue Ligérienne
+Activisme
+L'Oriflamme
+Activisme
+Luminis
+Activisme
+Meduana Noctua
+Activisme
+Mouvement Chouan
+Activisme
+Nemesis
+Activisme
+Neuer Wanderbund
+Activisme
+Nousautes
+Communauté
+Nouvelle Droite
+Activisme
+Novelum Carcassonne
+Activisme
+Opus
+Communauté
+Palatinu
+Activisme
+Patria Albiges
+Activisme
+Quercus Rodumnæ
+Communauté
+RED
+Activisme
+Remes Patriam
+Activisme
+Roazhon Christiana
+Communauté
+Romulus Rémus
+Formation
+Rutenes
+Activisme
+Sophia Polis
+Formation
+Souvenir Normand
+Communauté
+Tenesoun
+Activisme
+Terra Nostra
+Communauté
+Unité Sud Perpignan
+Activisme
+Valyor
+Activisme
+Vosegus Epinal
+Activisme
+"
+
+lines <- unlist(strsplit(text_data, "\n"))
+
+## remove leading or trailing whitespace from each line
+lines <- trimws(lines)
+
+# create tibble by alternating odd (group) and even (type) lines
+df <- tibble(
+  group = lines[seq(1, length(lines), by = 2)],
+  type = lines[seq(2, length(lines), by = 2)]
+)
+
+## similarly hacky, one can pull out the organisation pages from the 
+## developer side of the website
+
+Pages <- c("https://en-racine.org/association/1-academia-christiana", 
+          "https://en-racine.org/association/5-action-francaise", 
+          "https://en-racine.org/association/101-alamans-strasbourg", 
+          "https://en-racine.org/association/71-allobroges", 
+          "https://en-racine.org/association/4-animus-fortis", 
+          "https://en-racine.org/association/2-an-tour-tan", 
+          "https://en-racine.org/association/6-aquila-popularis", 
+          "https://en-racine.org/association/91-arduin-patriam", 
+          "https://en-racine.org/association/8-arle", 
+          "https://en-racine.org/association/9-auctorum",
+          "https://en-racine.org/association/83-audace",
+          "https://en-racine.org/association/66-aurelianorum-corda",
+          "https://en-racine.org/association/10-aurora",
+          "https://en-racine.org/association/73-auvernha-christana",
+          "https://en-racine.org/association/30-bastide-bordelaise",
+          "https://en-racine.org/association/11-bloc-montpellierain",
+          "https://en-racine.org/association/96-carre-saint-louis",
+          "https://en-racine.org/association/99-cenomans",
+          "https://en-racine.org/association/98-cercle-burdigala",
+          "https://en-racine.org/association/67-cercle-des-capitouls",
+          "https://en-racine.org/association/70-cercle-parisien",
+          "https://en-racine.org/association/77-cercle-patrimoine-champenois",
+          "https://en-racine.org/association/82-cervus-picardae",
+          "https://en-racine.org/association/63-clermont-non-conforme",
+          "https://en-racine.org/association/14-cocarde-etudiante",
+          "https://en-racine.org/association/65-coeur-yonnais",
+          "https://en-racine.org/association/86-columna",
+          "https://en-racine.org/association/69-comite-du-9-mai",
+          "https://en-racine.org/association/87-communaute-lyonnaise",
+          "https://en-racine.org/association/16-comunautat-occitana",
+          "https://en-racine.org/association/18-defends-marseille",
+          "https://en-racine.org/association/17-des-tours-et-des-lys",
+          "https://en-racine.org/association/20-esprit-de-corps",
+          "https://en-racine.org/association/79-forez-front",
+          "https://en-racine.org/association/21-fraternite-comtoise",
+          "https://en-racine.org/association/22-furie-tolosa",
+          "https://en-racine.org/association/24-helix",
+          "https://en-racine.org/association/94-heritage-lyon",
+          "https://en-racine.org/association/95-heritage-savoie",
+          "https://en-racine.org/association/68-ifp",
+          "https://en-racine.org/association/25-institut-georges-valois",
+          "https://en-racine.org/association/26-institut-iliade",
+          "https://en-racine.org/association/27-jeunes-doc",
+          "https://en-racine.org/association/90-jeunesse-mendoise",
+          "https://en-racine.org/association/92-krak",
+          "https://en-racine.org/association/28-lalerion",
+          "https://en-racine.org/association/46-le-759",
+          "https://en-racine.org/association/32-le-maquis",
+          "https://en-racine.org/association/33-le-mora",
+          "https://en-racine.org/association/80-les-bayards",
+          "https://en-racine.org/association/34-les-braves",
+          "https://en-racine.org/association/35-les-hesperianoi",
+          "https://en-racine.org/association/36-les-natifs",
+          "https://en-racine.org/association/37-les-normaux",
+          "https://en-racine.org/association/38-les-temeraires",
+          "https://en-racine.org/association/85-les-venetes",
+          "https://en-racine.org/association/74-liga-carcinola",
+          "https://en-racine.org/association/31-ligue-ligerienne",
+          "https://en-racine.org/association/29-loriflamme",
+          "https://en-racine.org/association/39-luminis",
+          "https://en-racine.org/association/41-meduana-noctua",
+          "https://en-racine.org/association/12-mouvement-chouan",
+          "https://en-racine.org/association/15-nemesis",
+          "https://en-racine.org/association/42-neuer-wanderbund",
+          "https://en-racine.org/association/100-nousautes",
+          "https://en-racine.org/association/57-nouvelle-droite",
+          "https://en-racine.org/association/43-novelum-carcassonne",
+          "https://en-racine.org/association/89-opus",
+          "https://en-racine.org/association/44-palatinu",
+          "https://en-racine.org/association/45-patria-albiges",
+          "https://en-racine.org/association/88-quercus-rodumn",
+          "https://en-racine.org/association/47-red",
+          "https://en-racine.org/association/48-remes-patriam",
+          "https://en-racine.org/association/75-roazhon-christiana",
+          "https://en-racine.org/association/78-romulus-remus",
+          "https://en-racine.org/association/76-rutenes",
+          "https://en-racine.org/association/50-sophia-polis",
+          "https://en-racine.org/association/84-souvenir-normand",
+          "https://en-racine.org/association/51-tenesoun",
+          "https://en-racine.org/association/97-terra-nostra",
+          "https://en-racine.org/association/53-unite-sud-perpignan",
+          "https://en-racine.org/association/72-valyor",
+          "https://en-racine.org/association/81-vosegus-epinal")
+
+Pages <- data.frame(Pages)
+
+df$pages <- Pages$Pages
+
+base_url <- "https://en-racine.org/"
+
+df <- df %>%
+  mutate(
+    events_list = map_chr(pages, function(url) {
+      tryCatch({
+        page <- read_html(url)
+        
+        page %>%
+          html_elements("a") %>%
+          keep(~ str_trim(html_text(.x)) ==
+                 "Voir tous les événements proposés par l'association") %>%
+          html_attr("href") %>%
+          first() %>% 
+          url_absolute(base_url)
+        
+      }, error = function(e) NA_character_)
+    })
+  )
+
+###For each event, scraping the dates (".element-detail .text-regular-regular:nth-child(1)") 
+## and event titles (".text-regular-regular a"). Event titles are also a 
+## hyperlink for the event webpage. There are multiple events on each 
+## page, so we duplicate the existing rows in df for all the newly scraped rows
+
+scrape_events <- function(url) {
+  tryCatch({
+    page <- read_html(url)
+    
+    dates <- page %>%
+      html_elements(".element-detail .text-regular-regular:nth-child(1)") %>%
+      html_text(trim = TRUE)
+    
+    titles_nodes <- page %>%
+      html_elements(".text-regular-regular a")
+    
+    titles <- titles_nodes %>%
+      html_text(trim = TRUE)
+    
+    links <- titles_nodes %>%
+      html_attr("href") %>%
+      url_absolute(url)
+    
+    # If no events found, return one NA row
+    if (length(dates) == 0 && length(titles) == 0) {
+      return(tibble(
+        event_date  = NA_character_,
+        event_title = NA_character_,
+        event_link  = NA_character_
+      ))
+    }
+    
+    tibble(
+      event_date  = dates,
+      event_title = titles,
+      event_link  = links
+    )
+    
+  }, error = function(e) {
+    tibble(
+      event_date  = NA_character_,
+      event_title = NA_character_,
+      event_link  = NA_character_
+    )
+  })
+}
+
+df_events <- df %>%
+  mutate(events = map(events_list, scrape_events)) %>%
+  unnest(events)
+
+df_events$event_date <- as.Date(df_events$event_date, "%d/%m/%Y")
+
+scrape_location <- function(url) {
+  if (is.na(url)) return(NA_character_)
+  
+  tryCatch({
+    read_html(url) %>%
+      html_elements(".text-small-bold p") %>%
+      html_text(trim = TRUE) %>%
+      first()
+  }, error = function(e) NA_character_)
+}
+
+df_events <- df_events %>% mutate(loc = map_chr(event_link, scrape_location))
+
+scrape_organisateurs <- function(url) {
+  if (is.na(url)) return(NA_character_)
+  
+  tryCatch({
+    read_html(url) %>%
+      html_nodes(".organisateurs") %>%
+      html_text(trim = TRUE) %>%
+      first() %>%
+      ## remove line breaks and normalize spaces
+      str_replace_all("[\r\n]+", " ") %>%
+      # add a semi-colon before "Voir l'association" to separate orgs
+      str_replace_all("Voir l'association", "; Voir l'association") %>%
+      ## remove "Organisteur(s)" and "Voir l'association" (already separated)
+      str_replace_all("Organisteur\\(s\\)", "") %>%
+      str_replace_all("Voir l'association", "") %>%
+      ## normalize spaces and replace common delimiters with a semi-colon
+      str_replace_all("\\s{2,}", " ") %>%
+      str_replace_all("\\s*/\\s*|\\s*,\\s*|\\s+et\\s+", "; ") %>%
+      str_squish()  ## collapse multiple spaces
+    
+  }, error = function(e) NA_character_)
+}
+
+df_events <- df_events %>% mutate(organisateurs = map_chr(event_link, scrape_organisateurs))
+
+scrape_description <- function(url) {
+  if (is.na(url)) return(NA_character_)
+  
+  tryCatch({
+    page <- read_html(url)
+    
+    # Scrape description
+    description <- page %>%
+      html_nodes(".details p") %>%
+      html_text(trim = TRUE) %>%
+      paste(collapse = " ") %>%  ## In case there are multiple <p> elements
+      str_squish()  ## clean up extra spaces
+    
+    description
+    
+  }, error = function(e) NA_character_)
+}
+
+df_events <- df_events %>% mutate(description = map_chr(event_link, scrape_description))
+
+library(openxlsx)
+write.xlsx(df_events, paste0("en-racine", as.character(Sys.Date()), ".xlsx"))
+
+```
+
+</details>
+
+## Some useful applied network analysis sources 
+
+In putting together this post, I consulted several of the many useful online sources for applied network analysis, particularly with two-mode networks. These sources include: 
+
+- Rawlings, C. M., Smith, J. A., Moody, J., & McFarland, D. A. (2023). Network Analysis: Integrating Social Network Theory, Method, and Application with R. Cambridge University Press. <https://inarwhal.github.io/NetworkAnalysisR-book/>
+- Tore Opsahl's *[tnet](https://cran.r-project.org/web/packages/tnet/tnet.pdf)* package and associated explainers: <https://toreopsahl.com/tnet/two-mode-networks/>
+- The online igraph library: <https://r.igraph.org/>
+- Katya Ognyanova's guidance on network visualisation: <https://kateto.net/network-visualization>
+- Guidance on the *[tidygraph](https://cran.r-project.org/web/packages/tidygraph/index.html)* package: <https://www.data-imaginist.com/posts/2017-07-07-introducing-tidygraph/>
