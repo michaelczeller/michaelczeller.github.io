@@ -253,18 +253,18 @@ par(mar = c(0, 0, 0, 0))
 #   layout = layout_as_bipartite(ER_graph_2mode)
 # )
 
-plotER_graph_2mode <- plot(
-  ER_graph_2mode,
-  vertex.color = ifelse(V(ER_graph_2mode)$type, "tomato", "skyblue"), ## organisations, events
-  edge.color = "red",
-  vertex.label = vertex_labels, 
-  vertex.label.family="Helvetica",
-  vertex.label.color=c("blue"),
-  vertex.label.font=2, # Font: 1plain, 2bold, 3italic, 4bold italic, 5symbol
-  vertex.label.cex=0.8,
-  # vertex.size = 6,
-  layout = layout_with_fr(ER_graph_2mode)
-)
+# plotER_graph_2mode <- plot(
+#   ER_graph_2mode,
+#   vertex.color = ifelse(V(ER_graph_2mode)$type, "tomato", "skyblue"), ## organisations, events
+#   edge.color = "red",
+#   vertex.label = vertex_labels, 
+#   vertex.label.family="Helvetica",
+#   vertex.label.color=c("blue"),
+#   vertex.label.font=2, # Font: 1plain, 2bold, 3italic, 4bold italic, 5symbol
+#   vertex.label.cex=0.8,
+#   # vertex.size = 6,
+#   layout = layout_with_fr(ER_graph_2mode)
+# )
 
 ```
 
@@ -280,7 +280,18 @@ plotER_graph_2mode <- plot(
 #| fig-cap: "Predominant far-right event organisers."
 #| label: fig-2mode-EventOrg
 
-plotER_graph_2mode
+plot(
+  ER_graph_2mode,
+  vertex.color = ifelse(V(ER_graph_2mode)$type, "tomato", "skyblue"), ## organisations, events
+  edge.color = "red",
+  vertex.label = vertex_labels, 
+  vertex.label.family="Helvetica",
+  vertex.label.color=c("blue"),
+  vertex.label.font=2, # Font: 1plain, 2bold, 3italic, 4bold italic, 5symbol
+  vertex.label.cex=0.8,
+  # vertex.size = 6,
+  layout = layout_with_fr(ER_graph_2mode)
+)
 ```
 
 Some organisations seem to keep to themselves. For example, none of the events organised by the IFP (*l'Institut de Formation Politique*), run by Alexandre Pesey, were co-organised with another organisation listed by the Rooted Calendar. Others seldom collaborate: [Action Française](https://cartofaf.streetpress.com/liste/action-francaise/), one of the oldest and largest French far-right organisations, is a highly active event organiser---the most prolific in the Rooted Calendar (@fig-ERpiechart)---but only rarely co-organises events. Still others are veritable hubs of interactivity. At the centre of the biggest cluster in @fig-2mode-EventOrg is [Academia Christiana](https://cartofaf.streetpress.com/liste/academia-christiana/), a radical right organisation that was at one point (in late 2023) faced the possibility of [organisational proscription](https://www.liberation.fr/politique/sous-la-menace-dune-dissolution-les-identitaires-cathos-dacademia-christiana-multiplient-les-associations-20250824_MVPUDQDENZADPFLZTBBM6ULQ2I/) by the [French state](https://www.lefigaro.fr/faits-divers/academia-christiana-depose-une-plainte-en-diffamation-contre-gerald-darmanin-20231212). 
