@@ -5,7 +5,7 @@ author:
   - name: Michael C. Zeller
     url: https://michaelczeller.github.io
     orcid: 0000-0002-2422-3896
-description: "'militant nationalist events' across France..."
+description: "The 'Rooted Calendar' (*Calendrier Enraciné*) is a website that maintains a list of 'militant nationalist events' across France. Operating since 2024, this source offers insights about activity and collaboration within the French far-right movement scene."
 image: en_racine_logo.png
 twitter-card:
   image: "en_racine_logo.png"
@@ -362,7 +362,7 @@ The *ggraph* package makes it a bit easier to add in some extra elements to the 
   <summary>Click to expand/collapse the code</summary>
 
 ```{r ggOrgOrgCode}
-#| echo: false
+#| echo: true
 #| message: false
 #| fig.width: 12
 #| fig.height: 10
@@ -437,7 +437,7 @@ ggplot_g_org
   <summary>Click to expand/collapse the code</summary>
 
 ```{r OrgOrgInteractiveCode}
-#| echo: false
+#| echo: true
 #| message: false
 #| fig.width: 12
 #| fig.height: 10
@@ -535,7 +535,7 @@ With such a limited, curated set of events and collaborations, it does not make 
   <summary>Click to expand/collapse the code</summary>
 
 ```{r NetworkNodeMeasuresTableCode}
-#| echo: false
+#| echo: true
 #| message: false
 #| warning: false
 #| include: true
