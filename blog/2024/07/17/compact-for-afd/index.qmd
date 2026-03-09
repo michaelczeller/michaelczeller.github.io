@@ -9,6 +9,7 @@ open-graph:
   image: "compact_ban_logo.png"
 categories:
   - COMPACT
+  - Alternative für Deutschland (AfD)
   - Germany
   - banning
   - far right
