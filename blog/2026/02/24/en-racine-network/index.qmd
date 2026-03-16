@@ -475,6 +475,7 @@ g_org_VN$nodes <- g_org_VN$nodes %>%
 
 g_org_VN$nodes <- g_org_VN$nodes %>% dplyr::rename(group = type)
 
+
 ### adding colour therefrom -- if not using visGroups
 # g_org_VN$nodes <- g_org_VN$nodes %>% 
 #   mutate(
@@ -504,6 +505,48 @@ plot_g_org_VN <- visNetwork(nodes=g_org_VN$nodes, edges=g_org_VN$edges,
   # visConfigure(enabled = TRUE) %>%
   visLayout(randomSeed = 12) # to have always the same network 
 
+
+
+g_org_VN$nodes$idx <- gsub(" ", "", g_org_VN$nodes$id)
+g_org_VN$nodes$idx <- gsub("é", "e", g_org_VN$nodes$idx)
+g_org_VN$nodes$idx <- gsub("è", "e", g_org_VN$nodes$idx)
+g_org_VN$nodes$idx <- gsub("É", "E", g_org_VN$nodes$idx)
+g_org_VN$nodes$idx <- gsub("ç", "c", g_org_VN$nodes$idx)
+
+g_org_VN$nodes <- g_org_VN$nodes %>%
+  mutate(shape = c("circularImage"), # "image", "circularImage"
+         )
+
+# g_org_VN$nodes <- g_org_VN$nodes %>%
+#   mutate(image = paste0("FRA_fr_logos_nospace/", idx, ".png"))
+path_to_images <- "https://raw.githubusercontent.com/michaelczeller/data-open/refs/heads/main/FRA_fr_logos_nospace/"
+
+g_org_VN$nodes <- g_org_VN$nodes %>%
+    mutate(image = paste0(path_to_images, idx, ".png"))
+
+
+# g_org_VN$nodes <- g_org_VN$nodes %>%
+#   dplyr::select(id, shape, image, label)
+
+
+plot_g_org_VN_img <- visNetwork(nodes=g_org_VN$nodes, edges=g_org_VN$edges,
+           physics=TRUE, smooth=TRUE, idToLabel=TRUE, width="100%") %>%
+  visIgraphLayout() %>%
+  visNodes(shapeProperties = list(useBorderWithImage = TRUE),
+           scaling = list(min = 30, max = 70)) %>%
+  visGroups(groupname="Activisme", color="forestgreen") %>% #, shape="triangle"
+  visGroups(groupname="Communauté", color="goldenrod") %>% # , shape="diamond"
+  visGroups(groupname="Formation", color="darkred") %>% # , shape="square"
+  visLayout(randomSeed = 2) %>% 
+  visEdges(scaling = list(min = 5, max = 30),
+           color = list(color = "navy", highlight = "red")) %>% 
+  visOptions(selectedBy = "group", 
+             highlightNearest = list(enabled = T, hover = T), 
+             nodesIdSelection = T) %>% 
+  visPhysics(stabilization = FALSE) %>% 
+  visLegend(width = 0.2, position = "right", main = "Group type") %>% 
+  visLayout(randomSeed = 12) # to have always the same network 
+
 ```
 
 </details>
@@ -516,7 +559,7 @@ plot_g_org_VN <- visNetwork(nodes=g_org_VN$nodes, edges=g_org_VN$edges,
 #| fig-cap: "Interactive visualisation of French far-right organisations-to-organisations network. Nodes are sized based on the number of (co-organised) events by an organisation. Node colours and shapes reflect the 'type' listed on the 'Rooted Calendar'. Edges are sized by number of collaboratively organised events between organisations."
 #| label: fig-1mode-OrgOrgInteractive
 
-plot_g_org_VN
+plot_g_org_VN_img
 ```
 
 
