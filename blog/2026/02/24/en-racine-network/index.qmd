@@ -625,6 +625,412 @@ dt_node_measures
 ```
 
 
+# Network evolution
+
+Crucial for assessing how organisations interact, pool resources, and collaborate is the ability to track the evolution of this network. There are several visual ways to do this. For example, one can take snapshots of the network in different periods (again assuming that an enduring link is created between organisations when they co-participate in an event). 
+
+<details>
+  <summary>Click to expand/collapse the code</summary>
+
+```{r repeatedTies}
+#| echo: true
+#| message: false
+#| warning: false
+#| paged-print: false
+
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## CUMULATIVE (MONOTONIC) EDGE PROCESS (once a tie appears it never disappears)
+library(ndtv)
+library(networkDynamic)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(stringr)
+
+df <- ER %>%
+  select(group, type, event_date, loc, organisateurs) %>%
+  mutate(
+    organisateurs = str_split(organisateurs, ";"),
+    organisateurs = map(organisateurs, ~ str_trim(.x)),
+    organisateurs = map(organisateurs, ~ .x[.x != ""]) # remove empty
+  ) %>%
+  filter(lengths(organisateurs) > 1) %>%   # keep only multi आयोज
+  mutate(event_id = row_number())
+
+## create nodes dataframe 
+nodes_df <- df %>%
+  select(group, type, organisateurs) %>%
+  unnest(organisateurs) %>%
+  distinct(organisateurs, .keep_all = TRUE) %>%
+  mutate(
+    id = row_number(),
+    type.label = type
+  ) %>%
+  ##create a numeric encoding for each unique type.label
+  mutate(type = as.integer(factor(type.label))) %>%
+  rename(organisation = organisateurs) %>%
+  select(id, organisation, type, type.label) %>% 
+  as.data.frame()
+
+nodes_df <- nodes_df %>% 
+  mutate(
+    org.label=case_when(
+      organisation=="Academia Christiana" ~ "AC",
+      organisation=="Les Vénètes" ~ "Vénètes",
+      organisation=="Coeur Yonnais" ~ "CY",
+      organisation=="Cercle Parisien" ~ "CP",
+      organisation=="Cercle Burdigala" ~ "CB",
+      organisation=="Carré Saint-Louis" ~ "CSL",
+      organisation=="Cercle des Capitouls" ~ "CdC",
+      organisation=="Comunautat Occitana" ~ "CO",
+      organisation=="Liga Carcinola" ~ "LC",
+      organisation=="Auvernha Christana" ~ "AuvC",
+      organisation=="Communauté Lyonnaise" ~ "CL",
+      organisation=="Terra Nostra" ~ "TN",
+      organisation=="Roazhon Christiana" ~ "RC",
+      organisation=="Cocarde Étudiante" ~ "CE",
+      organisation=="Cercle patrimoine champenois" ~ "CPC",
+      organisation=="Action Française" ~ "AF",
+      organisation=="Nouvelle Droite" ~ "ND",
+      organisation=="Aquila Popularis" ~ "AP",
+      organisation=="Institut Georges Valois" ~ "IGV",
+      organisation=="Clermont Non Conforme" ~ "CNC",
+      organisation=="Des Tours et des Lys" ~ "DTDL",
+      organisation=="Ligue Ligérienne" ~ "LL",
+      organisation=="L'Oriflamme" ~ "Oriflamme",
+      organisation=="Mouvement Chouan" ~ "Chouan",
+      organisation=="Furie Tolosa" ~ "FT",
+      organisation=="Patria Albiges" ~ "PA",
+      organisation=="Remes Patriam" ~ "RP",
+      organisation=="Institut Iliade" ~ "II",
+      organisation=="Unité Sud Perpignan" ~ "USP",
+      organisation=="Les Normaux" ~ "Normaux",
+      organisation=="Novelum Carcassonne" ~ "NC",
+      TRUE ~ organisation
+    )
+  )
+
+## split the column of named organisers 
+ER_clean <- ER %>%
+  mutate(
+    event_id = row_number(),
+    organisateurs = str_remove_all(organisateurs, "\\s*;\\s*$") # remove trailing ;
+  ) %>%
+  separate_rows(organisateurs, sep = ";") %>%
+  mutate(
+    organisateurs = str_trim(organisateurs)
+  )
+
+# split organisers into list
+ER_pairs <- ER_clean %>%
+  mutate(group_list = strsplit(organisateurs, ",\\s*")) %>%
+  select(event_id, event_date, group_list) %>%
+  unnest(group_list)
+
+## create all pairwise combinations per event, keeping only events with more than 2 organisers and making edges undirected and consistent
+ER_edges <- ER_pairs %>%
+  group_by(event_id, event_date) %>%
+  summarise(
+    group_list = list(unique(group_list)),  # remove duplicates within event
+    n_groups = length(group_list[[1]]),
+    .groups = "drop"
+  ) %>%
+  filter(n_groups >= 2) %>%
+  rowwise() %>%
+  mutate(
+    pairs = list(t(combn(group_list, 2)))
+  ) %>%
+  unnest(pairs) %>%
+  mutate(
+    head = pmin(pairs[,1], pairs[,2]),
+    tail = pmax(pairs[,1], pairs[,2])
+  ) %>%
+  select(head, tail, event_date) %>% 
+  ## get rid of duplicated rows
+  distinct(.keep_all = TRUE)
+
+### compute weights 
+## final weight (total collaborations)
+ER_edges <- ER_edges %>%
+  group_by(head, tail) %>%
+  mutate(weight_fin = n()) %>%
+  ungroup()
+## Accumulated weight over time
+ER_edges <- ER_edges %>%
+  arrange(head, tail, event_date) %>%
+  group_by(head, tail) %>%
+  mutate(weight_acc = row_number()) %>%
+  ungroup()
+
+library(network)
+
+netER <- network(ER_edges,  vertex.attr=nodes_df, matrix.type="edgelist",
+                loops=T, multiple=T, ignore.eval = F)
+
+netER %n% "net.name" <- "French radical right network" #  network attribute
+# netER %v% "type" # Node attribute
+# netER %v% "type.label" # Node attribute
+# netER %v% "org.label" # Node attribute
+# netER %e% "event_date"  # Edge attribute
+# netER %e% "weight_fin"  # Edge attribute
+# netER %e% "weight_acc"  # Edge attribute
+
+netER %v% "col" <- c("darkred", "goldenrod", "forestgreen")[netER %v% "type"]
+# plot(netER, vertex.cex=3, vertex.col="col")
+
+# ## PLOT OPTIONS: https://cran.r-project.org/web/packages/network/network.pdf
+# plot(netER, usearrows = F, 
+#      vertex.cex=2, vertex.col="col", vertex.lwd=0.2,
+#      displaylabels = T, boxed.labels=F, label.cex=0.5, label.col="darkred",
+#      edge.lwd = (netER %e% "weight_fin")*2, edge.col="blue")
+
+# ## Note that - as in igraph - the plot returns the node position coordinates. You can use them in other plots using the coord parameter.
+# l <- plot(netER, usearrows = F, 
+#      vertex.cex=2, vertex.col="col", vertex.lwd=0.2,
+#      displaylabels = T, boxed.labels=F, label.cex=0.5, label.col="darkred",
+#      edge.lwd = (netER %e% "weight_fin")*2, edge.col="blue")
+# plot(netER, usearrows = F, 
+#      vertex.cex=2, vertex.col="col", vertex.lwd=0.2,
+#      displaylabels = T, boxed.labels=F, label.cex=0.5, label.col="darkred",
+#      edge.lwd = (netER %e% "weight_fin")*2, edge.col="blue",
+#      coord=l)
+
+## The network package also offers the option to edit a plot interactively, by setting the parameter interactive=T:
+# plot(netER, usearrows = F,
+#      vertex.cex=3, vertex.col="col", vertex.lwd=0.2,
+#      displaylabels = T, boxed.labels=F, label.cex=0.5, label.col="darkred",
+#      edge.lwd = (netER %e% "weight_fin"), edge.col="blue", 
+#      interactive=T)
+
+edge_spells <- ER_edges %>% 
+  rename(onset_date=event_date) %>% dplyr::select(head, tail, onset_date, weight_acc, weight_fin) # , weight_acc, weight_fin
+
+### set end at latest date in dataset (there may be NAs in dataset)
+end_time <- max(ER_edges$event_date, na.rm = TRUE)
+
+ER_edges <- ER_edges %>% 
+  rename(from = head,
+         to = tail,
+         weight=weight_fin) %>% 
+  mutate(type="cooperation") %>% 
+  dplyr::select(from, to, type, weight, weight_acc) %>% # , weight_acc
+  as.data.frame()
+
+edge_spells <- edge_spells %>% mutate(terminus_date = end_time)
+
+## convert dates to numeric time
+origin <- min(edge_spells$onset_date)
+
+edge_spells <- edge_spells %>%
+  mutate(
+    onset = as.numeric(onset_date - origin),
+    terminus = as.numeric(terminus_date - origin)
+  ) %>% 
+  dplyr::select(onset, terminus, head, tail, weight_acc, weight_fin) # , onset_date, terminus_date, weight_acc, weight_fin
+
+# ## map groups to numeric IDs
+nodes <- sort(unique(c(edge_spells$tail, edge_spells$head)))
+
+node_ids <- data.frame(
+  name = nodes,
+  id = seq_along(nodes)
+)
+
+edge_spells_clean <- edge_spells %>%
+  left_join(node_ids, by = c("tail" = "name")) %>%
+  rename(tail_id = id) %>%
+  left_join(node_ids, by = c("head" = "name")) %>%
+  rename(head_id = id) %>% 
+  rename(tail_name = tail,
+         head_name = head)
+
+edge_spells_clean <- edge_spells_clean %>%
+  select(onset, terminus, head_id, tail_id, head_name, tail_name, weight_acc, weight_fin) %>% # 
+  mutate(
+    onset = as.numeric(onset),
+    terminus = as.numeric(terminus),
+    head = as.integer(head_id),
+    tail = as.integer(tail_id)
+  ) %>%
+  select(onset, terminus, head, tail, weight_acc, weight_fin) %>% # , head_name, tail_name, weight_acc, weight_fin
+  as.data.frame()
+
+## recast termini for dynamic edge attribute of accumulating weight
+edge_spells_fixed <- edge_spells_clean %>%
+  arrange(head, tail, onset) %>%
+  group_by(head, tail) %>%
+  mutate(
+    terminus = lead(onset, default = first(terminus))
+  ) %>%
+  ungroup() %>% 
+  as.data.frame()
+
+col_fun <- colorRampPalette(c("#53adcb", "red"))
+colors_12 <- col_fun(12)
+edge_spells_fixed$cols <- colors_12[edge_spells_fixed$weight_acc]
+
+## thicker edges
+edge_spells_fixed$weight_acc2 <- (1.5*edge_spells_fixed$weight_acc)
+
+# str(edge_spells_fixed)
+# summary(edge_spells_fixed)
+
+node_ids <- node_ids %>% 
+  mutate(
+    onset = min(edge_spells_fixed$onset),
+    terminus = max(edge_spells_fixed$terminus)
+  ) %>% 
+  rename(vertex.id = id) %>% 
+  dplyr::select(onset, terminus, vertex.id) # , name
+
+## create networkDynamic
+CumulativeERnet <- networkDynamic(vertex.spells = node_ids,
+                                  edge.spells = edge_spells_fixed, #[, c(1:8)]
+                                  create.TEAs=T,
+                                  edge.TEA.names=c('weight_acc',
+                                                   'weight_fin',
+                                                   'cols',
+                                                   'weight_acc2'),
+                                  verbose = F
+                                  )
+
+# activate.edge.attribute(CumulativeERnet,'width',1,onset=0,terminus=200) 
+# activate.edge.attribute(CumulativeERnet,'width',5,onset=200,terminus=400)
+# activate.edge.attribute(CumulativeERnet,'width',10,onset=400,terminus=Inf)
+
+par(mar = c(1, 0.2, 0.2, 0.2))
+
+# filmstrip(CumulativeERnet, displaylabels=F, mfrow=c(1, 4), 
+#           slice.par=list(start=0, end=540, interval=136,
+#                          aggregate.dur=136, rule='any'))
+
+compute.animation(CumulativeERnet,
+                  animation.mode = "kamadakawai",
+                  # weight.attr = "weight_acc", ## adding this messes with layout
+                  slice.par=list(start=0, end=539, interval=1,
+                         aggregate.dur=1, rule='all'), verbose = F)
+
+# ## render.d3movie(CumulativeERnet,displaylabels=TRUE) 
+# timePrism(CumulativeERnet, at = c(200,280,400, 530))
+# 
+# proximity.timeline(CumulativeERnet, mode='sammon',
+#                    default.dist=10,
+#                    # labels.at=c(1,16,25),
+#                    onsets = 300,
+#                    label.cex=0.7,
+#                    vertex.col=c(rep('gray',14),'green','blue'),
+#                    labels.at=540
+#                    )
+
+library(scales)
+
+# render.d3movie(CumulativeERnet, usearrows = F,
+#        displaylabels = T, label=netER %v% "org.label",
+#        bg="#F0EAD6", vertex.border="#333333",
+#        vertex.cex = function(slice){ rescale(degree(slice), to = c(1, 3)) },
+#        # vertex.cex = rescale(degree(netER), to = c(2, 5)),
+#        vertex.col = netER %v% "col",
+#        edge.lwd = 'weight_acc2',
+#        # edge.lwd = (rescale(netER %e% "weight_fin", to = c(1, 10))),
+#        edge.col = 'cols', 
+#        # edge.col = '#53adcb', # 'lightblue',
+#        # edge.col=function(slice){rgb(slice%e%'width_acc'/10,0,0)},
+#        vertex.tooltip=paste("<b>Name:</b>", (netER %v% "organisation") , "<br>",
+#                               "<b>Type:</b>", (netER %v% "type.label")),
+#        edge.tooltip = function(slice) {
+#          w_acc <- slice %e% "weight_acc"
+#          w_fin <- slice %e% "weight_fin"
+#          paste0("<b>No. of collaborations at time:</b> ", w_acc,
+#                 "<br><b>Final No. of collaborations:</b> ", w_fin)
+#          },
+#        launchBrowser=F, filename="French-RR-Network-Dynamic.html",
+#        render.par=list(tween.frames = 10, show.time = T), 
+#        plot.par=list(mar=c(0,0,0,0)) ) # , output.mode='inline')
+
+## output.mode='inline' to embed the plot in a markdown document
+
+
+```
+
+</details>
+
+@fig-filmstrip shows the network at four different stages. 
+
+```{r}
+#| label: fig-filmstrip
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: The French far-right organisations-to-organisations network with links accumulating over four periods.
+#| paged-print: false
+
+CumulativeERnet <- networkDynamic(vertex.spells = node_ids,
+                                  edge.spells = edge_spells_fixed, #[, c(1:8)]
+                                  create.TEAs=T,
+                                  edge.TEA.names=c('weight_acc',
+                                                   'weight_fin',
+                                                   'cols',
+                                                   'weight_acc2'),
+                                  verbose = F
+                                  )
+
+par(mar = c(4, 0.2, 0.2, 0.2))
+
+filmstrip(CumulativeERnet, 
+          displaylabels=F, mfrow=c(1, 4), usearrows=F,
+          slice.par=list(start=0, end=540, interval=136,
+                         aggregate.dur=136, rule='any'))
+
+```
+
+Similarly, @fig-prism shows the development of the network.
+
+<!-- #| fig.width: 12 -->
+
+```{r}
+#| label: fig-prism
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: The French far-right organisations-to-organisations network with links accumulating over four periods.
+#| paged-print: false
+#| fig.height: 7
+
+compute.animation(CumulativeERnet,
+                  animation.mode = "kamadakawai",
+                  # weight.attr = "weight_acc", ## adding this messes with layout
+                  slice.par=list(start=0, end=539, interval=1,
+                         aggregate.dur=1, rule='all'), verbose = F)
+
+timePrism(CumulativeERnet, at = c(200,280,400, 530),
+          planes = T, usearrows=F, angle=40)
+
+```
+
+But probably the most effective way of showing this evolution (certainly the most granular) is to animate the day-by-day accumulation of links between organisations based on co-participation in events, as below.
+
+<figure>
+    <figcaption>Figure 9: Evolution of the French far-right organisations-to-organisations network. The data spans 540 days (nearly 1.5 years). The animation shows each day. Network connections are made by organisations co-participating in an event together; the more co-participation, the thicker and redder the connections become. Node colours reflect the 'type' listed on the 'Rooted Calendar'.</figcaption>
+    <iframe src="French-RR-Network-Dynamic.html" height="600" width="600" ></iframe>
+</figure>
+
+
+<!-- ### plots at crucial periods  -->
+
+<!-- Plot nodes and edges that were active for the entire period (rule=all) from time 1 to time 5: -->
+
+<!-- - plot( network.extract(short.stergm.sim, onset=1, terminus=5, rule="all") ) -->
+
+<!-- Plot nodes and edges that were active at any point (rule=any) between time 1 and time 10: -->
+
+<!-- - plot( network.extract(short.stergm.sim, onset=1, terminus=10, rule="any") )  -->
+
+<!-- ### simultaneous -->
+
+<!-- <https://book.archnetworks.net/visualization>: Figure 6.22: Similtaneous Display -->
+
+<!-- (refer also to this? <https://book.archnetworks.net/visualization>: Figure 6.21: The Filmstrip Approach; Figure 6.22: Similtaneous Display; Figure 6:23: Timelines and Time Prisms) -->
+
 # Data
 
 ## Raw data scraped from <https://en-racine.org/>
@@ -1085,3 +1491,123 @@ In putting together this post, I consulted several of the many useful online sou
 - The online igraph library: <https://r.igraph.org/>
 - Katya Ognyanova's guidance on network visualisation: <https://kateto.net/network-visualization>
 - Guidance on the *[tidygraph](https://cran.r-project.org/web/packages/tidygraph/index.html)* package: <https://www.data-imaginist.com/posts/2017-07-07-introducing-tidygraph/>
+- The *Online Companion to Network Science in Archaeology*: <https://book.archnetworks.net/> <!-- <https://book.archnetworks.net/visualization> -->
+- Statnet's ndtv tutorial: <https://statnet.org/nme/d3-s8-ndtv.html> and <https://statnet.org/workshop-ndtv/ndtv_workshop.html>
+
+
+<!-- # SCRATCH -->
+
+```{r X}
+#| eval: false
+#| include: false
+library(ndtv)
+
+# data(short.stergm.sim)
+# short.stergm.sim 
+# head(as.data.frame(short.stergm.sim))
+
+## plot the network disregarding its time component
+# plot(short.stergm.sim)  
+
+## get a network that only contains elements active at a given point...
+# plot( network.extract(short.stergm.sim, at=1) )
+
+## during a given time interval: plot active for the ENTIRE period (rule=all) from time 1 to time 5
+# plot( network.extract(short.stergm.sim, onset=1, terminus=5, rule="all") )
+
+## Plot active at ANY point (rule=any) between time 1 and time 10
+# plot( network.extract(short.stergm.sim, onset=1, terminus=10, rule="any") ) 
+
+## make a quick d3 animation from the example network:
+# render.d3movie(short.stergm.sim,displaylabels=TRUE) 
+
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+nodes <- read.csv("polnet2025/Data_files/Dataset1-Media-Example-NODES.csv", header=T, as.is=T)
+links <- read.csv("polnet2025/Data_files/Dataset1-Media-Example-EDGES.csv", header=T, as.is=T)
+
+## > head(nodes)
+##    id               media media.type type.label audience.size
+## 1 s01            NY Times          1  Newspaper            20
+## 2 s02     Washington Post          1  Newspaper            25
+## 3 s03 Wall Street Journal          1  Newspaper            30
+## 4 s04           USA Today          1  Newspaper            32
+## 5 s05            LA Times          1  Newspaper            20
+## 6 s06       New York Post          1  Newspaper            50
+## 
+## > head(links)
+##   from  to      type weight
+## 1  s01 s02 hyperlink     22
+## 2  s01 s03 hyperlink     22
+## 3  s01 s04 hyperlink     21
+## 4  s01 s15   mention     20
+## 5  s02 s01 hyperlink     23
+## 6  s02 s03 hyperlink     21
+
+library(network)
+
+net3 <- network(links,  vertex.attr=nodes, matrix.type="edgelist", 
+                loops=T, multiple=F, ignore.eval = F)
+
+net3 %n% "net.name" <- "Media Network" #  network attribute
+net3 %v% "media"    # Node attribute
+net3 %e% "type"     # Edge attribute
+
+net3 %v% "col" <- c("gray70", "tomato", "gold")[net3 %v% "media.type"]
+plot(net3, vertex.cex=(net3 %v% "audience.size")/7, vertex.col="col")
+
+## Note that - as in igraph - the plot returns the node position coordinates. You can use them in other plots using the coord parameter.
+l <- plot(net3, vertex.cex=(net3 %v% "audience.size")/7, vertex.col="col")
+plot(net3, vertex.cex=(net3 %v% "audience.size")/7, vertex.col="col", coord=l)
+
+## The network package also offers the option to edit a plot interactively, by setting the parameter interactive=T:
+# plot(net3, vertex.cex=(net3 %v% "audience.size")/7, vertex.col="col", interactive=T)
+
+library(ndtv)
+# par(mar=c(0,0,0,0))
+# 
+# render.d3movie(net3, usearrows = F, displaylabels = F, bg="#111111", 
+#        vertex.border="#ffffff", vertex.col =  net3 %v% "col",
+#        vertex.cex = (net3 %v% "audience.size")/8, 
+#        edge.lwd = (net3 %e% "weight")/3, edge.col = '#55555599',
+#        vertex.tooltip = paste("<b>Name:</b>", (net3 %v% 'media') , "<br>",
+#                               "<b>Type:</b>", (net3 %v% 'type.label')),
+#        edge.tooltip = paste("<b>Edge type:</b>", (net3 %e% 'type'), "<br>", 
+#                             "<b>Edge weight:</b>", (net3 %e% "weight" ) ),
+#        launchBrowser=F, filename="Media-Network.html" )  
+
+vs <- data.frame(onset=0, terminus=50, vertex.id=1:17)
+es <- data.frame(onset=1:49, terminus=50, 
+                 head=as.matrix(net3, matrix.type="edgelist")[,1],
+                 tail=as.matrix(net3, matrix.type="edgelist")[,2])
+
+net3.dyn <- networkDynamic(base.net=net3, edge.spells=es, vertex.spells=vs)
+
+plot(net3.dyn, vertex.cex=(net3 %v% "audience.size")/7, vertex.col="col")
+
+filmstrip(net3.dyn, displaylabels=F, mfrow=c(1, 5),
+          slice.par=list(start=0, end=49, interval=10, 
+                         aggregate.dur=10, rule='any'))
+
+compute.animation(net3.dyn, animation.mode = "kamadakawai",
+                  slice.par=list(start=0, end=50, interval=1, 
+                         aggregate.dur=1, rule='any'))
+
+# render.d3movie(net3.dyn, usearrows = F, 
+#        displaylabels = F, label=net3 %v% "media",
+#        bg="#ffffff", vertex.border="#333333",
+#        vertex.cex = degree(net3)/2,  
+#        vertex.col = net3.dyn %v% "col",
+#        edge.lwd = (net3.dyn %e% "weight")/3, 
+#        edge.col = '#55555599',
+#        vertex.tooltip = paste("<b>Name:</b>", (net3.dyn %v% "media") , "<br>",
+#                               "<b>Type:</b>", (net3.dyn %v% "type.label")),
+#        edge.tooltip = paste("<b>Edge type:</b>", (net3.dyn %e% "type"), "<br>", 
+#                             "<b>Edge weight:</b>", (net3.dyn %e% "weight" ) ),
+#        launchBrowser=T, filename="Media-Network-Dynamic.html",
+#        render.par=list(tween.frames = 30, show.time = F),
+#        plot.par=list(mar=c(0,0,0,0)), output.mode='inline' )
+
+```
+
+
