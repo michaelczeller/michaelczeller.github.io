@@ -1493,6 +1493,10 @@ In putting together this post, I consulted several of the many useful online sou
 - Guidance on the *[tidygraph](https://cran.r-project.org/web/packages/tidygraph/index.html)* package: <https://www.data-imaginist.com/posts/2017-07-07-introducing-tidygraph/>
 - The *Online Companion to Network Science in Archaeology*: <https://book.archnetworks.net/> <!-- <https://book.archnetworks.net/visualization> -->
 - Statnet's ndtv tutorial: <https://statnet.org/nme/d3-s8-ndtv.html> and <https://statnet.org/workshop-ndtv/ndtv_workshop.html>
+- *bipartite* package: <https://cran.r-project.org/web/packages/bipartite/bipartite.pdf> - *tsna* (temporal social network analysis package) <https://cran.r-project.org/web/packages/tsna/index.html>
+    + vignette: <https://cran.r-project.org/web/packages/tsna/vignettes/tsna_vignette.html> 
+
+<!-- great circle (not relevant for compact France plot): <https://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/> -->
 
 
 <!-- # SCRATCH -->
