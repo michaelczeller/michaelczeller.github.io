@@ -2771,7 +2771,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-654"><a href="#cb10-654" aria-hidden="true" tabindex="-1"></a><span class="in">    organisateurs = map(organisateurs, ~ str_trim(.x)),</span></span>
 <span id="cb10-655"><a href="#cb10-655" aria-hidden="true" tabindex="-1"></a><span class="in">    organisateurs = map(organisateurs, ~ .x[.x != ""]) # remove empty</span></span>
 <span id="cb10-656"><a href="#cb10-656" aria-hidden="true" tabindex="-1"></a><span class="in">  ) %&gt;%</span></span>
-<span id="cb10-657"><a href="#cb10-657" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(lengths(organisateurs) &gt; 1) %&gt;%   # keep only multi आयोज</span></span>
+<span id="cb10-657"><a href="#cb10-657" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(lengths(organisateurs) &gt; 1) %&gt;%   # keep only multi </span></span>
 <span id="cb10-658"><a href="#cb10-658" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(event_id = row_number())</span></span>
 <span id="cb10-659"><a href="#cb10-659" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-660"><a href="#cb10-660" aria-hidden="true" tabindex="-1"></a><span class="in">## create nodes dataframe </span></span>

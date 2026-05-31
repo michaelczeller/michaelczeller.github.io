@@ -654,7 +654,7 @@ df <- ER %>%
     organisateurs = map(organisateurs, ~ str_trim(.x)),
     organisateurs = map(organisateurs, ~ .x[.x != ""]) # remove empty
   ) %>%
-  filter(lengths(organisateurs) > 1) %>%   # keep only multi आयोज
+  filter(lengths(organisateurs) > 1) %>%   # keep only multi 
   mutate(event_id = row_number())
 
 ## create nodes dataframe 
