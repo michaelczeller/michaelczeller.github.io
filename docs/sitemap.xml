@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>michaelczeller.github.io/index.html</loc>
-    <lastmod>2026-01-09T10:58:22.874Z</lastmod>
+    <lastmod>2026-06-01T14:24:47.635Z</lastmod>
   </url>
   <url>
     <loc>michaelczeller.github.io/maptest.html</loc>
@@ -315,5 +315,9 @@
   <url>
     <loc>michaelczeller.github.io/blog/2026/05/31/shakes/index.html</loc>
     <lastmod>2026-05-31T20:52:59.867Z</lastmod>
+  </url>
+  <url>
+    <loc>michaelczeller.github.io/book/index_book.html</loc>
+    <lastmod>2026-06-01T14:22:09.218Z</lastmod>
   </url>
 </urlset>
