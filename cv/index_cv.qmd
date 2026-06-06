@@ -1,7 +1,7 @@
 ---
 title: Curriculum vitæ
 description-meta: "Michael Zeller's CV"
-date: 2025-10-05
+date: 2026-06-06
 title-block-banner: "#170C3A"
 published-title: CV last updated
 engine: knitr 

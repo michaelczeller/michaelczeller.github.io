@@ -464,8 +464,28 @@ shakes$SceneCity <- dplyr::case_when(
 #   filter(is.na(SceneCity)) %>%
 #   distinct(SceneLocation)
 
-### MORE TO DO HERE ON LOCATION -------
+### LOCATION -------
 
+### Scraping from Wikipedia, wrangling and then joining 
+library(rvest)
+library(dplyr)
+library(stringr)
+
+url <- "https://en.wikipedia.org/wiki/List_of_Shakespearean_settings#Settings_by_scene"
+page <- read_html(url)
+
+tables <- page %>% html_nodes("table")
+
+shakespeare_df <- tables[[2]] %>% html_table(fill = TRUE)
+
+shakespeare_df <- shakespeare_df %>%
+  # remove empty columns or rows
+  select_if(~!all(is.na(.))) %>%
+  filter(!if_all(everything(), is.na)) %>%
+  # trim whitespace
+  mutate(across(everything(), str_trim))
+
+head(shakespeare_df)
 
 ## RELIGION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -527,21 +547,7 @@ shakes$SceneCity <- dplyr::case_when(
 # 
 # 
 # ## work with igraph, networkDynamic, tsna, tnet (two-mode with plays)
-# 
-# 
-# ER <- read_excel("en-racine2026-01-21.xlsx", sheet="Sheet 1")
-# ER <- as.data.frame(ER)
-# ER$event_date <- as.Date(ER$event_date)
-# 
-# ER <- ER %>% 
-#   mutate(
-#     colour=case_when(
-#       type=="Formation" ~ "darkred",
-#       type=="Activisme" ~ "forestgreen",
-#       type=="Communauté"~ "goldenrod",
-#       TRUE ~ "lightblue"
-#     )
-#   )
+
 
 ```
 
