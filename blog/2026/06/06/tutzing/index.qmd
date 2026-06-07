@@ -1,0 +1,111 @@
+---
+title: Tagung - Zivilgesellschaft und Demokratie
+date: 2026-06-07
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io
+    orcid: 0000-0002-2422-3896
+description: "Rede auf der Tagung der Evangelischen Akademie Tutzing."
+engine: knitr 
+pres:
+  pdf: "tutzing_zeller.pdf"
+image: eatutzing.png
+twitter-card:
+  image: "eatutzing.png"
+open-graph:
+  image: "eatutzing.png"
+categories:
+  - far right
+  - Germany
+  - media appearance
+  - right-wing extremism
+  - social movements
+---
+
+*Die Evangelische Akademie Tutzing veranstaltete am 5. und 7. Juni eine Tagung zum Thema [Zivilgesellschaft und Demokratie](https://www.eatutzing.de/veranstaltung/zivilgesellschaft-und-demokratie/#event-programm). Die Organisatoren – Pfr. Udo Hahn, Brigitte Grande und Prof. Dr. Swen Hutter – haben mich freundlicherweise zur Teilnahme eingeladen. Ich habe im Panel „Zivilgesellschaftliche Strategien gegen rechts – Wissenschaftliche Befunde“ mit Christin Jänicke und Henning Flad gesprochen. Meine kurze vorbereitete Rede lautete wie folgt.*
+
+******************************
+
+![](IMG_4764.jpg)
+
+******************************
+
+Zivilgesellschaftliches Engagement kann auf vielfältige Weise zur Eindämmung radikal rechter und rechtsextremistischer Aktivitäten beitragen. Neben den anderen Ansätzen von Christin genannt, zeigt meine Forschung zu Demonstrationen, Mobilisierungen und Vereinsverboten, dass zivilgesellschaftliche Akteure insbesondere in vier Bereichen wirksam sind:
+
+Erstens: **Protest und Gegenmobilisierung** (d.h. 'Konfrontative Strategien'). Durch Demonstrationen und öffentliche Aktionen gegen radikal rechte und rechtsextremistische Organisationen, Veranstaltungen oder Ideologien machen zivilgesellschaftliche Akteure deutlich, dass diese Positionen auf gesellschaftlichen Widerstand stoßen. Sie zeigen Solidarität mit den von Diskriminierung und politischem Extremismus betroffenen Gruppen, verhindern die unangefochtene Aneignung öffentlicher Räume durch entsprechende Akteure und erhöhen den Druck auf Politik, Behörden und andere gesellschaftliche Akteure, aktiv zu werden.
+
+Zweitens: **Anstoß rechtlicher Veränderungen**. Zivilgesellschaftliches Engagement kann politische und rechtliche Reformen anstoßen. Ein bekanntes Beispiel sind die Proteste gegen die Rudolf-Hess-Gedenkmärsche in Wunsiedel. Das beharrliche Engagement lokaler Bürgerinnen und Bürger sowie zivilgesellschaftlicher Gruppen trug dazu bei, dass der Gesetzgeber § 130 Abs. 4 StGB einführte, der die Verherrlichung der nationalsozialistischen Gewalt- und Willkürherrschaft unter Strafe stellt. Dadurch wurden die Prinzipien der wehrhaften Demokratie gestärkt (insbesondere durch eine Entscheidung vom BVerfG).
+
+Drittens: **Forschung, Monitoring und Agenda-Setting**. Zivilgesellschaftliche Organisationen leisten wichtige Aufklärungs- und Dokumentationsarbeit, die staatliches Handeln oft erst ermöglicht oder beschleunigt. Durch die Beobachtung, Erforschung und öffentliche Thematisierung radikal rechter und rechtsextremistischer Aktivitäten können sie Missstände sichtbar machen und politische Reaktionen anstoßen. So trugen etwa lokale Forschungsinitiativen (Mendel-Grundmann-Gesellschaft (MGG) in Vlotho), jüdische Organisationen und Bündnisse gegen Rechtsextremismus (Netzwerkstrategien: Vlothoer Bündnis gegen das Collegium Humanum) maßgeblich dazu bei, dass in 2008 das rechtsextreme Netzwerk Collegium Humanum (Leiterin Ursula Haverbeck-Wetzel) verboten wurde. Ähnliche Beispiele finden sich auch in Österreich, wo zivilgesellschaftliche Recherchen (Dokumentationsarchivs des österreichischen Widerstandes) staatliche Maßnahmen gegen rechtsextreme Strukturen auslösten wie in Kärnten gegen die rechtsextremistische Ulrichsbergfeier.
+
+Viertens: **Mobilisierung weiterer Akteure**. Zivilgesellschaftliche Initiativen wirken häufig über ihre unmittelbaren Aktivitäten hinaus. Sie motivieren staatliche Institutionen, Unternehmen und andere gesellschaftliche Akteure, ebenfalls Stellung gegen radikal rechte und rechtsextremistische Entwicklungen zu beziehen. Um nur eine kleine Auswahl aus den letzten Jahren zu nennen: Zivilgesellschaftliche Akteure haben … (a) es rechtsextremen Parteien erschwert, sich zu versammeln und notwendige organisatorische Angelegenheiten zu regeln (<https://taz.de/Protest-gegen-AfD-Bundesparteitag/!6020433/>); (b) Zahlungsdienstleister erfolgreich dazu bewegt, den Zugang für rechtsextreme Gruppen einzuschränken (<https://ze.tt/kein-geld-fuer-rechtsextreme-paypal-verbietet-spendengelder-an-pro-chemnitz/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x&utm_medi>); (c) Urheberrechte an neonazistischen Parolen angemeldet und den Neonazis damit das Recht entzogen, entsprechende Merchandise-Artikel zu verkaufen und extremistische Propaganda zu verbreiten (<https://taz.de/Rechtsextremer-Onlineshop-Druck18/!6105321/>).
+
+Insgesamt zeigen zahlreiche Beispiele, dass die Zivilgesellschaft eine wirksame Kraft im Umgang mit radikal rechten und rechtsextremistischen Herausforderungen sein kann. Besonders bedeutsam ist dabei ihre Multiplikatorwirkung: Wenn zivilgesellschaftliche Akteure ein Thema aufgreifen und öffentlich Druck erzeugen, werden häufig auch staatliche und andere gesellschaftliche Akteure aktiv.
+
+
+```{css echo=FALSE}
+.embed-container {
+    position: relative;
+    padding-bottom: 60%;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.embed-container iframe,
+.embed-container object,
+.embed-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+```
+
+```{=html}
+<p class="text-center">
+  <a class="btn btn-primary btn-lg pres-download" href="`r rmarkdown::metadata$pres$pdf`" target="_blank">
+    <i class="bi-download"></i>&ensp;Download presentation
+  </a>
+</p>
+
+<div class="embed-container">
+  <iframe src="`r rmarkdown::metadata$pres$pdf`" style="border: 0.5px"></iframe>
+</div>
+```
+
+
+
+<!-- ![Slides](presentation_tutzing/tutzing_zeller.pdf) -->
+
+<!-- ```{=html} -->
+<!-- <object data="presentation_tutzing/tutzing_zeller.pdf" type="application/pdf" width="100%" height="100%" style="min-height:100vh;"> -->
+<!--     <p>It appears you don't have a PDF plugin for this browser. -->
+<!--     No biggie... you can <a href="presentation_tutzing/tutzing_zeller.pdf">click here to -->
+<!--     download the PDF file.</a></p> -->
+<!-- </object> -->
+<!-- ``` -->
+
+::: {.callout-note collapse="true" title="English version"}
+
+Among the many things civil society can do (including what Christin mentioned), my research on far-right demonstrations and association bans against far-right organisations shows civil society can be particularly effective in four areas:
+
+1. (Counter-)demonstrating. By protesting against far-right organisations/events/phenomena, civil society actors (i) show opposition to these radical/extreme societal elements, (ii) show support for attacked/harassed groups, (iii) deny far-right demonstrators sole occupation of the public space (whether for a rally, a concert, a Parteitag), (iv) problematise this organisation/event/phenomena and pressure other actors to take action
+
+2. Prompt legal changes. For example, in the 1990s and 2000s neo-Nazi groups mobilised to glorify the memory of Rudolf Hess in his hometown of Wunsidel. A group of Wunsiedel residents and civil society actors lobbied the government to pass laws to ‘stop glorification of National Socialism.’ And it did. The government passed §130(4) of the Criminal Code, which penalises ‘publicly approving, glorifying, or justify- ing the National Socialist rule of violence and despotism.’ This effectively forbid further Hess memorial marches. The German Constitutional Court later confirmed the legality of this new legal provision and further affirmed that Germany's political system is especially configured to oppose manifestations of Nazism. Thus, civil society actors prompted a reaffirmation and expansion of Germany's militant democracy. 
+
+3. Researching, monitoring, agenda-setting. Civil society actors have on numerous occasions spurred important action against far-right activity. For example, through the 2000s the Mendel-Grundmann-Gesellschaft (MGG) in Vlotho (NRW), an organisation focused on researching local victims of the Shoah, campaigned against the far-right, antisemitic activities of Collegium Humanum and its leader Ursula Haverbeck-Wetzel. Together with the Zentralrats der Juden in Deutschland and the Vlothoer Bündnis gegen das Collegium Humanum, the MGG successfully pressured the government to ban Collegium Humanum, closing down a major centre of networking for far-right actors in Germany. Similarly, in 2009 researchers at the Dokumentationsarchiv des österreichischen Widerstandes revealed the leader of Ulrichsberggemeinschaft was selling Nazi memorabilia (which is illegal). This precipitated state action that effectively ended a long-running series of far-right demonstrations in Kärnten. 
+
+4. Trigger other actors to stand up against the far right. In addition to directly achieve benefits for society by taking action against far-right actors, civil society actors are often quite effective at getting other actors to stand up too. Just a small selection from recent years, civil society actors have: (a) made it harder for far-right parties to meet and perform necessary organisational matters; (b) successfully lobbied payment services to restrict access to far-right groups; (c) filed for copyrights of neo-Nazi slogans and so denied neo-Nazis the right to sell merchandise and spread extremist propaganda. 
+
+In each of these areas, there are numerous cases that show that civil society can be a potent force against the far right. And perhaps most importantly: civil society action has a contagious quality: if civil society actors engage and campaign on an issue, then other actors, both state and societal will engage too.
+
+:::
+
+
+******************************
+
+
+
+
