@@ -4,7 +4,9 @@ subtitle: "Patterns and Processes from Demonstration Campaigns in Germany, Engla
 title-block-banner: "#170C3A"
 ---
 
-*planned publication with Cambridge University Press in September 2026*
+*available NOW from Cambridge University Press: <https://doi.org/10.1017/9781009720748>*
+
+<!-- *planned publication with Cambridge University Press in September 2026* -->
 
 :::: {.columns}
 :::{.column width="35%"}
@@ -27,4 +29,4 @@ Social movement research has grown rapidly in recent decades. Yet the greatest s
 :::
 ::::
 
-*[Further information and resources will be available on this page following publication.]{style="color:darkred; font-size:18px;"}*
+*[Further information and resources coming soon.]{style="color:darkred; font-size:18px;"}*
