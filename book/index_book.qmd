@@ -30,3 +30,25 @@ Social movement research has grown rapidly in recent decades. Yet the greatest s
 ::::
 
 *[Further information and resources coming soon.]{style="color:darkred; font-size:18px;"}*
+
+# Short pieces with findings from the book 
+
+::: {.callout-important collapse="true"}
+## *Institut für Protest- und Bewegungsforschung* (ipb): New Book – Demobilising the Far Right: How Societal Actors Counter Far-Right Social Forces by Michael Zeller
+
+*[originally published at:]{style="color:darkred; font-size:18px;"} [<https://protestinstitut.eu/de/new-book-demobilising-the-far-right-how-societal-actors-counter-far-right-social-forces-by-michael-zeller-2-2/>]{style="font-size:18px;"}*
+
+What can be done to counter far-right social forces? These movements, whether attacking foundational liberal tenets of society (often called ‘radical right’) or attacking democratic systems and norms (‘extreme right), present a serious challenge to liberal democracies across Europe. Understanding how to effectively counter them is critical for safeguarding open societies, protecting vulnerable groups, and preserving the foundations of our political systems. Conversely, the risks of failing to address far-right social forces are significant: deepened polarization, fractured societies, increased violence, and ultimately, a weakening of the democratic norms and institutions that underpin our freedoms.
+
+My new book, [Demobilising the Far Right](https://doi.org/10.1017/9781009720748), explores a pervasive tactic employed by the far right – large-scale demonstrations. Far-right actors use demonstrations to legitimise discriminatory and sometimes violent political positions, build organising and political momentum, and attack people and groups. Through a detailed comparative study of far-right demonstration campaigns in Austria, England, and Germany between 1990 and 2020, using qualitative comparative analysis (QCA) and process-tracing techniques, the book reveals diverse patterns of factors that cause far-right campaigns to demobilise.
+
+Four particularly effective models emerge from how societal actors have counter-mobilised against far-right demonstrations. First, societal actors can use information as a weapon by researching, monitoring, and setting agendas about far-right activity. In Austria, the long-running annual far-right gathering at Ulrichsberg demobilised only after a Vienna-based antifascist archive (Dokumentationsarchiv des österreichischen Widerstandes) revealed that the leading organiser was selling Nazi paraphernalia online (a criminal offence in Austria). Second, societal actors have sometimes been effective with direct confrontation, counter-protesting to show opposition to far-right activists and to problematise the event and its organisers to bystanders. Antifascist blockades against neo-Nazi demonstrations in Dresden marking the anniversary of Allied bombing have both stopped march processions and diminished subsequent organisation and participation.
+
+Third, societal actors often contribute to demobilising the far right indirectly by inducing state action. In England, counter-protests against the British National Party pushed local authorities to deny them an alcohol license at their annual festival and impose other limitations, raising the costs and reducing the rewards of the far-right demonstration. In Germany, movement organisation and civil society mobilisation has prompted regional governments to restrict right-wing extremist demonstrations through new laws (e.g., Brandenburg’s 2006 Cemeteries Assembly Law), supported the enactment of new criminal provisions against ‘glorification of the Nazi regime’ and thereby demobilised a campaign honouring Rudolf Hess, and, through protests and public awareness campaigns, pressured authorities to ban far-right organisations (e.g., Nationale Offensive, banned in 1992, and Collegium Humanum, banned in 2008). State actions are often effective check on far-right activity—but states usually take action only after pressure from societal actors.
+
+Fourth, societal actors effectively oppose far-right activities by building collective action, creating coalitions and encouraging others to take a stand against the far right. One of Germany’s largest and longest running far-right campaigns, annual rallies in Passau by the German People’s Union (DVU) party, only came to an end after a broad coalition of societal actors encouraged various boycotts against the event.
+
+These models have proven effective not just in countering demonstrations, but also in challenging far-right influence in electoral politics and online spaces. As the cases in my book show, while these strategies demand considerable effort, the record of their uses show that effective resistance to far-right social forces is within reach.
+
+:::
+
