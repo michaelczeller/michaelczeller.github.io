@@ -4923,6 +4923,135 @@ plot(g,
 
 :::
 
+::: {.callout-important collapse="true" title="Enobarbus: Age cannot wither her"}
+
+```{r AgeCannotWitherHer}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(glue)
+library(htmltools)
+
+# Find start and end rows
+start_row <- aac %>% 
+  mutate(row = row_number()) %>% 
+  filter(
+    str_detect(
+      PlayerLine,
+      fixed("Now Antony must leave her utterly",
+            ignore_case = TRUE)
+    )
+  ) %>%
+  pull(row)
+
+end_row <- aac %>%
+  mutate(row = row_number()) %>%
+  filter(
+    str_detect(
+      PlayerLine,
+      fixed("Bless her when she is riggish.",
+            ignore_case = TRUE)
+    )
+  ) %>%
+  pull(row)
+
+# Extract the speech
+speech <- aac %>%
+  mutate(row = row_number()) %>%
+  slice(start_row:end_row) %>%
+  select(
+    Act,
+    Scene,
+    Line,
+    PlayerClean,
+    PlayerLine
+  ) %>%
+  mutate(
+    new_speaker = PlayerClean != lag(
+      PlayerClean,
+      default = first(PlayerClean)
+    )
+  )
+
+# Force first row to display speaker
+speech$new_speaker[1] <- TRUE
+
+# Create citation label
+citation_label <- speech %>%
+  summarise(
+    act = first(Act),
+    scene = first(Scene),
+    line_start = first(Line),
+    line_end = last(Line)
+  ) %>%
+  mutate(
+    label = glue(
+      "({act}.{scene}.{line_start}–{line_end})"
+    )
+  ) %>%
+  pull(label)
+
+# Build formatted HTML
+speech_html <- tagList(
+  tags$div(
+    style = "
+      max-width: 700px;
+      margin: 2em auto;
+      padding: 1.5em;
+      background: #f8f8f8;
+      border-left: 6px solid #7a0019;
+      font-family: Georgia, serif;
+      line-height: 1.1;
+    ",
+
+    tags$h3(
+      style = "margin-top:0;",
+      glue("Age cannot wither her {citation_label}")
+      ),
+
+    lapply(seq_len(nrow(speech)), function(i) {
+
+      speaker <- speech$PlayerClean[i]
+      line <- speech$PlayerLine[i]
+      show_name <- speech$new_speaker[i]
+
+      tags$div(
+
+        # Only print speaker if changed
+        if (show_name) {
+          tags$p(
+            style = "
+              margin-top: 1.2em;
+              margin-bottom: 0.2em;
+              font-weight: bold;
+              letter-spacing: 0.03em;
+            ",
+            speaker
+          )
+        },
+
+        # The actual line
+        tags$p(
+          style = "
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            padding-left: 1em;
+          ",
+          line
+        )
+      )
+    })
+  )
+)
+
+speech_html
+
+```
+
+:::
+
 ```{r aac-dynamicnetz}
 #| include: false
 #| message: false
@@ -7981,6 +8110,136 @@ plot(g,
   layout = igraph::layout_with_fr(g),
   vertex.label = ifelse(igraph::degree(g) > 5, V(g)$name, NA)
 )
+
+```
+
+:::
+
+
+::: {.callout-important collapse="true" title="Gertrude: The lady doth protest too much"}
+
+```{r DothProtestTooMuch}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(glue)
+library(htmltools)
+
+# Find start and end rows
+start_row <- hamlet %>% 
+  mutate(row = row_number()) %>% 
+  filter(
+    str_detect(
+      PlayerLine,
+      fixed("The lady protests",
+            ignore_case = TRUE)
+    )
+  ) %>%
+  pull(row)
+
+end_row <- hamlet %>%
+  mutate(row = row_number()) %>%
+  filter(
+    str_detect(
+      PlayerLine,
+      fixed("too much, methinks.",
+            ignore_case = TRUE)
+    )
+  ) %>%
+  pull(row)
+
+# Extract the speech
+speech <- hamlet %>%
+  mutate(row = row_number()) %>%
+  slice(start_row:end_row) %>%
+  select(
+    Act,
+    Scene,
+    Line,
+    PlayerClean,
+    PlayerLine
+  ) %>%
+  mutate(
+    new_speaker = PlayerClean != lag(
+      PlayerClean,
+      default = first(PlayerClean)
+    )
+  )
+
+# Force first row to display speaker
+speech$new_speaker[1] <- TRUE
+
+# Create citation label
+citation_label <- speech %>%
+  summarise(
+    act = first(Act),
+    scene = first(Scene),
+    line_start = first(Line),
+    line_end = last(Line)
+  ) %>%
+  mutate(
+    label = glue(
+      "({act}.{scene}.{line_start}–{line_end})"
+    )
+  ) %>%
+  pull(label)
+
+# Build formatted HTML
+speech_html <- tagList(
+  tags$div(
+    style = "
+      max-width: 700px;
+      margin: 2em auto;
+      padding: 1.5em;
+      background: #f8f8f8;
+      border-left: 6px solid #7a0019;
+      font-family: Georgia, serif;
+      line-height: 1.1;
+    ",
+
+    tags$h3(
+      style = "margin-top:0;",
+      glue("The lady doth protest too much {citation_label}")
+      ),
+
+    lapply(seq_len(nrow(speech)), function(i) {
+
+      speaker <- speech$PlayerClean[i]
+      line <- speech$PlayerLine[i]
+      show_name <- speech$new_speaker[i]
+
+      tags$div(
+
+        # Only print speaker if changed
+        if (show_name) {
+          tags$p(
+            style = "
+              margin-top: 1.2em;
+              margin-bottom: 0.2em;
+              font-weight: bold;
+              letter-spacing: 0.03em;
+            ",
+            speaker
+          )
+        },
+
+        # The actual line
+        tags$p(
+          style = "
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            padding-left: 1em;
+          ",
+          line
+        )
+      )
+    })
+  )
+)
+
+speech_html
 
 ```
 
@@ -14866,6 +15125,136 @@ plot(g,
 ```
 
 :::
+
+::: {.callout-important collapse="true" title="Lear: Whipping that whore"}
+
+```{r WhippingThatWhore}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(glue)
+library(htmltools)
+
+# Find start and end rows
+start_row <- kl %>% 
+  mutate(row = row_number()) %>% 
+  filter(
+    str_detect(
+      PlayerLine,
+      fixed("Thou rascal beadle",
+            ignore_case = TRUE)
+    )
+  ) %>%
+  pull(row)
+
+end_row <- kl %>%
+  mutate(row = row_number()) %>%
+  filter(
+    str_detect(
+      PlayerLine,
+      fixed("thou whipp'st her.",
+            ignore_case = TRUE)
+    )
+  ) %>%
+  pull(row)
+
+# Extract the speech
+speech <- kl %>%
+  mutate(row = row_number()) %>%
+  slice(start_row:end_row) %>%
+  select(
+    Act,
+    Scene,
+    Line,
+    PlayerClean,
+    PlayerLine
+  ) %>%
+  mutate(
+    new_speaker = PlayerClean != lag(
+      PlayerClean,
+      default = first(PlayerClean)
+    )
+  )
+
+# Force first row to display speaker
+speech$new_speaker[1] <- TRUE
+
+# Create citation label
+citation_label <- speech %>%
+  summarise(
+    act = first(Act),
+    scene = first(Scene),
+    line_start = first(Line),
+    line_end = last(Line)
+  ) %>%
+  mutate(
+    label = glue(
+      "({act}.{scene}.{line_start}–{line_end})"
+    )
+  ) %>%
+  pull(label)
+
+# Build formatted HTML
+speech_html <- tagList(
+  tags$div(
+    style = "
+      max-width: 700px;
+      margin: 2em auto;
+      padding: 1.5em;
+      background: #f8f8f8;
+      border-left: 6px solid #7a0019;
+      font-family: Georgia, serif;
+      line-height: 1.1;
+    ",
+
+    tags$h3(
+      style = "margin-top:0;",
+      glue("Whipping that whore {citation_label}")
+      ),
+
+    lapply(seq_len(nrow(speech)), function(i) {
+
+      speaker <- speech$PlayerClean[i]
+      line <- speech$PlayerLine[i]
+      show_name <- speech$new_speaker[i]
+
+      tags$div(
+
+        # Only print speaker if changed
+        if (show_name) {
+          tags$p(
+            style = "
+              margin-top: 1.2em;
+              margin-bottom: 0.2em;
+              font-weight: bold;
+              letter-spacing: 0.03em;
+            ",
+            speaker
+          )
+        },
+
+        # The actual line
+        tags$p(
+          style = "
+            margin-top: 0;
+            margin-bottom: 0.5em;
+            padding-left: 1em;
+          ",
+          line
+        )
+      )
+    })
+  )
+)
+
+speech_html
+
+```
+
+:::
+
 
 ```{r kl-dynamicnetz}
 #| include: false
