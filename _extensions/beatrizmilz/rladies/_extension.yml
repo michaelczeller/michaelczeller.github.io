@@ -1,0 +1,15 @@
+title: R-Ladies Presentation Template
+author: Beatriz Milz
+version: 0.0.4
+contributes:
+  formats: 
+    revealjs:
+      logo: book2026_front.png
+      footer: |
+        [Demobilising the Far Right](https://doi.org/10.1017/9781009720748) by [Michael C. Zeller](https://michaelzeller.de/book/index_book.html).
+      theme: rladies.scss
+      slide-number: c/t
+      show-slide-number: all
+      title-slide-attributes:
+        data-background-color: "#41010f" # "#fabf68"
+      preview-links: true
