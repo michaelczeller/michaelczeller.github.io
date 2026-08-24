@@ -78,7 +78,7 @@ bibliography: ../../../../library.bib
 
 ![](cup_book_gifs/bnp-rwb_2008_rm_sound.gif){.fragment .absolute bottom=50 left=5}
 
-![](cup_book_gifs/chemnitz_2018-08-27_threats.gif){.fragment .absolute bottom=30 right=5}
+<!-- ![](cup_book_gifs/chemnitz_2018-08-27_threats.gif){.fragment .absolute bottom=30 right=5} -->
 
 ![](cup_book_gifs/dvu_congress_1994-09-24_foreign_troops.gif){.fragment .absolute top=30 left=5 width=800}
 
@@ -88,95 +88,95 @@ bibliography: ../../../../library.bib
 
 :::
 
-# Alt gifs version {visibility="hidden"}
+<!-- # Alt gifs version {visibility="hidden"} -->
 
-::: {.r-stack}
+<!-- ::: {.r-stack} -->
 
-::: {.fragment .absolute top=50 left=10}
-![](cup_book_gifs/uberg_Tauschitz_resignation_2022_all_parties.gif){width=800} 
+<!-- ::: {.fragment .absolute top=50 left=10} -->
+<!-- ![](cup_book_gifs/uberg_Tauschitz_resignation_2022_all_parties.gif){width=800}  -->
 
-Ulrichsberg Celebration
-:::
+<!-- Ulrichsberg Celebration -->
+<!-- ::: -->
 
-::: {.fragment .absolute top=10 right=10}
-![](cup_book_gifs/bnp-rwb_panorama_2001_rm_sound.gif)
+<!-- ::: {.fragment .absolute top=10 right=10} -->
+<!-- ![](cup_book_gifs/bnp-rwb_panorama_2001_rm_sound.gif) -->
 
-BNP Red, White, and Blue Festival
-:::
+<!-- BNP Red, White, and Blue Festival -->
+<!-- ::: -->
 
-::: {.fragment .absolute bottom=50 left=5}
-![](cup_book_gifs/bnp-rwb_2008_rm_sound.gif)
+<!-- ::: {.fragment .absolute bottom=50 left=5} -->
+<!-- ![](cup_book_gifs/bnp-rwb_2008_rm_sound.gif) -->
 
-BNP Red, White, and Blue Festival
-:::
+<!-- BNP Red, White, and Blue Festival -->
+<!-- ::: -->
 
-::: {.fragment .absolute bottom=30 right=5}
-![](cup_book_gifs/chemnitz_2018-08-27_threats.gif)
+<!-- ::: {.fragment .absolute bottom=30 right=5} -->
+<!-- ![](cup_book_gifs/chemnitz_2018-08-27_threats.gif) -->
 
-Chemnitz 2018
-:::
+<!-- Chemnitz 2018 -->
+<!-- ::: -->
 
-::: {.fragment .absolute top=30 left=5}
-![](cup_book_gifs/dvu_congress_1994-09-24_foreign_troops.gif){width=800}
+<!-- ::: {.fragment .absolute top=30 left=5} -->
+<!-- ![](cup_book_gifs/dvu_congress_1994-09-24_foreign_troops.gif){width=800} -->
 
-DVU Congress
-:::
+<!-- DVU Congress -->
+<!-- ::: -->
 
-::: {.fragment .absolute top=10 right=30}
-![](cup_book_gifs/fla_2020_do_this_peacefully.gif)
+<!-- ::: {.fragment .absolute top=10 right=30} -->
+<!-- ![](cup_book_gifs/fla_2020_do_this_peacefully.gif) -->
 
-[Football Lads Alliance]{style="color:white;"}
-:::
+<!-- [Football Lads Alliance]{style="color:white;"} -->
+<!-- ::: -->
 
-::: {.fragment .absolute bottom=10 left=30}
-![](cup_book_gifs/hess_report_2011_summary.gif)
+<!-- ::: {.fragment .absolute bottom=10 left=30} -->
+<!-- ![](cup_book_gifs/hess_report_2011_summary.gif) -->
 
-Hess Memorial March
-::: 
+<!-- Hess Memorial March -->
+<!-- :::  -->
 
-:::
+<!-- ::: -->
 
 
-# Vids {visibility="hidden"}
+<!-- # Vids {visibility="hidden"} -->
 
-::: {.r-stack}
+<!-- ::: {.r-stack} -->
 
-::: {.fragment .absolute top=50 left=10}
-<video id="uberg" src="cup_book_clips/uberg_Tauschitz_resignation_2022_all_parties.mp4" title='Ulrichsberg (AT)'
-       width="900" controls controlslist="nodownload"></video>
-:::
+<!-- ::: {.fragment .absolute top=50 left=10} -->
+<!-- <video id="uberg" src="cup_book_clips/uberg_Tauschitz_resignation_2022_all_parties.mp4" title='Ulrichsberg (AT)' -->
+<!--        width="900" controls controlslist="nodownload"></video> -->
+<!-- ::: -->
 
-::: {.fragment .absolute top=10 right=10}
-<video id="bnp2001" src="cup_book_clips/bnp-rwb_panorama_2001_rm_sound.mp4"
-       title='BNP Red, White, and Blue Festival (UK) 2001'
-       width="900" controls controlslist="nodownload"></video>
-:::
+<!-- ::: {.fragment .absolute top=10 right=10} -->
+<!-- <video id="bnp2001" src="cup_book_clips/bnp-rwb_panorama_2001_rm_sound.mp4" -->
+<!--        title='BNP Red, White, and Blue Festival (UK) 2001' -->
+<!--        width="900" controls controlslist="nodownload"></video> -->
+<!-- ::: -->
 
-::: {.fragment .absolute top=70 left=5}
-<video id="bnp2008" src="cup_book_clips/bnp-rwb_2008_speech.mp4"
-       title='BNP Red, White, and Blue Festival (UK) 2008'
-       width="900" controls controlslist="nodownload"></video>
-:::
+<!-- ::: {.fragment .absolute top=70 left=5} -->
+<!-- <video id="bnp2008" src="cup_book_clips/bnp-rwb_2008_speech.mp4" -->
+<!--        title='BNP Red, White, and Blue Festival (UK) 2008' -->
+<!--        width="900" controls controlslist="nodownload"></video> -->
+<!-- ::: -->
 
-::: {.fragment .absolute top=90 right=5}
-<video id="chemnitz2018" src="cup_book_clips/chemnitz_2018-08-27_threats.mp4"
-       title='Chemnitz (DE) 2018'
-       width="900" controls controlslist="nodownload"></video>
-:::
+<!-- ::: {.fragment .absolute top=90 right=5} -->
+<!-- <video id="chemnitz2018" src="cup_book_clips/chemnitz_2018-08-27_threats.mp4" -->
+<!--        title='Chemnitz (DE) 2018' -->
+<!--        width="900" controls controlslist="nodownload"></video> -->
+<!-- ::: -->
 
-::: {.fragment .absolute top=50 left=10}
-<video id="dvu1994" src="cup_book_clips/dvu_congress_1994-09-24_foreign_troops.mp4"
-       title='DVU Passau (DE) 1994'
-       width="900" controls controlslist="nodownload"></video>
-:::
+<!-- ::: {.fragment .absolute top=50 left=10} -->
+<!-- <video id="dvu1994" src="cup_book_clips/dvu_congress_1994-09-24_foreign_troops.mp4" -->
+<!--        title='DVU Passau (DE) 1994' -->
+<!--        width="900" controls controlslist="nodownload"></video> -->
+<!-- ::: -->
 
-::: {.fragment .absolute bottom=10 right=10}
-<video id="fla2020" src="cup_book_clips/fla_2020_do_this_peacefully.mp4"
-       title='Football Lads Alliance (UK) 2019'
-       width="900" controls controlslist="nodownload"></video>
-:::
+<!-- ::: {.fragment .absolute bottom=10 right=10} -->
+<!-- <video id="fla2020" src="cup_book_clips/fla_2020_do_this_peacefully.mp4" -->
+<!--        title='Football Lads Alliance (UK) 2019' -->
+<!--        width="900" controls controlslist="nodownload"></video> -->
+<!-- ::: -->
 
-:::
+<!-- ::: -->
 
 
 <!-- poster="slide_files/03/spotlight_cover.png" -->
@@ -1296,11 +1296,11 @@ plot(euler_sol, fills = "transparent",
     + presumed and alternative mechanisms
     + mechanism graphic
 
-## BNP Red, White, and Blue Festival - Griffin
+<!-- ## BNP Red, White, and Blue Festival - Griffin -->
 
-<video id="bnp2008" src="cup_book_clips/bnp-rwb_2008_speech2.mp4"
-       title='BNP Red, White, and Blue Festival (UK) 2008'
-       width="900" controls controlslist="nodownload"></video>
+<!-- <video id="bnp2008" src="cup_book_clips/bnp-rwb_2008_speech2.mp4" -->
+<!--        title='BNP Red, White, and Blue Festival (UK) 2008' -->
+<!--        width="900" controls controlslist="nodownload"></video> -->
 
 ## BNP Red, White, and Blue Festival events {.smaller .scrollable}
 
@@ -1477,10 +1477,10 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
     + presumed and alternative mechanisms
     + mechanism graphic
 
-## Ulrichsbergfeier pomp and ceremony
+<!-- ## Ulrichsbergfeier pomp and ceremony -->
 
-<video id="uberg" src="cup_book_clips/uberg_wolfgang-jugler_1988-10-03_overview.mp4" title='Ulrichsbergfeier'
-       width="800" controls controlslist="nodownload"></video>
+<!-- <video id="uberg" src="cup_book_clips/uberg_wolfgang-jugler_1988-10-03_overview.mp4" title='Ulrichsbergfeier' -->
+<!--        width="800" controls controlslist="nodownload"></video> -->
 
 ## Ulrichsbergfeier events {.smaller .scrollable}
 
@@ -1665,11 +1665,11 @@ reactable::reactable(uEvents_sorted,
     + presumed and alternative mechanisms
     + mechanism graphic and newspapers and debt/deficit figures
 
-## DVU Passau - Frey
+<!-- ## DVU Passau - Frey -->
 
-<video id="dvu1994" src="cup_book_clips/dvu_congress_1994-09-24_foreign_troops.mp4"
-       title='DVU Passau (DE) 1994'
-       width="800" controls controlslist="nodownload"></video>
+<!-- <video id="dvu1994" src="cup_book_clips/dvu_congress_1994-09-24_foreign_troops.mp4" -->
+<!--        title='DVU Passau (DE) 1994' -->
+<!--        width="800" controls controlslist="nodownload"></video> -->
 
 ## DVU Passau events {.smaller .scrollable}
 
