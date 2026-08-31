@@ -2,6 +2,8 @@
 title: "Demobilising the Far Right"
 subtitle: "Patterns and Processes from Demonstration Campaigns in Germany, England, and Austria"
 title-block-banner: "#170C3A"
+datadownload:
+  excel1: "book_pres/Zeller_CUP2026_data.xlsx"
 ---
 
 *available NOW from Cambridge University Press: <https://doi.org/10.1017/9781009720748>*
@@ -73,3 +75,52 @@ Fourth, societal actors effectively oppose far-right activities by building coll
 These models have proven effective not just in countering demonstrations, but also in challenging far-right influence in electoral politics and online spaces. As the cases in my [book](https://doi.org/10.1017/9781009720748) show, while these strategies demand considerable effort, the record of their uses show that effective resistance to far-right social forces is within reach.
 
 :::
+
+# Data availability
+
+::: {.callout-note collapse="true"}
+## Data file (Excel)
+
+[Download the data](book_pres/Zeller_CUP2026_data.xlsx)
+
+- Sheets in Excel: 
+    + Campaigns: *Campaigns data (including cases excluded as outside of scope conditions)*
+    + codebook: *codebook for Campaigns dataset*
+    + UK_council: *UK council election results* 
+    + fin_bnp: *British National Party (BNP) finances* 
+    + fin_dvu: *Deutsche Volksunion (DVU) finances* 
+    + ENG_crime: *England racist crime statistics* 
+    + GER_crime: *Germany far-right crime statistics* 
+    + GER_org: *Germany far-right person potential* 
+    + GER_pol: *Germany far-right election results* 
+    + AUS_crime: *Austria far-right crime statistics* 
+    + AUS_pol: *Austria far-right election results* 
+
+:::
+
+<!-- # Book presentation  -->
+
+```{r echo=FALSE, results="asis"}
+#| warning: false
+if (Sys.Date() >= as.Date("2026-11-26")) { 
+  
+slide_buttons <- function(slide_id) {
+  glue::glue('<p class="text-center buttons"><a class="btn btn-danger" target="_blank" href="{slide_id}.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="{slide_id}.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a></p>')
+}
+
+slide_buttons("book_pres/index")
+
+library(xaringanExtra)
+
+xaringanExtra::embed_xaringan(
+  "book_pres/index.html",
+  ratio = "16:9",
+  border = "none",
+  margin = "0 auto"
+)
+}
+```
+
+
+<!-- # Analysis replication code  -->
+

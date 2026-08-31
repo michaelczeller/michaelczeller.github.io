@@ -13,13 +13,18 @@ format:
     theme: [default, custom_options]
     background-transition: fade
 incremental: false
-embed-resources: true
+embed-resources: true 
+datadownload:
+  excel1: "Zeller_CUP2026_data.xlsx"
 # runtime: shiny
 bibliography: ../../../../library.bib
 ---
 
 
 ---
+
+<!-- --palette (yellow: #fabf68; rgba(250, 191, 104); red: #dc2223; rgba(220, 34, 35); brown: #41010f; rgba(65, 1, 15)) -->
+
 
 <!-- https://github.com/beatrizmilz/quarto-rladies-theme/tree/main -->
 <!-- https://beatrizmilz.github.io/quarto-rladies-theme/#/gtgt -->
@@ -78,11 +83,11 @@ bibliography: ../../../../library.bib
 
 ![](cup_book_gifs/bnp-rwb_2008_rm_sound.gif){.fragment .absolute bottom=50 left=5}
 
-<!-- ![](cup_book_gifs/chemnitz_2018-08-27_threats.gif){.fragment .absolute bottom=30 right=5} -->
+![](cup_book_gifs/dvu_congress_1994-09-24_foreign_troops.gif){.fragment .absolute bottom=30 right=5 width=800}
 
-![](cup_book_gifs/dvu_congress_1994-09-24_foreign_troops.gif){.fragment .absolute top=30 left=5 width=800}
+<!-- ![](cup_book_gifs/chemnitz_2018-08-27_threats.gif){.fragment .absolute top=30 left=5 } -->
 
-![](cup_book_gifs/fla_2020_do_this_peacefully.gif){.fragment .absolute top=10 right=30}
+<!-- ![](cup_book_gifs/fla_2020_do_this_peacefully.gif){.fragment .absolute top=10 right=30} -->
 
 ![](cup_book_gifs/hess_report_2011_summary.gif){.fragment .absolute bottom=10 left=30}
 
@@ -213,10 +218,10 @@ bibliography: ../../../../library.bib
 
 # Demobilisation
 
-::: {.fragment .fade-up}
+::: {.fragment .fade-up style="text-align: center;"}
 *the process whereby collective action, whether in the form of campaigns, organisations, or even whole movements, decreases and ultimately ends*
 :::
- 
+
 . . . 
 
 - covers *[decline]{style="color:#dc2223;"}* and *[cessation]{style="color:#dc2223;"}*
@@ -343,9 +348,14 @@ p
 
 ::: 
 
-::: {.fragment .absolute .fade-up bottom=50 left=530 style="color:blue;"}
-causal characteristics: conjuctural, equifinal, asymmetric, multifinal
+<!-- ::: {.fragment .absolute .fade-up bottom=50 right=750}  -->
+<!-- applicable to [campaigns]{style="color:goldenrod;"}, [organisations]{style="color:violet;"}, whole [movement sectors]{style="color:teal;"} -->
 
+<!-- :::  -->
+
+::: {.fragment .absolute .fade-up bottom=50 left=530 style="color:teal;"} 
+<!-- causal characteristics: conjuctural, equifinal, asymmetric, multifinal -->
+*causes overlap and interact in different __demobilisation [processes]{style="color:blue;"}__*  
 ::: 
 
 
@@ -377,27 +387,31 @@ causal characteristics: conjuctural, equifinal, asymmetric, multifinal
 
 ::: 
 
-# Research 
+# Research on a subset of cases
 
-- *subset of cases
-    + Campaigns consist of four essential elements[Staggenborg2009]: (1) constant organising actor(s), (2) temporal boundedness, (3) strategically linked actions, (4) intention to advance movement goals 
-    + Demonstrations---ubiquitous movement tactic. Particularly important for far right, both **symbolically** and **instrumentally**
-        * extreme right[Mudde1995] traits: nationalism, racism, xenophobia, anti- democracy, and prefer strong state
-        * radical right[Mudde2007ch1] traits: nativism, authoritarianism, and populism
-        * importance of demonstrations endures for far right, enhanced by online spaces
-    + here, 'large' is a campaign that mobilised at least 1000 participants
-- *fsQCA and process tracing
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- Far right (in three countries: Germany, Austria and England)
+    + extreme right [@Mudde1995] traits: nationalism, racism, xenophobia, anti- democracy, and prefer strong state
+    + radical right [@Mudde2007ch1] traits: nativism, authoritarianism, and populism
 
-# Data 
+::: 
 
-- data ("Zbook.fr_demos_dataset.xlsx", sheet = "Campaigns"; "Zbook.fr_demos_dataset_zeller.xlsx" for all the rest) -- ALL NOW IN "Zeller_CUP2026_data.xlsx" -- **offer as download on webpage**
-    + active campaigns graphic?
-    + timelines graphic
-    + cases overview table (from appendix, Tab A.3.)
-    + thematic focus donuts
-    + going from PED to campaigns dataset
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- Demonstrations---ubiquitous movement tactic
+    + esp. important for far right, *symbolically* and *instrumentally*
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- Campaigns [@Staggenborg2009]: (1) constant organising actor(s), (2) temporal boundedness, (3) strategically linked actions, (4) intention to advance movement goals 
+    + '*large*' is a campaign that mobilised at least 1000 participants
+
+::: 
+
 
 ## Why cases in Germany, Austria, & England? 
+
+::: {.fragment .fade-up style="margin-top: -15px;"} 
 
 - Guarding against limited diversity
     + Germany: high mobilisation (and weak parties, at least until 2017), but also most active state social control against far right
@@ -405,7 +419,91 @@ causal characteristics: conjuctural, equifinal, asymmetric, multifinal
     + England: sporadic mobilisation---mostly ignored or contained
 - Beneficial for finding more generalisable results (i.e., patterns not limited to one country)
 
-## Active campaigns
+:::
+
+# Data collection
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- protest event data (PED): (1) identify large events, (2) identify related events (campaigns) 
+    + extant datasets (e.g., [PolDem](https://poldem.eui.eu/)) $\rightarrow$ state sources $\rightarrow$ newspapers $\rightarrow$ organiser accounts 
+
+::: 
+
+## Data sources, archives and other assistance
+
+::: panel-tabset
+### Germany
+
+| Location | Archive                         |
+| --------:|:--------------------------------|
+| Berlin   | [antifaschistisches pressearchiv und bildungszentrum berlin e.V. (apabiz)](https://www.apabiz.de/) |
+| München  | [Antifaschistische Informations-, Dokumentations- und Archivstelle München e.V. (a.i.d.a.)](https://www.aida-archiv.de/) |
+
+<!-- : Archival sources -->
+
+- VfS reports; newspapers (*Zeit*, *Süddeutsche*, local papers), participant accounts at archives 
+
+### Austria
+
+| Location | Archive                         |
+| --------:|:--------------------------------|
+| Wien     | [Dokumentationsarchiv des österreichischen Widerstandes (DöW)](https://www.doew.at/) |
+
+<!-- : Archival sources -->
+
+- VfS reports; newspapers (*Der Standard*, *Kurier*, *Kronen Zeitung*, local papers), participant accounts at archives 
+
+### England
+
+| Location | Archive                         |
+| --------:|:--------------------------------|
+| Northamption | [The Searchlight Archives](https://www.northampton.ac.uk/about-us/services-and-facilities/the-searchlight-archives/)    |
+| London   | [Bishopsgate Institute archives](https://www.bishopsgate.org.uk/archives/)  |
+
+<!-- : Archival sources -->
+
+- ENG: newspapers (*BBC*, *Guardian*); ‘Unite against Fascism’ (UAF) and ‘Hope not Hate’ (HnH); archives
+
+:::
+
+
+::: {.fragment .fade-up style="margin-top: -35px; color: darkorange;"} 
+with thanks for support to Fabian Virchow, Dan Jones, Nigel Copsey, Bernhard Weidinger, CEU colleagues, and András Bozóki, Carsten Q. Schneider, and Dorit Geva
+
+::: 
+
+## Data collection: limiting scope conditions {visibility="hidden"}
+
+::: {.fragment .fade-up style="margin-top: -25px;"} 
+- cases that fell (just) below size threshold
+    + (AT) Identitarian 2014-15 anti-refugee demos (Wien, Spielfeld)
+    + (ENG) EDL 2010-11 flash-mob campaign
+    + (ENG) National Front Remembrance Sunday march (1970s and 1980s, small by 1990s) 
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -25px;"} 
+- cases that fell short of campaign definition
+    + (AT) fraternity Kommers events (one-offs, irregular events)
+    + (AT) Totengedenken in Wien
+    + (DE) demos opposing NPD ban in 2000
+    + (DE) mourning Rainer Sonntag 1991, 1992
+    + (ENG) various EDL one-offs about specific criminal cases
+
+::: 
+
+<!-- ::: {.fragment .fade-up style="margin-top: -25px;"}  -->
+<!-- - unique campaigns excluded: (AT) Bleiburg Commemorations (highly active state sponsorship), (DE) 1. May (carousel of different organisers in many different locations, off and on over the years) -->
+
+<!-- :::  -->
+
+
+## Active campaigns by country, 1990-2020
+
+::: {style="text-align: center;"}
+40 large far-right demonstration campaigns over three decades
+
+::: 
 
 ```{r campaign-timing}
 ## fig.cap="Demonstration campaigns active during the period of study.", fig.scap="Demonstration campaigns active during the period of study", fig.alt="The bar chart shows active far-right demonstration campaigns across Germany, England, and Austria from 1990 to 2020. The X-axis represents the years, from 1990 to 2020. The Y-axis shows the number of active campaigns, ranging from 0 to 16. Each bar in the graph corresponds to a specific year, with bars stacked and coloured by country: Germany is in dark grey, England in white, and Austria in medium grey. Germany shows the highest frequency of campaigns, with peaks especially in 2015-2016. England and Austria have comparatively fewer campaigns, with fluctuations over the years. Austria and England never exceeded four active campaigns."
@@ -504,7 +602,7 @@ better_cversion
 ```
 
 
-## Timelines graphic
+## Campaign timelines 
 
 ```{r all-demo-campaigns, echo=FALSE}
 library(reshape2)
@@ -918,8 +1016,16 @@ girafe(
 
 ```
 
-- even split of radical & extreme right
-- varying tempos (annual vs. more frequent) may make a difference to demobilisation processes
+::: {.fragment .fade-up .absolute bottom=55 left=100}
+- even split of [radical]{style="color:darkorange;"} & [extreme]{style="color:red;"} right
+
+::: 
+
+::: {.fragment .fade-up .absolute bottom=15 left=300}
+- varying [tempos]{style="color:forestgreen;"} (annual vs. more frequent) 
+
+:::
+
 
 ## Cases overview {.smaller .scrollable}
 
@@ -959,7 +1065,7 @@ DEMOB = DEMOB %>% dplyr::select(COUNTRY, LOC, PSMO, YEAR)
 #   row_spec(seq(1:39), extra_latex_after = "\\cline{1-5}")
 
 reactable::reactable(DEMOB,
-  defaultPageSize = 15,
+  defaultPageSize = 5,
   defaultColDef = colDef(
     align = "left",
     minWidth = 40,
@@ -1125,123 +1231,268 @@ prow
 
 ```
 
+## Data availability
 
-## going from PED to campaigns dataset
+::: {.callout-note collapse="true" style="margin-top: -15px;"}
 
-- ‘blanketing strategy’[Beissinger2002, Hutter2014]---applied to different contexts
-    + broadly: (1) identify large events, (2) identify related events. state sources $\rightarrow$ newspapers $\rightarrow$ organiser accounts $\rightarrow$ extant datasets (e.g., PolDem) 
-    + Germany: first, federal and regional VfS reports; next, newspapers (*Zeit*, *Süddeutsche*, later local papers), accounts (of organisers and counter-demonstrators) at anti-fascist archives 
-    + Austria: first, federal VfS reports (less helpful than in DE); next, newspapers (*Der Standard*, *Kurier*, *Kronen Zeitung*, later local papers), accounts (of organisers and counter-demonstrators) at a.i.d.a. 
-    + England: first, newspapers (*BBC*, *Guardian*); next, ‘Unite against Fascism’ (UAF) and ‘Hope not Hate’ (HnH); Searchlight and Bishopsgate archives
+### Data file (Excel) [Download the data](Zeller_CUP2026_data.xlsx)
 
-## Data collection: limiting scope conditions 
+- Sheets in Excel: 
+    + Campaigns: *Campaigns data (including cases excluded as outside of scope conditions)*
+    + codebook: *codebook for Campaigns dataset*
+    + UK_council: *UK council election results* 
+    + fin_bnp: *British National Party (BNP) finances* 
+    + fin_dvu: *Deutsche Volksunion (DVU) finances* 
+    + ENG_crime: *England racist crime statistics* 
+    + GER_crime: *Germany far-right crime statistics* 
+    + GER_org: *Germany far-right person potential* 
+    + GER_pol: *Germany far-right election results* 
+    + AUS_crime: *Austria far-right crime statistics* 
+    + AUS_pol: *Austria far-right election results* 
 
-- cases that fell (just) below size threshold
-    + (AT) Identitarian 2014-15 anti-refugee campaign in Wien and Spielfeld
-    + (ENG) EDL 2010-11 flash-mob campaign
-    + (ENG) National Front Remembrance Sunday march (1970s and 1980s, small by 1990s)
-- cases that fell short of campaign definition
-    + (AT) fraternity Kommers events (one-offs or irregular gatherings)
-    + (AT) Totengedenken in Wien
-    + (DE) demos opposing NPD ban in 2000
-    + (DE) mourning Rainer Sonntag 1991, 1992
-    + (ENG) various EDL one-offs about specific criminal cases
-- unique campaigns excluded: (AT) Bleiburg Commemorations (highly active state sponsorship), (DE) 1. May (carousel of different organisers in many different locations, off and on over the years)
+:::
 
-## Archival sources and other assistance
+# Complementary mixed methods
 
-:::: {.columns}
-:::{.column width="70%"}
+::: {.fragment .fade-up style="margin-top: -25px;"} 
+- [qualitative comparative analysis]{style="color:blue;"} ([fs]QCA) 
+    + cross-case analysis
+    + useful for addressing phenomena with certain causal properties 
+        * necessity and sufficiency relationships 
+        * conjunctural causation, equifinality, multifinality, asymmetry 
+    + *Under what conditions do large far-right demonstration campaigns demobilise?* 
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -25px;"} 
+- [process tracing]{style="color:blue;"} 
+    + within-case analysis 
+    + *how do those conditions cause campaigns to demobilise?* 
+
+::: 
+
+<!-- - QCA -->
+<!--     + conditions and calibration -->
+<!--     + *no necessary disjuntions -->
+<!--     + abbreviated TT -->
+<!--     + QCA solution -->
+<!--         * *with measures -->
+<!--     + solution plot -->
+<!--     + *robustness -->
+<!--     + patterns of demob fig -->
+
+## QCA calibration: outcome set 
+
+::: {.fragment .fade-up style="margin-top: -25px;"} 
+- Outcome: negative demobilisation (ND) 
+    + composite of two sets ...
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -25px;"} 
+1. observation or not (i.e., [crisp set]{style="color:blue;"}) of ceased demonstration events where the organising actor has not had some demand or raison(s) d’être satisfied (which would signify ‘positive demobilisation’); 
+
+:::
+
+::: {.fragment .fade-up style="margin-top: -25px;"} 
+2. observation of decreased demonstration size in a campaign (i.e., [fuzzy set]{style="color:blue;"}) over repeated events 
+
+:::
+
+<!-- (On importance of participation and 'size' for demonstrations, see [@Denardo1985, @Biggs2018]) -->
+
+## QCA calibration: conditions 
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- [State channelling]{style="color:darkred;"} ([SCH]{style="color:#dc2223;"}) - state action that inhibits but does not coercively prohibit demonstrations (e.g., conditions on permit)
+- [State coercion]{style="color:darkred;"} ([SCO]{style="color:#dc2223;"}) - state coercion against the demonstrations/campaigns (e.g., banning demonstrations, arresting/detaining numerous demonstrators)
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- [Private channelling]{style="color:darkred;"} ([PCH]{style="color:#dc2223;"}) - non-state action inhibiting the demonstration campaign (e.g., organising boycotts)
+- [Private coercion]{style="color:darkred;"} ([PCO]{style="color:#dc2223;"}) - non-state coercive action: use of violence or threat of violence (e.g., blockades obstructing demonstrations)
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+calibrated on basis of **[proximity]{style="color:cadetblue;"}** to the outcome and **[repetition]{style="color:cadetblue;"}**  
+:::
+
+::: {.fragment .fade-up style="margin-top: -25px;"} 
+- [Long duration]{style="color:darkred;"} ([LD]{style="color:#dc2223;"}) - demonstration campaigns lasting for ten or more events (i.e., a crisp set)
+    + accounts for varying campaign tempos (e.g., annual, weekly)
+
+:::
+
+<!-- ## Abbreviated TT -->
+
+## QCA Solution 
+
+::: {style="margin-top: -35px;"}
 
 ::: panel-tabset
-## Germany
+### Solution table 
 
-| Location | Archive                         |
-| --------:|:--------------------------------|
-| Berlin   | [antifaschistisches pressearchiv und bildungszentrum berlin e.V. (apabiz)](https://www.apabiz.de/) |
-| München  | [Antifaschistische Informations-, Dokumentations- und Archivstelle München e.V. (a.i.d.a.)](https://www.aida-archiv.de/) |
+::: {style="margin-top: -25px;"}
 
-: Archival sources
+```{r}
+#| echo: false
 
-## Austria
+grouping_data <- data.frame(
+  Grouping = c("closing opportunity", "state repression", "civil counter-mobilisation", "anti-far-right militancy", ""),
+  SolutionTerm = c("SCH", 
+                   "~LD* ~PCH", 
+                   "~PCO* PCH", 
+                   "LD* ~SCO* PCO",
+                   "Solution"),
+  InclS = c("0.977", "1", "0.925", "1", "0.949"),
+  # PRI = c("0.977", "1", "0.923", "1", "0.948"),
+  CovS = c("0.408", "0.136", "0.475", "0.214", "0.893"),
+  CovU = c("0.097", "0.087", "0.243", "0.146", " "),
+  Cases = c("HoGeSa, Pressefest der Deutsche Stimme, Eichsfelder Heimattag; AN Antikriegstag; 2. Hess Gedenksmarsch; 1. Hess Gedenksmarsch; 2. Waffen-SS commemoration, Heidenau hört zu; Ulrichsbergfeier; Freital steht auf, 2018 Pro Chemnitz; Tag der deutschen Zukunft; Trauermarsch Bad Nenndorf", 
+            "Freigeist; Sachsentag; 1. Waffen-SS commemoration; 1. Hess Gedenksmarsch", 
+            "Lichtelläufen Schneeberg, Free Tommy Robinson, FLA against extremism, Justice for Women and Children; HoGeSa, Pressefest der Deutsche Stimme, Eichsfelder Heimattag; 2. Hess Gedenksmarsch; Deutsche Volksunion Congress, PEGIDA Dresden, Legida, EDL rally, Migrationspakt stoppen, S/TH-ÜGIDA; Freital steht auf, 2018 Pro Chemnitz", 
+            "2. Wehrmachtsausstellung; Trauermarsch Magdeburg, BNP Red, White and Blue festival, Wiener Korporations Ball, 1. Trauermarsch Dresden; Tag der deutschen Zukunft; Trauermarsch Bad Nenndorf",
+            " ")
+)
 
-| Location | Archive                         |
-| --------:|:--------------------------------|
-| Wien     | [Dokumentationsarchiv des österreichischen Widerstandes (DöW)](https://www.doew.at/) |
+# ## bolding uniquely covered cases 
+# cases_to_bold <- c(
+#   "AN Antikriegstag",
+#   "2. Waffen-SS commemoration",
+#   "Heidenau hört zu",
+#   "Ulrichsbergfeier",
+#   "Freigeist",
+#   "Sachsentag",
+#   "1. Waffen-SS commemoration",
+#   "Lichtelläufen Schneeberg",
+#   "Free Tommy Robinson",
+#   "FLA against extremism",
+#   "Justice for Women and Children",
+#   "Legida",
+#   "EDL rally",
+#   "Migrationspakt stoppen",
+#   "S/TH-ÜGIDA",
+#   "2. Wehrmachtsausstellung",
+#   "Trauermarsch Magdeburg", 
+#   "BNP Red, White and Blue festival", 
+#   "Wiener Korporations Ball", 
+#   "1. Trauermarsch Dresden"
+# )
+# 
+# for (case in cases_to_bold) {
+#   grouping_data$Cases <- gsub(
+#     case,
+#     paste0('<span class="bold-case">', case, '</span>'),
+#     grouping_data$Cases,
+#     fixed = TRUE
+#   )
+# }
 
-: Archival sources
-
-## England
-
-| Location | Archive                         |
-| --------:|:--------------------------------|
-| Northamption | [The Searchlight Archives](https://www.northampton.ac.uk/about-us/services-and-facilities/the-searchlight-archives/)    |
-| London   | [Bishopsgate Institute archives](https://www.bishopsgate.org.uk/archives/)  |
-
-: Archival sources
+kable(grouping_data, format = "html", escape = FALSE, 
+      col.names = c(" ", " ", "inclS", "covS", "covU", "cases")) %>% # "PRI",
+  kable_styling("striped", full_width = FALSE,
+                font_size = 20) # %>%column_spec(1, width = "2cm") %>%
+  # column_spec(2, width = "2cm") %>%
+  # column_spec(7, width = "3cm")
+```
 
 :::
 
-:::
+<!-- ::: {.fragment .fade-up style="margin-top: -25px; font-size: 0.6em;"}  -->
 
-::: {.column width="30%"}
-with thanks for support to Fabian Virchow, Dan Jones, Nigel Copsey, Bernhard Weidinger, CEU colleagues, and András Bozóki, Carsten Q. Schneider, and Dorit Geva
+### Solution measures
+
+- Consistency [inclS]{style="color:#dc2223;"} - how consistently the combination of conditions co-occurs with the outcome
+- Coverage solution [covS]{style="color:#dc2223;"} - how many cases are described by a term
+- Coverage unique [covU]{style="color:#dc2223;"} - how many cases only covered by that term
+
+<!-- PRI (proportional reduction in inconsistency) "provides a numerical measure of (roughly speaking) how much it helps to know that a given X is specifically a subset of Y and not a subset of ~Y" (Schneider and Wagemann 2012, p. 242). If consistency (inclS) and PRI are both high, then "there is a clear non-simultaneous subset relation, and there is no problem in interpreting them as sufficient conditions for the outcome of interest" (Ibid., p.243). -->
 
 ::: 
 
-::::
+:::
 
-# Comparative analysis (QCA)
 
-- QCA
-    + conditions and calibration
-    + *no necessary disjuntions
-    + abbreviated TT
-    + QCA solution
-        * *with measures
-    + solution plot
-    + *robustness
-    + patterns of demob fig
+## Solution plot {visibility="hidden"}
 
-## QCA operationalisation: outcome set 
+## Robustness {visibility="hidden"}
 
-- Outcome: negative demobilisation (ND) 
-    + composite of two sets 
-        1. observation or not (i.e., crisp set) of ceased demonstration events where the organising actor has not had some demand or raison(s) d’être satisfied (which would signify ‘positive demobilisation’); 
-        2. observation of decreased demonstration size in a campaign (i.e., fuzzy set) over repeated events (On importance of participation and ’size’ for demonstrations, see [Denardo1985, Biggs2018])
+## Patterns of demobilisation
 
-## QCA calibration 
+```{r patterns, echo=FALSE, message=FALSE, warning=FALSE, engine = 'tikz'}
 
-calibrated on basis of **proximity** and **repetition**
+\begin{tikzpicture}[node distance=2.5cm]
+\usetikzlibrary{shapes.geometric, shapes.misc, arrows}
+<!-- \tikzstyle{BOX} = [rectangle, rounded corners, minimum width=2cm, minimum height=0.5cm,text centered, text width=2cm, draw=black, fill=red!30] -->
+\tikzstyle{BOX} = [rectangle, rounded corners, minimum width=2cm, minimum height=0.5cm,text centered, text width=2cm, draw=black, fill=gray!30]
+<!-- \tikzstyle{TRAPE} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2.5cm, minimum height=0.5cm, text centered, text width=1.7cm, draw=black, fill=blue!30] -->
+\tikzstyle{TRAPE} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=2.5cm, minimum height=0.5cm, text centered, text width=1.7cm, draw=black]
+<!-- \tikzstyle{RECT} = [rectangle, minimum width=1cm, minimum height=0.5cm, text centered, text width=1.8cm, draw=black, fill=orange!30] -->
+\tikzstyle{RECT} = [rectangle, minimum width=1cm, minimum height=0.5cm, text centered, text width=1.8cm, draw=black]
+<!-- \tikzstyle{ELLIP} = [ellipse, minimum width=0.25cm, minimum height=0.25cm, text centered, text width=2.25cm, draw=black, fill=green!30] -->
+<!-- \tikzstyle{HEXA} = [rounded rectangle, minimum width=0.25cm, minimum height=0.25cm, text centered, text width=2.25cm, draw=black, fill=green!30] -->
+\tikzstyle{HEXA} = [rounded rectangle, minimum width=0.25cm, minimum height=0.25cm, text centered, text width=2.25cm, draw=black]
+\tikzstyle{arrow} = [thick,->,>=stealth]
 
-- State channelling (SCH) - measures by state actors which restrict the operation of the demonstration campaign, but which stop short of invoking the state’s coercive apparatus to prohibit demonstrations
-- State coercion (SCO) - recourse to the state’s coercive powers, that is, the use or threat of violence: banning demonstration events, arrest and detention of numerous demonstrators
-- Private channelling (PCH) - non-state (i.e., the initiative of private actors) actions that restrict the operation of the demonstration campaign, but without resorting to coercive measures
-- Private coercion (PCO) - non-state coercive action: private violence or threat of violence
-- Long duration (LD) - demonstration campaigns lasting for ten or more events (i.e., a crisp set)
-    + calibration is geared to cope with varying tempos
+\node (pattern1) [BOX] {closing \linebreak opportunity};
+\node (pattern2) [BOX, below of=pattern1] {anti-far-right \linebreak militancy};
+\node (pattern3) [BOX, below of=pattern2] {state \linebreak repression};
+\node (pattern4) [BOX, below of=pattern3] {civil counter-\linebreak mobilisation};
 
-## Abbreviated TT
+\node (p1c1) [RECT, right of=pattern1, xshift=2.5cm] {state channelling (SCH)};
+\node (p2c1) [RECT, right of=pattern2] {long duration \linebreak (LD)};
+\node (p2c2) [RECT, right of=p2c1] {\textit{not} state coercion \linebreak ($\sim$SCO)};
+\node (p2c3) [RECT, right of=p2c2] {private coercion \linebreak (PCO)};
+\node (p3c1) [RECT, right of=pattern3] {\textit{not} long duration \linebreak ($\sim$LD)};
+\node (p3c2) [RECT, right of=p3c1] {\textit{not} private channelling \linebreak ($\sim$PCH)};
+\node (p4c1) [RECT, right of=pattern4, xshift=2.5cm] {private channelling (PCH)};
+\node (p4c2) [RECT, right of=p4c1] {\textit{not} private coercion \linebreak ($\sim$PCO)};
 
-## Solution (with measures explained) 
+\node (m1) [TRAPE, right of=pattern1, xshift=8cm] {\textit{mechanism}};
+\node (m2) [TRAPE, right of=pattern2, xshift=8cm] {\textit{mechanism}};
+\node (m3) [TRAPE, right of=pattern3, xshift=8cm] {\textit{mechanism}};
+\node (m4) [TRAPE, right of=pattern4, xshift=8cm] {\textit{mechanism}};
 
-## Solution plot 
+\node (nd) [HEXA, right of=m2, yshift=-1.25cm] {negative \linebreak demobilisation};
 
-## Robustness* 
+\draw [line width=0.5mm] (p2c1) -- (p2c2) -- (p2c3);
+\node [right of=p2c1, xshift=-1.25cm, yshift=0.2cm] {\LARGE *};
+\node [right of=p2c2, xshift=-1.25cm, yshift=0.2cm] {\LARGE *};
+\draw [line width=0.5mm] (p3c1) -- (p3c2);
+\node [right of=p3c1, xshift=-1.25cm, yshift=0.2cm] {\LARGE *};
+\draw [line width=0.5mm] (p4c1) -- (p4c2);
+\node [right of=p4c1, xshift=-1.25cm, yshift=0.2cm] {\LARGE *};
 
-## Process graphic 
+\node [below of=p1c1, yshift=1.25cm] {\LARGE +};
+\node [below of=p2c2, yshift=1.25cm] {\LARGE +};
+\node [below of=p3c2, yshift=1.25cm] {\LARGE +};
 
-# Case studies
+\draw [dashed] (p1c1) -- (m1);
+\draw [dashed] (p2c3) -- (m2);
+\draw [dashed] (p3c2) -- (m3);
+\draw [dashed] (p4c2) -- (m4);
+
+\draw [arrow] (m1) -- (nd);
+\draw [arrow] (m2) -- (nd);
+\draw [arrow] (m3) -- (nd);
+\draw [arrow] (m4) -- (nd);
+
+\end{tikzpicture}
+
+```
+
+# Case coverage and cases further study
 
 ::: {.fragment .absolute top=100 left=10}
-- *euler diagram and
-- case selection
+- patterns and number  
+of cases covered
 
 ::: 
 
-::: {.absolute top=100 right=10}
-- patterns and number  
-of cases covered
+::: {.fragment .absolute top=100 left=700}
+- avoiding the 'causally overdetermined' cases covered by multiple patterns
 
 ::: 
 
@@ -1282,19 +1533,19 @@ plot(euler_sol, fills = "transparent",
 
 ```
 
+# BNP Red, White, and Blue Festival
 
-# BNP-RWB
+<!-- picture montage: 1 Tyndall (young with national socialist movement, tyndall_nsm <https://punk77.co.uk/the-national-front/>), 2 Tyndall older (tyndall_bnp, <http://searchlightmagazine.com/2026/04/decision-time-for-rupert-lowe-as-nazis-rally-behind-restore-britain/>), 3 BNP logo (bnp_logo), 4 Griffin young (griffin_nf), 5 Griffin party leader (griffin_bnp, <https://upload.wikimedia.org/wikipedia/commons/8/89/Nick_griffin_bnp_from_flickr_user_britishnationalism.jpg>), 6 RWB site example (bnp_rwb_above), 7 Front National's BBR festival photo (fn_fete_bbr_1994_jmlp.gif) -->
 
-- RWB
-    + context (2 figures of election results)
-        * picture montage: 1 Tyndall (young with national socialist movement, tyndall_nsm <https://punk77.co.uk/the-national-front/>), 2 Tyndall older (tyndall_bnp, <http://searchlightmagazine.com/2026/04/decision-time-for-rupert-lowe-as-nazis-rally-behind-restore-britain/>), 3 BNP logo (bnp_logo), 4 Griffin young (griffin_nf), 5 Griffin party leader (griffin_bnp, <https://upload.wikimedia.org/wikipedia/commons/8/89/Nick_griffin_bnp_from_flickr_user_britishnationalism.jpg>), 6 RWB site example (bnp_rwb_above), 7 Front National's BBR festival photo (fn_fete_bbr_1994_jmlp.gif)
-        * BNP: UK’s most successful extreme right party ever
-        * RWB campaign inspired by Front National---the remnant of BNP’s ‘march and grow’ strategy 
-        * aim: make BNP palatable to families: mobilise social support and enhance electoral prospects
-        * early successes (no significant counter- mobilisation) crowned with 2009 electoral victories---but RWB demobilisation the next year
-    + conditions of case (picture of counter-protest, bnp_rwb_counter, <https://socialistworker.co.uk/wp-content/uploads/images1412/Image/2009/2165/rwb_2.jpg>)
-    + presumed and alternative mechanisms
-    + mechanism graphic
+<!-- - RWB -->
+<!--     + context (2 figures of election results) -->
+<!--         * BNP: UK’s most successful extreme right party ever -->
+<!--         * RWB campaign inspired by Front National---the remnant of BNP’s ‘march and grow’ strategy  -->
+<!--         * aim: make BNP palatable to families: mobilise social support and enhance electoral prospects -->
+<!--         * early successes (no significant counter-mobilisation) crowned with 2009 electoral victories---but RWB demobilisation the next year -->
+<!--     + conditions of case (picture of counter-protest, bnp_rwb_counter, <https://socialistworker.co.uk/wp-content/uploads/images1412/Image/2009/2165/rwb_2.jpg>) -->
+<!--     + presumed and alternative mechanisms -->
+<!--     + mechanism graphic -->
 
 <!-- ## BNP Red, White, and Blue Festival - Griffin -->
 
@@ -1302,9 +1553,73 @@ plot(euler_sol, fills = "transparent",
 <!--        title='BNP Red, White, and Blue Festival (UK) 2008' -->
 <!--        width="900" controls controlslist="nodownload"></video> -->
 
+::: {.columns}
+
+::: {.column width="50%"}
+
+![](cup_book_imgs/bnp_logo.png){.fragment .absolute top=80 width=500 data-fragment-index="2"}
+
+![](cup_book_imgs/tyndall_nsm_emph.png){.fragment .absolute top=120 width=500 data-fragment-index="3"}
+
+![](cup_book_imgs/tyndall_bnp.png){.fragment .absolute top=160 width=500 data-fragment-index="4"}
+
+![](cup_book_imgs/griffin_nf.png){.fragment .absolute top=200 width=400 data-fragment-index="5"}
+
+![](cup_book_imgs/griffin_bnp.png){.fragment .absolute top=240 width=500 data-fragment-index="6"}
+
+![](cup_book_imgs/bnp_rwb_above.png){.fragment .absolute top=280 width=500 data-fragment-index="7"}
+
+![](cup_book_imgs/fn_fete_bbr_1994.png){.fragment .absolute top=320 width=500 data-fragment-index="8"}
+
+:::
+
+::: {.column width="50%"}
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -50px;"}
+British National Party, foremost postwar extremist party 
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="3" style="margin-top: -20px;"}
+Founded in 1982 by John [Tyndall](http://searchlightmagazine.com/2026/04/decision-time-for-rupert-lowe-as-nazis-rally-behind-restore-britain/), continuing his extremist activism
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="4" style="margin-top: -20px;"}
+BNP was not explicitly neo-Nazi, but avowedly racist 
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="5" style="margin-top: -20px;"}
+Tyndall recruited an experienced young neo-Nazi, Nick [Griffin](https://upload.wikimedia.org/wikipedia/commons/8/89/Nick_griffin_bnp_from_flickr_user_britishnationalism.jpg)
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="6" style="margin-top: -20px;"}
+Griffin ousted Tyndall and began party 'modernisation'
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="7" style="margin-top: -20px;"}
+RWB Festival: sanitise the BNP's image, make it *family friendly*
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="8" style="margin-top: -20px;"}
+Inspired by *Front National*'s Fête des Bleu-blanc-rouge
+
+:::
+
+
+:::
+
+:::
+
 ## BNP Red, White, and Blue Festival events {.smaller .scrollable}
 
 <!-- https://glin.github.io/reactable/articles/examples.html -->
+
+::: {style="margin-top: -25px;"}
 
 ```{r bnp-rwb-events}
 library(dplyr)
@@ -1329,7 +1644,7 @@ rwb <- data.frame(rwb_dates, rwb_loc, rwb_num, rwb_counter, rwb_arr)
 #   add_footnote(c("*The 2010 event was a `family weekend' not organised by the BNP, but rather a", "closely-related group called the `Indigenous Forum'; nevertheless, it is listed here", "due to its close connection to the RWB."), notation="none")
 
 reactable::reactable(rwb, 
-  defaultPageSize = 15,
+  defaultPageSize = 6,
   defaultColDef = colDef(
     align = "left",
     minWidth = 70,
@@ -1346,8 +1661,24 @@ reactable::reactable(rwb,
 
 ```
 
+::: 
 
-## BNP Calibration
+::: {.fragment .fade-up style="margin-top: -15px;"} 
+- aiming to make BNP palatable to families, mobilise social support, and boost electoral prospects
+    + no significant [counter-mobilisation]{style="color:darkred;"} 
+    + positive media coverage (even in [The Guardian](https://www.theguardian.com/uk/2002/aug/19/race.thefarright))
+    + crowned with 2009 electoral victories
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -15px;"} 
+... but RWB [demobilisation]{style="color:darkred;"} the next year 
+
+::: 
+
+
+
+## RWB Case calibration
 
 
 ```{r rwb-calibration}
@@ -1383,25 +1714,43 @@ DEMOB_BNP = DEMOB %>% dplyr::select(LD, SCH, SCO, PCH, PCO)
 knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Festival"),], align='cccccc', booktabs = TRUE, caption = 'BNP Red, White, and Blue Festival campaign calibration.', 
              caption.short = 'BNP Red, White, and Blue Festival campaign calibration',
              col.names = c("Long Duration (LD)","State Channelling (SCH)","State Coercion (SCO)","Private Channelling (PCH)","Private Coercion (PCO)")) %>% 
-  kable_styling(font_size = 9) %>% 
-  column_spec(1, width = "1.8cm") %>% 
-  column_spec(2, width = "1.6cm") %>% 
-  column_spec(3, width = "2cm") %>% 
-  column_spec(4, width = "1.6cm") %>% 
-  column_spec(5, width = "2cm") %>% 
-  column_spec(6, width = "1.6cm") %>% 
+  kable_styling(font_size = 30) %>% 
+  column_spec(1, width = "3.8cm") %>% 
+  column_spec(2, width = "3.6cm") %>% 
+  column_spec(3, width = "4cm") %>% 
+  column_spec(4, width = "3.6cm") %>% 
+  column_spec(5, width = "4cm") %>% 
+  column_spec(6, width = "3.6cm") %>% 
   row_spec(0, bold = TRUE)
 
 ```
 
+::: {.fragment .fade-up .absolute top=350 left=200} 
+- UK state and policing posture for far-right demos: separate opposed camps, *sometimes* impose conditions on far-right demonstration
 
-## BNP process 
+::: 
+
+::: {.fragment .fade-up .absolute top=500 left=200} 
+- counter-mobilisation slow to get going, but by 2008... 
+
+::: 
+
+![](cup_book_imgs/bnp_rwb_counter.png){.fragment .absolute top=50 left=20 width=1000}
+
+## BNP rise and fall 
+
+![](cup_book_imgs/bnp-seats-1.jpeg){.fragment .fade-up .absolute top=40 left=20 width=900}
+
+![](cup_book_imgs/bnp-nat-elect-1.jpeg){.fragment .fade-up .absolute top=40 left=20 width=900}
+
+## RWB demobilisation process 
 
 <!-- \begin{figure} -->
 <!-- \centering -->
 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, engine = 'tikz'}
+#| fig-align: center
 
 \begin{tikzpicture}[node distance=4cm]
 \usetikzlibrary{shapes.geometric, shapes.misc, arrows, arrows.meta}
@@ -1465,6 +1814,28 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
 <!-- \label{fig:bnp-detailed-rwb} -->
 <!-- \end{figure} -->
 
+## RWB case conclusions 
+
+::: {.fragment .fade-up style="margin-top: -30px;"} 
+- RWB was an evolution from BNP's 'march and grow', aimed at bolstering the party's electoral prospects
+
+:::
+
+::: {.fragment .fade-up style="margin-top: -30px;"} 
+- the case is typical of British state responses: [neutrality]{style="color:cadetblue;"} --- no mandate (as elsewhere) to curb far-right activity 
+    + but recent organisational bans are something of a shift 
+
+:::
+
+::: {.fragment .fade-up style="margin-top: -30px;"} 
+- [anti-far-right militancy]{style="color:darkred;"} caused the RWB to demobilise 
+    + higher costs (e.g., extra security measures required to get alcohol licence)
+    + decreased benefits (counter-protest discourages participation and tars attempt to create family-friendly image) 
+    + *diminishing returns* mechanism 
+
+:::
+
+
 # Ulrichsbergfeier
 
 - Uberg
@@ -1483,6 +1854,8 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
 <!--        width="800" controls controlslist="nodownload"></video> -->
 
 ## Ulrichsbergfeier events {.smaller .scrollable}
+
+::: {style="margin-top: -25px;"}
 
 ```{r uberg-events}
 library(dplyr)
@@ -1634,7 +2007,7 @@ rownames(uEvents) <- NULL
 uEvents_sorted <- uEvents %>% arrange(desc(Date))
 
 reactable::reactable(uEvents_sorted, 
-  defaultPageSize = 15,
+  defaultPageSize = 10,
   defaultColDef = colDef(
     align = "left",
     minWidth = 70,
@@ -1644,12 +2017,13 @@ reactable::reactable(uEvents_sorted,
     rwb_dates=colDef(name="Date"),
     Attendance=colDef(name="Participants"),
     Counter=colDef(name="Counter-protesters", align="center"),
-    `Keynote speaker`=colDef(name="Speakers", minWidth=140)
+    `Keynote speaker`=colDef(name="Speakers", minWidth=240)
   )
 )
   
 ```
 
+::: 
 
 # Deutsche Volksunion (DVU) in Passau
 
@@ -1712,32 +2086,105 @@ reactable::reactable(dvu,
 
 # Conclusions 
 
-<!-- - Conclusions  -->
-<!--     + DRAW HERE FROM CONCLUSIONS, BUT ALSO FROM TUTZING TALK, NOTES TO MAIK AND MICHAEL V.  -->
-
-
 <!-- []{style="font-size:10px;"} -->
 
+- multiple paths to demobilising the far right 
+- many benefits of counter-mobilisation 
+- wider relevance 
+- further resources available from research 
+
+<!-- - <https://cambridgeblog.org/2026/07/demobilising-the-far-right-how-societal-actors-counter-far-right-social-forces/> -->
+<!-- - multiple sufficient paths to campaign demobilisation: (1) closing opportunity, (2) state repression, (3) civil counter-mobilisation, and (4) anti-far-right militancy  -->
+<!--     + internal factors and competition within far-right scene are relevant—but once mobilised FR campaigns seem quite internally stable (e.g., in Germany with NPD)  -->
+
+<!-- - banning booze (relevant for policing)  -->
+<!-- - annual demonstrations are more durable  -->
+<!-- - counter-mobilisation is often the crucial, catalysing ingredient in demobilisation processes  -->
+
+## Conclusions: paths to demobilising the far right 
+
+::: {.fragment .fade-up style="margin-top: -20px;"} 
+- internal factors and competition among far right are relevant---but once mobilised FR campaigns are quite internally stable
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -20px;"} 
+- multiple sufficient paths to campaign demobilisation: 
+    (1) closing opportunity, 
+    (2) state repression, 
+    (3) civil counter-mobilisation, and 
+    (4) anti-far-right militancy 
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -20px;"} 
+- what is effective depends on context (e.g., state posture) and circumstances of the campaign (e.g., how it is vulnerable)
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -20px;"} 
+- BUT counter-mobilisation is often the crucial, catalysing ingredient in demobilisation processes 
+
+:::
+
+::: {.fragment .fade-up .absolute top=300 left=600} 
+and it never hurts to consider banning booze 
+
+::: 
+
+## Conclusions: the many benefits of counter-mobilisation
+
+<!-- counter-mobilisation, protesting against far-right activism (in addition to problematising/contesting far-right presence in public space and showing solidarity with targeted groups) can contribute to demobilising the far right, sometimes directly and other times indirectly, by prompting state action. (ii) Initial counter-mobilisation often has cascading effects, causing other actors to respond to the far right. For example, in recent years civil society actors have (a) made it harder for far-right parties to meet and perform necessary organisational matters; (b) successfully lobbied payment services to restrict access to far-right groups; (c) filed for copyrights of neo-Nazi slogans and so denied neo-Nazis the right to sell merchandise and spread extremist propaganda. (iii) Civil society capacity to oppose the far right effectively is usually built many years in advance of an actual flashpoint by community work and the formation of inter-organisational connections that can be called upon for coalitions to oppose the far right.  -->
+
+::: {.fragment .fade-up style="margin-top: -30px;"} 
+- can weaken the far right by...
+    + problematising and challenging its presence in public spaces 
+    + showing solidarity with targeted groups 
+    + directly blocking far-right demos or prompting state action 
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- can trigger wider responses, e.g.,  
+    + [obstructing](https://taz.de/Protest-gegen-AfD-Bundesparteitag/!6020433/) far-right parties' meeting and organising activity 
+    + [pressuring](https://www.zeit.de/zett/politik/2019-11/kein-geld-fuer-rechtsextreme-paypal-verbietet-spendengelder-an-pro-chemnitz) payment services to limit access to far-right groups 
+    + [copyrighting](https://taz.de/Rechtsextremer-Onlineshop-Druck18/!6105321/) neo-Nazi slogans, denying right to sell merchandise 
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- effective counter-mobilisation capacity is built well in advance...
+    + community work 
+    + formation of inter-org. connections that can make coalitions 
+
+::: 
+
+## Conclusions: wider relevance 
+
+other cases beyond DE, AT, ENG -- mentioned in book 
+
+in recent news, e.g., UK anti-refugee housing demos 
+
+## Conclusions: further resources 
+
+- Data and resources available online 
+
 - <https://cambridgeblog.org/2026/07/demobilising-the-far-right-how-societal-actors-counter-far-right-social-forces/>
-- multiple sufficient paths to campaign demobilisation: (1) closing opportunity, (2) state repression, (3) civil counter-mobilisation, and (4) anti-far-right militancy 
-    + internal factors and competition within far-right scene are relevant—but once mobilised FR campaigns seem quite internally stable (e.g., in Germany with NPD) 
-
-- banning booze (relevant for policing) 
-- annual demonstrations are more durable 
-- counter-mobilisation is often the crucial, catalysing ingredient in demobilisation processes 
 
 
-## Notes to Michael V. 
+```{r SummaryNotes}
+#| eval: false
+#| include: false
+
+## Notes to Michael V. -----
 
 The ‘key lessons for confronting the far right today’ is very much a selling point for the book. Just a couple weeks ago I spoke along those more civil society practitioner/activist lines to a German audience, drawing on pieces from the book. Pulling some of those key lessons out: (i) counter-mobilisation, protesting against far-right activism (in addition to problematising/contesting far-right presence in public space and showing solidarity with targeted groups) can contribute to demobilising the far right, sometimes directly and other times indirectly, by prompting state action. (ii) Initial counter-mobilisation often has cascading effects, causing other actors to respond to the far right. For example, in recent years civil society actors have (a) made it harder for far-right parties to meet and perform necessary organisational matters; (b) successfully lobbied payment services to restrict access to far-right groups; (c) filed for copyrights of neo-Nazi slogans and so denied neo-Nazis the right to sell merchandise and spread extremist propaganda. (iii) Civil society capacity to oppose the far right effectively is usually built many years in advance of an actual flashpoint by community work and the formation of inter-organisational connections that can be called upon for coalitions to oppose the far right. 
 
-## Notes to Maik 
+## Notes to Maik -----
 
 Die Analyse zeigt auf, was staatliche und gesellschaftliche Akteure tun können, um rechtsextremen Aktivitäten entgegenzuwirken. Insbesondere wird deutlich, dass gesellschaftliche Akteure bisweilen unmittelbar dazu beitragen können, dass rechtsextreme Kampagnen an Mobilisierungskraft verlieren. Noch wirksamer ist es jedoch, wenn sie staatliche Akteure zu entsprechenden Maßnahmen veranlassen. Je nach Einzelfall führen unterschiedliche Kombinationen aus indirekten Maßnahmen – etwa der Verweigerung von Alkoholausschankgenehmigungen oder der Auferlegung sonstiger Beschränkungen – sowie direkten Maßnahmen, wie dem Verbot bestimmter Demonstrationen oder Organisationen, zu einer Demobilisierung der rechtsextremen Aktivitäten.
 
-```{r TutzingNotes}
-#| eval: false
-#| include: false
+## Tutzing notes -----
 
 Among the many things civil society can do (including what Christin and Henning mention), my research on far-right demonstrations and association bans against far-right organisations shows civil society can be particularly effective in four areas:
 
@@ -1754,101 +2201,10 @@ In each of these areas, there are numerous cases that show that civil society ca
 ```
 
 
-# Foreign fighers {background-color="#fabf68"}
-
-:::: {.columns}
-:::{.column width="50%"}
-- definition 
-- examples 
-
-:::
-
-::: {.column width="50%"}
-<div class="tenor-gif-embed" data-postid="19267861" data-share-method="host" data-aspect-ratio="1.77778" data-width="100%"><a href="https://tenor.com/view/aircraft-airplane-boeing777-b777-pakistan-international-gif-19267861">Aircraft Airplane Sticker</a>from <a href="https://tenor.com/search/aircraft-stickers">Aircraft Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>  
-:::
-::::
-
-## Foreign fighters
-
-- **[foreign fighters]{style="color:darkred;"}** - individuals who travel to a conflict zone from another territory (prima facie evidence of radicalism $\rightarrow$ *[engagement]{style="color:darkred;"}* in political violence; a 'security failure' by authority of origin state?)
-
-- [examples historically? from cases you know of?]{style="color:indigo;"}
-
-[[Questions about groups]{style="color:violet;"}: (1) Did the group emerge in response to political repression? (2) Did the absence of (opportunity for) peaceful political participation contribute to the group's use of violence? (3) Did the group actively recruit members from outside its primary country of operation? (4) How important were cross-border networks to this group's activities? (5) Was the group's cause was framed as an international struggle?]{style="font-size: 0.7em;"}
-
-
-<!-- :::{.column width="50%"} -->
-<!-- ![](slide_files/07/morris_morocco.png){width="400"} -->
-<!-- ![](slide_files/07/morris_turkey.png){width="400"} -->
-
-<!-- ::: -->
-
-<!-- ::: {.column width="50%"} -->
-<!-- ![](slide_files/07/morris_egypt.png){width="400"} -->
-
-<!-- *Major centres*: Tangier, Tetouan, and surrounding region, and Fes; Cairo, Alexandria, and lower Nile area; Istanbul and Antep -->
-
-<!-- [any visualisation problems?]{style="color:indigo;"} -->
-
-<!-- ::: -->
-<!-- :::: -->
-
-
-## Dealing with returning foreign fighters (1)
-
-Spain example
-
-<!-- Aspect ratios include 1x1, 4x3, 16x9 (the default), and 21x9. -->
-<!-- aspect-ratio="21x9"  -->
-{{< video https://www.youtube.com/watch?v=Ec-nhQ6jt2Q
-    start="1"
-    width="80%"
-    height="80%" >}}
-
-
-## @JohannesDueEnstad2018 - data overview
-
-```{r}
-library(kableExtra)
-
-data <- data.frame(
-  `Perpetrator type` = c(
-    "Organized groups", 
-    "Affiliated members", 
-    "Autonomous cells", 
-    "<span style='color:red;'>Gangs</span>", 
-    "<span style='color:red;'>Unorganized</span>", 
-    "Lone actors", 
-    "Shadow groups", 
-    "Unknown", 
-    "**Total**"
-  ),
-  `Premeditated attacks` = c(48, 10, 34, 121, 74, 16, 0, 104, 408),
-  `Spontaneous attacks` = c(3, 1, 0, 12, 15, 8, 0, 7, 46),
-  `Plots` = c(2, 2, 7, 0, 1, 2, 0, 2, 16),
-  `Preparation for armed struggle` = c(0, 0, 0, 0, 0, 1, 0, 1, 2),
-  `Unknown` = c(1, 1, 0, 2, 1, 1, 1, 16, 23),
-  `Sum` = c(54, 14, 41, 135, 91, 28, 1, 130, 495)
-)
-
-# Generate the kable table
-kable(data, format = "html", escape = FALSE, align = "lcccccc", 
-      col.names = c("Perpetrator type", 
-                    "Premeditated attacks", 
-                    "Spontaneous attacks", 
-                    "Plots", 
-                    "Preparation for armed struggle", 
-                    "Unknown", 
-                    "Sum")) %>%
-  kable_styling(full_width = FALSE, bootstrap_options = c("striped", "hover", "condensed"),
-                font_size = 22) %>%
-  add_header_above(c(" " = 1, "Type of violence" = 6)) %>%
-  column_spec(1, bold = TRUE)
-
-```
-
-
-
 ## References
 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+pagedown::chrome_print(file.path("../..", "docs/book/book_pres", "index.html"))
+```
 
