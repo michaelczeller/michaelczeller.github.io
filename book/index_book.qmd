@@ -100,31 +100,31 @@ These models have proven effective not just in countering demonstrations, but al
 
 # Book presentations
 
-<!-- ::: {.callout-note collapse="true"} -->
-<!-- ## Extreme Right Research Network  -->
+::: {.callout-note collapse="true"}
+## Extreme Right Research Network (2026-09-25)
 
-<!-- ```{r echo=FALSE, results="asis"} -->
-<!-- #| warning: false -->
-<!-- # if (Sys.Date() >= as.Date("2026-11-26")) {  -->
+```{r echo=FALSE, results="asis"}
+#| warning: false
+# if (Sys.Date() >= as.Date("2026-11-26")) {
 
-<!-- slide_buttons <- function(slide_id) { -->
-<!--   glue::glue('<p class="text-center buttons"><a class="btn btn-danger" target="_blank" href="{slide_id}.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="{slide_id}.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a></p>') -->
-<!-- } -->
+slide_buttons <- function(slide_id) {
+  glue::glue('<p class="text-center buttons"><a class="btn btn-danger" target="_blank" href="{slide_id}.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="{slide_id}.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a></p>')
+}
 
-<!-- slide_buttons("book_pres/index") -->
+slide_buttons("book_pres/index_ERRN")
 
-<!-- library(xaringanExtra) -->
+library(xaringanExtra)
 
-<!-- xaringanExtra::embed_xaringan( -->
-<!--   "book_pres/index.html", -->
-<!--   ratio = "16:9", -->
-<!--   border = "none", -->
-<!--   margin = "0 auto" -->
-<!-- ) -->
-<!-- # } -->
-<!-- ``` -->
+xaringanExtra::embed_xaringan(
+  "book_pres/index_ERRN.html",
+  ratio = "16:9",
+  border = "none",
+  margin = "0 auto"
+)
+# }
+```
 
-<!-- ::: -->
+:::
 
 <!-- # Analysis replication code  -->
 
