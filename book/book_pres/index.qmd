@@ -2413,7 +2413,7 @@ mapview(postSouthport_sf, zcol = "Type",
 
 > Phrases like 'march and grow' and 'battle for the streets' (*Kampf um die Straße*) are not so much artefacts of one or another organisation’s strategy as they are summaries of archetypal far-right activism. Demonstrations are unshakeably central in far-right movements' repertoire of contention.
 
-::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -20px;"} 
+::: {.fragment data-fragment-index="2" style="margin-top: -20px;"} 
 - Far-right campaigns will continue to emerge 
 - Counter-mobilisation (and demobilising pressure) most effective where there 
     + are strong oppositional networks, and 
@@ -2421,7 +2421,7 @@ mapview(postSouthport_sf, zcol = "Type",
 
 ::: 
 
-::: {.fragment .fade-in-then-semi-out data-fragment-index="3" style="margin-top: -20px;"} 
+::: {.fragment data-fragment-index="3" style="margin-top: -20px;"} 
 - Data and resources available online: <https://michaelzeller.de/book/index_book.html>  
 
 :::
