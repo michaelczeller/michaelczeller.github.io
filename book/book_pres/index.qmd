@@ -89,7 +89,7 @@ bibliography: ../../../../library.bib
 
 <!-- ![](cup_book_gifs/fla_2020_do_this_peacefully.gif){.fragment .absolute top=10 right=30} -->
 
-![](cup_book_gifs/hess_report_2011_summary.gif){.fragment .absolute bottom=10 left=30}
+<!-- ![](cup_book_gifs/hess_report_2011_summary.gif){.fragment .absolute bottom=10 left=30} -->
 
 :::
 
@@ -1535,6 +1535,8 @@ plot(euler_sol, fills = "transparent",
 
 # BNP Red, White, and Blue Festival
 
+## BNP Red, White, and Blue Festival
+
 <!-- picture montage: 1 Tyndall (young with national socialist movement, tyndall_nsm <https://punk77.co.uk/the-national-front/>), 2 Tyndall older (tyndall_bnp, <http://searchlightmagazine.com/2026/04/decision-time-for-rupert-lowe-as-nazis-rally-behind-restore-britain/>), 3 BNP logo (bnp_logo), 4 Griffin young (griffin_nf), 5 Griffin party leader (griffin_bnp, <https://upload.wikimedia.org/wikipedia/commons/8/89/Nick_griffin_bnp_from_flickr_user_britishnationalism.jpg>), 6 RWB site example (bnp_rwb_above), 7 Front National's BBR festival photo (fn_fete_bbr_1994_jmlp.gif) -->
 
 <!-- - RWB -->
@@ -1606,7 +1608,7 @@ RWB Festival: sanitise the BNP's image, make it *family friendly*
 :::
 
 ::: {.fragment .fade-in-then-semi-out data-fragment-index="8" style="margin-top: -20px;"}
-Inspired by *Front National*'s Fête des Bleu-blanc-rouge
+Inspired by *Front National* Fête des Bleu-blanc-rouge
 
 :::
 
@@ -1835,8 +1837,9 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
 
 :::
 
+# Ulrichsbergfeier 
 
-# Ulrichsbergfeier
+## Ulrichsbergfeier {visibility="hidden"}
 
 - Uberg
     + context (pictures of the site and plaques: uberg_site, <https://www.wanderdoerfer.at/kaernten/wanderweg/von-zweikirchen-auf-den-ulrichsberg/>; <https://u-berg.at/texte/derulrichsberg_buch.htm>) 
@@ -1853,7 +1856,9 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
 <!-- <video id="uberg" src="cup_book_clips/uberg_wolfgang-jugler_1988-10-03_overview.mp4" title='Ulrichsbergfeier' -->
 <!--        width="800" controls controlslist="nodownload"></video> -->
 
-## Ulrichsbergfeier events {.smaller .scrollable}
+## Ulrichsbergfeier events {visibility="hidden"} 
+
+<!-- {.smaller .scrollable} -->
 
 ::: {style="margin-top: -25px;"}
 
@@ -2027,6 +2032,8 @@ reactable::reactable(uEvents_sorted,
 
 # Deutsche Volksunion (DVU) in Passau
 
+## Deutsche Volksunion (DVU) in Passau {visibility="hidden"}
+
 - DVU
     + context (pictures of Frey, Nibelungenhalle)
         * picture montage: 1 Frey, 2 Nibelungenhalle, 
@@ -2045,7 +2052,9 @@ reactable::reactable(uEvents_sorted,
 <!--        title='DVU Passau (DE) 1994' -->
 <!--        width="800" controls controlslist="nodownload"></video> -->
 
-## DVU Passau events {.smaller .scrollable}
+## DVU Passau events {visibility="hidden"} 
+
+<!-- {.smaller .scrollable} -->
 
 ```{r dvu-passau-events}
 library(dplyr)
@@ -2091,6 +2100,7 @@ reactable::reactable(dvu,
 - multiple paths to demobilising the far right 
 - many benefits of counter-mobilisation 
 - wider relevance 
+- relevance for contemporary UK 
 - further resources available from research 
 
 <!-- - <https://cambridgeblog.org/2026/07/demobilising-the-far-right-how-societal-actors-counter-far-right-social-forces/> -->
@@ -2128,7 +2138,7 @@ reactable::reactable(dvu,
 :::
 
 ::: {.fragment .fade-up .absolute top=300 left=600} 
-and it never hurts to consider banning booze 
+[and it never hurts to consider banning booze]{style="color:cadetblue;"} 
 
 ::: 
 
@@ -2159,17 +2169,262 @@ and it never hurts to consider banning booze
 
 ::: 
 
-## Conclusions: wider relevance 
+## Wider relevance 
 
-other cases beyond DE, AT, ENG -- mentioned in book 
+<!-- photo montage:    -->
+<!-- - Lukov March, Sofia  -->
+<!-- - Dance of Flags, Jerusalem  -->
+<!-- - Independence March (All-Polish Youth and National Radical Camp), Warsaw  -->
+<!-- - Wien Akademikerball -->
+<!-- - Bleiburg  -->
 
-in recent news, e.g., UK anti-refugee housing demos 
+Far-right movements across Europe (and beyond) commonly rely on demonstrations
 
-## Conclusions: further resources 
+::: {.columns}
 
-- Data and resources available online 
+::: {.column width="50%"}
 
-- <https://cambridgeblog.org/2026/07/demobilising-the-far-right-how-societal-actors-counter-far-right-social-forces/>
+![](cup_book_imgs/other_lukov2026.png){.fragment .absolute top=150 width=500 data-fragment-index="2"}
+
+![](cup_book_imgs/other_jerusalem2026.png){.fragment .absolute top=200 width=500 data-fragment-index="3"}
+
+![](cup_book_imgs/other_PLindependence2018.png){.fragment .absolute top=250 width=500 data-fragment-index="4"}
+
+![](cup_book_imgs/other_akademikerball2018.png){.fragment .absolute top=300 width=500 data-fragment-index="5"}
+
+![](cup_book_imgs/other_bleiburg2016.png){.fragment .absolute top=350 width=500 data-fragment-index="6"}
+
+:::
+
+::: {.column width="50%"}
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -40px;"}
+Annual [Lukov March](https://www.bta.bg/en/news/1064350-annual-march-held-in-sofia-in-memory-of-general-lukov) honours fascist general---despite [bans](https://www.novinite.com/articles/236999/Nazi-Linked+Lukovmarsh+Took+Place+in+Sofia+After+Court+Overturned+City+Ban)
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="3" style="margin-top: -20px;"}
+Jerusalem Day marchers often [threaten](https://www.theguardian.com/world/2026/may/14/israel-nationalists-jerusalem-day-march-anniversary-protest) Palestinian residents 
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="4" style="margin-top: -20px;"}
+[Polish Independence Day](https://notesfrompoland.com/2025/11/11/large-right-wing-independence-march-passes-through-warsaw/) march mixes [far right](https://www.dw.com/en/poland-court-approves-far-right-independence-march-in-warsaw/a-46219225) with conservatives <!-- and attracts RWE activists from around Europe  -->
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="5" style="margin-top: -20px;"}
+FPÖ's [Akademikerball](https://www.spiegel.de/politik/ausland/akademikerball-in-wien-rechts-tanzt-links-demonstriert-a-1190107.html) replace a demobilised FR event (WKR Ball) 
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="6" style="margin-top: -20px;"}
+[Bleiburg Commemorations](https://www.cultures-of-history.uni-jena.de/debates/commemorating-bleiburg-croatias-struggle-with-historical-revisionism) (now [held in Croatia](https://www.portal.hr/en/novosti/hr/108739-obiljezena-godisnjica-bleiburske-tragedije) after [Austrian ban](https://www.parlament.gv.at/aktuelles/news/in-einfacher-sprache/archiv/j2022/027berichtbleiburg)): historically revisionist, sanitising the [Ustaša](https://www.britannica.com/topic/Ustasa)
+
+<!-- [Austrian ban](https://balkaninsight.com/2021/11/24/austrian-interior-ministry-advised-to-ban-croats-wwii-bleiburg-event/) -->
+
+:::
+
+
+:::
+
+:::
+
+
+## Relevance for contemporary UK
+
+::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -20px;"}
+```{r}
+# from the Guardian: <https://www.theguardian.com/uk-news/article/2024/aug/04/rioters-try-to-torch-rotherham-asylum-seeker-hotel-amid-far-right-violence>
+# 2024-07-29 - Southport
+# 2024-07-30 - Southport
+# 2024-07-30 - Sunderland
+# 2024-07-31 - Hartlepool 
+# 2024-07-31 - Manchester 
+# 2024-07-31 - London 
+# 2024-07-31 - Aldershot 
+# 2024-08-02 - Sunderland 
+# 2024-08-02 - Liverpool 
+# 2024-08-03 - Belfast 
+# 2024-08-03 - Blackpool 
+# 2024-08-03 - Manchester 
+# 2024-08-03 - Leeds 
+# 2024-08-03 - Hull 
+# 2024-08-03 - Liverpool 
+# 2024-08-03 - Stoke-on-Trent 
+# 2024-08-03 - Nottingham 
+# 2024-08-03 - Bristol 
+# 2024-08-03 - Portsmouth 
+# 2024-08-04 - Rotherham 
+# 2024-08-04 - Middlesbrough 
+# 2024-08-04 - Aldershot 
+
+# from Wiki: <https://en.wikipedia.org/wiki/Template:2024_United_Kingdom_riots_map>
+library(tibble)
+postSouthport <- tribble(
+  ~Location,                    ~Lat,      ~Long,     ~Type,
+  "Southport",                  53.6475,   -3.0053,   "disorder",
+  "Whitehall",                  51.50417,  -0.12639,  "disorder",
+  "Manchester",                 53.48054,  -2.24361,  "disorder",
+  "Hartlepool",                 54.69176,  -1.21191,  "disorder",
+  "Aldershot",                  51.24812,  -0.75624,  "violent",
+  "Sunderland",                 54.90679,  -1.38396,  "disorder",
+  "Liverpool",                  53.40848,  -2.99179,  "disorder",
+  "Leeds",                      53.80077,  -1.54909,  "disorder",
+  "Nottingham",                 52.95411,  -1.15513,  "disorder",
+  "Stoke-on-Trent",             53.00336,  -2.18271,  "disorder",
+  "Leicester",                  52.63693,  -1.13977,  "disorder",
+  "Blackpool",                  53.81668,  -3.03711,  "disorder",
+  "Blackburn",                  53.74863,  -2.48757,  "disorder",
+  "Preston",                    53.76320,  -2.70312,  "disorder",
+  "Bristol",                    51.45462,  -2.58790,  "disorder",
+  "Hull",                       53.74355,  -0.33934,  "violent",
+  "Belfast",                    54.59729,  -5.93011,  "disorder",
+  "Manvers, Wath upon Dearne",  53.50863,  -1.35138,  "violent",
+  "Bolton",                     53.57686,  -2.42821,  "disorder",
+  "Middlesbrough",              54.57418,  -1.23514,  "disorder",
+  "Tamworth",                   52.62866,  -1.69332,  "violent",
+  "Solihull",                   52.41189,  -1.77766,  "disorder",
+  "Weymouth",                   50.60993,  -2.45463,  "disorder",
+  "Lancaster",                  54.04492,  -2.79932,  "disorder",
+  "Sheffield",                  53.38112,  -1.47009,  "peaceful",
+  "Birmingham",                 52.48224,  -1.89003,  "disorder",
+  "Plymouth",                   50.37544,  -4.14260,  "disorder",
+  "Darlington",                 54.52362,  -1.55945,  "disorder",
+  "Brighton",                   50.82615,  -0.14230,  "peaceful",
+  "Hastings",                   50.85427,   0.57344,  "peaceful",
+  "Walthamstow",                51.59017,  -0.01737,  "peaceful",
+  "Harrow",                     51.58061,  -0.34201,  "peaceful",
+  "Newcastle",                  54.97738,  -1.61864,  "peaceful",
+  "Northampton",                52.23705,  -0.89446,  "disorder",
+  "Brentford",                  51.48350,  -0.30639,  "peaceful",
+  "North Finchley",             51.61361,  -0.17605,  "peaceful",
+  "Normanton, Derby",           52.90356,  -1.47902,  "peaceful",
+  "Southampton",                50.91049,  -1.40490,  "disorder",
+  "Portsmouth",                 50.80147,  -1.09324,  "disorder",
+  "Bournemouth",                50.72195,  -1.86645,  "disorder",
+  "Chatham",                    51.38098,   0.52202,   "disorder",
+  "Westcliff-on-Sea, Southend", 51.53573,   0.69680,  "peaceful",
+  "Cardiff",                    51.48376,  -3.16812,  "peaceful",
+  "Accrington",                 53.75345,  -2.37186,  "peaceful",
+  "Newtownabbey",               54.65466,  -5.91866,  "disorder",
+  "Bangor",                     54.65416,  -5.67308,  "peaceful",
+  "Carrickfergus",              54.72632,  -5.80996,  "disorder",
+  "Stoke Newington, Hackney",   51.56118,  -0.08350,  "peaceful",
+  "Lewisham",                   51.46113,  -0.00749,  "peaceful",
+  "Oxford",                     51.75198,  -1.25768,  "peaceful",
+  "Swindon",                    51.55814,  -1.77984,  "peaceful",
+  "Derry",                      54.99739,  -7.31988,  "peaceful",
+  "Stormont",                   54.60431,  -5.83266,  "peaceful",
+  "Walton, Liverpool",          53.44396,  -2.95665,  "disorder",
+  "Barnsley",                   53.55263,  -1.47975,  "disorder",
+  "Crawley",                    51.11400,  -0.17100,  "peaceful",
+  "Paisley",                    55.84265,  -4.41979,  "peaceful",
+  "Bathgate",                   55.88707,  -3.62406,  "peaceful",
+  "Dumfries",                   55.06870,  -3.61057,  "peaceful",
+  "Dundee",                     56.46029,  -2.96945,  "peaceful",
+  "Edinburgh",                  55.95253,  -3.17441,  "peaceful",
+  "Glasgow",                    55.86117,  -4.25015,  "peaceful",
+  "Tenby",                      51.67168,  -4.69911,  "peaceful",
+  "St Helens",                  53.45405,  -2.73543,  "peaceful",
+  "High Wycombe",               51.62866,  -0.74824,  "disorder",
+  "Chester",                    53.19139,  -2.89028,  "disorder"
+)
+
+library(tidyverse)
+library(ggplot2)
+library(sf)
+library(rnaturalearth)
+library(mapview)
+# library(spatstat)
+library(leafpop)
+
+uk = ne_countries(scale=50, returnclass="sf") |>
+    filter(admin=="United Kingdom")
+
+postSouthport_sf <- postSouthport %>%
+  st_as_sf(
+    coords = c("Long", "Lat"),
+    crs = st_crs("EPSG:27700") # CRS for UK (https://epsg.io/)
+  )
+
+st_crs(postSouthport_sf) <- st_crs(uk)
+
+mapview(postSouthport_sf, zcol = "Type",
+        legend = T, layer.name = 'Post-Southport demos and riots',
+        map.types = c("OpenStreetMap"),
+        popup = popupTable(postSouthport_sf,
+                           zcol = c("Location","Type")))
+
+```
+::: 
+
+![](cup_book_imgs/other_uk_raise.png){.fragment .absolute top=150 width=515 data-fragment-index="3"}
+
+![](cup_book_imgs/other_uk_bell.png){.fragment .absolute top=200 width=515 data-fragment-index="4"}
+
+![](cup_book_imgs/other_uk_dover.png){.fragment .absolute top=250 width=515 data-fragment-index="5"}
+
+
+:::
+
+::: {.column width="50%"}
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -20px;"} 
+- [anti-migrant protests](https://www.theguardian.com/uk-news/article/2024/aug/04/rioters-try-to-torch-rotherham-asylum-seeker-hotel-amid-far-right-violence) after Southport 
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="3" style="margin-top: -20px;"} 
+- [Raise the Colours](https://www.theguardian.com/uk-news/2026/may/15/man-hit-by-van-birmingham-residents-take-down-union-flags-put-up-by-anti-migrant-group) campaign -- [high court injunction](https://www.theguardian.com/uk-news/2026/jun/23/nationalist-group-stop-hoisting-st-george-flags-oxfordshire-court-injunction) in 2026
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="4" style="margin-top: -20px;"} 
+- protesting refugee housing (e.g., [Bell Hotel](https://www.theguardian.com/uk-news/2026/jul/08/battle-over-bell-hotel-asylum-protests-essex) in Epping)
+::: 
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="5" style="margin-top: -20px;"} 
+- anti-migrant [blockading](https://www.theguardian.com/uk-news/2026/sep/07/ministers-condemn-far-right-activists-portsmouth-asylum-seekers) action in [Dover and Portsmouth](https://www.theguardian.com/politics/2026/sep/07/patriot-platform-far-right-group-dover-portsmouth) 
+::: 
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="6" style="margin-top: -40px;"} 
+[parallels to DE campaigns in 2015-2016: FreeSpirit, Freital Stands Up, Heidenau Listens, Einsiedel Says No, as well as UK campaign 'Justice for Women and Children' (2018-19)]{style="color:cadetblue; font-size: 0.7em;"} 
+
+:::
+
+
+:::
+
+:::
+
+<!-- - protesting refugee housing (<https://www.theguardian.com/uk-news/2026/jul/08/battle-over-bell-hotel-asylum-protests-essex>) -->
+<!--     + Bell Hotel in Epping (Essex): made into asylum-seeker accommodation by Conservatives in 2020 -->
+<!--     + initial dissenters: Eddy Butler (BNP) and Julian Leppert (For Britain)  -->
+<!--     + protests organised on Facebook: 'Epping Forest Residents Group' becomes 'Epping Says NO'  -->
+<!--         * admins from Homeland party: Callum Barker, Adam Clegg and Andrew Piper -->
+<!--         * Craig Kitts, part of Raise the colours campaign  -->
+<!--         * Orla Minihane, part of a group of local mothers (Pink Ladies) and part of Reform, then Restore -->
+
+
+---
+
+> Phrases like 'march and grow' and 'battle for the streets' (*Kampf um die Straße*) are not so much artefacts of one or another organisation’s strategy as they are summaries of archetypal far-right activism. Demonstrations are unshakeably central in far-right movements' repertoire of contention.
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -20px;"} 
+- Far-right campaigns will continue to emerge 
+- Counter-mobilisation (and demobilising pressure) most effective where there 
+    + are strong oppositional networks, and 
+    + strategies to prompt state action 
+
+::: 
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="3" style="margin-top: -20px;"} 
+- Data and resources available online: <https://michaelzeller.de/book/index_book.html>  
+
+:::
 
 
 ```{r SummaryNotes}
