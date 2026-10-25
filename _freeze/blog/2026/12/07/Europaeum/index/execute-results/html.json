@@ -1,0 +1,15 @@
+{
+  "hash": "1359b50c801ce354a086faae03a851d9",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Europaeum presentation - Monitoring Right-Wing Extremism\ndate: 2026-10-25\nauthor:\n  - name: Michael C. Zeller\n    url: https://michaelczeller.github.io\n    orcid: 0000-0002-2422-3896\ndescription: \"Presentation to the Europaeum Scholars in Budapest\"\nengine: knitr \nimage: europaeum_logo.png\ntwitter-card:\n  image: \"europaeum_logo.png\"\nopen-graph:\n  image: \"europaeum_logo.png\"\ncategories:\n  - far right\n  - right-wing extremism\n---\n\n\n\nSlides for presentation to Europaeum Scholars in Budapest:\n\n<!-- <div style=\"text-align: center; margin-bottom: 1rem;\"> -->\n<!--   <a class=\"btn btn-danger\" -->\n<!--      href=\"./europaeum_pres.html\" -->\n<!--      target=\"_blank\"> -->\n<!--     ↗ View all slides in new window -->\n<!--   </a> -->\n<!-- </div> -->\n\n<!-- <iframe -->\n<!--   src=\"./europaeum_pres.html\" -->\n<!--   width=\"100%\" -->\n<!--   height=\"650\" -->\n<!--   style=\"border: none;\" -->\n<!--   title=\"Monitoring Right-Wing Extremism presentation\"> -->\n<!-- </iframe> -->\n\n<!-- <iframe -->\n<!--   src=\"./europaeum_pres.html\" -->\n<!--   width=\"100%\" -->\n<!--   height=\"650\" -->\n<!--   style=\"border: none;\" -->\n<!--   title=\"Monitoring Right-Wing Extremism presentation\"> -->\n<!-- </iframe> -->\n\n\n\n<p class=\"text-center buttons\">\n  <a class=\"btn btn-danger\" target=\"_blank\"\n     href=\"europaeum_pres.html\">\n    <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>\n    View all slides in new window\n  </a>\n</p>\n\n\n\n<iframe\n  src=\"./europaeum_pres.html\"\n  width=\"100%\"\n  height=\"350\"\n  style=\"border: none;\"\n  title=\"Monitoring Right-Wing Extremism presentation\">\n</iframe>\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

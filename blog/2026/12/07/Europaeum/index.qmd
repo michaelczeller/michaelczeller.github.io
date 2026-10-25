@@ -1,0 +1,68 @@
+---
+title: Europaeum presentation - Monitoring Right-Wing Extremism
+date: 2026-10-25
+author:
+  - name: Michael C. Zeller
+    url: https://michaelczeller.github.io
+    orcid: 0000-0002-2422-3896
+description: "Presentation to the Europaeum Scholars in Budapest"
+engine: knitr 
+image: europaeum_logo.png
+twitter-card:
+  image: "europaeum_logo.png"
+open-graph:
+  image: "europaeum_logo.png"
+categories:
+  - far right
+  - right-wing extremism
+---
+
+Slides for presentation to Europaeum Scholars in Budapest:
+
+<!-- <div style="text-align: center; margin-bottom: 1rem;"> -->
+<!--   <a class="btn btn-danger" -->
+<!--      href="./europaeum_pres.html" -->
+<!--      target="_blank"> -->
+<!--     ↗ View all slides in new window -->
+<!--   </a> -->
+<!-- </div> -->
+
+<!-- <iframe -->
+<!--   src="./europaeum_pres.html" -->
+<!--   width="100%" -->
+<!--   height="650" -->
+<!--   style="border: none;" -->
+<!--   title="Monitoring Right-Wing Extremism presentation"> -->
+<!-- </iframe> -->
+
+<!-- <iframe -->
+<!--   src="./europaeum_pres.html" -->
+<!--   width="100%" -->
+<!--   height="650" -->
+<!--   style="border: none;" -->
+<!--   title="Monitoring Right-Wing Extremism presentation"> -->
+<!-- </iframe> -->
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_id <- "europaeum_pres"
+
+cat(glue::glue(
+  '<p class="text-center buttons">
+    <a class="btn btn-danger" target="_blank"
+       href="{slide_id}.html">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      View all slides in new window
+    </a>
+  </p>'
+))
+```
+
+<iframe
+  src="./europaeum_pres.html"
+  width="100%"
+  height="350"
+  style="border: none;"
+  title="Monitoring Right-Wing Extremism presentation">
+</iframe>
+
+
