@@ -126,7 +126,7 @@ xaringanExtra::embed_xaringan(
 
 :::
 
-::: {.callout-note collapse="true"}
+::: {.callout-note collapse="false"}
 ## Tübingen - Institut für Rechtsextremismusforschung (IRex) (2026-11-17)
 
 ```{r echo=FALSE, results="asis"}
