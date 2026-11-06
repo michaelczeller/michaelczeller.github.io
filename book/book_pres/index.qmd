@@ -1535,7 +1535,7 @@ plot(euler_sol, fills = "transparent",
 
 # BNP Red, White, and Blue Festival
 
-## BNP Red, White, and Blue Festival
+## BNP Red, White, and Blue Festival {visibility="hidden"}
 
 <!-- picture montage: 1 Tyndall (young with national socialist movement, tyndall_nsm <https://punk77.co.uk/the-national-front/>), 2 Tyndall older (tyndall_bnp, <http://searchlightmagazine.com/2026/04/decision-time-for-rupert-lowe-as-nazis-rally-behind-restore-britain/>), 3 BNP logo (bnp_logo), 4 Griffin young (griffin_nf), 5 Griffin party leader (griffin_bnp, <https://upload.wikimedia.org/wikipedia/commons/8/89/Nick_griffin_bnp_from_flickr_user_britishnationalism.jpg>), 6 RWB site example (bnp_rwb_above), 7 Front National's BBR festival photo (fn_fete_bbr_1994_jmlp.gif) -->
 
@@ -1555,75 +1555,83 @@ plot(euler_sol, fills = "transparent",
 <!--        title='BNP Red, White, and Blue Festival (UK) 2008' -->
 <!--        width="900" controls controlslist="nodownload"></video> -->
 
-::: {.columns}
-
-::: {.column width="50%"}
-
-![](cup_book_imgs/bnp_logo.png){.fragment .absolute top=80 width=500 data-fragment-index="2"}
-
-![](cup_book_imgs/tyndall_nsm_emph.png){.fragment .absolute top=120 width=500 data-fragment-index="3"}
-
-![](cup_book_imgs/tyndall_bnp.png){.fragment .absolute top=160 width=500 data-fragment-index="4"}
-
-![](cup_book_imgs/griffin_nf.png){.fragment .absolute top=200 width=400 data-fragment-index="5"}
-
-![](cup_book_imgs/griffin_bnp.png){.fragment .absolute top=240 width=500 data-fragment-index="6"}
-
-![](cup_book_imgs/bnp_rwb_above.png){.fragment .absolute top=280 width=500 data-fragment-index="7"}
-
-![](cup_book_imgs/fn_fete_bbr_1994.png){.fragment .absolute top=320 width=500 data-fragment-index="8"}
-
-:::
-
-::: {.column width="50%"}
-
-::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -50px;"}
-British National Party, foremost postwar extremist party 
-
-:::
-
-::: {.fragment .fade-in-then-semi-out data-fragment-index="3" style="margin-top: -20px;"}
-Founded in 1982 by John [Tyndall](http://searchlightmagazine.com/2026/04/decision-time-for-rupert-lowe-as-nazis-rally-behind-restore-britain/), continuing his extremist activism
-
-:::
-
-::: {.fragment .fade-in-then-semi-out data-fragment-index="4" style="margin-top: -20px;"}
-BNP was not explicitly neo-Nazi, but avowedly racist 
-
-:::
-
-::: {.fragment .fade-in-then-semi-out data-fragment-index="5" style="margin-top: -20px;"}
-Tyndall recruited an experienced young neo-Nazi, Nick [Griffin](https://upload.wikimedia.org/wikipedia/commons/8/89/Nick_griffin_bnp_from_flickr_user_britishnationalism.jpg)
-
-:::
-
-::: {.fragment .fade-in-then-semi-out data-fragment-index="6" style="margin-top: -20px;"}
-Griffin ousted Tyndall and began party 'modernisation'
-
-:::
-
-::: {.fragment .fade-in-then-semi-out data-fragment-index="7" style="margin-top: -20px;"}
-RWB Festival: sanitise the BNP's image, make it *family friendly*
-
-:::
-
-::: {.fragment .fade-in-then-semi-out data-fragment-index="8" style="margin-top: -20px;"}
-Inspired by *Front National* Fête des Bleu-blanc-rouge
-
-:::
 
 
-:::
 
-:::
 
-## BNP Red, White, and Blue Festival events {.smaller .scrollable}
+<!-- ::: {.columns} -->
+
+<!-- ::: {.column width="50%"} -->
+
+<!-- ![](cup_book_imgs/bnp_logo.png){.fragment .absolute top=80 width=500 data-fragment-index="2"} -->
+
+<!-- ![](cup_book_imgs/tyndall_nsm_emph.png){.fragment .absolute top=120 width=500 data-fragment-index="3"} -->
+
+<!-- ![](cup_book_imgs/tyndall_bnp.png){.fragment .absolute top=160 width=500 data-fragment-index="4"} -->
+
+<!-- ![](cup_book_imgs/griffin_nf.png){.fragment .absolute top=200 width=400 data-fragment-index="5"} -->
+
+<!-- ![](cup_book_imgs/griffin_bnp.png){.fragment .absolute top=240 width=500 data-fragment-index="6"} -->
+
+<!-- ![](cup_book_imgs/bnp_rwb_above.png){.fragment .absolute top=280 width=500 data-fragment-index="7"} -->
+
+<!-- ![](cup_book_imgs/fn_fete_bbr_1994.png){.fragment .absolute top=320 width=500 data-fragment-index="8"} -->
+
+<!-- ::: -->
+
+<!-- ::: {.column width="50%"} -->
+
+<!-- ::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -50px;"} -->
+<!-- British National Party, foremost postwar extremist party  -->
+
+<!-- ::: -->
+
+<!-- ::: {.fragment .fade-in-then-semi-out data-fragment-index="3" style="margin-top: -20px;"} -->
+<!-- Founded in 1982 by John [Tyndall](http://searchlightmagazine.com/2026/04/decision-time-for-rupert-lowe-as-nazis-rally-behind-restore-britain/), continuing his extremist activism -->
+
+<!-- ::: -->
+
+<!-- ::: {.fragment .fade-in-then-semi-out data-fragment-index="4" style="margin-top: -20px;"} -->
+<!-- BNP was not explicitly neo-Nazi, but avowedly racist  -->
+
+<!-- ::: -->
+
+<!-- ::: {.fragment .fade-in-then-semi-out data-fragment-index="5" style="margin-top: -20px;"} -->
+<!-- Tyndall recruited an experienced young neo-Nazi, Nick [Griffin](https://upload.wikimedia.org/wikipedia/commons/8/89/Nick_griffin_bnp_from_flickr_user_britishnationalism.jpg) -->
+
+<!-- ::: -->
+
+<!-- ::: {.fragment .fade-in-then-semi-out data-fragment-index="6" style="margin-top: -20px;"} -->
+<!-- Griffin ousted Tyndall and began party 'modernisation' -->
+
+<!-- ::: -->
+
+<!-- ::: {.fragment .fade-in-then-semi-out data-fragment-index="7" style="margin-top: -20px;"} -->
+<!-- RWB Festival: sanitise the BNP's image, make it *family friendly* -->
+
+<!-- ::: -->
+
+<!-- ::: {.fragment .fade-in-then-semi-out data-fragment-index="8" style="margin-top: -20px;"} -->
+<!-- Inspired by *Front National* Fête des Bleu-blanc-rouge -->
+
+<!-- ::: -->
+
+
+<!-- ::: -->
+
+<!-- ::: -->
+
+## BNP Red, White, and Blue Festival events {visibility="hidden"}
+
+<!-- {.smaller .scrollable} -->
 
 <!-- https://glin.github.io/reactable/articles/examples.html -->
 
 ::: {style="margin-top: -25px;"}
 
 ```{r bnp-rwb-events}
+#| eval: false
+#| include: false
 library(dplyr)
 library(kableExtra)
 library(reactable)
@@ -1680,10 +1688,12 @@ reactable::reactable(rwb,
 
 
 
-## RWB Case calibration
+## RWB case calibration {visibility="hidden"}
 
 
 ```{r rwb-calibration}
+#| eval: false
+#| include: false
 library(dplyr)
 library(readxl)
 library(kableExtra)
@@ -1739,13 +1749,13 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
 
 ![](cup_book_imgs/bnp_rwb_counter.png){.fragment .absolute top=50 left=20 width=1000}
 
-## BNP rise and fall 
+## BNP rise and fall {visibility="hidden"}
 
-![](cup_book_imgs/bnp-seats-1.jpeg){.fragment .fade-up .absolute top=40 left=20 width=900}
+<!-- ![](cup_book_imgs/bnp-seats-1.jpeg){.fragment .fade-up .absolute top=40 left=20 width=900} -->
 
-![](cup_book_imgs/bnp-nat-elect-1.jpeg){.fragment .fade-up .absolute top=40 left=20 width=900}
+<!-- ![](cup_book_imgs/bnp-nat-elect-1.jpeg){.fragment .fade-up .absolute top=40 left=20 width=900} -->
 
-## RWB demobilisation process 
+## RWB demobilisation process {visibility="hidden"}
 
 <!-- \begin{figure} -->
 <!-- \centering -->
@@ -1816,7 +1826,7 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
 <!-- \label{fig:bnp-detailed-rwb} -->
 <!-- \end{figure} -->
 
-## RWB case conclusions 
+## RWB case conclusions {visibility="hidden"}
 
 ::: {.fragment .fade-up style="margin-top: -30px;"} 
 - RWB was an evolution from BNP's 'march and grow', aimed at bolstering the party's electoral prospects
@@ -1839,24 +1849,118 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
 
 # Ulrichsbergfeier 
 
-## Ulrichsbergfeier {visibility="hidden"}
+## Ulrichsbergfeier 
 
-- Uberg
-    + context (pictures of the site and plaques: uberg_site, <https://www.wanderdoerfer.at/kaernten/wanderweg/von-zweikirchen-auf-den-ulrichsberg/>; <https://u-berg.at/texte/derulrichsberg_buch.htm>) 
-        * photo montage: 1. Blasius Scheucher (no photo available), 2 Uberg, 3 Breker piece, 4 plaques, 
-        * Third Reich (incl. Waffen-SS) veterans commemoration, established after Allies left Austria in 1955 (on ancient hilltop holy site; supported (speakers, honour guard, transport) by parties and state)
-        * ‘far-right’ event: organisers and speakers, revisionist narratives, right-wing extremist participants 
-        * need not have demobilised; far-right WWII commemorations endure (Bleiburg, Tag der Ehre in Ungarn, Lukov March)
-    + conditions of case
-    + presumed and alternative mechanisms
-    + mechanism graphic
+<!-- {visibility="hidden"} -->
+
+<!-- - Uberg -->
+<!--     + context (pictures of the site and plaques: uberg_site, <https://www.wanderdoerfer.at/kaernten/wanderweg/von-zweikirchen-auf-den-ulrichsberg/>; <https://u-berg.at/texte/derulrichsberg_buch.htm>)  -->
+<!--         * photo montage: 1. Blasius Scheucher (no photo available), 2 Uberg, 3 Breker piece, 4 plaques,  -->
+<!--         * Third Reich (incl. Waffen-SS) veterans commemoration, established after Allies left Austria in 1955 (on ancient hilltop holy site; supported (speakers, honour guard, transport) by parties and state) -->
+<!--         * ‘far-right’ event: organisers and speakers, revisionist narratives, right-wing extremist participants  -->
+<!--         * need not have demobilised; far-right WWII commemorations endure (Bleiburg, Tag der Ehre in Ungarn, Lukov March) -->
+<!--     + conditions of case -->
+<!--     + presumed and alternative mechanisms -->
+<!--     + mechanism graphic -->
 
 <!-- ## Ulrichsbergfeier pomp and ceremony -->
 
 <!-- <video id="uberg" src="cup_book_clips/uberg_wolfgang-jugler_1988-10-03_overview.mp4" title='Ulrichsbergfeier' -->
 <!--        width="800" controls controlslist="nodownload"></video> -->
 
-## Ulrichsbergfeier events {visibility="hidden"} 
+::: {.columns}
+
+::: {.column width="40%"}
+
+![](cup_book_imgs/uberg_site.png){.fragment .absolute top=80 width=400 data-fragment-index="2"}
+
+![](cup_book_imgs/uberg_breker.png){.fragment .absolute top=120 width=400 data-fragment-index="3"}
+
+![](cup_book_imgs/uberg_tafeln_waffen-ss-flanders.png){.fragment .absolute top=160 width=400 data-fragment-index="4"}
+
+![](cup_book_imgs/uberg_tafeln_waffen-ss-finland.png){.fragment .absolute top=160 width=400 data-fragment-index="5"}
+
+![](cup_book_imgs/uberg_tafeln_waffen-ss-latvia.png){.fragment .absolute top=160 width=400 data-fragment-index="6"}
+
+![](cup_book_imgs/uberg_tafeln_kiv.png){.fragment .absolute top=160 width=400 data-fragment-index="7"}
+
+![](cup_book_imgs/uberg_colour_guard.png){.fragment .absolute top=280 width=400 data-fragment-index="8"}
+
+![](cup_book_imgs/uberg_haider.png){.fragment .absolute top=320 width=400 data-fragment-index="9"}
+<!-- <https://www.derstandard.at/story/2000133137865/kritik-an-neuem-chef-des-kaerntner-verfassungsschutzes-weitet-sich-aus> -->
+
+:::
+
+::: {.column width="60%"}
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -10px;"}
+Ulrichsberg: site of ruined 15th century church (owned by titled Goëss family)
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="3" style="margin-top: -20px;"}
+adopted as site for veteran commemoration in 1959, decorated (1984) with Arno Breker relief 
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="4" style="margin-top: -20px;"}
+plaques to Flemish Waffen-SS volunteers, 
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="5" style="margin-top: -20px;"}
+Finnish Waffen-SS volunteers, 
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="6" style="margin-top: -20px;"}
+Latvian Waffen-SS volunteers, 
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="7" style="margin-top: -20px;"}
+KIV comradeship (modified SS motto)
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="8" style="margin-top: -20px;"}
+ritual of pomp and ceremony: colour guard, veterans (sometimes in uniform) and active soldiers
+
+:::
+
+::: {.fragment .fade-in-then-semi-out data-fragment-index="9" style="margin-top: -20px;"}
+and prominent politicians
+
+:::
+
+
+:::
+
+:::
+
+## Ulrichsbergfeier - a far-right campaign 
+
+<!-- * ‘far-right’ event: organisers and speakers, revisionist narratives, right-wing extremist participants  -->
+<!-- * need not have demobilised; far-right WWII commemorations endure (Bleiburg, Tag der Ehre in Ungarn, Lukov March) -->
+
+::: {style="margin-top: -35px;"} 
+- fascist veterans celebrations, far-right WWII commemorations
+    + e.g., Halbe, Mittenwald, Budapest, Sofia, Riga 
+    + *[earlier]{style="color:goldenrod;"}*: aiming to win benefits for veterans; *[more recently]{style="color:goldenrod;"}*: revisionism, refute some/all of Third Reich wrongdoing 
+
+<!-- Halbe SS cemetary, Mountain troops in Mittenwald, Day of Honour in Budapest, Lukov March in Sofia, Remembrance Day of the Latvian Legionnaires -->
+
+:::
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- despite claims of 'non-political' and 'peace promotion', Ulrichsbergfeier was [decidedly far right]{style="color:red;"}: 
+    + **[organisers and speakers]{style="color:cadetblue;"}**: originated by B. Scheucher (*Gebirgsjäger* veteran), first speech (1959) given by A. Holzinger, Waffen-SS veteran and active Austrian army officer 
+    + **[participants]{style="color:cadetblue;"}**: far-right fraternities, Waffen-SS veterans (KIV), Nazi 'celebrities', neo-Nazi activists --- excluding partisans 
+    + **[symbols]{style="color:cadetblue;"}**: NS-regime iconography, plaques <!-- to parts of Third Reich's armed forces and forced labour apparatus --> (several illegal)
+
+::: 
+
+## Ulrichsbergfeier events {.smaller}
 
 <!-- {.smaller .scrollable} -->
 
@@ -2012,7 +2116,7 @@ rownames(uEvents) <- NULL
 uEvents_sorted <- uEvents %>% arrange(desc(Date))
 
 reactable::reactable(uEvents_sorted, 
-  defaultPageSize = 10,
+  defaultPageSize = 6,
   defaultColDef = colDef(
     align = "left",
     minWidth = 70,
@@ -2029,6 +2133,129 @@ reactable::reactable(uEvents_sorted,
 ```
 
 ::: 
+
+::: {.fragment .fade-up style="margin-top: -1px;"} 
+- for many years participation of politicians across political spectrum ([ÖVP]{style="color:#63C3D0;"}, [SPÖ]{style="color:#DC021B;"}, [FPÖ]{style="color:#0056A2;"})
+- shifting context and consensus on Austria's *Opferthese* 
+    + 1986 Kurt Waldheim (successful) presidential campaign 
+    + radicalisation and rise of [FPÖ]{style="color:#0056A2;"} under [Jörg Haider]{style="color:#0056A2;"}
+        * contentious speeches at Ulrichsberg by Haider in 1990 and 2000 (and at Krumpendorftreffen in 1995) 
+
+::: 
+
+## Ulrichsbergfeier case calibration 
+
+```{r uberg-calibration}
+library(dplyr)
+library(readxl)
+library(kableExtra)
+
+df <- read_excel("Zeller_CUP2026_data.xlsx", sheet = "Campaigns")
+df <- as.data.frame(df)
+df <- df[!(df$LOC %in% "Wien, Speilfeld"),]
+df <- df[!(df$NAME %in% "March for Life"),]
+df <- df[!(df$NAME %in% "Linz Fraternity Ball"),]
+df <- df[!(df$NAME %in% "Dresden Memorial March"),]
+df <- df[!(df$NAME %in% "REP Ash Wednesday Rally"),]
+rownames(df) <- df$NAME
+
+col.names.keep <- c("ND","LD","PCO","PCH","SCO","SCH")
+DEMOB <- df[ ,(colnames(df) %in% col.names.keep)]
+DEMOB <- na.omit(DEMOB)
+DEMOB = DEMOB %>% dplyr::select(ND, LD, SCH, SCO, PCH, PCO)
+
+DEMOB_Uberg = DEMOB %>% dplyr::select(LD, SCH, SCO, PCH, PCO)
+
+knitr::kable(DEMOB_Uberg[row.names(DEMOB_Uberg) %in% c("Ulrichsberg Celebration"),], align='cccccc', booktabs = TRUE, 
+             # caption = 'Ulrichsbergfeier campaign calibration.', 
+             # caption.short = 'Ulrichsbergfeier campaign calibration',
+             col.names = c("Long Duration (LD)","State Channelling (SCH)","State Coercion (SCO)","Private Channelling (PCH)","Private Coercion (PCO)")) %>% 
+  kable_styling(font_size = 30) %>% 
+  column_spec(1, width = "3.8cm") %>% 
+  column_spec(2, width = "3.6cm") %>% 
+  column_spec(3, width = "4cm") %>% 
+  column_spec(4, width = "3.6cm") %>% 
+  column_spec(5, width = "4cm") %>% 
+  column_spec(6, width = "3.6cm") %>% 
+  row_spec(0, bold = TRUE)
+
+```
+
+::: {.fragment .fade-up} 
+ <!-- .absolute top=350 left=100 --> 
+ 
+- Austrian state not only tolerated Ulrichsbergfeier---it *sponsored* it 
+    + Army honour guard 
+    + military jeeps to transport older participants up mountain 
+    + state financing for UBG veterans group (organisers) 
+
+::: 
+
+<!-- - participation numbers graphic (layered over)? -->
+
+## Ulrichsbergfeier - possible demobilising mechanisms
+
+::: {style="margin-top: -20px;"} 
+State channelling withdraws resources necessary for campaign
+
+::: 
+
+![](cup_book_imgs/uberg-hypo.jpeg){.absolute top=100 left=40 width=950}
+
+::: {.fragment .fade-up style="margin-top: 180px;"} 
+ <!-- .absolute top=500 left=100 -->   
+
+<!-- **Alternative theory-based mechanisms**:  -->
+
+- [Lost commitment]{style="color:cadetblue;"}: broader inclusion alienate existing participants 
+- [Burnout/exhaustion]{style="color:cadetblue;"}: fewer veterans able to participate <!-- (mortality or infirmity) -->
+- [Membership loss]{style="color:cadetblue;"}: UBG fails to recruit new participants 
+- [Factionalisation]{style="color:cadetblue;"}: splits among veterans’ organisations within UBG weaken mobilising capacity 
+- [Rigidity]{style="color:cadetblue;"}: UBG supports polarising and political rhetoric, undermining consensual support for the campaign 
+ 
+::: 
+
+
+## Ulrichsbergfeier - demobilisation process
+
+![](cup_book_imgs/uberg-empiric.jpeg){.absolute top=125 left=40 width=1000}
+
+![](cup_book_imgs/uberg-empiric_emph1.png){.fragment .absolute top=125 left=40 width=1000}
+
+![](cup_book_imgs/uberg-empiric_emph2.png){.fragment .absolute top=125 left=40 width=1000}
+
+::: {.fragment .fade-up style="margin-top: -40px;"} 
+ <!-- .absolute top=500 left=100 -->   
+
+- without state sponsorship, demonstrations literally and metaphorically went downhill 
+
+::: 
+
+## Ulrichsbergfeier case conclusions
+
+::: {style="margin-top: -40px;"} 
+- Ulrichsbergfeier need not have demobilised 
+    + other far-right WWII memory campaigns have been carried forward by younger generations 
+    + ageing, dying veterans on its own is insufficient explanation 
+
+:::
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- [closing opportunity]{style="color:darkred;"} demobilised Ulrichsbergfeier  
+    + [relatively long process]{style="color:cadetblue;"}: politicisation (SPÖ distancing, FPÖ coopting) $\rightarrow$ weaker state support $\rightarrow$ shocking revelation of RWE by organiser<!-- Wolf Dieter Ressenig --> $\rightarrow$ campaign ends after a few years 
+    + (state-driven) *resource deprivation* mechanism --- private counter-action a key trigger 
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -35px; font-size: 0.8em;"} 
+- state permissiveness, even outright support is not unique (e.g., Bleiburg, PL Independence March, Lega Nord events at Pontida, Roma's Via Acca Larentia, Milano's Sergio Ramelli Commemoration, Tag der Ehre in Budapest)
+
+::: 
+
+<!-- * need not have demobilised; far-right WWII commemorations endure (Bleiburg, Tag der Ehre in Ungarn, Lukov March) -->
+<!--     + conditions of case -->
+<!--     + presumed and alternative mechanisms -->
+<!--     + mechanism graphic -->
 
 # Deutsche Volksunion (DVU) in Passau
 
@@ -2100,7 +2327,7 @@ reactable::reactable(dvu,
 - multiple paths to demobilising the far right 
 - many benefits of counter-mobilisation 
 - wider relevance 
-- relevance for contemporary UK 
+<!-- - relevance for contemporary UK  -->
 - further resources available from research 
 
 <!-- - <https://cambridgeblog.org/2026/07/demobilising-the-far-right-how-societal-actors-counter-far-right-social-forces/> -->
@@ -2231,7 +2458,7 @@ FPÖ's [Akademikerball](https://www.spiegel.de/politik/ausland/akademikerball-in
 :::
 
 
-## Relevance for contemporary UK
+## Relevance for contemporary UK {visibility="hidden"} 
 
 ::: {.columns}
 
@@ -2239,6 +2466,8 @@ FPÖ's [Akademikerball](https://www.spiegel.de/politik/ausland/akademikerball-in
 
 ::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -20px;"}
 ```{r}
+#| eval: false
+#| include: false
 # from the Guardian: <https://www.theguardian.com/uk-news/article/2024/aug/04/rioters-try-to-torch-rotherham-asylum-seeker-hotel-amid-far-right-violence>
 # 2024-07-29 - Southport
 # 2024-07-30 - Southport
