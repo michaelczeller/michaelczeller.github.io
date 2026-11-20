@@ -1,5 +1,7 @@
 ---
-title: "Demobilising the Far Right"
+title: |
+  | Societal conflict and 
+  | *Demobilising the Far Right*
 subtitle: "Patterns and Processes from Demonstration Campaigns in Germany, England, and Austria"
 author: "[Dr. Michael C. Zeller](https://michaelzeller.de)"
 format: 
@@ -79,7 +81,7 @@ bibliography: ../../../../library.bib
 
 ![](cup_book_gifs/uberg_Tauschitz_resignation_2022_all_parties.gif){.fragment .absolute top=50 left=10 width=800}
 
-![](cup_book_gifs/bnp-rwb_panorama_2001_rm_sound.gif){.fragment .absolute top=10 right=10}
+<!-- ![](cup_book_gifs/bnp-rwb_panorama_2001_rm_sound.gif){.fragment .absolute top=10 right=10} -->
 
 ![](cup_book_gifs/bnp-rwb_2008_rm_sound.gif){.fragment .absolute bottom=50 left=5}
 
@@ -87,7 +89,7 @@ bibliography: ../../../../library.bib
 
 <!-- ![](cup_book_gifs/chemnitz_2018-08-27_threats.gif){.fragment .absolute top=30 left=5 } -->
 
-<!-- ![](cup_book_gifs/fla_2020_do_this_peacefully.gif){.fragment .absolute top=10 right=30} -->
+![](cup_book_gifs/fla_2020_do_this_peacefully.gif){.fragment .absolute top=10 right=30}
 
 <!-- ![](cup_book_gifs/hess_report_2011_summary.gif){.fragment .absolute bottom=10 left=30} -->
 
@@ -215,6 +217,29 @@ bibliography: ../../../../library.bib
  
 :::
 ::::
+
+## Why this research?
+<!-- far-right campaign demobilisation? -->
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- Why demobilisation?
+    + mobilisation and activism most studied aspects of social movements---relatively little about demobilisation
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- Why campaigns?
+    + again, less studied compared to macro-level ‘cycles of contention’ <!-- [@Tarrow2011] --> and to studies of particular organisation's campaigns: *how movements move*---yet a unit of analysis infrequently examined in SMS
+
+::: 
+
+::: {.fragment .fade-up style="margin-top: -35px;"} 
+- Why the far right?
+    + demonstration campaigns are particularly important for far-right movements, many benefits---still, even with online activity
+    + pressing subset of cases, but also generalizable to others
+
+::: 
+
 
 # Demobilisation
 
@@ -364,28 +389,6 @@ p
 
 <!-- :::  -->
 
-
-## Why this research?
-<!-- far-right campaign demobilisation? -->
-
-::: {.fragment .fade-up style="margin-top: -35px;"} 
-- Why demobilisation?
-    + mobilisation and activism most studied aspects of social movements---relatively little about demobilisation
-
-::: 
-
-::: {.fragment .fade-up style="margin-top: -35px;"} 
-- Why campaigns?
-    + again, less studied compared to macro-level ‘cycles of contention’ <!-- [@Tarrow2011] --> and to studies of particular organisation's campaigns: *how movements move*---yet a unit of analysis infrequently examined in SMS
-
-::: 
-
-::: {.fragment .fade-up style="margin-top: -35px;"} 
-- Why the far right?
-    + demonstration campaigns are particularly important for far-right movements, many benefits---still, even with online activity
-    + pressing subset of cases, but also generalizable to others
-
-::: 
 
 # Research on a subset of cases
 
@@ -2327,7 +2330,7 @@ reactable::reactable(dvu,
 - multiple paths to demobilising the far right 
 - many benefits of counter-mobilisation 
 - wider relevance 
-<!-- - relevance for contemporary UK  -->
+- relevance for contemporary UK
 - further resources available from research 
 
 <!-- - <https://cambridgeblog.org/2026/07/demobilising-the-far-right-how-societal-actors-counter-far-right-social-forces/> -->
@@ -2458,7 +2461,7 @@ FPÖ's [Akademikerball](https://www.spiegel.de/politik/ausland/akademikerball-in
 :::
 
 
-## Relevance for contemporary UK {visibility="hidden"} 
+## Relevance for contemporary UK
 
 ::: {.columns}
 
@@ -2466,8 +2469,6 @@ FPÖ's [Akademikerball](https://www.spiegel.de/politik/ausland/akademikerball-in
 
 ::: {.fragment .fade-in-then-semi-out data-fragment-index="2" style="margin-top: -20px;"}
 ```{r}
-#| eval: false
-#| include: false
 # from the Guardian: <https://www.theguardian.com/uk-news/article/2024/aug/04/rioters-try-to-torch-rotherham-asylum-seeker-hotel-amid-far-right-violence>
 # 2024-07-29 - Southport
 # 2024-07-30 - Southport
