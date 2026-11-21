@@ -1,7 +1,5 @@
 ---
-title: |
-  | Societal conflict and 
-  | *Demobilising the Far Right*
+title: "Demobilising the Far Right" 
 subtitle: "Patterns and Processes from Demonstration Campaigns in Germany, England, and Austria"
 author: "[Dr. Michael C. Zeller](https://michaelzeller.de)"
 format: 
@@ -81,13 +79,13 @@ bibliography: ../../../../library.bib
 
 ![](cup_book_gifs/uberg_Tauschitz_resignation_2022_all_parties.gif){.fragment .absolute top=50 left=10 width=800}
 
-<!-- ![](cup_book_gifs/bnp-rwb_panorama_2001_rm_sound.gif){.fragment .absolute top=10 right=10} -->
+![](cup_book_gifs/bnp-rwb_panorama_2001_rm_sound.gif){.fragment .absolute top=10 right=10}
 
 ![](cup_book_gifs/bnp-rwb_2008_rm_sound.gif){.fragment .absolute bottom=50 left=5}
 
 ![](cup_book_gifs/dvu_congress_1994-09-24_foreign_troops.gif){.fragment .absolute bottom=30 right=5 width=800}
 
-<!-- ![](cup_book_gifs/chemnitz_2018-08-27_threats.gif){.fragment .absolute top=30 left=5 } -->
+![](cup_book_gifs/chemnitz_2018-08-27_threats.gif){.fragment .absolute top=30 left=5 }
 
 ![](cup_book_gifs/fla_2020_do_this_peacefully.gif){.fragment .absolute top=10 right=30}
 
@@ -255,11 +253,12 @@ bibliography: ../../../../library.bib
 
 . . . 
 
-- difference of 'positive' demobilisation and 'negative' demobilisation (and non-demobilisation)
-    <!-- + negative cases deserve attention: of ‘positive demobilisation’ (e.g., 1. anti-Wehrmachtsausstellung) or continued mobilisation (e.g., PEGIDA) — but many FR campaigns are intended to endure -->
+<!-- - difference of 'positive' demobilisation and 'negative' demobilisation (and non-demobilisation) -->
+
+<!-- + negative cases deserve attention: of ‘positive demobilisation’ (e.g., 1. anti-Wehrmachtsausstellung) or continued mobilisation (e.g., PEGIDA) — but many FR campaigns are intended to endure -->
 
 
-## Demobilisation research 
+## Demobilisation research {visibility="hidden"} 
 
 ::: {.fragment .fade-up style="margin-top: -20px;"}
 - Macro-sociological approaches to movements <!-- including ‘contention’[Tilly1978])   -->
@@ -281,7 +280,7 @@ bibliography: ../../../../library.bib
 
 ::: 
 
-## Demobilisation research 
+## Demobilisation research {visibility="hidden"} 
 
 ::: {.fragment .fade-up}
 - Social movement studies
@@ -424,7 +423,7 @@ p
 
 :::
 
-# Data collection
+# Data collection {visibility="hidden"} 
 
 ::: {.fragment .fade-up style="margin-top: -35px;"} 
 - protest event data (PED): (1) identify large events, (2) identify related events (campaigns) 
@@ -501,7 +500,7 @@ with thanks for support to Fabian Virchow, Dan Jones, Nigel Copsey, Bernhard Wei
 <!-- :::  -->
 
 
-## Active campaigns by country, 1990-2020
+## Active campaigns by country, 1990-2020 {visibility="hidden"} 
 
 ::: {style="text-align: center;"}
 40 large far-right demonstration campaigns over three decades
@@ -1030,7 +1029,9 @@ girafe(
 :::
 
 
-## Cases overview {.smaller .scrollable}
+## Cases overview {visibility="hidden"} 
+
+<!-- {.smaller .scrollable} -->
 
 ```{r cases-overview}
 library(dplyr)
@@ -1255,7 +1256,7 @@ prow
 
 :::
 
-# Complementary mixed methods
+# Complementary mixed methods {visibility="hidden"} 
 
 ::: {.fragment .fade-up style="margin-top: -25px;"} 
 - [qualitative comparative analysis]{style="color:blue;"} ([fs]QCA) 
@@ -1284,7 +1285,7 @@ prow
 <!--     + *robustness -->
 <!--     + patterns of demob fig -->
 
-## QCA calibration: outcome set 
+## QCA calibration: outcome set {visibility="hidden"} 
 
 ::: {.fragment .fade-up style="margin-top: -25px;"} 
 - Outcome: negative demobilisation (ND) 
@@ -1418,9 +1419,9 @@ kable(grouping_data, format = "html", escape = FALSE,
 :::
 
 
-## Solution plot {visibility="hidden"}
+## Solution plot {visibility="hidden"} 
 
-## Robustness {visibility="hidden"}
+## Robustness {visibility="hidden"} 
 
 ## Patterns of demobilisation
 
@@ -1488,9 +1489,10 @@ kable(grouping_data, format = "html", escape = FALSE,
 
 # Case coverage and cases further study
 
-::: {.fragment .absolute top=100 left=10}
-- patterns and number  
-of cases covered
+::: {.absolute top=100 left=10}
+- patterns and    
+number of   
+cases covered  
 
 ::: 
 
@@ -1499,6 +1501,12 @@ of cases covered
 
 ::: 
 
+::: {.fragment .absolute top=300 right=750}
+[BNP Red, White, and Blue Festival]{style="color:blue;"}    
+[Ulrichsbergfeier]{style="color:#dc2223;"}    
+[Deutsche Volksunion Congress in Passau]{style="color:forestgreen;"}    
+
+::: 
 
 ```{r euler, out.width='100%'}
 library(eulerr)
@@ -1536,7 +1544,7 @@ plot(euler_sol, fills = "transparent",
 
 ```
 
-# BNP Red, White, and Blue Festival
+# BNP Red, White, and Blue Festival {visibility="hidden"} 
 
 ## BNP Red, White, and Blue Festival {visibility="hidden"}
 
@@ -1850,11 +1858,9 @@ knitr::kable(DEMOB_BNP[row.names(DEMOB_BNP) %in% c("BNP Red, White and Blue Fest
 
 :::
 
-# Ulrichsbergfeier 
+# Ulrichsbergfeier {visibility="hidden"} 
 
-## Ulrichsbergfeier 
-
-<!-- {visibility="hidden"} -->
+## Ulrichsbergfeier {visibility="hidden"} 
 
 <!-- - Uberg -->
 <!--     + context (pictures of the site and plaques: uberg_site, <https://www.wanderdoerfer.at/kaernten/wanderweg/von-zweikirchen-auf-den-ulrichsberg/>; <https://u-berg.at/texte/derulrichsberg_buch.htm>)  -->
@@ -1941,7 +1947,7 @@ and prominent politicians
 
 :::
 
-## Ulrichsbergfeier - a far-right campaign 
+## Ulrichsbergfeier - a far-right campaign {visibility="hidden"}  
 
 <!-- * ‘far-right’ event: organisers and speakers, revisionist narratives, right-wing extremist participants  -->
 <!-- * need not have demobilised; far-right WWII commemorations endure (Bleiburg, Tag der Ehre in Ungarn, Lukov March) -->
@@ -1963,9 +1969,9 @@ and prominent politicians
 
 ::: 
 
-## Ulrichsbergfeier events {.smaller}
+## Ulrichsbergfeier events {visibility="hidden"} 
 
-<!-- {.smaller .scrollable} -->
+<!-- {.smaller} -->
 
 ::: {style="margin-top: -25px;"}
 
@@ -2146,7 +2152,7 @@ reactable::reactable(uEvents_sorted,
 
 ::: 
 
-## Ulrichsbergfeier case calibration 
+## Ulrichsbergfeier case calibration {visibility="hidden"} 
 
 ```{r uberg-calibration}
 library(dplyr)
@@ -2196,7 +2202,7 @@ knitr::kable(DEMOB_Uberg[row.names(DEMOB_Uberg) %in% c("Ulrichsberg Celebration"
 
 <!-- - participation numbers graphic (layered over)? -->
 
-## Ulrichsbergfeier - possible demobilising mechanisms
+## Ulrichsbergfeier - possible demobilising mechanisms {visibility="hidden"} 
 
 ::: {style="margin-top: -20px;"} 
 State channelling withdraws resources necessary for campaign
@@ -2219,7 +2225,7 @@ State channelling withdraws resources necessary for campaign
 ::: 
 
 
-## Ulrichsbergfeier - demobilisation process
+## Ulrichsbergfeier - demobilisation process {visibility="hidden"} 
 
 ![](cup_book_imgs/uberg-empiric.jpeg){.absolute top=125 left=40 width=1000}
 
@@ -2234,7 +2240,7 @@ State channelling withdraws resources necessary for campaign
 
 ::: 
 
-## Ulrichsbergfeier case conclusions
+## Ulrichsbergfeier case conclusions {visibility="hidden"} 
 
 ::: {style="margin-top: -40px;"} 
 - Ulrichsbergfeier need not have demobilised 
@@ -2260,7 +2266,7 @@ State channelling withdraws resources necessary for campaign
 <!--     + presumed and alternative mechanisms -->
 <!--     + mechanism graphic -->
 
-# Deutsche Volksunion (DVU) in Passau
+# Deutsche Volksunion (DVU) in Passau {visibility="hidden"} 
 
 ## Deutsche Volksunion (DVU) in Passau {visibility="hidden"}
 
@@ -2323,13 +2329,75 @@ reactable::reactable(dvu,
 
 ```
 
+## Case studies findings {auto-animate=true} 
+
+## Case studies findings {auto-animate=true} 
+
+<!-- .fragment .fade-up  -->
+
+::: {style="margin-top: -30px;"} 
+- [anti-far-right militancy]{style="color:darkred;"} caused the RWB to demobilise 
+    + higher costs (e.g., extra security required for alcohol licence)
+    + decreased benefits (counter-protest discourages participation and tars attempt to create family-friendly image) 
+    + *diminishing returns* mechanism 
+
+:::
+
+
+## Case studies findings {auto-animate=true} 
+
+<!-- .fragment .fade-up  -->
+
+::: {style="margin-top: -35px;"} 
+- [closing opportunity]{style="color:darkred;"} demobilised the Ulrichsbergfeier  
+    + [relatively long process]{style="color:cadetblue;"}: politicisation (SPÖ distancing, FPÖ coopting) $\rightarrow$ weaker state support $\rightarrow$ shocking revelation of RWE by organiser<!-- Wolf Dieter Ressenig --> $\rightarrow$ campaign ends after a few years 
+    + (state-driven) *resource deprivation* mechanism --- private counter-action a key trigger 
+
+::: 
+
+::: {style="margin-top: -30px;"} 
+- [anti-far-right militancy]{style="color:darkred;"} caused the RWB to demobilise 
+    + higher costs (e.g., extra security required for alcohol licence)
+    + decreased benefits (counter-protest discourages participation and tars attempt to create family-friendly image) 
+    + *diminishing returns* mechanism 
+
+:::
+
+
+## Case studies findings {auto-animate=true} 
+
+<!-- .fragment .fade-up  -->
+
+::: {style="margin-top: -35px;"} 
+- [civil counter-mobilisation]{style="color:darkred;"} put demobilising pressure on the DVU Congress  
+    + also present: *signals* of state opposition **[and]{style="color:cadetblue;"}** internal factors ([organisational failure]{style="color:darkred;"}---debt, declining membership, and failure to adapt [[rigidity]{style="color:darkred;"}])
+    + multiple factors in *conjuncturally caused* demobilisation process
+
+::: 
+
+::: {style="margin-top: -35px;"} 
+- [closing opportunity]{style="color:darkred;"} demobilised the Ulrichsbergfeier  
+    + [relatively long process]{style="color:cadetblue;"}: politicisation (SPÖ distancing, FPÖ coopting) $\rightarrow$ weaker state support $\rightarrow$ shocking revelation of RWE by organiser<!-- Wolf Dieter Ressenig --> $\rightarrow$ campaign ends after a few years 
+    + (state-driven) *resource deprivation* mechanism --- private counter-action a key trigger 
+
+::: 
+
+::: {style="margin-top: -30px;"} 
+- [anti-far-right militancy]{style="color:darkred;"} caused the RWB to demobilise 
+    + higher costs (e.g., extra security required for alcohol licence)
+    + decreased benefits (counter-protest discourages participation and tars attempt to create family-friendly image) 
+    + *diminishing returns* mechanism 
+
+:::
+
+
 # Conclusions 
 
 <!-- []{style="font-size:10px;"} -->
 
 - multiple paths to demobilising the far right 
 - many benefits of counter-mobilisation 
-- wider relevance 
+<!-- - wider relevance  -->
 - relevance for contemporary UK
 - further resources available from research 
 
@@ -2399,7 +2467,7 @@ reactable::reactable(dvu,
 
 ::: 
 
-## Wider relevance 
+## Wider relevance {visibility="hidden"} 
 
 <!-- photo montage:    -->
 <!-- - Lukov March, Sofia  -->
@@ -2595,9 +2663,9 @@ mapview(postSouthport_sf, zcol = "Type",
 
 ![](cup_book_imgs/other_uk_raise.png){.fragment .absolute top=150 width=515 data-fragment-index="3"}
 
-![](cup_book_imgs/other_uk_bell.png){.fragment .absolute top=200 width=515 data-fragment-index="4"}
+![](cup_book_imgs/other_uk_bell.png){.fragment .absolute top=240 width=515 data-fragment-index="4"}
 
-![](cup_book_imgs/other_uk_dover.png){.fragment .absolute top=250 width=515 data-fragment-index="5"}
+![](cup_book_imgs/other_uk_dover.png){.fragment .absolute top=310 width=515 data-fragment-index="5"}
 
 
 :::

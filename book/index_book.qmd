@@ -152,8 +152,33 @@ xaringanExtra::embed_xaringan(
 
 :::
 
+::: {.callout-tip collapse="true"}
+## The London School of Economics and Political Science (LSE) (2026-11-26)
 
-::: {.callout-note collapse="true"}
+```{r echo=FALSE, results="asis"}
+#| warning: false
+# if (Sys.Date() >= as.Date("2026-11-26")) {
+
+slide_buttons <- function(slide_id) {
+  glue::glue('<p class="text-center buttons"><a class="btn btn-danger" target="_blank" href="{slide_id}.html"><i class="fa-solid fa-arrow-up-right-from-square"></i> View all slides in new window</a> <a class="btn btn-danger" target="_blank" href="{slide_id}.pdf" role="button"><i class="fa-solid fa-file-pdf"></i> Download PDF of all slides</a></p>')
+}
+
+slide_buttons("book_pres/index_LSE")
+
+library(xaringanExtra)
+
+xaringanExtra::embed_xaringan(
+  "book_pres/index_LSE.html",
+  ratio = "16:9",
+  border = "none",
+  margin = "0 auto"
+)
+# }
+```
+
+:::
+
+::: {.callout-tip collapse="true"}
 ## University of Warwick (2026-11-27)
 
 ```{r echo=FALSE, results="asis"}
